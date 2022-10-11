@@ -1,0 +1,49 @@
+<IfModule mod_rewrite.c>
+	#########################################################################################
+		Options -Indexes -MultiViews +FollowSymLinks 
+		
+	#########################################################################################
+	# 	ATIVAMOS  O RewriteEngine 
+	#########################################################################################
+		RewriteEngine On
+
+	#########################################################################################
+	# 	PRIMEIRO VERIFICAMOS SE O ARQUIVO EXISTE DENTRO DA PASTA WEBSITE
+	#########################################################################################
+		RewriteBase {{ROOT_WEBSHEEP}}website/
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}website/$1 -f
+		RewriteRule ^(.*)$ $1 [L]
+
+	#########################################################################################
+	# 	AGORA VERIFICA SE É UMA URL GLOBAL 
+	#########################################################################################
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-f
+		RewriteCond	%{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-d
+		RewriteRule	^ws-img/(.*)$ 			./../admin/app/core/ws-img.php 							[L]	
+		RewriteRule	^ws-leads/(.*)$ 		./../admin/app/core/ws-leads.php 						[L]
+		RewriteRule	^ws-class.php$ 			./../admin/app/lib/class-ws-v1.php						[L]
+		RewriteRule	^ws-download-now/(.*)$ 	./../admin/app/core/ws-download-now.php?filename=$1		[L]
+		RewriteRule	^ws-gz/(.*)$ 			./../admin/app/core/ws-gz.php?type=admin				[L]
+		RewriteRule	^ws-gzip/(.*)$ 			./../admin/app/core/ws-gz.php?type=website				[L]
+		RewriteRule	^ws-video/(.*)$ 		./../admin/app/core/ws-video.php 						[L]
+		RewriteRule	^ws-download/(.*)$ 		./../admin/app/core/ws-download.php 					[L]
+		RewriteRule	^ws-rest/(.*)$ 			./../admin/app/core/ws-rest.php$1						[L]	
+		RewriteRule	^ws-branches$			./../admin/app/core/ws-branches.php 					[L]
+		RewriteRule	^ws-commits$			./../admin/app/core/ws-commits.php 						[L]
+		RewriteRule	^ws-php-info$			./../admin/app/config/ws-php-info.php 					[L]
+
+	#########################################################################################
+	# 	AGORA DIRECIONA OS ACESSOS AO PAINEL ADMIN
+	#########################################################################################
+		 RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}admin/$1 -f			
+		 RewriteRule ^((.*/)*[^./]+)/*$	./../admin/$1		[L]
+		
+	#########################################################################################
+	# 	QUALQUER OUTRA URL DIGITADA DIRECIONA PARA O PROCESSADOR CENTRAL
+	#########################################################################################
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-f
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-d
+		RewriteRule ^((.*/)*[^./]+)/*$	./../admin/app/core/ws-website.php		[L]
+		RewriteRule ^$					./../admin/app/core/ws-website.php		[L]
+
+</IfModule>

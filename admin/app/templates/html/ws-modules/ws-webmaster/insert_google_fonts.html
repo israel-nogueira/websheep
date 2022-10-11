@@ -1,0 +1,439 @@
+<style type="text/css">
+	.h1 {
+		position: relative;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 10px;
+		margin: 10px 0;
+		border-bottom: solid 1px #50637d;
+		color: #FFF;
+		float: left;
+		width: calc(100% - 35px);
+    }
+
+	.h2 {
+		position: relative;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #d5d5d5;
+		float: left;
+		width: calc(100% - 35px);
+	}
+	.h3 {
+		position: relative;
+		font-size: 14px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #FFFFFF;
+		float: left;
+		width: calc(100% - 35px);
+	}
+	.chosen-container{
+		z-index: 1;
+		width: calc(100% - 35px)!important;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.chosen-container .chosen-drop {
+		border-color: #333;
+		background: #212121;
+		box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+	}
+
+	.chosen-container-single .chosen-single {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+		padding: 10px;
+	}
+
+	.chosen-container-single .chosen-default {
+		color: #999;
+	}
+
+	.chosen-container-single .chosen-search input[type="text"] {
+		border-color: #333;
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results {
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results li.disabled-result {
+		color: #505050;
+	}
+
+	.chosen-container .chosen-results li.highlighted {
+		background-color: #3875d7;
+		background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+		color: #fff;
+	}
+
+	.chosen-container .chosen-results li.no-results {
+		color: #e3e3e3;
+		background: #1f1d1d;
+	}
+
+	.chosen-container-multi .chosen-choices {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+	}
+
+	.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice {
+		border-color: #000;
+		background-color: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-disabled {
+		border: 1px solid #ccc;
+		background-color: #e4e4e4;
+		background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+		color: #666;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-focus {
+		background: #d4d4d4;
+	}
+
+	.chosen-container-multi .chosen-drop .result-selected {
+		color: #505050;
+	}
+
+	.chosen-container-active .chosen-single {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+	}
+
+	.chosen-container-active.chosen-with-drop .chosen-single {
+		border-color: #333;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+	}
+
+	.chosen-container-active .chosen-choices {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+
+	.chosen-container-active .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3 !important;
+	}
+
+	.chosen-disabled {
+		opacity: 0.5 !important;
+	}
+
+	.chosen-rtl .chosen-search input[type="text"] {
+		color: #e3e3e3;
+		background: url("chosen-sprite.png") no-repeat -30px -20px;
+	}
+
+	.input_text {
+		font-family: 'Titillium Web', sans-serif;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 16px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+		padding: 15px 10px;
+		border: solid 1px #3f4143;
+		background-color: #212121;
+		color: #c7c7c7;
+		width: 100%;
+	}
+</style> 
+<style type="text/css">
+	.comboChecks {
+		position: relative;
+		margin-left: 9px;
+		width: calc(100% - 26px);
+		float: left;
+		margin-bottom: 30px;
+    }
+
+	.bt_padrao {
+		padding: 10px 20px;
+		width: calc(100% - 80px);
+		left: 50%;
+		position: relative;
+		margin: 13px 0;
+		transform: translateX(calc(-50% - 6px));
+		text-align: center;
+	}
+	.bt_metade {
+	padding: 10px 20px;
+	width: calc(50% - 60px);
+	position: relative;
+	margin: 13px 5px;
+	text-align: center;
+	left: 7px;
+    }
+	.checkbox{
+		position: relative;
+		float: left;
+		padding: 5px 12px;
+		background-color: #38619a;
+		margin: 2px;
+		color: #FFF;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+	}
+
+.containerCheck {
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+	display: block;
+	float: left;
+	padding: 4px 12px;
+	background-color: #38619a;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	margin: 3px 6px;
+	cursor: pointer;
+	font-size: 16px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #FFF;
+    width: calc(100% - 70px);
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	height: 15px;
+	width: 16px;
+	background-color: #274268;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 4px;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmark {
+    background-color: #1e2e45;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmark {
+    background-color: #18202c;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmark:after {
+    left:4px;
+    top: -1px;
+    width: 5px;
+    height: 10px;
+    border: solid #4a98b8;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.example{
+	color: #93bddc;
+	letter-spacing: 1px;
+}
+
+.editor{
+	position: relative;
+    height: 150px;
+    width: calc(100% - 30px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+.bg07.aviso{
+	color: #da0000;
+	padding: 20px;
+}
+
+</style>
+<div class="h1">
+	<i class="fa fa-font"></i> Google Fonts
+</div>
+<!-- BEGIN NOAPI -->
+	<div class="h3 bg07 aviso">
+	Esta aplicação necessita de uma APIKEY cadastrada em seu ws-config.php, com a variável {GOOGLE_FONTS_KEY}
+	</div>
+<!-- END NOAPI -->
+
+<!-- BEGIN APIOK -->
+<div class="h3">Adicone de forma fácil e rápida todas as fontes do Google Fonts<br> com apenas alguns cliques!</div>
+<div class="combo"> 
+	<select class="chosen" id="SelectFonte" style="width: calc(100% - 15px);left: 50%;transform: translateX(-50%);"> 
+		<option>Selecione uma Fonte </option> 
+		<!-- BEGIN LIST_FONT -->
+			<option value="{id}">{name}</option> 
+		<!-- END LIST_FONT -->
+	</select> 
+</div>
+
+<div class="h1 example" contentEditable="true">Lorem ipsum dolor sit amet</div>
+<div class="h3 example" contentEditable="true">
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet ultricies mi. Fusce consectetur sagittis massa sed commodo. Nulla laoreet ligula ultricies augue dictum lobortis. Aliquam non vehicula nisi, euismod elementum ex. Morbi id efficitur massa. Mauris a interdum sapien, auctor pharetra dui. Etiam eleifend, justo sit amet dapibus tempor, elit nisi tempus felis, ut iaculis dui mauris et purus. Morbi interdum malesuada erat, et fermentum felis molestie non. Sed luctus commodo porttitor
+</div>
+
+<div class="comboChecks"> 
+
+</div>
+
+
+<div class="h1">
+	@import:
+</div>
+<div id="importcss" class="editor"> 
+	@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+</div>
+<div class="h1">
+	font-family:
+</div>
+<div id="font-family" class="editor"> 
+#div{
+	font-family: 'Roboto Condensed', sans-serif;
+}
+</div>
+<div class="h1">
+	Link:
+</div>
+<div id="linkimport" class="editor"> 
+	link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"
+</div>
+<script type="text/javascript">
+	var SlugTool 	= null;
+	var getGoogleFontsApi = `{JSONGOOGLE}`;
+	$('#AddColunas').unbind("click tap press").bind("click tap press", function() {})
+	$('#AddFull').unbind("click tap press").bind("click tap press", function() {})
+	$(".chosen").chosen({
+		scroll_to_highlighted: false,
+		disable_search_threshold: 10,
+		search_contains: true,
+		enable_split_word_search: true,
+		no_results_text: "Nenhuma fonte encontrada!",
+	})
+
+	function configChecks(){
+		$(".checkTermos").unbind('change').bind("change",function(){
+					applyInputs();
+		})
+	}
+	function applyInputs(){
+		var variants = [];
+		$.each($(".checkTermos:checked"),function(a,b){variants.push($(b).attr('value'))})
+		if(variants.length>0){
+			variants = ":"+variants.join(",").split('talic').join('')
+		}else{
+			variants = "";
+		}
+		var selectedFont = getGoogleFontsApi[$("#SelectFonte").val()];
+		var family = selectedFont.family.split(' ').join("+");
+		var urlCSS = 'https://fonts.googleapis.com/css?family='+family+variants;
+		include_css(urlCSS,"LinkGoogleFonts","All");
+		$('.example').css({'font-family':selectedFont.family})
+		window.importcss.setSession(ace.createEditSession("\n\n@import url('https://fonts.googleapis.com/css?family="+family+variants+"');\n\n", "ace/mode/css"))
+		window.fontfamily.setSession(ace.createEditSession("\n\n.div{\n	font-family: '"+selectedFont.family+"';\n}\n\n", "ace/mode/css"))
+		window.linkimport.setSession(ace.createEditSession('\n\n<link href="https://fonts.googleapis.com/css?family='+family+variants+'" rel="stylesheet">\n\n', "ace/mode/html"))
+	}
+
+	$("#SelectFonte").chosen().unbind("change").bind("change",function(e) {
+		var selectedFont = getGoogleFontsApi[$("#SelectFonte").val()];
+		$(".comboChecks").html("");
+		$.each(selectedFont.variants,function(a,b){$(".comboChecks").append('<label class="containerCheck"> <input class="checkTermos" value="'+b+'" type="checkbox">'+b+'<span class="checkmark"></span></label>')})
+		applyInputs();
+		configChecks();
+		$('#webmaster_menu_right_body').perfectScrollbar("update");
+	})
+
+
+	$('.bt_padrao').unbind("click tap press").bind("click tap press", function() {})
+
+
+	ace.config.set('basePath', './app/vendor/ace/src-min-noconflict');
+
+  	window.importcss = ace.edit('importcss');
+	window.importcss.setTheme("ace/theme/monokai");
+	window.importcss.getSession().setMode("ace/mode/css");
+	window.importcss.setShowPrintMargin(true);
+	window.importcss.setHighlightActiveLine(true);
+	window.importcss.setShowInvisibles(0);
+	window.importcss.getSession().setUseSoftTabs(false);
+	window.importcss.setDisplayIndentGuides(true);
+	window.importcss.getSession().setUseWrapMode(true);
+	window.importcss.setOptions({ maxLines: Infinity });
+
+  	window.fontfamily = ace.edit('font-family');
+	window.fontfamily.setTheme("ace/theme/monokai");
+	window.fontfamily.getSession().setMode("ace/mode/css");
+	window.fontfamily.setShowPrintMargin(true);
+	window.fontfamily.setHighlightActiveLine(true);
+	window.fontfamily.setShowInvisibles(0);
+	window.fontfamily.getSession().setUseSoftTabs(false);
+	window.fontfamily.setDisplayIndentGuides(true);
+	window.fontfamily.getSession().setUseWrapMode(true);
+	window.fontfamily.setOptions({ maxLines: Infinity });
+
+  	window.linkimport = ace.edit('linkimport');
+	window.linkimport.setTheme("ace/theme/monokai");
+	window.linkimport.getSession().setMode("ace/mode/html");
+	window.linkimport.setShowPrintMargin(true);
+	window.linkimport.setHighlightActiveLine(true);
+	window.linkimport.setShowInvisibles(0);
+	window.linkimport.getSession().setUseSoftTabs(false);
+	window.linkimport.setDisplayIndentGuides(true);
+	window.linkimport.getSession().setUseWrapMode(true);
+	window.linkimport.setOptions({ maxLines: Infinity });
+
+	$('#webmaster_menu_right_body').perfectScrollbar("update");
+</script>
+
+<!-- END APIOK -->

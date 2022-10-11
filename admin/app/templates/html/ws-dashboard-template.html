@@ -1,0 +1,114 @@
+<!-- BEGIN DASHBOARD -->
+<html lang="pt-br" id="html" class="{classHTMLtypeAcess}">
+	<head>
+		<meta charset="UTF-8">
+		<title>WebSheep - Content Management System</title>
+		<link type="image/x-icon" href="{ws_rootPath}admin/app/templates/img/websheep/favicon.ico" rel="shortcut icon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700&subset=latin-ext" rel="stylesheet">
+		<script></script>
+	</head>
+	<body id="body">
+		<div id="dolly" 	style="display:none;"></div>
+		<div id="preloadWS" style="background-repeat: no-repeat;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #FFF;z-index:4;text-align: center;font-family: 'Titillium Web', sans-serif;color: #007CBD;">
+			<div id="splash" style="overflow: hidden;position: absolute; width: 460px; height: 400px; left: 50%; top: 50%; margin-left: -230px; margin-top: -196.5px; background-position: 0px 210px;background-repeat: no-repeat;background-color:#FFF;">
+				<div id="splashWS" style="z-index:2;position: absolute;background:none">
+					<div id="pct" style="position: fixed;top:0;left:0;color:#8DA6AD;text-align:left;width:100%;height:30px;">
+						<!-- <div id='number' style="position:absolute;top:10px;"></div> -->
+						<div id='bar' style="position:absolute;background-color:rgb(16, 100, 173);height:8px;width:70%;top:0;left:0;"></div>
+					</div>
+				</div>
+				<!-- BEGIN NOSPLASH -->
+					<img style="z-index:1;position: absolute; top: 0; left: 0; z-index: 1;" src="{ws_rootPath}{adminPath}/app/templates/img/websheep/Splash.jpg">
+				<!-- END NOSPLASH -->
+				<!-- BEGIN SPLASHSCREEN -->
+					<img style="z-index:1;position: absolute; top: 0; left: 0; z-index: 1;" src="{ws_rootPath}ws-img/460/400/{SPLASHSCREEN_IMG}">
+				<!-- END SPLASHSCREEN -->
+			</div>
+		</div>
+
+		<div id='avisoTopo' class="w1"></div>
+		
+		<!-- progressbar para Uploads -->
+		<div class="tapa_upload">
+			<div class="cont_up_center bg04">
+				<div class="pct w1">...</div>
+				<div class="bar bg05"></div>
+			</div>
+		</div>
+
+
+
+			<div id="menu_tools" class="menu_tools closed"></div>
+			<div id="header" class="bg02">
+				<div id="menu_mobile">≡</div>
+				<div id="logOut">
+					<div class="thumb_saudacao">
+						{SAUDACAO}
+					</div>
+				</div>
+				<div id="menu_website" class="menu_user w1">
+					<div id="logotipo"></div>
+					<ul>
+						<!-- BEGIN TOP_ICONS_PLUGINS -->
+							<li class="plugin">
+								<a href="{LI_HREF}" data-tokenAccess="{TKACCESS}" data-plugin="1" data-w="{LI_W}" data-h="{LI_H}" data-type="{LI_TYPE}" data-path="{LI_PATH}"  data-file="{LI_FILE}" data-id="">
+									{LI_ICON}
+									{LI_NAME}
+								</a>
+							</li>
+						<!-- END TOP_ICONS_PLUGINS -->
+					</ul>
+					<div class="c"><!-- --></div>
+				</div>
+			</div>
+			<div class="c"><!-- --></div>
+
+		<div id="container" style="overflow: auto;" class="{CLASS_POPUP}">
+			<div id="conteudo">
+				{INIT_DASHBOARD}
+			</div>
+		</div>
+
+
+		<div id="footer" class="bg02">
+			<div id="suportews" ></div>
+			<div id="copyright" class="w1">
+				{copyright}
+				<div id="getting-started" class="w1"></div>
+				<div id="expiresessao" class="w1"></div>
+			</div>
+		</div>
+		
+
+
+		<script>
+				var directAccess 				= {{_}};
+					directAccess.LoadDirectTool = '{LoadDirectTool}';
+					directAccess.oldVersion 	= {{_}deprecated:{VDEPRECATED},newVersion:{VNEW_VERSION}};
+					directAccess.newUpdate 		= {NEW_UPDATE};
+				
+			<!-- BEGIN DIRECTACCESS -->
+					directAccess.type_obj 	= "{type_obj}";
+					directAccess.id_tool 	= {id_tool};
+					directAccess.id_item 	= {id_item};
+					directAccess.id_gal 	= {id_gal};
+			<!-- END DIRECTACCESS -->
+
+
+
+
+
+		</script>
+
+
+
+
+	<script type = 'text/javascript' 		id="jquery220"		src='{ws_rootPath}{adminPath}/app/vendor/jquery/2.2.0/jquery.min.js'></script>
+	<script type = 'text/javascript' 		id="createjs062"	src='{ws_rootPath}{adminPath}/app/vendor/createjs/0.6.2/preloadjs.min.js'></script>
+	<script type = 'text/javascript' 		id="init"			src='{ws_rootPath}{adminPath}/app/templates/js/websheep/functionsws.js'></script>
+	<script type = 'text/javascript' 		id="init"			src='{ws_rootPath}{adminPath}/app/templates/js/websheep/init.js?v=0.4'></script>
+	<!-- <script src="http://code.responsivevoice.org/responsivevoice.js"></script> -->
+	</body>
+</html>
+<!-- END DASHBOARD -->

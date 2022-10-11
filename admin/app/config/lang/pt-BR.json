@@ -1,0 +1,897 @@
+{
+	"modulo": {
+		"itens": {
+			"mainTitle": "",
+			"buttons": {
+				"category": "Categorias",
+				"back": "Voltar",
+				"addItem": "Add um ítem",
+				"edit": ""
+			},
+			"table": {
+				"colunm": {
+					"functions": "Funções"
+				},
+				"paginate": {
+					"amount": "Quantidade:"
+				},
+				"icons": {
+					"delete": "Excluir",
+					"edit": "Editar"
+				}
+			},
+			"topAlert": {
+				"sucessDelete": "Ítem excluído com sucesso!"
+			},
+			"modal": {
+				"back": {
+					"content": "voltando"
+				},
+				"addItem": {
+					"content": "Adicionando ítem..."
+				},
+				"loading": {
+					"content": "Carregando..."
+				},
+				"delete": {
+					"beforeContent": "Excluindo ítem...",
+					"content": "<b>Você quer excluir este Ítem?<\/b><br><br>Após clicar em 'Sim eu quero', não terá mais volta.<br> <b>Tem certeza?<\/b>",
+					"bot1": "Sim eu quero",
+					"bot2": "Cancelar"
+				}
+			}
+		}
+	},
+	"keyFile": {
+		"index": {
+			"mainTitle": "Gerencias links para download",
+			"edit": "Editar",
+			"amount": "Quantidade:",
+			"tableColunms": {
+				"nameFile": "Nome do arquivo",
+				"type": "Tipo",
+				"size": "Peso",
+				"uploadDate": "Data de upload",
+				"link": "Add link"
+			},
+			"modal": {
+				"loading": "Carregando..."
+			}
+		},
+		"links": {
+			"mainTitle": "Links do arquivo:",
+			"backButton": "Voltar aos arquivos",
+			"backButtonBefore": "Voltando...",
+			"createLinkButton": "Criar um link cadastro",
+			"topAlert": {
+				"failCreateLink": "Houve alguma falha ao atualizar serialKey",
+				"sucessCreateLink": "SerialKey Atualizado",
+				"settingsIncorrectly": "Preencha corretamente as configurações"
+			},
+			"modal": {
+				"save": {
+					"saving": "Salvando..."
+				},
+				"delete": {
+					"before": "Excluindo link...",
+					"content": "Tem certeza de que você quer excluir esse link?<br>Isso não terá mais volta!",
+					"bot1": "Excluir",
+					"bot2": "Cancelar"
+				},
+				"addLink": {
+					"content": "Criando Link..."
+				},
+				"details": {
+					"mainTitle": "Informações do link",
+					"link": "Link",
+					"linkKey": "Acessar link + chave de acesso",
+					"activeLink": "Link Ativo",
+					"disableLinkFirstAccess": "Desativar link ao fazer o 1° download.",
+					"refreshLinkFirstAccess": "Atualizar serial key ao fazer o 1° download.",
+					"refreshLinkWithEveryDownload": "Atualizar serial a cada download",
+					"formatDate": "Data: AAAA-MM-DD",
+					"expireIn": "Expirar em:"
+				}
+			}
+		}
+	},
+	"urlFriendly": {
+		"title": "URLs no .HTACCESS",
+		"configurationData": "Dados de configuração:",
+		"addaURL": "Adicionar URL:",
+		"modal": {
+			"Adding": "Adicionando...",
+			"rearrangingItems": "Reordenando ítens...",
+			"save": {
+				"contentLine1": "Tem certeza do que está fazendo?",
+				"contentLine2": "As alterações feitas aqui, poderão afetar diretamente a navegação do seu site!",
+				"button1": "Salvar",
+				"button2": "Cancelar"
+			},
+			"delete": {
+				"content": "Você gostaria de excluir esse registro?",
+				"button1": "Excluir",
+				"button2": "Cancelar"
+			}
+		},
+		"topAlert": {
+			"save": {
+				"sucess": "Arquivo salvo com sucesso!"
+			}
+		}
+	},
+	"userManager": {
+		"index": {
+			"mainTitle": "Gerenciar usuários",
+			"editMyProfile": "Editar meu perfil",
+			"editMyProfilePlaceHolder": "Exemplo: Rogério dos Santos",
+			"register": "Novo usuário",
+			"noRegisteredUsers": "Sem usuarios cadastrados",
+			"deleteUser": "Excluir usuário",
+			"editPermissions": "Editar permissões",
+			"modal": {
+				"delete": {
+					"content": "Tem certeza de que gostaria de excluir este usuário?",
+					"button1": "Sim quero excluir",
+					"button2": "Ops, cliquei errado!"
+				}
+			},
+			"topAlert": {
+				"delete": {
+					"sucess": "Usuário excluido com sucesso!",
+					"fail": "Ops, houve uma falha ao excluir o usuário!"
+				}
+			}
+		},
+		"details": {
+			"back": "Voltar",
+			"save": "Salvar",
+			"userData": "Dados do usuário:",
+			"labels": {
+				"name": "Nome",
+				"lastName": "Sobrenome",
+				"email": "E-mail",
+				"login": "Login",
+				"pass": "Senha",
+				"rg": "RG",
+				"cpf": "CPF",
+				"basicData": "Dados básicos e status:",
+				"readOnly": "Apenas leitura",
+				"administrator": "É administrador",
+				"canAddAndEditUsers": "Pode adicionar usuários",
+				"editOnlyOwn": "Editar apenas seu conteúdo",
+				"panelStatus": "Situação do painel (para o usuário):",
+				"normal": "Normal:",
+				"invalidAccess": "Acesso Inválido:",
+				"inactiveDashboard": "Painel Inativo:",
+				"evaluation": "Avaliação:",
+				"blocked": "Bloqueado:",
+				"levelsOfAccess": "Níveis de permissão de acesso:"
+			}
+		}
+	},
+	"dashboard": {
+		"loadingAPI": "Carregando API",
+		"loading": "Carregando",
+		"wait": "Aguarde...",
+		"welcome": "[avatar]Olá <strong>[username]<\/strong>, seja bem vindo(a)!",
+		"footerCopyright": "Este produto está licenciado a <strong>[name]<\/strong> Copyright ©‎ WebSheep Tec. Int. Ltda    ||   Versão [system_version]",
+		"NewVersion": "Nova versão disponível!",
+		"topAlert": {
+			"content": "Permissão negada, fale com o administrador."
+		},
+		"modal": {
+			"bkp": {
+				"content": "Você está prestes a fazer download de um arquivo padrão WebSheep de BKP das configurações do seu painel, ferramentas e conteúdo de texto.",
+				"bot1": "Fazer backup",
+				"bot2": "Não obrigado",
+				"ridingBKP": "Montando BKP..."
+			},
+			"logOut": {
+				"content": "Você tem certeza de que gostarioa sair?<br>Não esqueça de salvar todas suas alterações.",
+				"bot1": "Sim quero sair!",
+				"bot2": "Ops, cliquei errado",
+				"loading": "Deslogando..."
+			}
+		},
+		"lateralMenu": {
+			"ManagePages": "Gerenciar Páginas",
+			"URLsIncludes": {
+				"main": "URL's & Includes",
+				"navigation": "Navegação & Includes",
+				"htaccess": "HTACCESS",
+				"css": "CSS's",
+				"js": "Javascripts"
+			},
+			"Plugins": {
+				"main": "Plugins",
+				"manage": "Gerenciar",
+				"installedPlugins": "Plugins instalados"
+			},
+			"update": "Update e Restauração",
+			"FTP": "FTP",
+
+			"webmaster": "Web Master",
+			"CodeEditor": "Editor de códigos",
+			"CodeVisualEditor": "Studio Web",
+
+			"PanelConfiguration": "Configuração do painel",
+			"MyTools": {
+				"main": "Minhas Ferramentas",
+				"manage": "Gerenciar"
+			},
+			"DownloadPassword": "Download com senha",
+			"AdditionalRegistrations": "Cadastros adicionais",
+			"BKPCentral": "Central de BKP",
+			"Users": "Usuários",
+			"ImageLibrary": "Biblioteca de imagens",
+			"HDManagement": "Gerenciamento de HD",
+			"logRecords": "Logs",
+			"reportBugs": "Reportar Bugs",
+			"Logout": "Fazer Logout"
+		}
+	},
+	"login": {
+		"loading": "Aguarde, conectando...",
+		"buttomBeginSession": "Iniciar Sessão",
+		"responseToken": "Ops, você é um robô?",
+		"recoverPassword": "Esqueci minha senha",
+		"privacypolicy": "Politica de privacidade",
+		"modalRecover": "Esqueceu a sua senha?<br>Por favor, digite seu e-mail que enviaremos os seus dados.",
+		"buttom1lRecover": "Enviar senha por e-mail",
+		"buttom2lRecover": "cancelar",
+		"recovering": "Recuperando...",
+		"RequestingChanges": "Solicitando alterações...",
+		"newPass": "Por favor, digite sua nova senha",
+		"titleModalPolicy": "Política de privacidade",
+		"privacypolicyURL": "ws-license.txt",
+		"passwordChangedSuccessfully": "Senha alterada com sucesso!",
+		"passwordsDoNotMatch": "As senhas não conferem, digite novamente",
+		"invalidOrExpiredToken": "Token inválido ou expirado",
+		"ButtomSendAnotherLink": "Enviar outro link"
+	},
+	"pages": {
+		"topTitle": "Gerenciador de páginas",
+		"buttomAddPage": "Adicionar página",
+		"iconsPage": {
+			"ManageMetaTags": "Gerenciar MetaTags",
+			"MoveItem": "Mover página",
+			"Edit": "Editar",
+			"EditCode": "Abrir arquivo",
+			"delete": "Excluir página",
+			"cache": "Cache de arquivos"
+		},
+		"responseMovePage": {
+			"sucess": "Página reposicionada com sucesso!",
+			"fail": "Ops, houve uma falha ao reposicionar a página!"
+		},
+		"modalAddPage": {
+			"title": "Título da página:",
+			"pathfile": "Patch do Arquivo:",
+			"FriendlyURL": "URL amigável:",
+			"button": {
+				"add": "Adicionar página",
+				"cancel": "Cancelar"
+			},
+			"response": {
+				"sucess": "Página adicionada com sucesso!",
+				"fail": "Ops, houve uma falha ao adicionar a página!"
+			}
+		},
+		"modalDeletePage": {
+			"content": "Ao excluir, será deletado todos os Apps!<br>Também o arquivo do servidor  será excluído e isso <b>não tem volta!<\/b><br>Porém você gostaria de PRESERVAR o seu arquivo?",
+			"button": {
+				"ok": "Sim, preservar arquivo",
+				"cancel": "Não, pode excluir tudo"
+			}
+		},
+		"modalDetailsPage": {
+			"title": "Título da página",
+			"SelectField": "Selecione um campo",
+			"rename": "Renomear arquivo",
+			"newFile": "Criar novo arquivo",
+			"siteMap": "Parâmetros para o sitemap.xml:",
+			"button": {
+				"save": "Salvar",
+				"cancel": "cancelar"
+			},
+			"type": {
+				"item": "Item",
+				"category": "Categorias",
+				"Gallery": "Galerias",
+				"Image": "Imagens",
+				"GalleryImage": "Imagens de galeria",
+				"File": "Arquivos"
+			}
+		},
+		"cacheFiles":{
+			"title":"Gerenciando páginas em cache"
+		}
+	},
+	"centralBkp": {		
+		"title"					: "Central de BKP",
+		"createBackup"			: "Criar backup",
+		"exportBackup"			: "Exportar",
+		"importBackup"			: "Importar",
+		"uploadBKP"				: "Upload de BKP existente",
+		"wait"					: "Por favor, aguarde...",
+		"loading"				: "Carregando...",
+		"mycomputer"			: "Meu computador",
+		"library"				: "Na biblioteca",
+		"delete"				: "Excluir",
+		"creating"				: "Criando...",
+		"export"				: "Exportar",
+		"importing"				: "Importando",
+		"invalidLink"			: "Link invalido ou expirado, tente outra URL.",
+		"cancel"				: "Cancelar",
+		"error"					: "Houve um erro, que tipo de restauração você quer?",
+		"restoration"			: "Aplicando restauração...",
+		"update"				: "Atualização efetuada com sucesso!",
+		"refresh"				: "Iremos recarregar seu painel para que as alterações sejam visualizadas.",
+		"recharge"				: "Recarregar browser",
+		"restore"				: "Instalar",
+		"placeholderTitle"		: "Título",
+		"descrition"			: "Descrição",
+		"download"				: "Download",
+		"creatingatemplate"		: "Criando um template/bkp",
+		"importModal"			: {
+									"title"		: "Insira uma URL válida",
+									"bots"		: {
+										"import":"Importar template",
+										"cancel":"Cancelar"
+									}
+								},
+		"exportModal"			: {
+									"title":"Copie a URL de exportação:",
+									"sucessCopy":"URL copiada com sucesso!",
+									"bots"		: {
+										"createCode":"Gerar código",
+										"copyCode":"Fechar modal",
+										"cancel":"Cancelar"
+
+									}
+								},
+
+		"restoreModal": {
+			"aboutTheFiles": "Sobre os arquivos:",
+			"restore100": "Restaurar 100% o site, excluindo todos os arquivos atuais",
+			"applyReplace": "Aplica os arquivos substituindo os arquivos existentes atuais",
+			"applyIgnore": "Aplica BKP sobre o site atual pulando os arquivos existentes",
+			"tools": "Apenas utilizar as ferramentas como base",
+			"dataBase": "E em relação a base de dados?",
+			"dontTouchDataBase": "Não mexer na base",
+			"basicStructure": "Estrutura básica instalada",
+			"rememberIf": "* Lembre-se os plugins estarão incluídos nas exclusões ou substituições."
+		}
+	},
+	"urlIncludes": {
+		"topTitle": "Includes de arquivos",
+		"save": "Salvar",
+		"configuration_data": "Dados de configuração:",
+		"add_an_include": "Adicionar um include",
+		"file_include": "Include de arquivos",
+		"basicData": {
+			"homeUrl": "URL Inicial",
+			"filesDirectory": "Diretório base dos arquivos",
+			"error404File": "Arquivo de erro 404",
+			"pluginsFolder": "Pasta dos plugins",
+			"skipFinalPaths": "Ignorar paths finais",
+			"ignore": "Ignorar"
+		},
+		"processNav": "Esse elemento simboliza todo o processo da navegação. Arraste e posicione onde você desejar.",
+		"include": {
+			"nameFile": "Nome do arquivo",
+			"save": "Salvar registro",
+			"edit": "Editar arquivo",
+			"delete": "Excluir arquivo"
+		},
+		"modal": {
+			"rearrangingItems": "Reordenando ítens...",
+			"adding": "Adicionando...",
+			"save": {
+				"save": "Salvar",
+				"likeToDoWhat": "Você gostaria de fazero que?",
+				"recordInTheDatabase": "Apenas alterar o registro na base de dados",
+				"renameFileAndCreate": "Renomear o arquivo, se não existir, cria",
+				"serverExists": "OPA! Já existe um registro com esse nome no servidor",
+				"toolExists": "OPA! Já existe um arquivo com esse nome no servidor OU em outra ferramenta",
+				"process": "Processar",
+				"cancel": "Cancelar",
+				"sucess": "Arquivo salvo com sucesso!",
+				"sureToSave": "Tem certeza de que gostaria de salvar?<br>Isso poderá afetar diretamente a navegação do seu site.",
+				"settingsSaved": "Configurações salvas com sucesso!"
+			},
+			"program": {
+				"loadingEditor": "Carregando editor..."
+			},
+			"delete": {
+				"content": "Você gostaria de excluir o arquivo ou apenas o registro?",
+				"onlyTheRecord": "Apenas o registro",
+				"deleteFileAsWell": "Excluir arquivo também"
+			},
+			"helpme": {
+				"emptyUrl": "Url Inicial <p class='content'>Define a página que será aberta quando<br>seu site é acessado sem Path definido.<br>Por exemplo: <b>''http://dominio/''<\/b><\/p>",
+				"setRoot": "Includes <p class='content'>Define o diretório paradrão que o sistema criará e buscará os arquivos do site.<\/p>",
+				"set404": "Erro 404 <p class='content'>Define o arquivo padrão que irá carregar quando não existir a URL requisitada.(Utiliza o path padrão)<\/p>",
+				"pathPlugins": "Plugins<p class='content'>Define a pasta padrão na arquitetura DO SITE que irá ser instalado os plugins.<p>",
+				"ignoreAdd": "Ignore paths adicionais<p class='content'>Permite que o sistema igone paths adicionais.<br>Por exemplo:<br>A URL correta é: ''/produtos''.<br>E o usuario acessar. ''/produtos/aaa/bbb/ccc''.<br>O sistema interpretará como a 1° ocorrência.<p>",
+				"addFile": "Adicone includes fixos<p class='content'>Esses arquivos serão incluídos em todas as páginas acessadas pelo seu site na ordem que você posicioná-los.<p>",
+				"navigate": "Navegação do site<p class='content'>Esse elemento simboliza todo o processo da navegação. Arraste e posicione onde você desejar.<p>",
+				"helpme": "Tutorial<p class='content'>Para ver novamente este tutorial, basta acessar este link.<p>",
+				"next": "Próximo",
+				"previous": "Anterior"
+			}
+		}
+	},
+	"includeJsCss": {
+		"index": {
+			"title": "Gerenciando includes:",
+			"titleModule": "Includes de arquivos {TYPE}:",
+			"modal": {
+				"edit": {
+					"access": "Acessando..."
+				},
+				"delete": {
+					"content": "Você gostaria de excluir esse registro?",
+					"delete": "Excluir",
+					"cancel": "Cancelar"
+				}
+			}
+		},
+		"includeFiles": {
+			"moduleTitle": "Gerenciando includes de: <span style=\"color:#fff;\">{PATH_FILE}<\/span>",
+			"inFTP": "No FTP:",
+			"linkedURL": "Vinculados a essa URL:",
+			"search": "Pesquisar:",
+			"modal": {
+				"sortItem": "Reordenando ítens...",
+				"addingFile": "Adicionando arquivo...",
+				"savingInput": "Salvando input...",
+				"deletingInput": "Excluindo input..."
+			}
+		}
+	},
+	"domainPanel": {
+		"AccountDetails": "Detalhes da conta",
+		"GeneralData": "Dados Gerais",
+		"Domain": "Domínio",
+		"Plan": "Plano",
+		"CreationDate": "Data de Criação",
+		"ExclusiveURL": "URL Exclusiva",
+		"HDspace": "Espaço do HD",
+		"WsLang": 	"Idioma do sistema",
+		"AboutServer": "Sobre o servidor",
+		"Protocol": "Protocolo",
+		"Password": "Senha",
+		"Port": "Porta",
+		"DomainFTP": "ftp.domain.com",
+		"Database": "Banco de Dados",
+		"AbsoluteServerURL": "URL absoluta do servidor",
+		"DB": "BD",
+		"URLMySQL": "mysql.dominio.com.br",
+		"Server": "Servidor",
+		"DefaultEmail": "Email padrão",
+		"RequiresAuth": "Requerido autenticação",
+		"DomainStatus": "Status do domínio",
+		"ActiveDomain": "Domínio ativo",
+		"FreezeAllPages": "Congele todas as páginas",
+		"FreezingURL": "URL de congelamento",
+		"AutoSave": "Auto Salvamento",
+		"ForceFileCache": "Forçar cache de arquivos",
+		"WSSiteBackup": "Backup do site websheep",
+		"ExcuteBackup": "Execute backup do website",
+		"DefaultMetaTags": "Configurar meta tags padrões",
+		"ConfigureMetaTags": "Configurar meta tags",
+		"SplashScreen": "Tela de abertura",
+		"UpdateData": "Autalizar dados",
+		"modal": {
+			"BeforeProceed": "<div class='bg08' style='padding: 20px;margin: 10px;color: #D40000;font-size: 18px;'><b>Antes de prosseguir:<\/b> <br><br>O sistema NÃO MANTÉM cópias destes backups no servidor.<br><br>Portanto, guarde bem este arquivo, <br> pois ele é a cópia <b>FIEL ATUAL<\/b> do seu site/sistema.<br><br>Quando descompactar arquivo novamente no servidor, ele pedirá um setup, isso é normal, prossiga normalmente.<br><br>Se for uma nova hospedagem, ele pedirá novamente os dados de acesso, caso contrario apenas um setup.<br>Os dados do site, e templates ficarão guardados dentro do menu 'Templates' ao lado esquerdo, com a data de registro.<br><br>Lembre-se, o sistema apagará tudo que existe de dados e arquivos antes de aplicar o bkp.",
+			"Saving": "Salvando",
+			"Prepare": "Preparar",
+			"Checking": "Checando",
+			"SeparatingFiles": "Separando arquivos ...",
+			"CompactingFiles": "Compactando arquivos, aguarde ...",
+			"JustALittleBit": "Só mais um pouquinho...",
+			"TakingAWhile": "Sei que está demorando, é assim mesmo ...",
+			"WereAlmostThere": "Estamos quase lá ...",
+			"Wait": "Peraí ...",
+			"OneMoment": "Um momento ...",
+			"FinalSettings": "Ajustes finais ...",
+			"Finishing": "Finalizando ...",
+			"ClosingFile": "Fechando arquivo ...",
+			"CheckingForError": "Verificando erros ...",
+			"EverythingOk": "Tudo OK ...",
+			"AllocatingRecords": "Alocando registros no diretório padrão ...",
+			"PleaseWait": "Por favor, aguarde ...",
+			"Processing": "Processando ...",
+			"WeFound": "Nós encontramos",
+			"DirectoriesAnd": "diretórios e",
+			"FilesYourServer": "arquivos no seu servidor",
+			"CanWeStartCompac": "Podemos começar a compactar?",
+			"Compact": "Compactar",
+			"Compacting": "Compactando",
+			"Directories": "Diretórios",
+			"Files": "Arquivos",
+			"FileWeight": "Peso do arquivo",
+			"Download": "Download",
+			"Downloading": "Fazendo download",
+			"BKPAlready": "Já existe um arquivo de BKP gerado no servidor",
+			"GenerateNew": "Gerar novo",
+			"UseTheSame": "Usar o mesmo",
+			"ItemSavedSucces": "Ítem salvo com sucesso!"
+		}
+	},
+	"hdPanel": {
+		"title": "Gerenciamento de disco",
+		"consumptionPerTool": "Consumo por ferramenta",
+		"SituationOfTheHD": "Situação do HD em geral",
+		"overviewOfAllFiles": "Visão geral de todos os arquivos",
+		"Library": "Biblioteca",
+		"consuming": "Consumindo",
+		"SpaceOccupied": "Espaço ocupado",
+		"table": {
+			"originalName": "Nome original",
+			"fileName": "Nome atual",
+			"size": "Peso",
+			"changed": "Alterado em",
+			"extension": "Extensão",
+			"path": "Local"
+		}
+	},
+	"Plugins": {
+		"Loading": "Preparando ambiente ...",
+		"PluginsWebsheep": "Plugins Websheep",
+		"CreateNewPlugin": "Criar novo plugin",
+		"CofigureTool": "Configurar ferramentas",
+		"On": "On",
+		"Off": "Off",
+		"Version": "Versão",
+		"Author": "Autor",
+		"Path": "Caminho",
+		"Keycode": "Keycode",
+		"Modal": {
+			"DoYouWantDelete": "Deseja excluir este Plugin?",
+			"ActionNotBack": "Esta ação não terá volta, e poderá afetar diretamente o seu site",
+			"Yes": "Sim",
+			"Cancel": "Cancelar",
+			"Excluding": "Excluindo",
+			"Loading": "Carregando",
+			"NotExist": "Ops, esse arquivo não existe",
+			"CreatingPlugin": "Criando plugin"
+		}
+	},
+	"ToolsManager": {
+		"Title": "Gerenciador de ferramentas",
+		"Back": "Voltar",
+		"pathTools": "Gerenciar grupos",
+		"ImportTool": "Importar uma Ferramenta",
+		"CreateTool": "Criar uma ferramenta",
+		"ExportAll": "Exportar todos",
+		"DeleteAll": "Excluir todos",
+		"Clear": "Limpar",
+		"Export": "Exportar",
+		"Move": "Mover",
+		"Access": "Configurações",
+		"Inputs": "Editar campos",
+		"Select": "Selecionar",
+		"Modal": {
+			"Backing": "Voltando",
+			"RepoTool": "Ferramenta reposicionada com sucesso!",
+			"RepoFail": "Ops, houve uma falha ao reposicionar a ferramenta",
+			"ExportTool": "Exportar ferramenta",
+			"ExportTools": "Exportar ferramentas",
+			"DeleteTool": "Excluir ferramenta",
+			"ExportThe": "Exportar as ",
+			"DeleteThe": "Excluir as ",
+			"TheTools": " ferramentas",
+			"AreYouSure": "Tem certeza que quer excluir essa ferramenta?",
+			"SureTool": "Tem certeza que quer excluir essas ",
+			"WaitDel": "Aguarde, estamos excluindo esta ferramenta",
+			"AllRegister": " e todos os seus registros...",
+			"MakeBkpDel": "Fazer BKP e excluir",
+			"JustDel": "Apenas excluir",
+			"FileName": "nomearquivo",
+			"Cancel": "Cancelar",
+			"ButtonLink": "Vincular",
+			"LoadEditor": "Carregando editor...",
+			"Loading": "Carregando",
+			"Verifying": "Verificando",
+			"SelectField": "Selecione um campo",
+			"Title": "titulo",
+			"Text": "texto",
+			"Avatar": "avatar",
+			"Image": "imagem",
+			"Uploaded": "carregado",
+			"SavedOK": "Página salva com sucesso!",
+			"ChooseApp": "Escolha o tipo de App que você quer",
+			"ColumnPrefix": "Prefixo das colunas",
+			"AppName": "Nome do App",
+			"SlugTool": "Slug",
+			"groupTool": "Grupo",
+			"groupToolButtom": "Selecionar",
+			"Example": "ex: Galeria de fotos",
+			"DoubleTool": "Duplicar ferramenta existente:",
+			"selectGroupTitle": "Selecione um ou mais grupos",
+			"SelectTool": "Selecione uma ferramenta",
+			"PleaseFill": "Por favor, preencha todos os campos",
+			"CreateOk": "Ferramenta criada com sucesso!",
+			"ClearTool": "Tem certeza que quer limpar essa ferramenta?",
+			"YesSure": "Sim, tenho certeza!",
+			"NoSorry": "Ops, cliquei errado!",
+			"WaitClean": "Aguarde, estamos limpando todos os seus registros inseridos nesta ferramenta...",
+			"ToolCleaned": "Ferramenta limpa com sucesso!",
+			"OkThanks": "Ok, obrigado",
+			"AndAllReg": " e todos os seus registros...",
+			"DelOk": "Ferramenta excluída com sucesso!",
+			"DelTool": "Tem certeza que quer excluir essa ferramenta?",
+			"MakeDel": "Fazer BKP e excluir",
+			"MySQLPrefix": "Prefixo MySQL",
+			"Slug": "Slug",
+			"NewNameTool": "Novo título da ferramenta",
+			"Install": "Instalar",
+			"ExistPrefix": "Já existe uma ferramenta com o prefixo ",
+			"ExistSlug": "Já existe uma ferramenta com o slug ",
+			"ToolInstall": "Ferramenta instalada com sucesso!",
+			"ErrorInstall": "Ops, houve uma falha ao instalar a ferramenta!"
+		},
+		"ToolDetails": {
+			"mainTitle": "Editando detalhes da ferramenta",
+			"BackToPluginsButton": "Voltar aos plugins",
+			"BackToToolsButton": "Voltar as ferramentas",
+			"saveTool": "Salvar ferramenta",
+			"toolType": "Tipo da ferramenta",
+			"columnsWillBeDisplayed": "Quais colunas serão exibidas na listagem dos itens?",
+			"toolIsPartOfAPlugin": "Essa ferramenta faz parte de um plugin",
+			"editButtom": "Editar os campos do Ítem",
+			"MaxItem":"Limitar inserções",
+			"groupOwned":"Grupo pertencente",
+			"rootGroup":"Sem grupo",
+			"TopAlert": {
+				"setSlug": "Escreva um SLUG para esta feramenta",
+				"setTitle": "Ops, qual será o titulo que ele terá no menu principal de topo?",
+				"setMySQL": "Você esqueceu de me dizer o nome da tabela MySQL dessa ferramenta"
+			},
+			"modal": {
+				"back": "Voltando...",
+				"loading": "Carregando...",
+				"saving": "Salvando...",
+				"save": {
+					"content": "Por favor, salve a ferramenta antes de prosseguir.",
+					"bot1": "Salvar e prosseguir",
+					"bot2": "Cancelar",
+					"sucess": "Ferramenta salva com sucesso!"
+				}
+			},
+			"chosen": {
+				"maxSelect": "Desculpe, escolha apenas 8 opções.    =("
+			},
+			"AddHTML":"Template HTML",
+			"AddJs": {
+				"title": "Javascript auxiliar",
+				"opt1": "Executar código ao abrir e ao salvar o ítem da ferramenta",
+				"opt2": "Executar código ao abrir um ítem da ferramenta",
+				"opt3": "Executar javscript ao salvar o item da ferramenta",
+				"opt4": "Não fazer nada"
+			},
+			"label": {
+				"slugTool": "Slug da ferramenta:",
+				"nameTool": "Qual é o nome da ferramenta?",
+				"prefixColunm": "Prefixo das colunas",
+				"description": "Uma breve descrição",
+				"anItem": "Um ítem",
+				"list": "Lista",
+				"category": "Lista com Categorias"
+			}
+		},
+		"PathTools":{
+			"Title"		: "Grupos de ferramentas",
+			"Back"		: "Voltar",
+			"Save"		: "Salvar",
+			"Delete"	: "Excluir",
+			"Move"		: "Mover",
+			"AddField"	: "Adicionar um grupo",
+			"Backing"	: "Voltando...",
+			"RepoPath"	: "Ferramenta reposicionada com sucesso!",
+			"RepoFail"	: "Ops, houve uma falha ao reposicionar a ferramenta!",
+			"SaveSucess": "Grupo salvo com sucesso!",
+			"SaveFail"	: "Falha ao salvar grupo!",
+			"addGroup": {
+				"Sucess"	: "Grupo criado com sucesso!",			
+				"Fail"		: "Houve alguma falha ao criar este grupo"			
+			},
+			"ModalDelete": {
+				"Label"	: "Tem certeza de que gostaria de excluir este grupo?",
+				"Confirm"	: "Sim tenho certeza",
+				"Cancel"	: "Cancelar",
+				"Sucess"	: "Grupo excluido com sucesso!",			
+				"Fail"		: "Houve alguma falha ao excluir este grupo"			
+			}
+		},
+		"FieldDetails": {
+			"Description"					: "Descrição",
+			"EnteringKeywords"				: "Este é um campo para inserção de palavras chave",
+			"ID"							: "ID",
+			"FieldTitle"					: "Título do campo",
+			"NameTableItems"				: "Nome na tabela de ítens",
+			"LegendBalloon"					: "Legenda do balão",
+			"LegendEqual"					: "legenda igual a essa",
+			"SimpleInput"					: "Este é um campo de input simples, ou seja, linha única, para títulos, legendas e pequenos textos",
+			"PlaceHolder"					: "Placeholder",
+			"SuperiorLabel"					: "Label superior do input",
+			"FieldLabel"					: "Label do campo",
+			"MaxCharacter"					: "Máx de caracteres",
+			"Mask"							: "Máscara",
+			"FieldAddress"					: "Este campo será um endereço",
+			"FieldDisabled"					: "Este campo será desabilitado para edição",
+			"FieldPassword"					: "Este campo será uma senha",
+			"FieldNumber"					: "Este campo será numérico",
+			"FieldDate"						: "Este campo será data",
+			"FieldMoney"					: "Este campo será com valores monetários",
+			"CaseAddress"					: "Caso seja um endereço, você pode definir outros campos da ferramenta para receber as variáveis quando selecionar",
+			"SelectField"					: "Selecione um campo",
+			"Street"						: "Rua",
+			"City"							: "Cidade",
+			"State"							: "UF",
+			"Neighborhood"					: "Bairro",
+			"Country"						: "País",
+			"PostalCode"					: "CEP",
+			"UniqueIdentifier"				: "Identificador único do campo",
+			"SuperiorLabelCheck"			: "Label superior do checkbox",
+			"SuperiorLabelTextArea"			: "Label superior do TextArea",
+			"MaxLenght"						: "Tamanho Máximo",
+			"DefaultColor"					: "Cores padrão do editor",
+			"TextColor"						: "Cor do texto",
+			"FieldBackgroud"				: "Background do campo",
+			"EnabledEditor"					: "Habilitar editor HTML",
+			"AutoSize": "Autosize",
+			"EnabledUpload": "Habilitar upload de imagens no editor",
+			"RadioboxDesc": "Este é um campo de radiobox, para uma seleção pré definidas de um único valor.O valor escolhido será gravado o diretamente na coluna MySQL com o valor em forma de string do label do proprio radio.",
+			"WhatGroup": "Qual é o grupo que esse radiobox pertence",
+			"LabelRadio": "Label interno do radiobox",
+			"FreeImage": "Imagem Avulsa",
+			"NonGalery": "Esse arquivo é pre definido e não está vinculadas a nenhuma galeria, apenas ao ítem em sí",
+			"Identifier": "Indentificador",
+			"PowerEditor": "Este é um poderoso editor de código, retorna o código puro",
+			"WhatSyntax": "Qual sintaxe você vai programar",
+			"CheckboxDesc": "Este é um campo de checkbox, para uma seleção pré definidas de um único valor.O valor escolhido será gravado o diretamente na coluna MySQL com valor boleano.",
+			"LabelCheckBox": "Label do checkbox",
+			"SelectBoxDesc": "Este é um campo selectbox e grava diretamente o resultado na coluna MySQL do ítem",
+			"SuperiorLabelSelec": "Label superior do select",
+			"SelectMultiple": "Este é um campo selectbox com múltiplas opções",
+			"NotSaveSelect": "Ele NÃO grava na tabela do ítem",
+			"SelMultDesc1": "Existe uma tabela com o final '_op_multiple' onde existe todas as opções referenciadas com o ID deste campo",
+			"SelMultDesc2": "e uma tabela com o final '_link_op_multiple' onde esta registrado apenas as opções selecionadas com o ID chave da 1° tabela",
+			"SeparatorDesc": "Este é apenas um campo para separação de conteudo",
+			"Label": "Label",
+			"GalButtonDesc1": "Botão de acesso ao gerenciador de galerias",
+			"GalButtonDesc2": "Lá o cliente poderá adicionar varias galerias, editá-las com thumb de exibição e descrição da galeria",
+			"MakeReference": "Faz referencia a outra ferramenta",
+			"ChooseTool": "Escolha uma ferramenta",
+			"WhatListLink": "Qual será listado para linkar",
+			"SpecificCategory": "Alguma categoria em específico",
+			"WhatLink": "Linkar em que",
+			"Categories": "Categorias",
+			"LinkMultiple": "Vincular com multiplos ítens",
+			"Multiple": "Múltiplos",
+			"Unitary": "Unitário",
+			"AccessButton": "Botão de acesso para outras ferramentas cadastradas",
+			"FileButton1": "Botão de acesso aos arquivos do ítem",
+			"FileButton2": "Esses arquivos estão ligados ao ítem diretamente.",
+			"PhotoButton1": "Botão de acesso as fotos do ítem",
+			"PhotoButton2": "Essas fotos não são vinculadas a nenhuma galeria, apenas ao ítem em sí",
+			"FileUpload1": "Upload de arquivo",
+			"FileUpload2": "Esse arquivo é pre definido e não está vinculadas a nenhuma galeria, apenas ao ítem em sí",
+			"FileAuthorized": "Este arquivo está autorizado para download",
+			"IFrame": "Iframe para adicionar conteudos externos",
+			"Name": "Nome",
+			"URL": "URL",
+			"Variable": "Variáveis",
+			"GET": "GET",
+			"Date": "Data",
+			"HowIframe": "Como ficará o iframe",
+			"AudioPlayer": "Player de Áudio, suporta url de vídeo do SoundCloud e Mixcloud",
+			"AudioField": "Nome do campo na tabela MySQL: (ex: minha_musica)",
+			"AudioLabelSup": "Label superior do player",
+			"VideoPlayer": "Player de vídeo, suporta url de vídeo do Youtube e Vimeo",
+			"VideoField": "Nome do campo na tabela MySQL: (ex: meu_video)",
+			"SimpleLabel": "Label simples de texto, perfeito para descrever algo ou algum campo",
+			"ColorPicker": "Este é um campo de colorpicker, onde o usuario poderá definir uma cor hexadecimal",
+			"ColorPickerName": "Título que irá na listagem dos ítens",
+			"ColorPickerLabel": "Label interno do colorpicker",
+			"EnableTopCaption": "Habilitar Label Superior"
+		}
+	},
+	"Leads" : {
+		"Register" : {
+			"Back"			: "Voltar",
+			"Backing"		: "Voltando",
+			"Modal"	: {
+				"NumerForPage"	: "Quantidade p/ página",				
+				"WantDelete"	: "Tem certeza de que você quer excluir esse link?",
+				"DataDelete"	: "Os dados inclusos na tabela também serão excluídos, e isso não terá mais volta!",
+				"Delete"		: "Excluir",
+				"Cancel"		: "Cancelar",
+				"DeleteLink"	: "Excluindo link..."}			
+		},
+		"Fields" : {
+			"Back"		: "voltar",
+			"AddField"	: "Adicionar um campo",
+			"Delete"	: "Excluir",
+			"Modal" : {
+				"AreSure"		: "Tem certeza de que você quer excluir essa coluna?",
+				"DataDelete"	: "Os dados inclusos nela também serão excluídos, e isso não terá mais volta!",
+				"Cancel"		: "cancelar",
+				"AddingField"	: "Adicionando campo...",
+				"Backing"		: "Voltando...",
+				"TypeName"		: "Digite um nome para o seu campo:",
+				"SameName"		: "(mesmo 'name' do input no seu formulário):"}
+		},
+		"Details" : {
+			"PleaseWait"	: "Por favor, aguarde...",
+			"BackList"		: "Voltar a listagem",
+			"SaveConfig"	: "Salvas configurações",
+			"URLSend"		: "URL de envio:",
+			"EditFieldForm"	: "Edite os campos do formulario.",
+			"EditField"		: "Editar campos",
+			"DataLead"		: "Dados do lead",
+			"RegisterName"	: "Nome deste cadastro:",
+			"Title"			: "Título:",
+			"ShortDesc"		: "Pequena descrição:",
+			"LeadConfig"	: "Configuração do lead",
+			"AboutForm"		: "Sobre a finalidade do formulário:",
+			"UserEmail"		: "Campo do email do usuário",
+			"JustSave"		: "Apenas gravar na base",
+			"JustSend"		: "Apenas enviar email",
+			"SaveSend"		: "Enviar e-mail e gravar na base",
+			"UserResponse"	: "Resposta ao usuário",
+			"SelectField"	: "Selecione um campo",
+			"ServerConfig"	: "Configurações do servidor:",
+			"SMTPSecure"	: "SMTPSecure:",
+			"Host"			: "Host:",
+			"Port"			: "Porta:",
+			"SMTPAuth"		: "SMTPAuth:",
+			"SenderEmail"	: "E-mail que fará o envio:",
+			"Password"		: "Senha do e-mail:",
+			"SMTPDomain"	: "SMTP do domínio",
+			"SMTPex"		: "ex: smtp.domain.com",
+			"Portex"		: "ex: 21",
+			"ReqAuth"		: "Requer autenticação",
+			"SendersName"	: "Nome do remetente:",
+			"ReceiveMail"	: "E-mail que receberá o envio principal:",
+			"Subject"		: "Assunto do e-mail principal:",
+			"SubjectUser"	: "Assunto do e-mail para o usuário:",
+			"AdminMessage"	: "Mensagem que o administrador irá receber:",
+			"UserMessage"	: "Mensagem resposta para o usuário:",
+			"URLSucess"		: "URL de sucesso:",
+			"URLError"		: "URL para erro:",
+			"NoAjax"		: "Esse parametro é caso você utilize o formulário sem ajax",
+			"ImageTop"		: "Imagem de topo do e-mail:",
+			"Signature"		: "Assinatura do e-mail:",
+			"MyComputer"	: "Meu computador",
+			"Library"		: "Na biblioteca",
+			"Modal" : {
+				"AccessData"	: "Acessando campos da tabela ...",
+				"Backing"		: "Voltando...",
+				"Saving"		: "Salvando...",
+				"Sucess"		: "Link de cadastro foi salvo com sucesso!",
+				"ProcessImage"	: "Processando imagem..."
+			}
+		},
+		"Index" : {
+			"FormRegister"		: "Cadastros de formulário",
+			"CreateLink"		: "Criar um link cadastro",
+			"ViewRegister"		: "Visualizar registros",
+			"Edit"				: "Editar",
+			"Delete"			: "Excluir",
+			"Modal" : {
+				"LoadRegister"		: "Carregando cadastro...",
+				"AreSure"			: "Tem certeza de que você quer excluir esse link?",
+				"NotBack"			: "Os dados inclusos na tabela também serão excluídos, e isso não terá mais volta!",
+				"Delete"			: "Excluir",
+				"Cancel"			: "Cancelar",
+				"DeleteLink"		: "Excluindo link...",
+				"CreateLead"		: "Criando LeadCapture..."}
+		}
+	}
+	
+}

@@ -1,0 +1,911 @@
+<!-- BEGIN TOOL_MODEL -->
+<form id="formUploadTool" style="display:none" method="post" enctype="multipart/form-data" name="formUpload">
+	<input name="arquivo"	 id="myfile" 		type="file"  style="display:none" accept=".json" />
+	<input name="pageid" 	id="pageid" 		type="hidden"  style="display:none"/>
+	<input name="prefix" 	id="InputPrefix" 	type="hidden"  style="display:none"/>
+	<input name="slugTool" 	id="InputSlug" 		type="hidden"  style="display:none"/>
+	<input name="nameTool" 	id="InputName" 		type="hidden"  style="display:none"/>
+	<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+	<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+</form>
+<script>
+	window.id_item_selected='';
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-tools/style.min.css','css_mod','All');
+</script>
+<style type="text/css">
+	.comboToolls{
+		position: relative;
+		overflow: auto;
+		max-height: 400px;
+		margin-bottom: -57px;
+
+	}
+	.comboToolls .toolUnique{
+		position: relative;
+		width: 500px;
+		border: solid 0.5px rgba(146, 146, 146, 0.3);
+		height: initial;
+		margin: 8px;
+		padding: 10px
+	}
+	.comboToolls .toolUnique .title{
+		font-size: 20px;
+		font-weight: bold;
+		float: left;
+		width: 100%;
+		text-align: left;
+	}
+	.comboToolls .toolUnique .content {
+		float: left;
+		position: relative;
+		min-height: 30px;
+		width: 100%;
+		text-align: left;
+		border-bottom: solid 1px #cecece;
+		margin: 10px 0;
+		word-wrap: break-word;
+		color: #000;
+		padding-bottom: 16px;
+	}
+	#excluir{
+		display: block;
+		position: relative;
+		float: right;
+		padding: 10px 30px;
+		right: 40px;
+	}
+	#exportarTodos,#excluir{
+		display: none;
+	}
+
+</style>
+
+	<div id="topoModulo" class="TitTop bg05 w1b">{ToolsManager_Title}</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+
+		<!-- BEGIN GOBACKBT  -->
+				<div id="voltar" data-goback="{GOBACK}" class="botao">{ToolsManager_Back}</div>
+		<!-- END GOBACKBT  -->
+
+			<div id="pathTools" 		class="botao">{ToolsManager_pathTools}</div>
+			<div id="importApp" 		class="botao">{ToolsManager_ImportTool}</div>
+			<div id="bt_Add_Grupo" 		class="botao">{ToolsManager_CreateTool}</div>
+			<div id="exportarTodos" 	class="botao">{ToolsManager_ExportAll}</div>
+			<div id="excluir" 			class="botao">{ToolsManager_DeleteAll}</div>
+			<div class="c"></div>
+		</form>
+		<!-- BEGIN GOBACKJS  -->
+			<script type="text/javascript">
+				$("#voltar").bind("click tap press",function(){
+					confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					$("#conteudo").load("{GOBACK}",function(){
+						$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+					});
+				})
+			</script>
+		<!-- END GOBACKJS  -->
+
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN TOOL -->
+				<li class='{LI_CLASS}' data-slug='{LI_SLUG}' data-prefix='{LI_PREFIX}' class='ws-toolsferramenta' data-id='{LI_ID}' data-token='{LI_TOKEN}' data-pai='0'>
+					<div class='w1 titulo'>{LI_TITLE}</div>
+					<div class='combo'>
+						<div class='detalhes_img'>
+							<div style='padding:0;		position:relative; float:left; width:25px; height:25px; top:2px;'>
+                            <input type='checkbox' style='cursor:pointer; position:relative; top:6px;' class='legenda' legenda='{ToolsManager_Select}'></div>
+							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'>
+                            <img style='cursor:pointer; position:relative; float:left; top:2px; ' class='limpar legenda' legenda='{ToolsManager_Clear}' src='./app/templates/img/websheep/vassoura.png'></div>
+							<div style='display:none; padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'>
+                            <img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' class='exportar legenda' legenda='{ToolsManager_Export}' src='./app/templates/img/websheep/export_toll.png'></div>
+							<div style='padding:0 9px;	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='mover_item legenda' legenda='{ToolsManager_Move}' src='./app/templates/img/websheep/arrow-move.png'></div>
+							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='editar legenda' legenda='{ToolsManager_Access}' src='./app/templates/img/websheep/engrenagem.png'></div> 
+							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='campos legenda' legenda='{ToolsManager_Inputs}' src='./app/templates/img/websheep/category-group.png'></div> 
+                            <div style='display:none;	padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px' 	class='excluir legenda' legenda='<img class=\"editar\" src=\"./app/templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir' src='./app/templates/img/websheep/cross-button.png'></div>
+						</div>
+					</div>
+				</li>
+			<!-- END TOOL -->
+		</ul>
+	</div>
+</div>
+
+<script>
+	window.ordenaFerramenta = function (retorno){
+			var retorno;
+			var posicoes = [];
+			var i = 0;
+			$('#palco ul li').each(function (i) {
+				var tok = $(this).data('token');
+				if(tok){
+					posicoes[i] = tok;
+					++i;
+				}
+			})
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: { 
+				function:"ordenaFerramenta",
+				posicoes:posicoes
+			  }
+			}).done(function(data) { 
+					if(data=="sucesso"){
+						TopAlert({mensagem: "{ToolsManager_Modal_RepoTool}",type: 3})
+					}else{
+						TopAlert({mensagem: "{ToolsManager_Modal_RepoFail}!",type: 2})
+					}
+			});
+	}
+
+
+	$(function() {
+		$( "#palco ul" ).sortable({
+			handle: ".mover_item",
+			forceHelperSize: true,
+			beforeStop: function( event, ui ) {
+				window.ordenaFerramenta()
+			}
+		});
+
+		$( "#palco .body" ).sortable({
+			handle: ".mover_sub_item",
+			forceHelperSize: true,
+			beforeStop: function( event, ui ) {
+				window.ordenaSubFerramenta()
+			}
+		});
+		$( "#palco ul" ).disableSelection();
+	 });
+ window.reloadFunctions = function(){
+	$('.legenda').LegendaOver();
+
+	$("input[type='checkbox']").unbind('click').bind("click tap press",function(e){
+		var selecteds = $("input[type='checkbox']:checked").length;
+		if(selecteds==1){
+			$("#exportarTodos").text("{ToolsManager_Modal_ExportTool}");
+			$("#excluir").text("{ToolsManager_Modal_DeleteTool}");
+		}else{
+			$("#exportarTodos").text("{ToolsManager_Modal_ExportThe}"+selecteds+"{ToolsManager_Modal_TheTools}");
+			$("#excluir").text("{ToolsManager_Modal_DeleteThe}"+selecteds+"{ToolsManager_Modal_TheTools}");
+		}
+
+		if(selecteds>=1){
+			$("#excluir").show();
+			$("#exportarTodos").show();
+		}else{
+			$("#excluir").hide();
+			$("#exportarTodos").hide();
+		}
+	})
+
+	$("#excluir").unbind('click tap press').bind("click tap press",function(e){
+		e.preventDefault();
+
+		var Item 		= $("input[type='checkbox']:checked").parent().parent().parent().parent();
+		var selecteds	= $("input[type='checkbox']:checked").length;
+	
+			if(selecteds==1){
+				var msn = '{ToolsManager_Modal_AreYouSure}'; 
+			}else{
+				var msn = '{ToolsManager_Modal_SureTool}'+selecteds+'{ToolsManager_Modal_TheTools}?'; 
+			}
+			function excluiToolls(){
+				var ferramentas = new Array();
+				$(Item).each(function(index){var id = $(this).data("id");ferramentas.push(id);})
+				$.ajax({
+					beforeSend:function(){confirma({width:600, conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AllRegister}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag:false, bot1:0, bot2:0 }) },
+					type: "POST",
+					url: "./app/ws-modules/ws-tools/functions.php",
+					data: { 'function':"exclude_All_Tool_File","tools":ferramentas}
+				}).done(function(data) {
+					if(data=="sucesso"){
+						$("#conteudo").load("./{PATH}/tools.php",function(){
+							setTimeout(function(){
+								$("#exportarTodos,#excluir").hide();
+							},1000);
+							$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+							window.refreshMenuDesktop();
+						});
+					}
+				})
+			}
+
+			if(selecteds==1){
+					$("input[type='checkbox']:checked").parent().parent().parent().parent().find(".excluir").click();
+			}else{
+				confirma({ 
+					conteudo:msn,
+					bot1:"{ToolsManager_Modal_MakeBkpDel}",
+					bot2:"{ToolsManager_Modal_JustDel}",
+					drag:false,
+					botclose:true,
+					newFun:function(){
+						$("#exportarTodos").click();
+						excluiToolls();
+					},
+					onCancel:function(){
+						excluiToolls();
+					}
+				})
+			}
+	//	//$("input[type='checkbox']:checked").click();
+		return false;
+	})
+
+	$("#exportarTodos").unbind("click tap press").bind("click tap press",function(e){
+		e.preventDefault();
+		var selecteds = $("input[type='checkbox']:checked").length;
+		if(selecteds==1){
+
+			$("input[type='checkbox']:checked").parent().parent().parent().parent().find(".exportar").click();
+
+		}else{
+			var ferramentas = new Array();
+			$("input[type='checkbox']:checked").parent().parent().parent().parent().each(function(index){ ferramentas.push($(this).data("id"));})
+			confirma({
+				width:"auto",
+				conteudo:'<div style="font-size: 30px; margin: 0px;">{ToolsManager_Modal_ExportTool}</div><br><input id="nameFileTool" class="inputText" placeholder="{ToolsManager_Modal_FileName}" style="padding: 10px; width: 450px; ">', drag:false,
+				width:500,
+				newFun:function(){
+					var filename = $("#nameFileTool").val()+'.json';
+
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { 'function':"export_All_Tool_File", tools:ferramentas}
+					}).done(function(data) {
+
+							var pom = document.createElement('a');
+							pom.setAttribute('href', 'data:text/plain;charset=utf-8,'+data);
+							pom.setAttribute("download",filename);
+							if (document.createEvent) {
+								var event = document.createEvent('MouseEvents');
+								event.initEvent('click', true, true);
+								pom.dispatchEvent(event);
+							}else{
+								pom.click().remove();
+							}
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+					})
+				},
+				bot1:"{ToolsManager_Modal_ExportTools}",
+				bot2:"{ToolsManager_Modal_Cancel}"
+			})
+		}
+				
+
+		return false;
+	})
+
+	$(".programar").unbind('click').click(function(e){
+		e.preventDefault()
+		var page 				= $(this).parent().parent().parent().parent().parent().data('file');
+		confirma({
+			width:"auto",
+			conteudo:"<strong>{ToolsManager_Modal_LoadEditor}</strong><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			drag:false,
+			posFn:function(){
+					$("#ws_confirm").css("line-height","20px");
+					$( "#conteudo" ).load("./app/ws-modules/ws-webmaster/index.php?get_file="+page, function( response, status, xhr ) {
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					});
+			},
+			bot1:0,
+			bot2:0
+		})
+		return false;
+	})
+
+	$(".exportar").unbind('click').click(function(){
+			var li			= $(this).parent().parent().parent().parent();
+			var id			= $(li).data('id');
+			var NamePlugin	= $(li).find('.titulo').text().split(" ").join("_");
+
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: { "function":"exportToolFile","id_tool":id, type:"echo"}
+			}).done(function(data) {
+
+						var pom = document.createElement('a');
+						pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + data);
+						pom.setAttribute('download', NamePlugin+".json");
+						if (document.createEvent) {
+							var event = document.createEvent('MouseEvents');
+							event.initEvent('click', true, true);
+							pom.dispatchEvent(event);
+						}else{
+							pom.click().remove();
+						}
+		
+			})
+	})
+
+
+	$(".editar ").unbind('click').click(function(){
+		var li	= $(this).parent().parent().parent().parent();
+		var id	= $(this).parent().parent().parent().parent().data("id");
+		confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		 $("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/detalhes.php{LINK_DETALHES}",function(){
+		 	$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+		});
+	})
+
+	$(".campos").unbind('click').click(function(){
+		var li	= $(this).parent().parent().parent().parent();
+		var id	= $(this).parent().parent().parent().parent().data("id");
+		confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		 $("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/campos.php{LINK_DETALHES}",function(){
+		 	$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+		});
+	})
+$("#combo_folder .editar ").unbind('click').click(function(){
+			var li		= $(this).parent().parent().parent().parent().parent();
+			var id		= $(li).data('id');
+			var titulo	= $(li).find('.titulo_folder').text();
+			functions({
+				funcao:"returnPaths",
+				vars:"id="+id,
+				patch:"{PATH}",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Verifying}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				Sucess:function(e){
+					confirma({				
+						width:"auto",
+						conteudo:e,
+						drag:false,
+						bot1:'Salvar',
+						bot2:'Cancelar',
+						posFn:function(){					
+							$("input[type='radio'][value='renomear']").click();
+							$("select#tools").change(function(e){
+								var idTool = ($(this).val());
+								$("input#path").val($("input#path").val().replace(/{{(.*?)}}/g, "____"));
+								functions({
+									funcao:"returnCamposTool",
+									vars:"idTool="+idTool,
+									patch:"{PATH}",
+									Sucess:function(e){
+										var campos ='<option value="">{ToolsManager_Modal_SelectField}</option>'; 
+											campos +='<option value="id">id</option>';
+											campos +='<option value="token">token</option>';
+											window.camposTools = campos+e;
+										$("select#campos").html(window.camposTools).unbind('change').bind("change",function(){
+											var string = '{{'+$("select#campos").val()+'}}';
+											var cursorPos = $('input#path').prop('selectionStart');
+											var v = $('input#path').val();
+											var textBefore = v.substring(0,  cursorPos);
+											var textAfter  = v.substring(cursorPos, v.length);
+											$('input#path').val(textBefore+string+textAfter);
+										})
+									}
+								})
+							});
+							$("select#campos").html(e).unbind('change').bind("change",function(){
+								var string = '{{'+$("select#campos").val()+'}}';
+								var cursorPos = $('input#path').prop('selectionStart');
+								var v = $('input#path').val();
+								var textBefore = v.substring(0,  cursorPos);
+								var textAfter  = v.substring(cursorPos, v.length);
+								$('input#path').val(textBefore+string+textAfter);
+							})
+							$("input[name=\"typeList\"]").unbind('change').bind("change",function(){
+										$("input#path").val($("input#path").val().replace(/{{(.*?)}}/g, "____"));
+										var type = $(this).val();
+										var campos ='<option value="">{ToolsManager_Modal_SelectField}</option>'; 
+											campos +='<option value="titulo">{ToolsManager_Modal_Title}</option>';
+											campos +='<option value="texto">{ToolsManager_Modal_Text}</option>';
+											campos +='<option value="url">url</option>';
+											campos +='<option value="filename">{ToolsManager_Modal_FileName}</option>';
+											campos +='<option value="token">token</option>';
+										
+										if(type=="item"){
+											$("select#campos").html(window.camposTools)
+										}else if(type=="cat"){
+											campos +='<option value="avatar">{ToolsManager_Modal_Avatar}</option>';
+											$("select#campos").html(campos);
+										}else if(type=="gal"){
+											campos +='<option value="id_item">id_item</option>';
+											campos +='<option value="avatar">{ToolsManager_Modal_Avatar}</option>';
+											$("select#campos").html(campos);
+										}else if(type=="img"){
+											campos +='<option value="id_item">id_item</option>';
+											campos +='<option value="imagem">{ToolsManager_Modal_Image}</option>';
+											$("select#campos").html(campos);
+										}else if(type=="img_gal"){
+											campos +='<option value="id_item">id_item</option>';
+											campos +='<option value="id_galeria">id_galeria</option>';
+											campos +='<option value="imagem">{ToolsManager_Modal_Image}</option>';
+											$("select#campos").html(campos);
+										}else if(type=="files"){
+											campos +='<option value="id_item">id_item</option>';
+											campos +='<option value="file">file</option>';
+											campos +='<option value="uploaded">{ToolsManager_Modal_Uploaded}</option>';
+											$("select#campos").html(campos);
+										}
+							});
+							
+						},
+						newFun:function(){
+							var formulario 	= $("#form_new_name").serialize();
+							var newName 	= $("#form_new_name input[name='titulo_page']").val();
+							$.ajax({
+							  type: "POST",
+							  url: "./App/Modulos/_tools_/functions.php",
+							  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
+							}).done(function(data) {
+								out(data)
+								if(data=="sucesso"){
+									$(li).find('.titulo_folder').text(newName);
+									TopAlert({mensagem: "{ToolsManager_Modal_SavedOK}",type: 3})
+								}else{
+									TopAlert({mensagem:data,type: 2})
+								}
+							})
+						}
+					});
+				}
+			})
+	})
+
+
+
+
+
+
+
+
+
+
+
+	$("#bt_Add_Grupo").unbind('click').click(function(){
+			var li			= $(this).parent().parent().parent().parent().parent();
+			var id			= $(li).data('id');
+			var titulo		= $(li).find('.titulo_folder').text();
+			var conteudo = "	<style>";
+				conteudo += "		.chosen-container{margin:10px;}";
+				conteudo += "		.chosen-container .chosen-results li{color: #000000;}";
+				conteudo += "		.chosen-container-single .chosen-single{height: 40px;}";
+				conteudo += "		.chosen-container-single .chosen-single span{margin-top: 9px;height: auto;}";
+				conteudo += "	</style>";
+				conteudo += "	<div  style='width:700px;'>";
+				conteudo += "		<form id='detailsApp'>";
+				conteudo += "		<div class='w1' style='width: 100%;margin: 0px 0px 20px;text-align: center;font-size: 30px;font-weight: bold;'>{ToolsManager_Modal_ChooseApp}:</div>";
+				conteudo += "		<input name='page' type='hidden' value='"+id+"' ></input>";
+				conteudo += "		<div class='w1' style='text-align: left; width: 140px; float: left; margin-left: 50px; margin-right: 10px; position: relative;'>{ToolsManager_Modal_ColumnPrefix}:</div> ";
+				conteudo += "		<div class='w1' style='text-align: left;width: 150px;float: left;margin: 0;position: relative;'>{ToolsManager_Modal_AppName}:</div>";
+				conteudo += "		<div class='w1 hide_0' style='text-align: left;width: 145px;m;float: left;'>{ToolsManager_Modal_SlugTool}:</div>";
+				conteudo += "		<div class='w1 hide_0' style='text-align: left;width: 130px;m;float: left;'>{ToolsManager_Modal_Group}:</div>";
+				conteudo += "		<div class='c'></div>";
+				conteudo += "		<input name='plugin' type='hidden' value='{MODAL_PLUGIN}'>";				
+				conteudo += "		<input name='prefix' style='padding: 10px 20px;	margin: 10px;							width:130px;	float: left;  margin-left: 50px;' class='inputText' value='' placeholder='ex: _galeriaX_'></input>";
+				conteudo += "		<input name='title' style='padding: 10px 20px; 	margin: 10px; 							width:130px; 	float: left;' class='inputText' value='' placeholder='{ToolsManager_Modal_Example}'></input>";
+				conteudo += "		<input class='inputText hide_0' name='slug' style='padding: 10px 20px;	margin: 10px;	width:130px;	float: left;' value='' placeholder='{ToolsManager_Modal_Example}'></input>";
+				conteudo += "		<div class='botao' id='selectGroup' style='position: relative; float: left; padding: 12px 46px; margin-top: 10px;'><span class='icon fa fa-folder-open'></span>{ToolsManager_Modal_Group_Buttom}</div>";
+				conteudo += "		<div class='c'></div>";
+				conteudo += "		<div class='w1 hide_0' style='text-align: left; width:600px; margin: 0 50px;float: left;'>{ToolsManager_Modal_DoubleTool}</div>";
+				conteudo += "			<select class='inputText hide_0 selectTools' name='ToolModel' id='selectApp' style='float:left;padding: 10px;width:600px;margin:10px;margin-left: 50px;'><option value='0'>{ToolsManager_Modal_SelectTool}</option>";
+				conteudo += "				{MODAL_STR}";
+				conteudo += "			</select>";
+				conteudo += "	</form>";
+				conteudo += "</div>";
+
+			confirma({				
+				width:"auto",
+				conteudo:conteudo,
+				drag:false,
+				bot1:'ok',
+				Check:function(){
+					if($("#detailsApp input[name='prefix']").val()=="" || $("#detailsApp input[name='title']").val()=="" || $("#detailsApp input[name='slug']").val()==""){
+						TopAlert({mensagem: "{ToolsManager_Modal_PleaseFill}!",type: 2})
+						return false;
+					}else{
+						return true;
+					}
+				},
+				bot2:'cancelar',
+				posFn:function(){
+					window.groupsTools = [];
+					 $(".selectTools").chosen({no_results_text: "Oops, nothing found!"}); 
+					 $("#selectGroup").unbind("click tap press").bind("click tap press",function(){
+							conteudo  = "	<div  style='width:600px;'>";
+							conteudo += "		<form id='detailsApp'>";
+							conteudo += "			<div class='w1' style='width: 100%;margin: 0px 0px 20px;text-align: center;font-size: 30px;font-weight: bold;'>{ToolsManager_Modal_Group_Title}</div>";
+							conteudo += "			<div class='c'></div>";
+							conteudo += "			<div class='w1' style='height: calc(100% - 40px);overflow: auto;text-align: left;width: calc(100% - 20px);margin: 0 10px;float: left;background-color: #FFF;border: solid 1px #CCC;'>";
+							conteudo += "			<label class='grupo' style='padding: 8px;border-bottom: dotted 1px #CCC;position: relative;float: left;width: calc(100% - 17px);'>"
+							conteudo += "				<input class='checkboxGrupo' type='checkbox' data-path='0' style='margin-right:3px; position:relative; margin-top:3px;'>{ToolsManager_Modal_rootGroup}"
+							conteudo += "			</label>"
+							<!-- BEGIN CATEGORIAS -->
+								conteudo += "			<label class='grupo' style='padding: 8px;border-bottom: dotted 1px #CCC;position: relative;float: left;width: calc(100% - 17px);'>"
+								conteudo += "				<input class='checkboxGrupo'  type='checkbox' data-path='{id}'  style='margin-right:3px; position:relative; margin-top:3px;'>{LABEL_GROUP}"
+								conteudo += "			</label>"
+							<!-- END CATEGORIAS -->
+							conteudo += "			</div>"
+							conteudo += "		</form>";
+							conteudo += "</div>";
+							ws.confirm({
+								conteudo:conteudo,
+								width: 'calc(100% - 20px)',
+								maxWidth: '600px',
+								minWidth: '300px',
+								maxHeight: '600px',
+								minHeight: '300px',
+								height: 'calc(100% - 100px)',
+								mleft: 0,
+								mtop: 0,
+								posFn: function() {
+									$('.checkboxGrupo').each(function(){
+										var check 	=  $(this)
+										var path 	=  $(check).data('path')
+										$.each(window.groupsTools,function(a){  
+											if(window.groupsTools[a]==path){
+												$(check).click()
+											}
+										})
+									});
+								},
+								Init: function() {},
+								posClose: function() {},
+								bots: [
+									{
+											id			: "aceitar",
+											label		: "{ToolsManager_Modal_ButtonLink}",
+											class		: "",
+											style 		: "",
+											css 		: {"color":"#FFF"},
+											ErrorCheck	: function() {},
+											Check 		: function() {return true},
+											action		: function(){
+												window.groupsTools = [];
+												$('.checkboxGrupo:checked').each(function(){
+													window.groupsTools.push($(this).data('path'))
+												})
+											},
+									},
+									{
+											id			: "cancelar",
+											label		: "{ToolsManager_Modal_Cancel}",
+											class		: "",
+											style 		: "",
+											css 		: {"color":"#FFF"},
+											ErrorCheck	: function() {},
+											Check 		: function() {return true},
+											action		: function(){console.log("1111111")},
+									}
+								],
+								bot1: false,
+								cancel: false,
+								idModal: "ws_select_group",
+								divScroll: "body",
+								divBlur: "#ws_confirm,#menu_tools,#container,#header",
+								drag: false,
+								botclose: false,
+								newFun: function() {},
+								onCancel: function() {},
+								onClose: function() {},
+								Callback: function() {},
+								ErrorCheck: function() {},
+								Check: function() {
+									return true
+								}
+							})
+					 }); 
+				},
+				newFun:function(){
+					var AppData = $("#detailsApp").serialize();
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { function:"addApp",group:window.groupsTools,id:id,AppData:AppData,plugin:"{GET_PLUGIN}"},
+					  beforeSend: function(xhr) {
+					  	ws.preload.open({string:"<b>Aguarde...</b>"})
+					  }
+					}).done(function(data) {
+					  	ws.preload.close()
+						TopAlert({mensagem: "{ToolsManager_Modal_CreateOk}",type: 3})
+						window.refreshMenuDesktop();
+						$("#conteudo").load("./{PATH}/tools.php",function(){
+							setTimeout(function(){$("#exportarTodos,#excluir").hide();},1000)
+							$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+						});
+					})
+				}
+			});
+	})
+
+
+	$(".limpar").unbind('click').click(function(e){
+		var ws_id_ferramenta= $(this).parent().parent().parent().parent().data("id");
+		var li= $(this).parent().parent().parent().parent().parent()
+				confirma({ 
+					conteudo:'{ToolsManager_Modal_ClearTool}',
+					bot1:"{ToolsManager_Modal_YesSure}",
+					bot2:"{ToolsManager_Modal_NoSorry}",
+					drag:false,
+					botclose:false,
+					newFun:function(){
+
+						setTimeout(function(){
+							confirma({
+								width:600,
+								conteudo:"{ToolsManager_Modal_WaitClean}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								drag:false,
+								bot1:0,
+								bot2:0,
+								posFn:function(){
+									$.ajax({
+									  type: "POST",
+									  url: "./app/ws-modules/ws-tools/functions.php",
+									  data: { function:"limparFerramenta",ws_id_ferramenta:ws_id_ferramenta}
+									}).done(function(data) {
+										$("#ws_confirm").css("line-height","20px");
+										$("#ws_confirm").remove();
+										$("#body").removeClass("scrollhidden");
+										$("*").removeClass("blur");
+										confirma({
+											width:600,
+											conteudo:"{ToolsManager_Modal_ToolCleaned}",
+											drag:false,
+											bot1:'{ToolsManager_Modal_OkThanks}',
+											bot2:0
+										});
+									});
+								}
+							})
+						},1000);
+					}
+				})
+	})
+
+
+
+	$(".excluir").unbind('click').click(function(e){
+
+				var ws_id_ferramenta 	= $(this).parent().parent().parent().parent().data("id");
+				var li 		 			= $(this).parent().parent().parent().parent()
+				var exportar 			= $(this).parent().parent().parent().find(".exportar");
+				function exclui(ws_id_ferramenta,li,exportar){
+							ws.confirm({
+								conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AndAllReg}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								width:		'calc(100% - 20px)',
+								maxWidth:	'500px',
+								minWidth:	'500px',
+								height: 	'20px',
+								maxHeight:	'20px',
+								minHeight:	'20px',
+								mleft: 0,
+								mtop: 0,
+								posFn: function() {
+									$.ajax({
+									  type: "POST",
+									  url: "./app/ws-modules/ws-tools/functions.php",
+									  data: { function:"excluiFerramenta",ws_id_ferramenta:ws_id_ferramenta}
+									}).done(function(data) {
+										if(data=="sucesso"){
+											TopAlert({mensagem: "{ToolsManager_Modal_DelOk}",type: 3})
+											window.refreshMenuDesktop();
+											$("#ws_preload_exclui").remove();
+											$("#exportarTodos,#excluir").hide();
+											$("*").removeClass("blur");
+											$(li).remove();
+											window.refreshMenuDesktop();
+										}
+									});			
+								},
+								Init: function() {},
+								posClose: function() {},
+								bots: [],
+								bot1: false,
+								cancel: false,
+								idModal: "ws_preload_exclui",
+								divScroll: "body",
+								divBlur: "#menu_tools,#container,#header",
+								drag: false,
+								botclose: false,
+								newFun: function() {},
+								onCancel: function() {},
+								onClose: function() {},
+								Callback: function() {},
+								ErrorCheck: function() {},
+								Check: function() {
+									return true
+								}
+							})
+
+					//	setTimeout(function(){
+							// confirma({
+							// 	width:600,
+							// 	conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AndAllReg}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+							// 	drag:false,
+							// 	bot1:0,
+							// 	bot2:0,
+							// 	posFn:function(){
+							// 		$.ajax({
+							// 		  type: "POST",
+							// 		  url: "./app/ws-modules/ws-tools/functions.php",
+							// 		  data: { function:"excluiFerramenta",ws_id_ferramenta:ws_id_ferramenta}
+							// 		}).done(function(data) {
+							// 			if(data=="sucesso"){
+							// 				TopAlert({mensagem: "{ToolsManager_Modal_DelOk}",type: 3})
+							// 				setTimeout(function(){$("#exportarTodos,#excluir").hide();},1000)
+							// 				window.refreshMenuDesktop();
+							// 				$("#ws_confirm").css("line-height","20px");
+							// 				$("#ws_confirm").remove();
+							// 				$("#body").removeClass("scrollhidden");
+							// 				$("*").removeClass("blur");
+							// 				$(li).remove();
+							// 				window.refreshMenuDesktop();
+											
+							// 			}
+							// 		});
+							// 	}
+							// })
+					//	},1000);
+				}
+				confirma({ 
+					conteudo:'{ToolsManager_Modal_DelTool}',
+					bot1:"{ToolsManager_Modal_MakeDel}",
+					bot2:"{ToolsManager_Modal_JustDel}",
+					drag:false,
+					botclose:true,
+					newFun:function(){
+						$(exportar).click();
+						exclui(ws_id_ferramenta,li,exportar);
+					},
+					onCancel:function(){
+						exclui(ws_id_ferramenta,li,exportar);
+					}
+				})
+	})
+	$("#formUploadTool").ajaxForm({
+		beforeSend: function(xhr) {},
+		uploadProgress: function(event, position, total, percentComplete, myForm){},
+		complete: function(e){}
+	})
+	$("#importApp").unbind('click').click(function(){
+		window.pageid=0;
+		$("#formUploadTool input[name='pageid']").val(window.pageid);
+		$("#formUploadTool #myfile").click();
+	})
+
+	$("#pathTools").unbind('click').click(function(){
+
+			$("#conteudo").load("./{PATH}/paths.php",function(){},1000);
+
+
+	})
+
+function SetupTool(Base64Var){
+
+		var json 		= $.parseJSON(Base64Var);
+		var conteudoModal = new Array();
+		jQuery.each(json, function(index, itemData) {
+				 conteudoModal.push({
+				 	title:itemData.name, 
+				 	description:itemData.description,
+				 	system:itemData.system.join(','), 
+				 	SQL:itemData.sql
+				 });
+		});
+
+
+		document.getElementById("myfile").value = "";
+		var Template 		= '';
+		var TemplateBase 	= '	<form class="toolUnique">\
+		<div class="w1 title">{{TITULO}}</div>\
+		<div class="w2 content">{{DESCRICAO}}</div>\
+		<div class="c"></div>\
+		<div class="w1" style="text-align: left;float: left;">{ToolsManager_Modal_Slug}:</div>\
+		<div class="w1" style="text-align: left;float: left;margin-left: 111px;">{ToolsManager_Modal_NewNameTool}:</div>\
+		<div class="c"></div>\
+		<input 					name="plugin" 		type="hidden" value="plugin:{GET_PLUGIN}">\
+		<input id="ModalSlug"	name="slugTool" 	style="padding: 10px 20px;margin: 10px 3px;width: 130px;float: left;position: relative;"	 	class="inputText" value="">\
+		<input id="ModalName"	name="nameTool" 	style="padding: 10px 20px;margin: 10px 3px;width: calc(100% - 143px);float: left;position: relative;" 		class="inputText" value="">\
+		<input id="SQL"		name="SQL" 		type="hidden" class="inputText" value="{{SQL}}">\
+		<input id="system"		name="system" 		type="hidden" class="inputText" value="{{system}}">\
+		<div class="c"></div>\
+		<div class="botao" style="padding: 8px;"">{ToolsManager_Modal_Install}</div>\
+	</form>'
+
+	$.each(conteudoModal,function(){
+		var tool = $(this)[0];
+		var newTemplate = TemplateBase;
+			newTemplate = 	newTemplate
+							.replace('{{TITULO}}',tool.title)
+							.replace('{{DESCRICAO}}',tool.description)
+							.replace('{{SQL}}',tool.SQL)
+							.replace('{{system}}',tool.system);
+			Template    = Template+newTemplate;
+	})
+	confirma({
+		width:"auto",
+		conteudo:'	<div class="comboToolls">'+Template+'</div>',
+		posFn:function(){
+			$('.comboToolls .botao').bind("click tap press",function(){
+				var DIV 			= $(this).parent();
+				var ToolInstall 	= $(this).parent().serialize();
+				var plugin			= $(this).parent().find("input[name='plugin']").val();
+				var slugTool		= $(this).parent().find("input[name='slugTool']").val();
+				var nameTool		= $(this).parent().find("input[name='nameTool']").val();
+				var system			= $(this).parent().find("input[name='system']").val();
+				var SQL				= $(this).parent().find("input[name='SQL']").val();
+
+				var slug 			= $("li[data-slug='"+slugTool+"']");
+				
+				if(slug.length>0){
+					TopAlert({mensagem: '{ToolsManager_Modal_ExistSlug}"'+slugToolString+'"',type: 2});
+					return false;
+				}else{
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { 
+						function:"installToolPanel",
+						plugin:plugin,
+						slugTool:slugTool,
+						nameTool:nameTool,
+						system:system,
+						SQL:SQL
+					  }
+					}).done(function(data) { 
+						var json 		= eval($.parseJSON(data));
+						$("#conteudo").load("./{PATH}/tools.php",function(){setTimeout(function(){$("#exportarTodos,#excluir").hide();},1000)});
+						if(json.status=="sucesso"){
+							TopAlert({mensagem: "{ToolsManager_Modal_ToolInstall}",type: 3})
+							$(DIV).css({backgroundColor: "#a7d35b"}).animate({ backgroundColor: "transparent" }, 2000);
+							window.refreshMenuDesktop();
+						}else{
+							TopAlert({mensagem: "{ToolsManager_Modal_ErrorInstall}<br>"+data,type: 2})
+						}							
+					});
+				}
+			})
+		},
+		<!-- BEGIN INSTALLfn -->
+			onClose:function(){
+				$("#conteudo").load("./app/ws-modules/ws-model-tool/ws-central-bkps.php",function(){
+					$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+					window.refreshMenuDesktop();
+				});
+			},
+		<!-- END INSTALLfn -->
+		bot1:0,
+		bot2:0,
+		botclose:true,
+		drag:false,
+	});
+}
+
+	$("#formUploadTool #myfile").change(function(){
+		var file = document.getElementById("myfile").files[0];
+		if (file) {
+		    var reader = new FileReader();
+		    reader.readAsText(file, "UTF-8");
+		    reader.onload = function (evt) {
+		    	SetupTool(evt.target.result);
+		    }
+		}
+	})
+
+	$('#container').perfectScrollbar();
+	setTimeout(function(){
+		<!-- BEGIN INSTALL -->
+			SetupTool(window.bkp_tool);
+		<!-- END INSTALL -->
+		$('#container').perfectScrollbar('destroy');
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+}
+window.reloadFunctions();
+</script>
+
+<!-- END TOOL_MODEL -->

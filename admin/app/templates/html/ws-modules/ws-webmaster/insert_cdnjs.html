@@ -1,0 +1,355 @@
+<style type="text/css">
+	.h1 {
+		position: relative;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 10px;
+		margin: 10px 0;
+		border-bottom: solid 1px #50637d;
+		color: #FFF;
+		float: left;
+		width: 100%;
+    }
+	.h2 {
+		position: relative;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #d5d5d5;
+		float: left;
+		width: 100%;
+	}
+	.h3 {
+		position: relative;
+		font-size: 14px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #FFFFFF;
+		float: left;
+		width: 100%;
+	}
+	.input_text {
+		font-family: 'Titillium Web', sans-serif;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 16px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+		padding: 15px 10px;
+		border: solid 1px #3f4143;
+		background-color: #212121;
+		color: #c7c7c7;
+		width: 100%;
+	}
+	.combo {
+		position: relative;
+		margin-left: 9px;
+		width: calc(100% - 26px);
+		float: left;
+		margin-bottom: 30px;
+    }
+	.bt_padrao {
+		padding: 10px 20px;
+		width: calc(100% - 80px);
+		left: 50%;
+		position: relative;
+		margin: 13px 0;
+		transform: translateX(calc(-50% - 6px));
+		text-align: center;
+	}
+	.bt_metade {
+		padding: 10px 20px;
+		width: calc(50% - 60px);
+		position: relative;
+		margin: 13px 5px;
+		text-align: center;
+		left: 7px;
+    }
+	.selectVersion{
+		width: 121px;
+		position: relative;
+		float: right;
+		font-size: 13px !important;
+		background: #222222 !important;
+		border: 1px solid #3e3e3e !important;
+		color: #9c9c9c !important;
+		border-radius: 3px;
+		padding: 7px 20px;
+    }
+    .plus{
+    	position: relative;
+    	float: right;
+    	right: 0;
+    }
+	.selectCDN i{
+		position: relative;
+		float: left;
+		top: 10px;
+		color: #38619a;
+		cursor: pointer;
+		margin: 0px 7px;
+    }
+	.selectCDN{
+		position: relative;
+		width: 230px;
+		height: 34px;
+		float: right;
+		top: 0;
+		right: 0;
+    }
+	.dataCDN{
+		position: relative;
+		float: left;
+		width: 250px;
+		height: 33px;
+	}
+	.dataCDN .title{
+		font-size: 18px;
+		font-weight: 500;
+		color: #FFF;
+		cursor: pointer;
+	}
+	.dataCDN .title i{
+		margin: 9px;
+		color: #38619a;
+		cursor: pointer;
+	}
+	.item_cdn{
+		position: relative;
+		height: 33px;
+		padding: 15px 0;
+		border-bottom: dotted 1px #38619a;
+	}
+</style>
+<div class="h1">
+	<i class="fa fa-cloud-download"></i> Importar CDNJS
+</div>
+<div class="h3">Adicone de forma fácil e rápida todas as libs do CDNJS<br> com apenas alguns cliques!</div>
+<div class="combo"> 
+	<input id="inputSearchCDN" class="input_text" type="text" placeholder="Pesquisar arquivo:" name="search">
+</div>
+<div class="combo comboItensCDNJS"></div>
+<script type="text/javascript">
+	var SlugTool = null;
+	function returnItem(){
+
+	}
+
+	var t = null;
+	$("#inputSearchCDN").unbind("keyup").bind("keyup",function(){
+		var q =  $(this).val().trim();
+		clearTimeout(t);
+		console.log(q.length)
+		if(q.length>=3){
+			t = setTimeout(function(){
+				$.ajax({
+					type: "GET",
+					async: true,
+					url: "//api.cdnjs.com/libraries",
+					data: {
+						'search': q,
+						'fields': 'keywords,version,description,assets,homepage',
+					}
+				}).done(function(data) {
+					// var obj = $.parseJSON(data);
+					$(".comboItensCDNJS").html("");
+					 $.each(data.results,function(a,b){
+					 	window.selectCDNJS = data.results;
+						var verifyFile = b.assets[0].files.join(' ')
+						var classCss;
+						var classJs;
+						var classImg;
+						var 	itemCDN  =	'<div data-child="'+a+'" class="item_cdn"	title="'+b.description.replace(/<(?:.|\n)*?>/gm, '')+'">';
+							itemCDN +=	'	<div class="dataCDN">';
+							itemCDN +=	'		<span class="title" ><i class="fa fa-info-circle"></i>'+b.name+'</span>';
+							itemCDN +=	'	</div>';
+							itemCDN +=	'	<div class="selectCDN">';
+							if(verifyFile.indexOf('.css')==-1){ classCss='display:none'}
+							if(verifyFile.indexOf('.js')==-1){ classJs='display:none'}
+							if(
+								verifyFile.indexOf('.jpg')==-1 && 
+								verifyFile.indexOf('.jpeg')==-1 && 
+								verifyFile.indexOf('.png')==-1 && 
+								verifyFile.indexOf('.gif')==-1){ 
+								classImg='display:none'
+							}
+							itemCDN +=	'		<i title="CSS" 		style="'+classCss+'" class="CSS insereCDN plus fa fa-css3"></i>';
+							itemCDN +=	'		<i title="Imagens" 		style="'+classImg+'" class="Imagens insereCDN plus fa fa-image"></i>';
+							itemCDN +=	'		<i title="Javascripts" 	style="'+classJs+'"  class="Javascripts insereCDN plus fa fa-code"></i>';
+
+
+							itemCDN +=	'		<select class="selectVersion">';
+							$.each(b.assets,function(c,d){itemCDN +=	'			<option value="'+c+'">'+d.version+'</option>';})
+							itemCDN +=	'		</select>';
+							itemCDN +=	'	</div>';
+							itemCDN +=	'</div>';
+							$(".comboItensCDNJS").append(itemCDN);
+					 })
+
+
+					$(".selectVersion").unbind('change').bind('change',function(){
+						var versionIndex 	= $(this).val();
+						var file 			= $(this).parent().parent().data('child');
+						var filesSelected 	= window.selectCDNJS[file].assets[versionIndex].files.join(' ')
+							if(filesSelected.indexOf('.css')>=0){ 
+								$(this).parent().find('.CSS').show();
+							}else{
+								$(this).parent().find('.CSS').hide();
+							}
+							if(filesSelected.indexOf('.js')>=0){ 
+								$(this).parent().find('.Javascripts').show();
+							}else{
+								$(this).parent().find('.Javascripts').hide();
+							}
+							if(filesSelected.indexOf('.jpg')>=0 || filesSelected.indexOf('.jpeg')>=0 || filesSelected.indexOf('.png')>=0 || filesSelected.indexOf('.gif')>=0){
+								$(this).parent().find('.Imagens').show();
+							}else{
+								$(this).parent().find('.Imagens').hide();
+							}
+					})
+
+					$(".insereCDN").unbind('click tap press').bind('click tap press',function(){
+						var versionIndex 	= $(this).parent().parent().find('.selectVersion').val();
+						var file 			= $(this).parent().parent().data('child');
+						var version 			= window.selectCDNJS[file].version;
+						var lasted 			= window.selectCDNJS[file].latest;
+						var baseURL 			= lasted.split(version)[0].replace("https:","");
+						var versionSelected 	= window.selectCDNJS[file].assets[versionIndex].version
+						var filesSelected 		= window.selectCDNJS[file].assets[versionIndex].files
+						var imagesEditor = [];
+						var cssEditor = [];
+						var jsEditor = [];
+
+						$.each(filesSelected,function(y,z){
+							var linkFile = baseURL+versionSelected+"/"+z;
+							var extension = linkFile.split('.').pop();
+
+							if(extension=="gif" || extension=="png" || extension=="jpg" || extension=="jpeg"){
+								imagesEditor.push('<img src="'+linkFile+'"/>')
+							}else if(extension=="css"){
+								cssEditor.push('<link rel="stylesheet" href="'+linkFile+'" />')
+							}else if(extension=="js"){
+								jsEditor.push('<script src="'+linkFile+'"\>\<\/script>')
+							}
+					 	})
+					 	if(imagesEditor.length>0 && $(this).hasClass('Imagens')){
+					 		window.ws_webmaster.engine.insert("<!-- IMAGENS -->\n")
+					 		window.ws_webmaster.engine.insert(imagesEditor.join("\n")+"\n")
+					 	}
+					 	if(cssEditor.length>0 && $(this).hasClass('CSS')){
+					 		window.ws_webmaster.engine.insert("<!-- CSS -->\n")
+					 		window.ws_webmaster.engine.insert(cssEditor.join("\n")+"\n")
+					 	}
+					 	if(jsEditor.length>0 && $(this).hasClass('Javascripts')){
+						 	window.ws_webmaster.engine.insert("<!-- JS -->\n")
+						 	window.ws_webmaster.engine.insert(jsEditor.join("\n")+"\n")
+						}
+					 })
+					$('#webmaster_menu_right_body').perfectScrollbar("update")
+				})
+			},600)
+		}else{
+			console.warn("Sem termos de pesquisa")
+		}
+	});
+
+
+
+	$('#AddColunas').unbind("click tap press").bind("click tap press", function() {
+		window.ws_webmaster.engine.insert(returnColunasHTML().join(""))
+	})
+	$('#AddFull').unbind("click tap press").bind("click tap press", function() {
+		if($("#typeInsert").val()=="PHP"){
+			window.ws_webmaster.engine.insert(insereTagPHP())
+		}else if($("#typeInsert").val()=="HTML5"){
+			window.ws_webmaster.engine.insert(insereTagHTML())
+		}else if($("#typeInsert").val()=="REST"){
+			window.ws_webmaster.engine.insert(insertJSON())
+		}
+	})
+	$(".chosen").chosen({
+		disable_search_threshold: 10,
+		search_contains: true,
+		enable_split_word_search: true,
+		no_results_text: "Oops, nothing found!",
+	})
+	$("#ferramenta,#type").chosen().change(function(e) {
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'getColums',
+				'id': $("#ferramenta").val(),
+				'type': $("#type").val(),
+			}
+		}).done(function(data) {
+			data = $.parseJSON(data);
+			 $("#listCampos").html("");
+			 SlugTool = data.slug;
+			 $.each(data.colunas,function(i){
+			 	var campo = data.colunas[i];
+			 	if(data.type=="item"){
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" data-type-colum="'+campo.type+'" value="'+campo.name+'" type="checkbox">'+campo.name+'<span class="checkmark"></span></label>')
+			 	}else{
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" value="'+campo+'" type="checkbox">'+campo+'<span class="checkmark"></span></label>')
+			 	}
+			 })	
+		})
+	})
+
+	$('.bt_padrao').unbind("click tap press").bind("click tap press", function() {
+		var path = $("#dirList").val();
+		var filename = $("#filename").val();
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'createFile',
+				'path': path,
+				'filename': filename
+			},
+			success: function(data) {}
+		}).done(function(data) {
+			var data = $.parseJSON(data);
+			console.log(data);
+			if (data.status == 1) {
+				ws.alert.top({
+					mensagem: "Arquivo criado com sucesso!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#9ee651",
+					bottomColor: "#3a763e",
+					styleText: "color:#000"
+				});
+				window.closeRighttMenu();
+				window.ws_webmaster.set.session({
+					token: data.token,
+					pathFile: data.pathFile,
+					filename: data.filename,
+					stringFile: data.stringFile,
+					extension: data.ext,
+				})
+				window.refreshAbas(data.token);
+				window.ws_webmaster.apply.session(data.token)
+				window.refreshExplorerFilesLeft();
+			} else {
+				ws.alert.top({
+					mensagem: "Ops, houve alguma falha!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#e04e1f",
+					bottomColor: "#e04e1f",
+					styleText: "color:#FFFFFF"
+				});
+			}
+		})
+	})
+</script>

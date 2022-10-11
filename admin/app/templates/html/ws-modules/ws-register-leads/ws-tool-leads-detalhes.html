@@ -1,0 +1,294 @@
+<!-- BEGIN DETALHES_LEAD -->
+
+<script>
+	include_css('./app/templates/css/websheep/ws-modules/ws-register-leads/detalhes.min.css', 'css_mod', 'All');
+</script>
+<div id="palco" class="palco_01">
+	<div class="label_separados w1">{Leads_Details_DataLead}</div>
+	<form id="UploadThumbmails" style="display:none" 	action="./app/core/ws-upload-files.php" 	method="post" enctype="multipart/form-data" name="formUpload">
+		<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="myfile" type="file" style="display:none">
+		<input type="hidden" name="id" 			value="{lead_id}">
+		<input type="hidden" name="token" 		value="{lead_token}">
+		<input type="hidden" name="datatype" 	value="">
+		<input type="hidden" name="type" 		value="leadCapture">
+		<input type="hidden" name="token_group" value="{token_group}">
+		<input type="hidden" name="width" 		value="">
+		<input type="hidden" name="height" 		value="">
+		<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+		<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+	</form>
+		<div style="width:478px;" class="botao botao_adicional" id="voltar">{Leads_Details_BackList}</div>
+		<div style="width:458px;" class="botao botao_adicional" id="salvarLeads">{Leads_Details_SaveConfig}</div>
+		<div style="margin-bottom:10px;" class="c"></div>
+	<form id="form_dados_geral">
+		<input type="hidden" name="token" value="{lead_token}">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 308px);">{Leads_Details_URLSend} <b>{DOMINIO}{ws_rootPath}ws-leads/{lead_token}</b></div>
+		<div style="width:238px;" class="botao botao_adicional" id="editarCampos" legenda="{Leads_Details_EditFieldForm}">{Leads_Details_EditField}</div>
+		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_RegisterName}</div>
+		<input type="text" id="title" class="inputText input_adicional" name="title" placeholder="{Leads_Details_Title}" maxlength="" style="height:44px;width:998px;" value="{lead_title}">
+		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_ShortDesc}</div>
+		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;">
+			<textarea class="textarea_adicional" id="content" data-editor="0" name="content" placeholder="" style="height:93px;width:995px;margin-top:0;">{lead_content}</textarea>
+		</div>
+		<div class="c"></div>
+		<div class="label_separados w1">{Leads_Details_LeadConfig}</div>
+		<div class="c"></div>
+		<div class="label_input w1" style="height:36px;width:743px">{Leads_Details_AboutForm}</div>
+		<div class="label_input w1" style="height:36px;width:213px">{Leads_Details_UserEmail}</div>
+		<label class="w1 class_radio bg01" style="width:177px;"><input type="radio" name="finalidade" value="{Leads_Details_JustSave}">{Leads_Details_JustSave}</label>
+		<label class="w1 class_radio bg01" style="width:167px;"><input type="radio" name="finalidade" value="{Leads_Details_JustSend}">{Leads_Details_JustSend}</label>
+		<label class="w1 class_radio bg01" style="width:227px;"><input type="radio" name="finalidade" value="{Leads_Details_SaveSend}">{Leads_Details_SaveSend}</label>
+		<label class="w1 class_check bg01" style="width:167px;"><input value="1" type="checkbox" id="form_resposta" name="resposta_ao_usuario" {lead_resposta_ao_usuario}> {Leads_Details_UserResponse} </label>
+		<select class="w1 inputText" id="camp_mail_clt" name="camp_mail_clt" style="padding:10px;width:238px;margin-top: 5px;">	
+			<option value="">{Leads_Details_SelectField}</option>
+				<!-- BEGIN COLUMNS -->
+				<option value="{OPT_COLUMN}">{OPT_COLUMN}</option>
+				<!-- END COLUMNS -->
+			</select>
+		<div class="c"></div>
+		<div class="label_separados w1">{Leads_Details_ServerConfig}</div>
+		<div class="c"></div>
+		<div class="label_input w1" style="height:36px;width:118px"></div>
+		<div class="label_input w1" style="height:36px;width:84px">{Leads_Details_SMTPSecure}</div>
+		<div class="label_input w1" style="height:36px;width:116px">{Leads_Details_Host}</div>
+		<div class="label_input w1" style="height:36px;width:44px">{Leads_Details_Port}</div>
+		<div class="label_input w1" style="height:36px;width:149px">{Leads_Details_SMTPAuth}</div>
+		<div class="label_input w1" style="height:36px;width:159px">{Leads_Details_SenderEmail}</div>
+		<div class="label_input w1" style="height:36px;width:144px">{Leads_Details_Password}</div>
+		<div class="c"></div>
+		<label class="w1 class_check bg01" style="width:162px;"><input type="checkbox" id="smtp_local" name="smtp_local" {lead_smtp_local}> {Leads_Details_SMTPDomain} </label>
+		<input type="text" id="SMTPSecure" class="inputText input_adicional" name="SMTPSecure" placeholder="ex: tsl" 		style="height:44px;width:53px;" value="{lead_SMTPSecure}">
+		<input type="text" id="host" class="inputText input_adicional" name="host" placeholder="{Leads_Details_SMTPex}" style="height:44px;width:163px;" value="{lead_host}">
+		<input type="text" id="mail_port" class="inputText input_adicional" name="port" placeholder="{Leads_Details_Portex}" maxlength="" style="height:44px;width:63px;" value="{lead_port}">
+		<label class="w1 class_check bg01" style="width:172px;"><input type="checkbox" id="server_ssl" name="server_ssl" {lead_server_ssl}> {Leads_Details_ReqAuth} </label>
+		<input type="text" id="email_envio" class="inputText input_adicional" name="email_envio" value="{lead_email_envio}" placeholder="" maxlength="" style="height:44px;width:173px;">
+		<input type="password" id="senha_email_envio" class="inputText input_adicional" name="pass" placeholder="" maxlength="" style="height:44px;width:168px;" value="{lead_pass}" >
+		<div class="label_input w1" style="height:36px;width:184px">{Leads_Details_SendersName}</div>
+		<div class="label_input w1" style="height:36px;width:262px">{Leads_Details_ReceiveMail}</div>
+		<div class="label_input w1" style="height:36px;width:215px">{Leads_Details_Subject}</div>
+		<div class="label_input w1" style="height:36px;width:240px">{Leads_Details_SubjectUser}</div>
+		<input type="text" class="inputText input_adicional" name="remetente_name" 		style="height:44px;width:206px;" 	value="{lead_remetente_name}"	>
+		<input type="text" class="inputText input_adicional" name="remetente" 			style="height:44px;width:280px;" 	value="{lead_remetente}"	>
+		<input type="text" class="inputText input_adicional" name="assunto" 				style="height:44px;width:234px;" 	value="{lead_assunto}"	>
+		<input type="text" class="inputText input_adicional" name="assunto_clt" 			style="height:44px;width:260px;" 	value="{lead_assunto_clt}"	>
+		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_AdminMessage}<strong> 
+			<!-- BEGIN FIELD_MSN_ADM -->
+				<a href="{A_FIELD}" class="insertTag" style="color: #007eb1;">[{A_FIELD}]</a> 
+			<!-- END FIELD_MSN_ADM -->
+		</strong></div>
+		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;">
+		<textarea class="textarea_adicional" id="msng_resp" data-editor="0" name="msng_resp" placeholder="" style="height:108px;width:995px;margin-top:0;">{lead_msng_resp}</textarea>		</div>
+
+
+		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_UserMessage}<strong> 
+			<!-- BEGIN FIELD_MSN_USER -->
+				<a href="{A_FIELD}" class="insertTagResp" style="color: #007eb1;">[{A_FIELD}]</a> 
+			<!-- END FIELD_MSN_USER -->
+		</strong></div>
+		<textarea class="textarea_adicional" id="msng_resp_user" data-editor="0" name="msng_resp_user" placeholder="" style="height:108px;width:995px;margin-top:0;">{lead_msng_resp_user}</textarea>
+		<div class="c"></div>
+		<div class="label_input w1" style="height:36px;width: 479px;">{Leads_Details_URLSucess}</div>
+		<div class="label_input w1" style="height:36px;width: 479px;">{Leads_Details_URLError}</div>
+		<input type="text" class="inputText input_adicional" legenda="{Leads_Details_NoAjax}" name="url_sucess" 	style="height:44px;width:499px;" 	value="{lead_url_sucess}"	>
+		<input type="text" class="inputText input_adicional" legenda="{Leads_Details_NoAjax}" name="url_error" 	style="height:44px;width:499px;" 	value="{lead_url_error}"	>
+		<div class="c"></div>
+		<div class="label_input w1" style="height:36px;width:473px">{Leads_Details_ImageTop}</div>
+		<div class="label_input w1" style="height:36px;width:474px">{Leads_Details_Signature}</div>
+		<div class="thumbmail" data-datatype="topo_email" style="width:481px; height:97px;" data-width="481" data-height="97">
+			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="./app/templates/img/websheep/up_m.png"> </div> 
+            <div class="bb" legenda="{Leads_Details_Library}"><img src="./app/templates/img/websheep/folder_m.png"> </div> </div> 
+			<img class="thumb_img" src="{ws_rootPath}ws-img/481/97/{lead_header_email}"> 
+		</div>
+		<div class="thumbmail" data-datatype="footer_email" style="width:476px; height:97px;" data-width="476" data-height="97">
+			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="./app/templates/img/websheep/up_m.png"> </div> 
+            <div class="bb" legenda="{Leads_Details_Library}"><img src="./app/templates/img/websheep/folder_m.png"> </div> </div> 
+			<img class="thumb_img" src="{ws_rootPath}ws-img/476/97/{lead_footer_email}">
+		</div>
+	</form>
+
+
+</div>
+<script>
+$(document).ready(function() {
+
+function insertAtCursor(myField, myValue) {
+	var cursorPos = myField.prop('selectionStart');
+    var v = myField.val();
+    var textBefore = v.substring(0,  cursorPos);
+    var textAfter  = v.substring(cursorPos, v.length);
+    myField.val(textBefore + myValue + textAfter);
+}
+
+$(".insertTag").unbind('click tap press').bind('click tap press',function(e){
+	e.preventDefault();
+	insertAtCursor($("#msng_resp"), $(this).text())
+	return false;
+})
+
+$(".insertTagResp").unbind('click tap press').bind('click tap press',function(e){
+	e.preventDefault();
+	insertAtCursor($("#msng_resp_user"), $(this).text())
+	return false;
+})
+
+
+	$("#camp_mail_clt").val("{lead_camp_mail_clt}");
+	$("input[type='radio'][name='finalidade'][value='{lead_finalidade}']").click();
+
+
+	$("#ws_confirm").remove();
+	$("#body").removeClass("scrollhidden");
+	$("*").removeClass("blur");
+	$('#keywork_select, .multipleselect,#_link_opt_cat_').chosen({
+		update: function(element) {
+			$(element).trigger('chosen:updated');
+		}
+	});
+
+	function reloadFunctions() {
+		$("#Balao_ToolType").remove();
+		$("input[type=checkbox]").unbind("click tap press").bind('click tap press',function() {if($(this).is(':checked')) {$(this).val('1');} else {$(this).val('0');}})
+		$('*[filtro]').each(function(index) {
+			$(this).mask($(this).attr('filtro'))
+		});
+		$('*[legenda]').LegendaOver();
+			$("#editarCampos").unbind("click tap press").bind('click tap press',function() {
+				confirma({width: "auto", conteudo: "{Leads_Details_Modal_AccessData}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }); 
+				$("#conteudo").load("{PATH}/campos.php?token_table={lead_token}", function() {
+					$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); 
+				});
+			})
+			$("#voltar").unbind("click tap press").bind('click tap press',function() {
+				confirma({width: "auto",conteudo: "{Leads_Details_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+				$("#conteudo").load("{PATH}/index.php", function() {
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			})
+		$('#salvarLeads').unbind('click tap press').bind('click tap press', function() {
+			var form = $("#form_dados_geral").serialize();
+			out(form)
+			$.ajax({
+				beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+				cache: false, type: "POST", url: "{PATH}/functions.php",
+				data: {
+					function: "SalvaLead",
+					form: form
+				}
+			}).done(function(e) {
+				out(e)
+				TopAlert({mensagem: "{Leads_Details_Modal_Sucess}", clickclose: true, height: 20, timer: 3000, type: 3, })
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			})
+		})
+		$("#UploadFile").ajaxForm({
+			beforeSend: function(xhr) {
+				$('.tapa_upload').show("fade", {}, 'fast');
+			},
+			uploadProgress: function(event, position, total, percentComplete, myForm) {
+				$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+				$('.tapa_upload').find('.bar').animate({
+					width: percentComplete + "%"
+				}, 50);
+			},
+			complete: function(e) {
+				var json = jQuery.parseJSON(e.responseText);
+				$(window.progressbarfile).attr('legenda', json.original);
+				$('.tapa_upload').find('.bar').animate({
+					width: 0
+				}, 500, function() {
+					$('.tapa_upload').hide("fade", {}, 'fast');
+				});
+			}
+		})
+		$("#UploadFile #myfile").change(function() {
+			$("#UploadFile #enviar_arquivos").click();
+		})
+		$("#UploadThumbmails").ajaxForm({
+			beforeSend: function(xhr) {
+				$('.tapa_upload').show("fade", {}, 'fast');
+			},
+			uploadProgress: function(event, position, total, percentComplete, myForm) {
+				if(percentComplete >= 99) {
+					$('.tapa_upload').find('.pct').html("{Leads_Details_Modal_ProcessImage}").css({"left":percentComplete + "%"});
+				} else {
+					$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+				}
+				$('.tapa_upload').find('.bar').animate({
+					width: percentComplete + "%"
+				}, 50);
+			},
+			complete: function(e) {
+				var response = $.parseJSON(e.responseText);
+				$('.tapa_upload').find('.bar').animate({
+					width: 0
+				}, 500, function() {
+					$('.tapa_upload').hide("fade", {}, 'fast');
+					$(window.new_thumb).parent().attr("legenda", response.nome);
+					$(window.new_thumb).attr('src', response.thumb);
+				});
+			}
+		})
+		$(document).off("mouseenter").off("mouseleave");
+		$(document).on("mouseenter", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+			$(this).find('.combo_upload').stop().fadeIn();
+			}).on("mouseleave", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+			$(this).find('.combo_upload').stop().fadeOut();
+		});
+		$("#UploadThumbmails #myfile").change(function() {$("#UploadThumbmails #enviar_arquivos").click();})
+		$(".thumbmail .combo_upload .pc").unbind('click').click(function() {
+
+			var type = $(this).parent().parent().data('datatype');
+			var width = $(this).parent().parent().data('width');
+			var height = $(this).parent().parent().data('height');
+			window.new_thumb= $(this).parent().parent().find('.thumb_img');
+			$("#UploadThumbmails input[name='datatype']").val(type);
+			$("#UploadThumbmails input[name='width']").val(width);
+			$("#UploadThumbmails input[name='height']").val(height);
+			$("#UploadThumbmails #myfile").click();
+		});
+		$(".thumbmail .combo_upload .bb").unbind('click').click(function() {
+			var type 			= $(this).parent().parent().data('datatype');
+			var width 			= $(this).parent().parent().data('width');
+			var height 			= $(this).parent().parent().data('height');
+			var id 				= '{lead_id}';
+			var token 			= '{lead_token}';
+			var imagem 			= $(this).parent().parent().find(".thumb_img");
+			window.new_thumb	= $(this).parent().parent().find('.thumb_img');
+
+			abreBiblioteca({
+				multiple: 0,
+				onSelect: function(a) {
+					$.ajax({
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }) }, cache: false, type: "POST", url: "{PATH}/functions.php",
+						data: {
+							function: "substituiThumb",
+							img: a[0],
+							id: id,
+							token: token,
+							type: type,
+							width: width,
+							height: height
+						},
+					}).done(function(e) {
+						$(imagem).attr("src",e);
+						$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); 
+					})
+				}
+			})
+
+
+		})
+	}
+	reloadFunctions();
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+})
+</script>
+<!-- END DETALHES_LEAD -->

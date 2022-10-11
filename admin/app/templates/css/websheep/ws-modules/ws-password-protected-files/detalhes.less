@@ -1,0 +1,565 @@
+@charset "utf-8";
+/*##################################################  STAGE LIQUIDO  #####################################################################*/
+@import "D:/localhost/data/localweb/less/vars.less";
+
+.listaCategoriasPopup{
+	position: relative;
+	float: left;
+    margin: 20px;
+    width: ~'calc(100% - 40px)';
+    height: ~'calc(100% - 40px)';
+    background-color: #FFF;
+	#combo{
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		label{
+			&:hover{
+				background-color: #E0EDF3;
+			}
+			&.categoria{
+				cursor: pointer;
+				position: relative;
+				float: left;
+				width: ~'calc(100% - 31px)';
+				text-align: left;
+				padding: 10px;
+				border-bottom: dotted 2px rgba(0, 0, 0, 0.15);
+			}
+			input[type="checkbox"]{
+				float: right;
+			}
+		}
+	}
+}
+
+
+#campos_BG{
+		position: relative;
+		#form_dados{
+			input{
+				position: relative;
+				padding: 14px;
+				width: 450px;
+			}
+			textarea{
+				width: 443px;
+				padding: 10px;
+				height: 200px;
+				margin-top: 8px;
+				resize: none;
+			}
+			.cleditorMain{
+				float: left;
+				margin-left: 6px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				width: 443px!important;
+				height: 265px!important;
+			}
+		}
+	}
+#topocadastro{
+		font-weight: 600;
+		font-size: 16px;
+		height: 32px;
+		padding-top: 11px;
+		padding-left: 12px;
+		color: #36568D;
+		text-shadow: 1px 1px 1px #fff;}
+#botaoVoltaDomain {
+		color: #FFFFFF;
+		top: -6px;
+		position: relative;
+		float: right;
+		right: 50%;
+		height: 15px;
+		padding: 8px 38px;
+		margin-right: -494px;}
+#botaoCadastraDomain{
+		color: #FFFFFF;
+		top: -12px;
+		position: relative;
+		float: right;
+		width: 61px;
+		height: 15px;
+		padding: 8px 18px;
+		margin-right: 6px;}
+#cdastrodominio {
+	#cadastretit{
+		top: 13px;
+		position: relative;
+		width: 350px;
+		}
+	}
+::-webkit-input-placeholder { 
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+:-moz-placeholder { 
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+::-moz-placeholder { 
+	font-family: "Myriad Pro Light";
+    color:rgb(83, 139, 190);
+	font-style:oblique;}
+:-ms-input-placeholder {
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+:-input[data-operaplaceholder] {
+	font-family: "Myriad Pro Light";
+	color: rgb(83, 139, 190);
+	font-style:oblique;}
+#palco{
+		position: relative;
+		width: 1010px;
+		float: left;
+		left: 50%;
+		margin-left: -500px;
+		top: 0px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin-bottom: 64px;
+		margin-top: 10px;
+	.input_colorpicker{
+		position: relative;
+		height: 22px!important;
+		width: 280px;
+		padding: 10px;
+		margin: 3px;
+		float: left;
+		.botao{
+			position: absolute;
+			float: right;
+			padding: 10px 30px;
+			right: 10px;
+			top: 10px;
+		}
+		.label{
+			position: absolute;
+			font-weight: 800;
+			top: 9px;
+			left: 56px;
+		}
+		.combo_bar{
+			position: relative;
+			background-color: #000;
+			height: 16px;
+			width: calc(~'100% - 125px');
+			top: 3px;
+			.bar{
+				position: relative;
+				height: 17px;
+				top: -1px;
+				width: 0;
+				border: 0;
+
+			}
+		}
+	}
+
+	.model_file{
+		position: relative;
+		height: 18px;
+		width: 280px;
+		padding: 10px;
+		margin: 3px;
+		float: left;
+		.botao{
+			position: absolute;
+			float: right;
+			padding: 5px 10px;
+			right: 5px;
+			top: 5px;
+    	}
+		.label{
+			position: relative;
+			font-weight: 800;
+			top: -3px;
+		}
+		.combo_bar{
+			position: relative;
+			background-color: #000;
+			height: 7px;
+			width: ~'calc(100% - 70px)';
+			top: 1px;
+			left: -8px;
+    		.bar{
+				position: relative;
+				height: 4px;
+				top: 1px;
+				width: 0;
+				border: 0;
+			}
+		}
+	}
+
+}
+
+.palco_01{
+	.chosen-container{
+		margin: 10px;
+		float: left!important;
+		.chosen-single{padding: 6px!important;}
+		.chosen-results li	{width: 100%;}
+	}
+	.avatar{
+		position: relative;
+		margin: 3px;
+		float: left;
+		border: solid 9px rgb(57, 99, 157);
+		cursor: pointer;
+	}
+	.playerMP3{
+		position: relative;
+		margin: 3px;
+		float: left;
+		border: solid 9px rgb(57, 99, 157);
+		overflow: hidden;
+		.combo_upload{display: none;}
+		.hidePlayer{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0);
+			.insertLink{
+				.pointer;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				position: absolute;
+				width: 120px;
+				height: 120px;
+				img{
+					top: 50%;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
+					position: absolute;
+				}
+    		}
+		}
+	}
+
+
+	.playerVideoThumb{
+		position: relative;
+		margin: 3px;
+		float: left;
+		border: solid 9px rgb(57, 99, 157);
+		overflow: hidden;
+		img{
+			position: relative;
+			float: left;
+			top: 0;
+			left: 50%;
+			transform:translateX(-50%); 
+		}
+		.thumb_img{
+		    top: 50%;
+		    left: 50%;
+			transform: translateX(-50%)translateY(-50%);
+		}
+		.combo_upload{
+		    display: none;
+		    position: absolute;
+		    transform: translateX(-50%) translateY(-50%);
+		    left: 50%;
+		    top: 50%;
+		    z-index: 1;
+    		div{
+				  cursor: pointer;
+			}
+		}
+	}
+
+
+
+	.thumbmail{
+		position: relative;
+		margin: 3px;
+		float: left;
+		border: solid 9px rgb(57, 99, 157);
+		
+		.combo_upload{
+			display: none;
+			position: absolute;
+			border: solid 1px #39639d;
+			margin: 10px;
+			height: 30px;
+			background-color: white;
+			margin-left: -34px;
+			left: 50%;
+		    z-index: 1;
+  			div{
+				  position: relative;
+				  float: left;
+				  margin: 3px;
+				  cursor: pointer;
+			}
+		}
+	}
+	.input_adicional[readonly="readonly"]{
+		background-color: rgba(255, 255, 255, 0.32);
+		color: #7B9DCA;
+		font-style: italic;
+		border: solid 1px rgb(204, 209, 224);
+	}
+	.input_adicional{
+		padding: 10px;
+		margin: 3px;
+		float: left!important;
+	}
+	.label_input{
+		padding: 12px 10px;
+		margin: 3px;
+		float: left!important;
+		height: 18px;
+		max-height: 16px;
+	    background-color: #E9EBF1;
+	}
+	.combo_selectbox{width: auto;}
+	.selectbox_adicional{
+		float: left;
+		width:~'calc(100% - 38px)';
+	}
+	.multipleselect_box{
+	    position: relative;
+	    min-height: 45px;
+	     float: left;
+		.edita_select_box_multiple{
+			cursor: pointer;
+			position: relative;
+			width: 30px;
+			height: 30px;
+			float: left;
+			top: 9px;
+			background-image: url('./../img/layer--pencil.png');
+			background-repeat: no-repeat;
+			background-position: 10px 10px;
+			left: -10px;
+		}
+}
+	.edita_select_box{
+		cursor: pointer;
+		position: relative;
+		width: 20px;
+		height: 20px;
+		float: left;
+		left: 3px;
+		top: 8px;
+		background-image: url('./../img/layer--pencil.png');
+		background-repeat: no-repeat;
+		background-position: 2px 2px;
+	}
+
+
+
+	.cleditorMain{
+		position: absolute;
+	}
+
+	.espaco_vazio{
+			position: relative;
+			float: left;
+			margin: 3px;
+	}
+	.textoarea_adicional{
+		float: left;
+		position: relative;
+		margin: 3px;
+		overflow: hidden;
+	}
+	.botao_adicional{
+		float: left;
+		position: relative;
+		text-align: center;
+		margin: 3px;
+		width: 218px;
+		padding: 11px;
+	}
+	.label_separados{
+		font-size: 28px;
+		border-bottom: dotted 1px;
+		margin: 10px;
+	}
+	.class_check, .class_radio{
+		cursor: pointer;
+		position: relative;
+		margin: 3px;
+		float: left;
+		padding: 12px 0;
+		text-align: center;
+		height: 18px;
+		input{margin: 3px;}
+		
+	}
+}
+
+
+
+		#topo_upload{
+			padding: 10px;
+			margin-top: -2px;
+			height: 38px;
+			#formUpload{
+				position: relative;
+				height: 38px;
+				left: 50%;
+				width: 100%;
+				transform: translateX(-50%);
+				max-width: 1040px;
+			}
+			.botaoPlugin{
+				position: relative;
+				float: left;
+				padding: 10px 40px;
+				border: solid 2px #3C68A4;
+				left: 50%;
+				transform: translateX(-499px);
+    			.degrade(#FFF,#CCC);
+				.radius(5px);
+
+			}
+			#progress_combo{
+				position: absolute;
+				left: 50%;
+				margin-left: -500px;
+				padding: 10px;
+				width: 698px;
+				height: 17px;
+
+			}
+			#bt_SalvarItem{
+				margin-top: 0px;
+				position: absolute;
+				float: right;
+				width: 20%;
+				padding: 10px;
+				right: 0;
+				text-align: center;
+				cursor: pointer;
+			}
+			#bt_AddCat{
+				cursor: pointer;
+				margin-top: 0px;
+				position: absolute;
+				float: left;
+				width: 20%;
+				padding: 10px 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				text-align: center;
+			}
+			#bt_Add_Galeria{
+				position: relative;
+				width: 169px;
+				padding: 10px 30px;
+				left: 50%;
+				margin-left: 270px;
+			}
+			#bt_voltar_Cat{
+				cursor: pointer;
+				position: absolute;
+				padding: 10px;
+				left: 0;
+				margin-top: 0px;
+				width: 20%;
+				text-align: center;
+    		}
+		}
+
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {min-height: 25px;}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close{background: url('./chosen-sprite.png') -42px 1px no-repeat!important;}
+#keywork_select_chosen{
+	&.chosen-container{
+		width: 980px!important;
+		margin-left: 10px;
+	}
+	&.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+		height: 25px;
+	}
+	&.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+	background: url('./chosen-sprite.png') -42px 1px no-repeat!important;
+	}
+	&.chosen-container .chosen-results{
+		width: 980px!important;
+	}
+	&.chosen-container .chosen-results li{
+		width: 980px!important;
+	}
+	&.chosen-container-multi .chosen-choices li.search-choice{
+		font-family: "Myriad Pro Light";
+	}
+}
+.text-core {
+	position: relative;
+	top: -15px;
+	left: 5px;
+	margin-bottom: -20px;
+	margin-top: 35px;
+	margin-left: 0px;
+}
+.cke_inner {background-color: transparent !important;}
+.cke_chrome { width:auto;}
+.keyworks_adicional{
+	position: absolute;
+	width:990px;
+}
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################	RESPONSÍVO
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+//###################################################################################################################
+@media only screen and (max-width: 1024px) {
+	#conteudo{
+		#implementar {
+			left: initial!important;
+			float: right;
+			right: 10px;
+			transform: translateX(0)!important;
+		}
+		.inputText.input_adicional, 
+		.class_radio , 
+		.class_check,
+		.textarea_adicional,
+		.cke_chrome,
+		.espaco_vazio,
+		.combo_selectbox,
+		.iframe_adicional,
+		.ace_editor,
+		.multipleselect_box { width: ~'calc(100% - 10px)!important';}
+		.label_input{width: ~'calc(100% - 26px)!important';}
+		.input_colorpicker {float: none;width: ~'calc(100% - 30px)!important';}
+		.model_file{width:~'calc(100% - 30px)!important';}
+		.multipleselect_box{.chosen-container{width: ~'calc(100% - 50px)!important';}}
+		.thumbmail {
+		    float: none;
+		    left: 50%;
+		    transform: translateX(-50%);
+		    width: 50%!important;
+		    clear: both;
+		    height: auto!important;
+		    position: relative;
+
+			
+			.thumb_img{
+				width: 100%;
+				position: relative;
+			}
+		}
+		.keyworks_adicional{width: 100%!important;}
+		.text-core .text-wrap{width: ~'calc(100% - 10px)!important';}
+		.botao.botao_adicional{	width: ~'calc(100% - 30px)!important';}
+	}
+}

@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<meta name="robots" content="noindex,nofollow">
+		<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/0C7B10FB-8F06-7146-84AA-1D2C4D52E4B4/main.js" charset="UTF-8"></script><script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+		<link rel="stylesheet" type="text/css" href="./assets/css/builder.css?2.0.23">
+	</head>
+	<body>
+		<div id="wrapper" class="container-fluid">
+			<div class="row">
+				<div id="itens" class="col-lg-2 col-md-3">
+					<div id="trash-can" class="animated fadeIn">
+						<i class="fa fa-fw fa-trash"></i>
+					</div>
+					<div class="containerItem">
+						<div id="tool">
+							<div id="menuRightBtn">
+								<ul>
+									<li id="previewMobile">
+										<svg class="svg-inline--fa fa-mobile-alt fa-w-10" aria-hidden="true" data-fa-processed="" data-prefix="fas" data-icon="mobile-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+											<path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path>
+										</svg>
+										<!-- <i class="fas fa-mobile-alt"></i> -->
+									</li>
+									<li id="previewTablet">
+										<svg class="svg-inline--fa fa-tablet-alt fa-w-14" aria-hidden="true" data-fa-processed="" data-prefix="fas" data-icon="tablet-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+											<path fill="currentColor" d="M400 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM224 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm176-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h328c6.6 0 12 5.4 12 12v312z"></path>
+										</svg>
+										<!-- <i class="fas fa-tablet-alt"></i> -->
+									</li>
+									<li id="previewLaptop" class="active">
+										<svg class="svg-inline--fa fa-laptop fa-w-20" aria-hidden="true" data-fa-processed="" data-prefix="fas" data-icon="laptop" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+											<path fill="currentColor" d="M512 64v256H128V64h384m16-64H112C85.5 0 64 21.5 64 48v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm100 416H389.5c-3 0-5.5 2.1-5.9 5.1C381.2 436.3 368 448 352 448h-64c-16 0-29.2-11.7-31.6-26.9-.5-2.9-3-5.1-5.9-5.1H12c-6.6 0-12 5.4-12 12v36c0 26.5 21.5 48 48 48h544c26.5 0 48-21.5 48-48v-36c0-6.6-5.4-12-12-12z"></path>
+										</svg>
+										<!-- <i class="fas fa-laptop"></i> -->
+									</li>
+								</ul>
+							</div>
+							<div class="custom-checkbox">
+								<div class="field">
+									<span>Visualizar</span>
+									<input type="checkbox" id="space" name="">
+									<label for="space"><i></i></label>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<h2><i class="fa fa-fw fa-square-o"></i> Containers e Linhas</h2>
+						<ul class="list-unstyled">
+							<li class="draggable draggable-list-element" data-draggable-key="section">Section</li>
+							<li class="draggable draggable-list-element" data-draggable-key="section_full">Section Completa</li>
+							<li class="draggable draggable-list-element" data-draggable-key="container">Container Fluid</li>
+							<li class="draggable draggable-list-element" data-draggable-key="container_fluid">Container</li>
+							<li class="draggable draggable-list-element" data-draggable-key="row">Row</li>
+							<li class="draggable draggable-list-element" data-draggable-key="row_v">Row Vertical Align</li>
+						</ul>
+						<h2><i class="fa fa-fw fa-columns"></i> Colunas</h2>
+						<ul class="list-unstyled">
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_1">1 Coluna</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_2">2 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_3">3 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_4">4 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_5">5 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_6">6 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_7">7 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_8">8 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_9">9 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_10">10 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_11">11 Colunas</li>
+							<li class="draggable draggable-list-element columnBox" data-draggable-key="column_12">12 Colunas</li>
+						</ul>
+						<h2><i class="fa fa-fw fa-code"></i> Elementos do HTML</h2>
+						<ul class="list-unstyled">
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h1">H1</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h2">H2</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h3">H3</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h4">H4</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h5">H5</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="h6">H6</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="img">IMG</li>
+							<li class="smallBox draggable draggable-list-element" data-draggable-key="hr">HR</li>
+						</ul>
+						<h2><i class="fa fa-fw fa-bold"></i> Bootstrap Templates</h2>
+						<a href="#menus" data-toggle="collapse">
+							<div class="listItem">
+								<span><i class="fa fa-bars fa-fw"></i> Menus</span>
+							</div>
+						</a>
+						<div id="menus" class="collapse show">
+							<ul class="list-unstyled">
+								<li class="draggable draggable-list-element" data-draggable-key="nav1"><img width="100%" src="./assets/placeholder/037.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="nav2"><img width="100%" src="./assets/placeholder/038.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="nav3"><img width="100%" src="./assets/placeholder/039.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="nav4"><img width="100%" src="./assets/placeholder/040.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="nav5"><img width="100%" src="./assets/placeholder/041.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="nav6"><img width="100%" src="./assets/placeholder/042.jpg"</li>
+							</ul>
+						</div>
+						<a href="#nav" data-toggle="collapse">
+							<div class="listItem">
+								<span><i class="fa fa-th fa-fw"></i> Estrutura</span>
+							</div>
+						</a>
+						<div id="nav" class="collapse show">
+							<ul class="list-unstyled">
+								<li class="draggable draggable-list-element" data-draggable-key="slide_full"><img width="100%" src="./assets/placeholder/001.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="estrutura_simples"><img width="100%" src="./assets/placeholder/002.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="boxes"><img width="100%" src="./assets/placeholder/003.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="estrutura1"><img width="100%" src="./assets/placeholder/004.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="estrutura2"><img width="100%" src="./assets/placeholder/005.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="spacer1"><img width="100%" src="./assets/placeholder/006.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="spacer2"><img width="100%" src="./assets/placeholder/007.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="cards"><img width="100%" src="./assets/placeholder/008.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="price"><img width="100%" src="./assets/placeholder/009.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="table"><img width="100%" src="./assets/placeholder/010.jpg"</li>
+							</ul>
+						</div>
+						<a href="#elements" data-toggle="collapse">
+							<div class="listItem">
+								<span><i class="fa fa-th-list fa-fw"></i> Elementos</span>
+							</div>
+						</a>
+						<div id="elements" class="collapse show">
+							<ul class="list-unstyled">
+								<li class="draggable draggable-list-element" data-draggable-key="card"><img width="100%" src="./assets/placeholder/011.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="card2"><img width="100%" src="./assets/placeholder/012.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="cardGroup"><img width="100%" src="./assets/placeholder/013.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="carousel"><img width="100%" src="./assets/placeholder/014.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="carousel2"><img width="100%" src="./assets/placeholder/015.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="breadcrumb"><img width="100%" src="./assets/placeholder/016.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="collapse"><img width="100%" src="./assets/placeholder/017.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="collapse2"><img width="100%" src="./assets/placeholder/018.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="jumbotron"><img width="100%" src="./assets/placeholder/019.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="modal"><img width="100%" src="./assets/placeholder/020.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="tabs"><img width="100%" src="./assets/placeholder/021.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="pagination"><img width="100%" src="./assets/placeholder/022.jpg"</li>
+							</ul>
+						</div>
+						<a href="#button" data-toggle="collapse">
+							<div class="listItem">
+								<span><i class="fa fa-stop-circle-o fa-fw"></i> Botões</span>
+							</div>
+						</a>
+						<div id="button" class="collapse show">
+							<ul class="list-unstyled">
+								<li class="draggable draggable-list-element" data-draggable-key="button1"><img width="100%" src="./assets/placeholder/023.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button2"><img width="100%" src="./assets/placeholder/024.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button3"><img width="100%" src="./assets/placeholder/025.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button4"><img width="100%" src="./assets/placeholder/026.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button5"><img width="100%" src="./assets/placeholder/027.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button6"><img width="100%" src="./assets/placeholder/028.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button7"><img width="100%" src="./assets/placeholder/029.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button8"><img width="100%" src="./assets/placeholder/030.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button9"><img width="100%" src="./assets/placeholder/031.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="button10"><img width="100%" src="./assets/placeholder/032.jpg"</li>
+							</ul>
+						</div>
+						<a href="#footer" data-toggle="collapse">
+							<div class="listItem">
+								<span><i class="fa fa-minus fa-fw"></i> Rodapé</span>
+							</div>
+						</a>
+						<div id="footer" class="collapse show">
+							<ul class="list-unstyled">
+								<li class="draggable draggable-list-element" data-draggable-key="footer1"><img width="100%" src="./assets/placeholder/033.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="footer2"><img width="100%" src="./assets/placeholder/034.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="footer3"><img width="100%" src="./assets/placeholder/035.jpg"</li>
+								<li class="draggable draggable-list-element" data-draggable-key="footer4"><img width="100%" src="./assets/placeholder/036.jpg"</li>
+							</ul>
+						</div>
+					</div>
+					<div class="buttonBottom">
+						<button id="clean">LIMPAR TUDO</button>
+						<button id="done">PRONTO</button>
+					</div>
+				</div>
+				<div class="col-lg-10 col-md-9">
+					<div id="main-page" class="droppable laptopView withSpace"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			(function($){
+				$(window).on("load",function(){
+						$(".containerItem").mCustomScrollbar();
+				});
+			})(jQuery);
+		</script>
+		<script type="text/javascript">
+			var _SNIPPETS = {section: `<section class="droppable movable" data-label="Section"></section>`,
+			section_full: `<section class="droppable movable" data-label="Section Completa">
+			<div class="container droppable movable">
+				<div class="row droppable movable"></div>
+			</div>
+			</section>`,
+			container: `<div class="container-fluid droppable movable" data-label="Container Fluid"></div>`,
+			container_fluid: `<div class="container droppable movable" data-label="Container"></div>`,
+			row: `<div class="row droppable movable" data-label="Row"></div>`,
+			row_v: `<div class="row align-items-center droppable movable text-center" data-label=".row-align-items-center"></div>`,
+			column_1: `<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 droppable movable editable" data-label="1 Coluna"></div>`,
+			column_2: `<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 droppable movable editable" data-label="2 Colunas"></div>`,
+			column_3: `<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 droppable movable editable" data-label="3 Colunas"></div>`,
+			column_4: `<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 droppable movable editable" data-label="4 Colunas"></div>`,
+			column_5: `<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 droppable movable editable" data-label="5 Colunas"></div>`,
+			column_6: `<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 droppable movable editable" data-label="6 Colunas"></div>`,
+			column_7: `<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 droppable movable editable" data-label="7 Colunas"></div>`,
+			column_8: `<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 droppable movable editable" data-label="8 Colunas"></div>`,
+			column_9: `<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 droppable movable editable" data-label="9 Colunas"></div>`,
+			column_10: `<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 droppable movable editable" data-label="10 Colunas"></div>`,
+			column_11: `<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 droppable movable editable" data-label="11 Colunas"></div>`,
+			column_12: `<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 droppable movable editable" data-label="12 Colunas"></div>`,h1: `<h1 class="movable editable">Esse é um título H1</h1>`,
+			h2: `<h2 class="movable editable">Esse é um título H2</h2>`,
+			h3: `<h3 class="movable editable">Esse é um título H3</h3>`,
+			h4: `<h4 class="movable editable">Esse é um título H4</h4>`,
+			h5: `<h5 class="movable editable">Esse é um título H5</h5>`,
+			h6: `<h6 class="movable editable">Esse é um título H6</h6>`,
+			img: `<img src="./assets/placeholder/img.jpg" class="img-fluid movable">`,
+			hr: `<hr class="movable">`,
+			slide_full: `<section class="py-5 text-center cover d-flex flex-column bg-light movable" style="min-height:100%;">
+				<div class="container my-auto">
+					<div class="row">
+						<div class="mx-auto col-lg-6 col-md-8">
+							<h1 class="display-3 mb-0 mt-5 big-title editable">WebSheep</h1>
+							<br>
+							<h3 class="mb-4 editable"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b></h3>
+							<p class="editable">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.&nbsp;</p>
+						</div>
+					</div>
+				</div>
+				<div class="container mt-auto">
+					<div class="row">
+						<div class="mx-auto col-lg-6 col-md-8 col-10">
+							<a href="#"><i class="d-block fa fa-angle-down fa-2x"></i></a>
+						</div>
+					</div>
+				</div>
+			</section>`,
+			estrutura_simples: `<section class="py-5 movable">
+					<div class="container">
+						<div class="row">
+							<div class="p-4 col-lg-4 col-md-6">
+								<h4><b class="editable">Título</b></h4>
+								<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet</p>
+								<p>
+									<a href="#">Link</a>
+								</p>
+							</div>
+							<div class="p-4 col-lg-4 col-md-6">
+								<h4><b class="editable">Título</b></h4>
+								<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet</p>
+								<p>
+									<a href="#">Link</a>
+								</p>
+							</div>
+							<div class="p-4 col-lg-4">
+								<h4><b class="editable">Título</b></h4>
+								<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet</p>
+								<p>
+									<a href="#">Link</a>
+								</p>
+							</div>
+						</div>
+					</div>
+			</section>`,
+			boxes: `<section class="text-center movable">
+					<div class="container-fluid">
+						<div class="row px-2">
+							<div class="col mx-2 pt-5 px-5 mb-3 bg-light">
+								<h2 class="mt-3"><b class="editable">Título</b></h2>
+								<p class="lead mb-5 editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								<img class="img-fluid d-block" src="./assets/placeholder/img.jpg" width=""> </div>
+							<div class="col mx-2 pt-5 px-5 mb-3 bg-light">
+								<h2 class="mt-3"><b class="editable">Título</b></h2>
+								<p class="lead mb-5 editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								<img class="img-fluid d-block" src="./assets/placeholder/img.jpg" width=""> </div>
+						</div>
+					</div>
+			</section>`,
+			estrutura1: `<section class="movable">
+				<div class="container py-5">
+					<div class="row justify-content-center">
+						<div class="col col-md-8 text-center">
+							<h1 class="editable display-4 py-4">WebSheep</h1>
+							<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.</p>
+						</div>
+					</div>
+				</div>
+			</section>`,
+			estrutura2: `<section class="movable text-center bg-light">
+				<div class="container py-5">
+					<div class="row py-5">
+						<div class="col-md-12">
+							<h1 class="display-3 mb-4 text-default editable">WebSheep</h1>
+							<p class="lead mb-5 editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo.
+								<br>ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.</p>
+							<a href="#" class="btn btn-lg mx-1 btn-default editable bg-dark text-white">Acesse</a>
+							<a href="#" class="btn btn-lg mx-1 btn-default editable bg-dark text-white">Registre-se</a>
+						</div>
+					</div>
+				</div>
+			 </section>`,
+			 spacer1: `<section class="py-5 movable">
+					<div class="container">
+						<div class="row">
+							<div class="text-center mx-auto col-md-8"> <i class="fa d-block fa-bullseye fa-5x mb-4 text-default"></i>
+								<p class="lead editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringillaorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla</p>
+							</div>
+						</div>
+					</div>
+			</section>`,
+			spacer2: `<div class="py-5 bg-light movable">
+				<div class="container">
+					<div class="row">
+						<div class="p-4 col-lg-8">
+							<h4 class="mb-3 text-black editable">Título</h4>
+							<div class="blockquote text-muted">
+								<p class="mb-0 editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla</p>
+								<br>
+								<div class="blockquote-footer editable">Texto complementar</div>
+							</div>
+							<a class="btn btn-default editable" href="#">Botão </a>
+						</div>
+						<div class="col-md-4 align-self-center">
+							<img class="img-fluid d-block" src="./assets/placeholder/img.jpg"> </div>
+					</div>
+				</div>
+			</div>`,
+			cards: `<section class="bg-light movable text-center" >
+				<div class="py-4">
+					<div class="container movable" data-label="Container">
+						<div class="row movable" data-label="Row">
+							<div class="col-md-4 p-3" data-label="4 Colunas">
+								<div class="card box-shadow">
+									<img class="card-img-top" src="./assets/placeholder/img.jpg">
+									<div class="card-body">
+										<p class="card-text editable">Proin convallis massa risus, id accumsan turpis eleifend eu. Donec eget accumsan neque. Proin rhoncus dolor quis sem pellentesque, et tristique lectus blandit. Morbi consectetur sapien a nulla tempor fermentum.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 p-3" data-label="4 Colunas">
+								<div class="card box-shadow">
+									<img class="card-img-top" src="./assets/placeholder/img.jpg">
+									<div class="card-body">
+										<p class="card-text editable">Proin convallis massa risus, id accumsan turpis eleifend eu. Donec eget accumsan neque. Proin rhoncus dolor quis sem pellentesque, et tristique lectus blandit. Morbi consectetur sapien a nulla tempor fermentum.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 p-3" data-label="4 Colunas">
+								<div class="card box-shadow">
+									<img class="card-img-top" src="./assets/placeholder/img.jpg">
+									<div class="card-body">
+										<p class="card-text editable">Proin convallis massa risus, id accumsan turpis eleifend eu. Donec eget accumsan neque. Proin rhoncus dolor quis sem pellentesque, et tristique lectus blandit. Morbi consectetur sapien a nulla tempor fermentum.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>`,
+			price: `<section class="bg-light movable text-center" >
+				<div class="py-4">
+					<div class="container" data-label="Container">
+			
+						<div class="pt-5 text-center">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-9 mx-auto">
+										<h1 class="display-4 editable">WebSheep</h1>
+										<p class="lead editable">Proin convallis massa risus, id accumsan turpis eleifend eu. Donec eget accumsan neque. Proin rhoncus dolor quis sem pellentesque, et tristique lectus blandit. Morbi consectetur sapien a nulla tempor fermentum.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<div class="container">
+								<div class="row pt-4">
+									<div class="col-md-4">
+										<div class="card mb-4 box-shadow">
+											<div class="card-header">
+												<h4 class="my-0 font-weight-normal editable">Plano 1</h4>
+											</div>
+											<div class="card-body">
+												<h1 class="editable"><b>$0 </b><small class="text-muted">/ mês</small></h1>
+												<ul class="list-unstyled mt-3 mb-4">
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+												</ul>
+												<button type="button" class="btn btn-lg btn-block btn-outline-default bg-light text-black editable">Cadastre-se</button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card mb-4 box-shadow">
+											<div class="card-header">
+												<h4 class="my-0 font-weight-normal editable">Plano 2</h4>
+											</div>
+											<div class="card-body">
+												<h1 class="editable"><b>$20 </b><small class="text-muted">/ mês</small></h1>
+												<ul class="list-unstyled mt-3 mb-4">
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+												</ul>
+												<button type="button" class="btn btn-lg btn-block btn-default bg-dark text-white editable">Comparar</button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card mb-4 box-shadow">
+											<div class="card-header">
+												<h4 class="my-0 font-weight-normal editable">Plano 3</h4>
+											</div>
+											<div class="card-body">
+												<h1 class="editable"><b>$40 </b><small class="text-muted">/ mês</small></h1>
+												<ul class="list-unstyled mt-3 mb-4">
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+													<li class="editable">Característica</li>
+												</ul>
+												<button type="button" class="btn btn-lg btn-block btn-default bg-dark text-white editable">Comparar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>`,
+			table: `<table class="table movable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col editable">Coluna 1</th>
+						<th scope="col editable">Coluna 2</th>
+						<th scope="col editable">Coluna 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td class="editable">Conteúdo 1</td>
+						<td class="editable">Conteúdo 2</td>
+						<td class="editable">Conteúdo 3</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td class="editable">Conteúdo 1</td>
+						<td class="editable">Conteúdo 2</td>
+						<td class="editable">Conteúdo 3</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td class="editable">Conteúdo 1</td>
+						<td class="editable">Conteúdo 2</td>
+						<td class="editable">Conteúdo 3</td>
+					</tr>
+				</tbody>
+			</table>`,
+			card: `<div class="card movable">
+				<img class="card-img-top" src="./assets/placeholder/img.jpg" alt="Título do Card">
+				<div class="card-body">
+					<h5 class="card-title editable">Título</h5>
+					<p class="card-text editable">Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor</p>
+					<a href="#" class="btn btn-default editable bg-dark text-white btn-block">Botão</a>
+				</div>
+			</div>`,
+			card2: `<div class="card movable">
+						<div class="card-img-overlay align-items-center d-flex">
+							<h4 class="w-100 text-center mb-0 text-black"><b class="editable">Texto sobreposto</b></h4>
+						</div>
+						<img class="img-fluid w-100 rounded" src="./assets/placeholder/img.jpg" alt="Card image">
+				</div>`,
+			cardGroup: `<div class="card-group movable">
+				<div class="card">
+					<img class="card-img-top" src="./assets/placeholder/img.jpg" alt="Título do Card">
+					<div class="card-body">
+						<h5 class="card-title editable">Título</h5>
+						<p class="card-text editable">Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor</p>
+						<p class="card-text editable"><small class="text-muted editable">Detalhes</small></p>
+					</div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" src="./assets/placeholder/img.jpg" alt="Título do Card">
+					<div class="card-body">
+						<h5 class="card-title editable">Título</h5>
+						<p class="card-text editable">Cras non elementum justo. Vivamus et turpis fringilla, condimentum Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. ligula sit amet, imperdiet lorem. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem.</p>
+						<p class="card-text editable"><small class="text-muted editable">Detalhes</small></p>
+					</div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" src="./assets/placeholder/img.jpg" alt="Título do Card">
+					<div class="card-body">
+						<h5 class="card-title editable">Título</h5>
+						<p class="card-text editable">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+						<p class="card-text editable"><small class="text-muted editable">Detalhes</small></p>
+					</div>
+				</div>
+			</div>`,
+			carousel: `<div id="carouselExampleControls" class="carousel slide movable" data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img class="d-block w-100" src="./assets/placeholder/slide-square.jpg" alt="First slide">
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./assets/placeholder/slide-square.jpg" alt="Second slide">
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./assets/placeholder/slide-square.jpg" alt="Third slide">
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Anterior</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Próxima</span>
+				</a>
+			</div>`,
+			carousel2: `<div id="carouselExampleControls2" class="carousel slide movable" data-ride="carousel">
+				
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleControls2" data-slide-to="0" class="active"></li>
+					<li data-target="#carouselExampleControls2" data-slide-to="1"></li>
+					<li data-target="#carouselExampleControls2" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="d-block w-100" src="./assets/placeholder/slide.jpg" alt="First slide">
+					<div class="carousel-caption d-none d-md-block">
+						<h5 class="display-4 editable">Título Slide</h5>
+						<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="./assets/placeholder/slide.jpg" alt="Second slide">
+					<div class="carousel-caption d-none d-md-block">
+						<h5 class="display-4 editable">Título Slide</h5>
+						<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="./assets/placeholder/slide.jpg" alt="Third slide">
+					<div class="carousel-caption d-none d-md-block">
+						<h5 class="display-4 editable">Título Slide</h5>
+						<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+					</div>
+				</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls2" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Anterior</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls2" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Próxima</span>
+				</a>
+			</div>`,
+			breadcrumb: `<nav aria-label="breadcrumb" class="movable">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a class="editable" href="#">Home</a></li>
+					<li class="breadcrumb-item"><a class="editable" href="#">Produto</a></li>
+					<li class="breadcrumb-item active editable" aria-current="page">Detalhes</li>
+				</ol>
+			</nav>`,
+			collapse: `<div id="accordion" class="movable">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h5 class="mb-0">
+							<button class="editable btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								Seção #1
+							</button>
+						</h5>
+					</div>
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body editable">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingTwo">
+						<h5 class="mb-0">
+							<button class="editable btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Seção #2
+							</button>
+						</h5>
+					</div>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+						<div class="card-body editable">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingThree">
+						<h5 class="mb-0">
+							<button class="editable btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								Seção #3
+							</button>
+						</h5>
+					</div>
+					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+						<div class="card-body editable">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo.
+						</div>
+					</div>
+				</div>
+			</div>`,
+			collapse2: `<div class="movable">
+				<a class="btn btn-default editable" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				Collapse em href
+				</a>
+			
+				<button class="btn btn-primary editable" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Collapse em Button</button>
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body editable">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.
+					</div>
+				</div>
+			</div>`,
+			jumbotron: `<div class="jumbotron movable">
+				<h1 class="display-4 editable">WebSheep</h1>
+				<p class="lead editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet.</p>
+				<hr class="my-4">
+				<p class="editable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.</p>
+				<p class="lead editable">
+					<a class="btn btn-primary btn-lg" href="#" role="button">Botão</a>
+				</p>
+			</div>`,
+			modal: `<!-- Button trigger modal -->
+			<button type="button" class="btn btn-default movable" data-toggle="modal" data-target="#exampleModal">
+				Abrir Modal
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Título do Modal</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar Modal</button>
+							<button type="button" class="btn btn-primary">Botão</button>
+						</div>
+					</div>
+				</div>
+			</div>`,
+			tabs: `<div class="nav-wrapper movable">
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active editable" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link editable" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Perfil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link editable" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contato</a>
+					</li>
+				</ul>
+			
+				<div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade show active editable" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.</div>
+					<div class="tab-pane fade editable" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo.</div>
+					<div class="tab-pane fade editable" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non elementum justo. Vivamus et turpis fringilla, condimentum ligula sit amet, imperdiet lorem. Fusce fermentum vel augue finibus auctor.</div>
+				</div>
+			</div>`,
+			pagination: `<nav class="movable" aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link editable" href="#">Anterior</a></li>
+					<li class="page-item"><a class="page-link editable" href="#">1</a></li>
+					<li class="page-item"><a class="page-link editable" href="#">2</a></li>
+					<li class="page-item"><a class="page-link editable" href="#">3</a></li>
+					<li class="page-item"><a class="page-link editable" href="#">Próxima</a></li>
+				</ul>v
+			</nav>`,
+			button1: `<button type="button" class="movable editable btn btn-primary">Primary</button>`,button2: `<button type="button" class="movable editable btn btn-secondary">Secondary</button>`,button3: `<button type="button" class="movable editable btn btn-success">Success</button>`,button4: `<button type="button" class="movable editable btn btn-danger">Danger</button>`,button5: `<button type="button" class="movable editable btn btn-warning">Warning</button>`,button6: `<button type="button" class="movable editable btn btn-info">Info</button>`,button7: `<button type="button" class="movable editable btn btn-light">Light</button>`,button8: `<button type="button" class="movable editable btn btn-dark">Dark</button>`,button9: `<button type="button" class="movable editable btn btn-link">Link</button>`,button10: `<button type="button" class="movable editable btn btn-default btn-block">Btn Block</button>`,footer1: `
+			<section class="py-5 movable">
+					<div class="container">
+						<div class="row pt-5 border-top">
+							<div class="col-12 col-md"> <i class="fa fa-lg fa-bullseye d-block mb-2"></i> <small class="d-block mb-3 text-muted">© 2017-2018</small> </div>
+							<div class="col-6 col-md">
+								<h5><b class="editable">Menu 1</b></h5>
+								<ul class="list-unstyled">
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-6 col-md">
+								<h5><b class="editable">Menu 2</b></h5>
+								<ul class="list-unstyled">
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-6 col-md">
+								<h5><b class="editable">Menu 3</b></h5>
+								<ul class="list-unstyled">
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+									<li>
+										<a class="text-muted editable" href="#">Item do menu</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>`,
+				footer2: `<section class="bg-light p-4 movable">
+					<div class="container">
+						<div class="row">
+							<div class="p-0 col-lg-4 col-md-6">
+								<img class="img-fluid" src="./assets/placeholder/img.jpg"> </div>
+								<div class="col-md-5 align-self-center p-4 offset-md-1">
+									<h4 class="editable">Titulo</h4>
+									<p class="mb-4 text-default editable">Endereço completo, 500
+										<br>Cidade - Estado
+										<br> <abbr title="Phone editable">P:</abbr> (99) 99999999 </p>
+									<div class="row text-center">
+										<div class="col-md-2 col-3">
+											<a href="#" target="_blank"><i class="fa fa-facebook text-default fa-2x"></i></a>
+										</div>
+										<div class="col-md-2 col-3">
+											<a href="#" target="_blank"><i class="fa fa-twitter text-default fa-2x"></i></a>
+										</div>
+										<div class="col-md-2 col-3">
+											<a href="#" target="_blank"><i class="fa fa-instagram text-default fa-2x"></i></a>
+										</div>
+										<div class="col-md-2 col-3">
+											<a href="#" target="_blank"><i class="fa text-default fa-2x fa-pinterest-p"></i></a>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+			</section>`,
+			footer3: `<section class="bg-dark py-3 movable">
+				<div class="container">
+					<div class="row d-flex justify-content-between">
+						<div class="col-lg-4 col-md-6">
+							<p class="text-secondary mb-0 editable">Copyright 2018 - Direitos Reservados</p>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<p class="text-secondary mb-0 editable">Desenvolvido por WebSheep</p>
+						</div>
+					</div>
+				</div>
+			</section>`,
+			footer4: `<section class="py-5 text-muted text-center movable">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 my-4">
+								<p class="mb-1 editable">© 2017-2018 Nome da Empresa</p>
+								<ul class="list-inline">
+									<li class="list-inline-item">
+										<a href="#" class="editable">Menu 1</a>
+									</li>
+									<li class="list-inline-item">
+										<a href="#" class="editable">Menu 2</a>
+									</li>
+									<li class="list-inline-item">
+										<a href="#" class="editable">Menu 3</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+			</section>`,
+			nav1: `<nav class="navbar movable navbar-expand-md bg-default bg-dark navbar-dark">
+				<div class="container">
+					<a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-star"></i><b class="editable">	Logo</b></a>
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSC" aria-controls="navbarSC" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+					<div class="collapse navbar-collapse text-center justify-content-end" id="navbarSC">
+						<ul class="navbar-nav">
+							<li class="nav-item movable">
+								<a class="nav-link editable editable" href="#"><i class="fa d-inline fa-lg fa-envelope"></i> Link</a>
+							</li>
+							<li class="nav-item movable">
+								<a class="nav-link editable editable" href="#"><i class="fa d-inline fa-lg fa-cog"></i> Link</a>
+							</li>
+							<li class="nav-item movable">
+								<a class="nav-link editable editable" href="#"><i class="fa d-inline fa-lg fa-user"></i> Link</a>
+							</li>
+							<li class="nav-item movable">
+								<a class="nav-link editable editable" href="#"><i class="fa d-inline fa-lg fa-star"></i> Link</a>
+							</li>
+						</ul>
+						<a class="btn navbar-btn movable editable ml-2 text-white btn-default bg-dark"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Login</a>
+					</div>
+				</div>
+			</nav>`,
+			nav2: `<nav class="navbar navbar-expand-md navbar-light bg-light movable">
+				<div class="container">
+					<a class="navbar-brand" href="#"><b class="editable">Logo</b></a>
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarLightSupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span> </button>
+					<div class="collapse navbar-collapse text-center justify-content-end" id="navbarLightSupportedContent">
+						<ul class="navbar-nav">
+							<li class="nav-item mx-1 movable">
+								<a class="nav-link editable" href="#"><i class="fa d-inline fa-facebook-square"></i>&nbsp; Facebook</a>
+							</li>
+							<li class="nav-item mx-1 movable">
+								<a class="nav-link editable" href="#"><i class="fa d-inline fa-twitter"></i>&nbsp; Twitter</a>
+							</li>
+							<li class="nav-item mx-1 movable">
+								<a class="nav-link editable" href="#"><i class="fa d-inline fa-pinterest"></i>&nbsp; Pinterest</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>`,
+			nav3: `<div class="d-flex flex-column flex-md-row align-items-center p-3 box-shadow border-bottom movable">
+				<h5 class="my-0 mr-md-auto font-weight-normal editable">Logo</h5>
+				<nav class="my-2 my-md-0 mr-md-3 movable">
+					<a class="p-2 text-dark editable" href="#">Link</a>
+					<a class="p-2 text-dark editable" href="#">Link</a>
+					<a class="p-2 text-dark editable" href="#">Link</a>
+					<a class="p-2 text-dark editable" href="#">Link</a>
+				</nav>
+				<a class="btn btn-outline-default editable bg-dark text-white editable" href="#">Acessar</a>
+			</div>`,
+			nav4: `<nav class="navbar navbar-expand-md navbar-dark bg-dark movable">
+				<div class="container">
+					<a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-bullseye"></i></a>
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span> </button>
+					<div class="collapse navbar-collapse text-center justify-content-between" id="navbar2SupportedContent">
+						<ul class="navbar-nav">
+							<li class="nav-item movable">
+								<a class="nav-link editable mx-2" href="#">Link</a>
+							</li>
+							<li class="nav-item movable">
+								<a class="nav-link editable mx-2" href="#">Link</a>
+							</li>
+							<li class="nav-item movable">
+								<a class="nav-link editable mx-2" href="#">Link</a>
+							</li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0">
+							<input class="form-control" type="text">
+							<button class="btn btn-link my-2 my-sm-0" type="submit"><i class="fa d-inline fa-lg fa-search text-light"></i></button>
+						</form>
+					</div>
+				</div>
+			</nav>`,
+			nav5: `<nav class="navbar navbar-expand-md navbar-dark bg-dark movable">
+				<div class="container">
+					<button class="navbar-toggler navbar-toggler-right mx-auto" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+					<div class="collapse navbar-collapse text-center justify-content-between" id="navbar2SupportedContent">
+						<a class="editable p-2 text-secondary" href="#"><i class="fa fa-dot-circle-o fa-lg d-block pt-1"></i></a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+						<a class="editable p-2 text-secondary" href="#">Link</a>
+					</div>
+				</div>
+			</nav>`,
+			nav6: `<nav class="navbar navbar-expand-md navbar-dark bg-secondary movable">
+				<div class="container">
+					<a class="navbar-brand" href="#"><b class="editable">Logo</b></a>
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSecondarySupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span> </button>
+					<div class="collapse navbar-collapse text-center justify-content-end" id="navbarSecondarySupportedContent">
+						<ul class="navbar-nav movable">
+							<li class="nav-item mx-2">
+								<a class="nav-link editable" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i></a>
+							</li>
+						</ul>
+						<a class="btn navbar-btn ml-2 text-white btn-default bg-dark" href="#"><i class="fa d-inline fa-lg fa-user-circle-o ml-1"></i>&nbsp;</a>
+					</div>
+				</div>
+			</nav>`,
+		};	
+		</script>
+		<script type="text/javascript">
+			$(function () {
+				$("#space").click(function () {
+					if ($(this).is(":checked")) {
+							$("#main-page").removeClass('withSpace');
+						$("#main-page").addClass('withoutBorder');
+					} else {
+						$("#main-page").addClass('withSpace');
+							$("#main-page").removeClass('withoutBorder');		
+					}
+				});
+			});			
+			$('#previewMobile').on("click", function(){
+				$('#main-page').removeClass("mobileView tabletView laptopView");
+				$('#main-page').addClass("mobileView");
+				$('#previewMobile').removeClass("active");
+				$('#previewTablet').removeClass("active");
+				$('#previewLaptop').removeClass("active");
+				$('#previewMobile').addClass("active");
+			});
+			
+			$('#previewTablet').on("click", function(){
+				$('#main-page').removeClass("mobileView tabletView laptopView");
+				$('#main-page').addClass("tabletView");
+				$('#previewMobile').removeClass("active");
+				$('#previewTablet').removeClass("active");
+				$('#previewLaptop').removeClass("active");
+				$('#previewTablet').addClass("active");
+			});
+			
+			$('#previewLaptop').on("click", function(){
+				$('#main-page').removeClass("mobileView tabletView laptopView");
+				$('#main-page').addClass("laptopView");
+				$('#previewMobile').removeClass("active");
+				$('#previewTablet').removeClass("active");
+				$('#previewLaptop').removeClass("active");
+				$('#previewLaptop').addClass("active");
+			});
+			
+			 
+			
+			function init() {
+				$("#main-page, #main-page .droppable").droppable({
+					accept: ".draggable, .movable",
+					greedy: true,
+					hoverClass: "droppable-hover",
+					tolerance: "pointer",
+					drop: function(e, ui) {
+						var elm = ui.draggable;
+						if ($(elm).hasClass('draggable')) {
+							var key = $(ui.draggable).attr("data-draggable-key");
+							var content = _SNIPPETS[key];
+							$(this).append(content);
+							$(ui.helper).remove();
+							init();
+						} else {
+							var item = $(elm).detach();
+							$(this).append(item);
+						}
+					}
+				});
+				
+				$("#main-page .movable").draggable({
+					appendTo: "body",
+					cancel: false,
+					scroll: false,
+					revert: true,
+					opacity: 0.35,
+					start: function( event, ui ) {
+						$("#trash-can").show();
+					},
+					stop: function( event, ui ) {
+						$("#trash-can").hide('fast');
+					}
+				});
+			}
+			
+			
+			
+			
+			
+			$(document).ready(function() {
+				$("#itens .draggable").draggable({
+					appendTo: "body",
+					cancel: false,
+					scroll: false,
+					revert: true,
+					helper: "clone",
+					opacity: 0.35,
+				});
+				
+				$("#trash-can").droppable({
+					accept: ".movable",
+					greedy: true,
+					hoverClass: "trashcan-hover",
+					tolerance: "pointer",
+					drop: function(e, ui) {
+						$(ui.draggable).remove();
+					}
+				});
+				
+				$("#main-page").on("dblclick", ".editable", function(e) {
+					var elm = e.currentTarget; 
+					$(elm).attr("contenteditable", true);
+					$(elm).focus();
+				});
+				
+				$("#main-page").on("blur", ".editable", function(e) {
+					var elm = e.currentTarget; 
+					$(elm).removeAttr("contenteditable");
+				});
+				
+				$("#main-page").on("mouseover", ".movable", function(e) {
+					e.stopPropagation();
+					var elm = e.currentTarget;
+					// $(elm).css("background", "#fafafa");
+				});
+				
+				$("#main-page").on("mouseout", ".movable", function(e) {
+					var elm = e.currentTarget;
+					// $(elm).css("background", "#000");
+				});
+				
+			
+				$("#clean").on("click", function(e) {
+					e.preventDefault();
+					swal({
+						title: "Deseja realmente limpar?",
+						text: "Essa ação excluirá tudo o que você inseriu nessa estrutura, deseja prosseguir?",
+						html: true,
+						type: "info",
+						showCancelButton: true,
+						confirmButtonColor: "#a9003d",
+						confirmButtonText: "Sim, quero limpar",
+						cancelButtonText: "Cancelar",
+						closeOnConfirm: true,
+						closeOnCancel: true
+					}, function() {
+						var html = $("#main-page").html('');
+						init();
+					})
+				});
+			
+				
+				$("#done").on("click", function() {
+					var html = $("#main-page").clone();
+			
+					$(html).find("*")
+					// my classes
+					.removeClass("droppable")
+					.removeClass("movable")
+					.removeClass("editable")
+					
+					// jquery ui classes
+					.removeClass("ui-droppable")
+					.removeClass("ui-draggable")
+					.removeClass("ui-draggable-handle")
+					
+					// my attrs
+					.removeAttr("data-label")
+					.removeAttr("contenteditable")
+					.removeAttr('style');
+					
+					html = $(html).html();
+			
+					window.parent.bootstrap_builder_callback(html);
+				});
+				
+				init();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,196 @@
+@charset "utf-8";
+/*##################################################  STAGE LIQUIDO  #####################################################################*/
+.esqueci a.email{
+	text-decoration: none;
+    color: #003d40;
+    cursor: pointer;
+    position: relative;
+    background-image: url(./../img/user-silhouette-question.png);
+    background-repeat: no-repeat;
+    padding-left: 19px;
+    font-family: 'Titillium Web', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 300;
+    z-index: 2;
+    text-shadow: none;
+
+}
+.esqueci a.politica{
+	text-decoration: none;
+    color: #003d40;
+    cursor: pointer;
+    position: relative;
+    background-image: url(./../img/magnifier.png);
+    background-repeat: no-repeat;
+    padding-left: 19px;
+    font-family: 'Titillium Web', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 300;
+    z-index: 2;
+    text-shadow: none;
+
+}
+.esqueci{
+	position: relative;
+    float: left;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+}
+#container #login {
+	position: fixed;
+	width: 100%;
+	top: 50%;
+	max-width: 410px;
+	left: 50%;
+	height: 240px;
+	transform: translateX(-50%) translateY(-50%);
+}
+#container #login #logomarca {
+		position: relative;
+		float: left;
+		left: 50%;
+		transform: translateX(-50%);
+  }
+#container #login #logomarca #h1 {
+	-webkit-background-clip: text;
+	font-family:'Titillium Web', sans-serif font-style:normal; font-weight:900;
+	font-size: 50px;
+	color:#1f477d;
+}
+#container #login #logomarca #h3 {
+	top: 4px;
+	position: absolute;
+	right: -40px;
+	font-size: 11px;
+}
+#container #login #logomarca #h2 {
+	-webkit-background-clip: text;
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:900;
+	font-size: 50px;
+	color:#1a3150;
+
+}
+#container #login #logomarca #beta {
+	position: absolute;
+	float: left;
+	left: 207px;
+	top: 4px;
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	font-size: 15px;
+	color: #5f859f;
+}
+#container #login #logomarca #SubTit {
+	position: relative;
+	left: 5px;
+	top: -4px;
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	font-size: 15.5px;
+	color: #5f859f;
+}
+#container #login #formulario {
+	position: relative;
+	left: 50%;
+	margin-left: -198px;
+	width: 400px;
+	top: 20px;
+}
+#container #login #formulario input {
+	padding: 10px;
+	width: 400px;
+	margin-bottom: 10px;
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	font-size: 20px;
+	color: #0080c9;
+}
+::-webkit-input-placeholder {
+	/* WebKit browsers */
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	color: #538bbe;
+	font-style: oblique;
+}
+:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	color: #538bbe;
+	font-style: oblique;
+}
+::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	color: #538bbe;
+	font-style: oblique;
+}
+:-ms-input-placeholder {
+	/* Internet Explorer 10+ */
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	color: #538bbe;
+	font-style: oblique;
+}
+:-input[data-operaplaceholder] {
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+	color: #538bbe;
+	font-style: oblique;
+}
+#container #login button.botao {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 1;
+    padding: 15px 128px;
+    width: 400px;
+    background: none;
+    background-color: #2e5994;
+}
+
+
+#container #login #iniciarsessao_disabled {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 1;
+    padding: 18px 105px;
+    width: 190px;
+    color: #2c97ba;
+    background: none;
+    background-color: #a9fedf;
+    border-color: #61c2ca;
+    cursor: progress;
+}
+#container #login #iniciarsessao_disabled img {
+	position: absolute;
+	left: 50px;
+	top: 15px;
+}
+
+#select_user_chosen.chosen-container-single .chosen-single span {
+	margin-left: 0px;
+	font-family:'Titillium Web', sans-serif; font-style:normal; font-weight:300
+}
+#select_user_chosen.chosen-container .chosen-results li.active-result {
+	width: 382px;
+	
+}
+#select_user_chosen.chosen-container {
+	margin-bottom: 10px;
+	top: -1px;
+	width: 400px!important;
+}
+#select_user_chosen.chosen-container-single .chosen-single {
+	padding: 6px 0px 0 8px;
+	height: 30px;
+	width: 390px!important;
+}
+#select_user_chosen.chosen-container-single .chosen-drop {
+	width: 400px!important;
+}
+#select_user_chosen.chosen-container .chosen-results {
+	width: 390px!important;
+	min-width: 390px!important;
+}

@@ -1,0 +1,277 @@
+<!-- BEGIN INCLUDES -->
+<script>
+	window.id_item_selected 	=	'';
+	var barra_progresso 		= 	'';
+	var canvas_barra_progresso 	= 	'';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-includes/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{urlIncludes_TopTitle}</div>
+	<div id="topo_upload"></div>
+	<div id="palco" class="palco_01" >
+		<div id="salvarBase" class="botao" >{urlIncludes_save}</div>
+		<div id="helpme" class="botao" style="" ><i class="fa fa-info-circle"></i>
+	</div>
+		<h1 class="w1 titlew1">{urlIncludes_configuration_data}</h1>
+		<form class="dados_basicos"  id="dados_basicos">
+			<div class="w1" style="position: relative;float: left;padding: 5px;font-size: 18px;width: 22%;">{urlIncludes_basic_data_home_url}</div>
+			<!-- <div class="w1" style="position: relative;float: left;padding: 5px;font-size: 18px;width: 22%;">{urlIncludes_basic_data_files_directory}</div> -->
+			<div class="w1" style="position: relative;float: left;padding: 5px;font-size: 18px;width: 15%;">{urlIncludes_basic_data_error_404_file}</div>
+			<div class="w1" style="position: relative;float: left;padding: 5px;font-size: 18px;width: 15%;">{urlIncludes_basic_data_plugins_folder}</div>
+			<div class="w1" style="position: relative;float: left;padding: 5px;font-size: 18px;width: 16%;">{urlIncludes_basic_data_skip_final_paths}</div>
+			<div class="c"></div>
+			<input type="text" class="inputText" id="urlVazia" 		value="{url_initPath}" 	style="width: 22%; float: left; margin: 0 5px;"		name="url_initPath"/>
+			<!-- {url_setRoot} -->
+			<input type="hidden" class="inputText" id="setRoot" 	value="includes" 		style="width: 22%; float: left; margin: 0 5px;"		name="url_setRoot"/>
+			<input type="text" class="inputText" id="set404" 		value="{url_set404}" 	style="width: 15%; float: left; margin: 0 5px;"		name="url_set404"/>
+			<input type="text" class="inputText" id="pathPlugins" 	value="{url_plugin}" 	style="width: 15%; float: left; margin: 0 5px;"		name="url_plugin"/>
+			<label type="text" class="w1 bg01"	 id="ignore_add" 	style="width:21%;cursor: pointer;position: relative;margin: 3px;float: left;padding: 7px 0;text-align: center;height: 18px;top:1px;">
+			<input value="0" type="checkbox" name="url_ignore_add" {url_ignore_add}>{urlIncludes_basic_data_ignore}</label></form>
+			<div class="c"></div>
+
+
+		<div id="addFile" class="botao" >{urlIncludes_add_an_include}</div>
+		<h1 class="w1 titlew1">{urlIncludes_file_include}:</h1>
+
+		<!-- BEGIN UL_URLS -->
+			<ul id="includes">
+				{LI_TEMPLATE}
+			</ul>
+		<!-- END UL_URLS -->
+	</div>
+</div>
+<script>
+function reloadFunctions(){
+	$('div[legenda]').LegendaOver();
+	function OrdenaItem(){
+		var ids 		= [];
+		var posicoes 	= [];
+		var i 			= 0;
+		var p 			= 0;
+		$('#palco ul').children().each(function () {
+			var elemento = $(this).data('id');
+			if(!$(this).hasClass("ui-sortable-placeholder")){
+				ids[i]		= $(this).data('id');
+				posicoes[i]	= p;
+				i++;p++;
+			}
+		})
+		$.ajax({
+		  type: "POST",
+		  url: "./{PATH}/functions.php",
+		  beforeSend:function(){confirma({width:"auto",conteudo:"  {urlIncludes_modal_rearranging_items}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		  data: {function:"OrdenaItem",ids:ids, posicoes:posicoes}})
+		  .done(function(data) {
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+			out(data)
+		});}
+	$( "#palco ul" ).sortable({
+		handle: ".move,.processo",
+		forceHelperSize: true,
+		beforeStop: function( event, ui ) {OrdenaItem()}
+	});
+	$("#addFile").unbind('click tap press').bind("click tap press",function(){
+		functions({
+			funcao:"addFile",
+			vars:"",
+			patch:"{PATH}",
+			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlIncludes_modal_adding}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			Sucess:function(e){
+				$( "#conteudo" ).load("./app/ws-modules/ws-includes/index.php", function( response, status, xhr ) {
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			}
+		})
+	})
+	$(".salvar").unbind('click tap press').bind("click tap press",function(e){
+		var id_include= $(this).parent().parent().data("id");
+		var file= $(this).parent().find('.nameFile').val();
+		confirma({ 
+			conteudo:'<form id="formSalva"><div style="margin: 20px; text-align:left;line-height: 26px;"><div style="text-align:center;margin: -20px;font-weight: bold;font-size: 20px;">{urlIncludes_modal_save_like_to_do_what}</div><br><br><label style="cursor:pointer"><input type="radio" name="type" value="bd"/>{urlIncludes_modal_save_record_in_the_database}</label><br><label style="cursor:pointer"> <input type="radio" name="type" value="renomear"/>{urlIncludes_modal_save_rename_file_and_create}</label></div></form>',
+			bot1:"{urlIncludes_modal_save_process}",
+			bot2:"{urlIncludes_modal_save_cancel}",
+			drag:false,
+			botclose:false,
+			posFn:function(){$("#formSalva input[type='radio'][value='bd']").click()},
+			newFun:function(){
+				var info = $("#formSalva input[type='radio']:checked").val();
+				$.ajax({
+					type: "POST",
+					url: "./app/ws-modules/ws-includes/functions.php",
+		 			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlIncludes_modal_rearranging_items}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					data: { function:"salvaInclude",id_include:id_include, file:file ,info:info}
+				}).done(function(data) {
+					if(data=="sucesso"){
+						TopAlert({
+							mensagem: "{urlIncludes_modal_save_sucess}",
+							clickclose: true,
+							height: 20,
+							timer: 3000,
+							type: 3,
+						})
+					}else{
+						TopAlert({
+							mensagem: data,
+							clickclose: true,
+							height: 20,
+							timer: 3000,
+							type: 2,
+						})
+					}
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				})
+			}
+		})
+	})
+	$("#salvarBase").unbind('click tap press').bind("click tap press",function(e){
+		var Formulario= $("#dados_basicos").serialize();
+		confirma({ 
+			conteudo:'<form id="formSalva"><div style="margin: 20px; text-align:left;line-height: 26px;"><div style="text-align:center;margin: -20px;font-weight: bold;font-size: 20px;">{urlIncludes_modal_save_sure_to_save}</div>',
+			bot1:"{urlIncludes_modal_save_save}",
+			bot2:"{urlIncludes_modal_save_cancel}",
+			drag:false,
+			botclose:false,
+			posFn:function(){},
+			newFun:function(){
+				$.ajax({
+					type: "POST",
+					url: "./app/ws-modules/ws-includes/functions.php",
+		 			beforeSend:function(){confirma({width:"auto",conteudo:"{urlIncludes_modal_rearranging_items}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					data: { "function":"SalvaPaths",Formulario:Formulario}
+				}).done(function(data) {
+					out(data);
+					if(data=="sucesso"){
+						TopAlert({
+							mensagem: "{urlIncludes_modal_save_savesettings_saved}",
+							clickclose: true,
+							height: 20,
+							timer: 3000,
+							type: 3,
+						})
+					}
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				})
+			}
+		})
+	})
+	$(".excluir").unbind('click tap press').bind("click tap press",function(e){
+		var id_include= $(this).parent().parent().data("id");
+		var div_include= $(this).parent().parent();
+		confirma({ 
+			conteudo:'{urlIncludes_modal_delete_content}',
+			bot1:"{urlIncludes_modal_delete_only_the_record}",
+			bot2:"{urlIncludes_modal_delete_delete_file_as_well}",
+			drag:false,
+			botclose:true,
+			newFun:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./app/ws-modules/ws-includes/functions.php",
+				  data: { function:"excluiRegistroFile",registro:"false",id_include:id_include}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			},
+			onCancel:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./app/ws-modules/ws-includes/functions.php",
+				  data: { function:"excluiRegistroFile",registro:"true",id_include:id_include}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			}
+		})
+	})
+
+	$(".programar").unbind('click tap press').bind("click tap press",function(e){
+		e.preventDefault()
+		var page 				= './../../../website/'+$(this).parent().find('.nameFile').val();
+		confirma({
+			width:"auto",
+			conteudo:"<strong>{urlIncludes_modal_program_loading_editor}</strong><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			drag:false,
+			posFn:function(){
+					$("#ws_confirm").css("line-height","20px");
+					$( "#conteudo" ).load("./app/ws-modules/ws-webmaster/index.php?get_file="+page, function( response, status, xhr ) {
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					});
+			},
+			bot1:0,
+			bot2:0
+		})
+		return false;
+	})
+
+	$("#helpme").unbind('click tap press').bind("click tap press",function(e){
+		introJs().setOptions({
+			steps:[
+
+
+
+				{element: "#urlVazia",				position:"right",	intro:"{urlIncludes_modal_helpme_empty_url}"}
+				,{element:"#setRoot",				position:"right",	intro:"{urlIncludes_modal_helpme_set_root}"}
+				,{element:"#set404",				position:"left",	intro:"{urlIncludes_modal_helpme_set_404}"}
+				,{element:"#pathPlugins",			position:"left",	intro:"{urlIncludes_modal_helpme_path_plugins}"}
+				,{element:"#ignore_add",			position:"left",	intro:"{urlIncludes_modal_helpme_ignore_add}"}
+				,{element:"#addFile",				position:"left",	intro:"{urlIncludes_modal_helpme_add_file}"}
+				,{element:"#navegue",				position:"top",		intro:"{urlIncludes_modal_helpme_navigate}"}
+				,{element:"#helpme",				position:"left",	intro:"{urlIncludes_modal_helpme_helpme}"}
+			],
+			skipLabel:"<i class='icon-close'></i>",
+			doneLabel:"<i class='icon-close'></i>",
+			nextLabel:"{urlIncludes_modal_helpme_next} <i class='fa fa-chevron-right'></i>",
+			prevLabel:"<i class='fa fa-chevron-left'></i>{urlIncludes_modal_helpme_previous}",
+			showBullets:1
+		}).start()
+	})
+
+
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+}
+reloadFunctions();
+</script>
+<!-- END INCLUDES -->
+
+
+<!-- BEGIN INCLUDE -->
+<li data-id="{LI_ID}">
+	<div class="bg01 file" >
+		<input legenda="{urlIncludes_include_nameFile}" value="{LI_VALUE}" data-file="{LI_DATA_FILE}" class="inputText nameFile" name="nameFile"/>
+		<div class="move"></div>
+		<div legenda="{urlIncludes_include_save}" class="salvar"></div>
+		<div legenda="{urlIncludes_include_edit}" class="editar programar"></div>
+		<div legenda="{urlIncludes_include_delete}" class="excluir"></div>
+	</div>
+</li>
+<!-- END INCLUDE -->
+
+<!-- BEGIN PROCESSO_NAVE -->
+<li data-id="0"><div class="processo w1 bg06">{urlIncludes_process_nav}</div></li>
+<!-- END PROCESSO_NAVE -->

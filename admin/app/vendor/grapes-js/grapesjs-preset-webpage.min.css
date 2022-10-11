@@ -1,0 +1,27 @@
+.gjs-one-bg{background-color:#2d353a}
+.gjs-one-color{color:#8f9fab}
+.gjs-one-color-h:hover{color:#bfcdd9}
+
+.gjs-two-bg{background-color:#2d353a}
+.gjs-two-color{color:#8f9fab}
+.gjs-two-color-h:hover{color:#bfcdd9}
+
+
+.gjs-three-bg{background-color:#2d353a}
+.gjs-three-color{color:#8f9fab}
+.gjs-three-color-h:hover{color:#bfcdd9}
+
+.gjs-four-bg{background-color:#2d353a}
+.gjs-four-color{color:#8f9fab}
+.gjs-four-color-h:hover{color:#bfcdd9}
+
+/*ICONES*/
+.gjs-blocks-c .icon-websheep-columns .gjs-block-label{
+	top: -6px;
+    position: relative;
+}
+.gjs-blocks-c .icon-websheep-columns{
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: 0px 13px!important;
+}

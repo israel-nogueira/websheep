@@ -1,0 +1,107 @@
+@charset "utf-8";
+body{
+	overflow: auto;
+}
+#avisoTopo{
+	font-family: 'Titillium Web', sans-serif;
+}
+ #container{
+    width: 100%;
+    position: relative;
+    top: 36px;
+    left: 0;
+}
+#palco {
+	position: relative;
+	width: 800px;
+	left: 50%;
+	margin-left: -410px;
+	top: 10px;
+	padding: 20px;
+	margin-bottom: 80px;
+	min-height: 390px;
+}
+#palco p {
+	width: 520px;
+	padding-bottom: 10px;
+	font-size: 17px;
+	float: right;
+	right: 20px;
+	position: relative;
+}
+ol {
+	padding: 5px 5px 5px 22px;
+	display: block;
+	list-style-type: decimal;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+}
+#vamosla {
+    position: relative;
+    float: left;
+    width: 70%;
+    padding: 10px;
+    margin-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.description{
+	position: relative;
+	line-height: normal;
+	margin-top: 20px;
+}
+.avisophp {
+		padding: 14px;
+		text-align: center;
+		color: #bf3000;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		position: relative;
+		width: 100%;
+		margin-top: 0px;
+		float: left;
+		font-size: 14px;
+		font-family: 'Titillium Web', sans-serif;
+}
+.avisophp .response label input {
+	position: absolute;
+	margin-left: -19px;
+	cursor: pointer;
+}
+.avisophp .response label {
+	cursor: pointer;
+	font-weight: 600;
+	line-height: 20px;
+}
+.avisophp .response {
+	osition: relative;
+	padding: 10px;
+	font-weight: 100;
+	font-size: 13px;
+}
+form input.error,form select.error {
+	background-color: #fdeeee;
+	border: solid 1px #ff2900;
+}
+form input,form select {
+	position: relative;
+	float: left;
+	padding: 12px;
+	width: 390px;
+	margin: 5px;
+	background-color: white;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: solid 1px #cccccc;
+}
+form .label {
+	position: relative;
+	float: left;
+	padding: 10px 0 ;
+	width: 380px;
+}

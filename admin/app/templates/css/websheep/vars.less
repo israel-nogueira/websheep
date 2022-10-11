@@ -1,0 +1,121 @@
+//########################################################################## CLASSES PRONTAS  #################################################################
+.pointer{cursor:pointer;}
+.placeholder(@color:#000){
+    *::-webkit-input-placeholder,
+    *:-moz-placeholder,
+    *::-moz-placeholder,
+    *:-ms-input-placeholder,
+    *:-input[data-operaplaceholder]{
+        color:@color;
+        font-style:oblique;
+    }
+}
+.placeholder(lighten(@color_base, 30%));
+
+
+*::selection, *::-moz-selection {
+    background: darken(@color_base, 30%) !important;
+    color: lighten(@color_base, 70%) !important;
+    text-shadow: 0 1px 0 darken(@color_base, 70%)!important;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.bg_y(@y){
+    background-position-y:@y!important;
+}
+
+.rotate(@rot){
+    -moz-transform: rotate(@rot);
+    -webkit-transform: rotate(@rot);
+    -o-transform: rotate( @rot);
+    -ms-transform: rotate(@rot);
+}
+.bg_img(@img){
+        background-image:url(@img)!important;
+        background-position: top center!important;
+        background-repeat: no-repeat!important;
+}
+.w(@w){width:@w}
+.z(@num){z-index: @num;}
+.w(@w){width:@w;}
+.h(@h){height:@h;}
+
+.bg_color(@cor){background-color: @cor;}
+.relative{position:relative;}
+.absolute{position:absolute;}
+.fixed{position:fixed;}
+.hide{display:none;}
+.left{float:left;}
+.right{float:right;}
+.italic{font-style: italic;}
+.bold{font-weight: bold;}
+
+.degradeFonte(@cor1:@VermelhoPadrao,@cor2:(@VermelhoPadrao - #666)){
+    background: -webkit-linear-gradient(@cor1, @cor2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.degrade (@startColor, @endColor) {
+    background-color: @startColor;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '@startColor', endColorstr = '@endColor');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '@{startColor}', endColorstr = '@{endColor}')";
+    background-image: -moz-linear-gradient(top, @startColor, @endColor);
+    background-image: -ms-linear-gradient(top, @startColor, @endColor);
+    background-image: -o-linear-gradient(top, @startColor, @endColor);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(@startColor), to(@endColor));
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor);
+    background-image: linear-gradient(top, @startColor, @endColor);
+}
+.transition-duration(@duration: 0.2s) {
+  -moz-transition-duration: @duration;
+  -webkit-transition-duration: @duration;
+  -o-transition-duration: @duration;
+  transition-duration: @duration;
+}
+.transform(@arguments) {
+  -webkit-transform: @arguments;
+  -moz-transform: @arguments;
+  -o-transform: @arguments;
+  -ms-transform: @arguments;
+  transform: @arguments;
+}
+
+.blur(@num:3px){
+    filter:blur(@num);
+    -o-filter:blur(@num);
+    -ms-filter:blur(@num);
+    -moz-filter:blur(@num);
+    -webkit-filter:blur(@num);
+    filter:blur(@num);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=@num);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Blur(PixelRadius=@num)";
+}
+.alpha(@num:0.5) {
+	-webkit-opacity: @num;
+	-moz-opacity: @num;
+	opacity: @num;
+	@valor:@num * 100;
+	filter:alpha(opacity= @valor);
+}
+.radius (@radius: 0px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+	border-top-left-radius:  @radius;
+	border-top-right-radius:  @radius;
+	border-bottom-right-radius:  @radius;
+	border-bottom-left-radius:  @radius;
+    border-radius: @radius;
+}
+
+.c{clear:both}
+//########################################################################## FOOTER  #################################################################

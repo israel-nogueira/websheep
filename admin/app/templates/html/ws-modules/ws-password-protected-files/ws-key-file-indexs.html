@@ -1,0 +1,85 @@
+<!-- BEGIN KEYFILE -->
+<script>
+	window.id_item_selected		='';
+	var barra_progresso 		= '';
+	var canvas_barra_progresso 	= '';
+	include_css('./app/templates/css/websheep/ws-modules/ws-password-protected-files/newItens.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{keyFile_index_mainTitle}</div>
+	<div id="palco" class="palco_01"  style="padding-bottom: 30px;">
+		<table class="data-tbl-simple table table-bordered w1">
+			<thead class="cabecalhoTable">
+				<tr>
+					<th class="bg05 sorting">{keyFile_index_tableColunms_nameFile}</th>
+					<th class="bg05 sorting">{keyFile_index_tableColunms_type}</th>
+					<th class="bg05 sorting">{keyFile_index_tableColunms_size}</th>
+					<th class="bg05 sorting">{keyFile_index_tableColunms_uploadDate}</th>
+					<th class="bg05 sorting">{keyFile_index_tableColunms_link}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- BEGIN TBODY -->
+					<tr class="item">';
+					<td>{LI_FILENAME}</td>
+					<td>{LI_TYPE}</td>";
+					<td>{LI_SIZE}</td>
+					<td>{LI_SAVED}</td>
+					<td id='{LI_ID}'>
+							<div class='combo'>
+								<img data-tokenfile='{LI_TOKEN_FILE}' legenda='{keyFile_index_edit}'  style='cursor:pointer;' class='editar' src='./app/templates/img/websheep/layer--pencil.png'/>
+							</div>
+						</td>
+					</tr>
+				<!-- END TBODY -->
+			</tbody>
+		</table>
+	</div>
+<div class="c"></div>
+</div>
+<script type="text/javascript">
+
+		function reloadFunctions(){
+			$('#bt_Add_Selo').LegendaOver();
+			$('#palco td .editar').LegendaOver();
+			$("#Balao_ToolType").remove();
+			 window.DesativaTabela = function (){
+				$(".tbl_length").chosen('destroy');
+				$('.data-tbl-simple').dataTable().fnDestroy();
+				$("div.table_top select").removeClass('tbl_length').removeClass('selectNumResult');
+				$(".dataTables_filter").removeClass('w1');
+				$(".dataTables_filter input").removeClass('inputText');
+			}
+			 window.AtivaTabela = function (){
+				$('.data-tbl-simple').dataTable({
+					"sDom": '<"table_top clearfix"fl<"clear">>,<"table_content"t>,<"table_bottom w1"p<"clear">>',
+					"iDisplayLength": 10,
+					"bAutoWidth": false,
+					"sPaginationType": "full_numbers",
+					'autoWidth': false,
+					'aoColumnDefs': [{'aTargets': ['nosort']}],
+					"oLanguage": {"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel w1'>{keyFile_index_amount}</span>",},
+				})
+				$("div.table_top select").addClass('tbl_length').addClass('selectNumResult').attr('id','selectNumResult');
+				$(".tbl_length").chosen({disable_search_threshold: 4});
+				$(".dataTables_filter input").addClass('inputText').addClass('w1').attr("placeHolder","Pesquisar:");
+			}
+			$('#palco td .editar').unbind('click').bind("click",function(){
+					var tokenfile = $(this).data('tokenfile');
+					confirma({width:"auto",conteudo:"{keyFile_index_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					$("#conteudo").load("./{PATH}/links.php?tokenfile="+tokenfile,function(){
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			})
+		}
+		reloadFunctions();
+		window.AtivaTabela();
+		setTimeout(function(){
+			$('#container').perfectScrollbar()
+			$('#container').perfectScrollbar('update')
+			$('#container').animate({scrollTop: 0}, 200);
+		},200);
+</script>
+
+<!-- END KEYFILE -->

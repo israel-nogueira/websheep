@@ -1,0 +1,246 @@
+<!-- BEGIN GALERIA_IMAGENS -->
+<script>
+include_css ('./app/templates/css/websheep/ws-modules/ws-model-tool/fotos.min.css','css_mod','All');
+</script>
+	<div id="topoModulo" class="TitTop bg05 w1b">{_TITULO_FERRAMENTA_}</div>
+		<div id="topo_upload" class="bg01" >
+			<div id="progress_combo" class="bg03" >	
+			<div id="progress_bar" class="bg05"></div>
+		</div>
+			<!-- BEGIN BOTBACK --> 
+				<div id="bt_Back_Gal" class="botao">Voltar as galerias</div>
+			<!-- END BOTBACK --> 
+
+
+			<form name="formUpload" id="formUpload" action="./app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+				<input name="arquivo[]" id="myfile" type="file" 	multiple  style="display:none" accept='image/jpg,image/png,image/jpeg,image/gif'/>
+				<input name="type" 					hidden="hidden" 		value="img_galeria" 		style="display:none" />
+				<input name="token_group" 			id="token_group"		value="{TOKEN_GROUP}" 		style="display:none" />
+				<input name="token" 				id="token"				value="" 					style="display:none" />
+				<input name="ws_id_ferramenta" 		id="ws_id_ferramenta"	value="{WS_ID_FERRAMENTA}" 	style="display:none" />
+				<input name="id_galeria" 			id="id_galeria" 		value="{_ID_GALERIA_}" 		style="display:none" />
+				<input name="id_item" 				id="id_item" 			value="{ID_ITEM}" 			style="display:none" />
+				<button type="submit" 				id="enviar_arquivos" 	style="display:none" ></button>
+				<div id="bt_search_files" class="botao">Upload de foto</div>
+				<div id="bt_search_biblioteca" class="botao">Procurar na biblioteca</div>
+			</form>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN IMAGEM -->
+				<li id="{ID_LI}" data-draft="{CLASS_DRAFT}">	
+						<div id='combo'>
+							<div id='detalhes_img' class='bg02'>
+							<spam ><img class='editar' 	legenda='Editar Informações'	src='./app/templates/img/websheep/layer--pencil.png'></spam>   
+							<spam ><img class='excluir'	legenda='Excluir Imagem'		src='./app/templates/img/websheep/cross-button.png'></spam>   
+							</div>
+							<img class='thumb_exibicao' src='{ws_rootPath}ws-img/155/155/100/{FILE_LI}'>
+						</div>
+					</li>
+			<!-- END IMAGEM -->
+		</ul>
+	</div>
+</div>
+
+<script>
+	function _ordena_thumbs(){
+		var posicoes = [];
+		var i = 0;
+		$('#palco ul').children().each(function () {
+			var ide = $(this).attr('id');
+			if(ide){
+
+				posicoes[i]= $(this).attr('id');
+
+				++i;
+			}
+		})
+
+		$.ajax({
+		  beforeSend:function(){ws.preload.open()},
+		  cache: false,
+		  type: "POST",
+		  url: "./app/ws-modules/ws-model-tool/functions.php",
+		  data: {ws_id_ferramenta:'{WS_ID_FERRAMENTA}', 'function':"ordena_fotos",ids:posicoes},
+		}).done(function(e) {
+			ws.preload.close();
+			if(e.trim()==""){
+				TopAlert({ 
+					mensagem:'Imagens reposicionadas com sucesso!', 
+					height:20,
+					timer:5000,
+					type:3
+				})
+			}else{
+				console.error(e);
+			}
+		})
+
+
+
+
+
+
+
+	}
+
+
+	$(function() {
+	    $( "#palco ul" ).sortable({
+	    	handle: "img",
+	    	forceHelperSize: true,
+	    	beforeStop: function( event, ui ) {
+	    		_ordena_thumbs()
+	    	}
+		});
+	    $( "#palco ul" ).disableSelection();
+	 });
+
+	$("#bt_Back_Gal").unbind('click').click(function(){
+		$("#conteudo").load("./{PATCH}/galerias.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}&back={BACK}&id_item={ID_ITEM}&function=null");
+	})
+
+
+function reloadFunctions(){
+	$('#palco ul li .editar').LegendaOver();
+	$('#palco ul li .excluir').LegendaOver();
+	$("#Balao_ToolType").remove();
+
+/*==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM */
+	$('#palco ul li img.excluir').unbind('click').click(function(){
+		var iDimg = $(this).parent().parent().parent().parent().attr('id');
+		var Div = $(this).parent().parent().parent().parent();
+				confirma({ 
+					conteudo:'Tem certeza que quer excluir essa imagem?',
+					bot1:"Sim tenho certeza!",
+					bot2:"Ops, cliquei errado!",
+					drag:false,
+					botclose:false,
+					newFun:function(){
+						functions({
+							patch:"{PATCH}",
+							funcao:"ExcluiImagem_gal",
+							vars:"iDimg="+iDimg,
+							Sucess:function(e){
+								out(e)
+								$(Div).remove();
+							}
+						});
+					}
+				})
+		})
+/*==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM */
+	$('#palco ul li .editar').unbind('click').click(function(){
+		var iDimg = $(this).parent().parent().parent().parent().attr('id');
+
+
+		$.ajax({
+		  beforeSend:function(){ws.preload.open()},
+		  cache: false,
+		  type: "POST",
+		  url: "./app/ws-modules/ws-model-tool/functions.php",
+		  data: {'function':"dados_img_gal", ws_id_ferramenta:'{WS_ID_FERRAMENTA}', iDimg:iDimg},
+		}).done(function(e) {
+			var formImg = e;
+			confirma({ 
+				conteudo:formImg,
+				bot1:"Salvar",
+				bot2:"Cancelar",
+				drag:false,
+				botclose:false,
+				width:800,
+				newFun:function(){
+					var element = $('#form-img #textarea');
+					var idImg 	= $('#form-img').attr('id-img');
+					var titulo 	= $('#form-img #titulo').val();
+					var texto 	= CKEDITOR.instances["textarea"].getData();
+
+					$.ajax({
+					  beforeSend:function(){ws.preload.open()},
+					  cache: false,
+					  type: "POST",
+					  url: "./app/ws-modules/ws-model-tool/functions.php",
+					  data: {'function':"SalvarDados", ws_id_ferramenta:'{WS_ID_FERRAMENTA}', 'idImg':idImg,'titulo':titulo,'texto':texto},
+					}).done(function(e) {
+							ws.preload.close()
+							if(e.trim()=='sucesso'){
+								TopAlert({ 
+									mensagem:'Dados salvos com sucesso!', 
+									height:20,
+									timer:5000,
+									type:3
+								})
+							}else{
+								TopAlert({ 
+									mensagem:e, 
+									height:20,
+									timer:5000,
+									type:2
+								})
+							}
+					});
+				}
+			})
+		})
+
+
+
+
+	})
+/*====================================================================================================*/
+}
+  reloadFunctions();
+	$("#formUpload").ajaxForm({
+	beforeSend: function(){$("#topo_upload #progress_combo #progress_bar").show()},
+	uploadProgress: function(event, position, total, percentComplete){
+			var pVel = percentComplete+'%';
+			$("#topo_upload #progress_combo #progress_bar").animate({width:pVel},100)
+	},
+	success: function(e){$("#topo_upload #progress_combo #progress_bar").animate({width:0},100,function(){	$("#topo_upload #progress_combo #progress_bar").hide()	})},
+	complete: function(e){
+		out(e.responseText)
+		$("#palco ul").prepend(e.responseText);
+		_ordena_thumbs();
+		reloadFunctions();
+		}
+	});
+	$("#bt_search_files").unbind('click').click(function(){$("#myfile").click();})
+	$('#formUpload').change(function(){$("#enviar_arquivos").click();})
+
+	$("#bt_search_biblioteca").unbind('click').click(function(){
+		
+		abreBiblioteca({
+			multiple:1,
+			onSelect:function(_out_){
+				$.ajax({
+					beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					cache: false,
+					type: "POST",
+					url: "./app/ws-modules/ws-model-tool/functions.php",
+					data: {
+						function:"addImagensBibliotecaGaleriaInterna",
+						img:_out_,
+						ws_id_ferramenta:"{WS_ID_FERRAMENTA}",
+						id_item:"{ID_ITEM}",
+						id_galeria:"{_ID_GALERIA_}"
+					}
+				}).done(function(e) {
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+
+					$("#palco ul").prepend(e);
+					_ordena_thumbs();
+					reloadFunctions();
+				})
+			}
+		})
+	})
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy')
+//		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+</script>
+
+<!-- END GALERIA_IMAGENS -->

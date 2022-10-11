@@ -1,0 +1,695 @@
+<style type="text/css">
+	.h1 {
+		position: relative;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 10px;
+		margin: 10px 0;
+		border-bottom: solid 1px #50637d;
+		color: #FFF;
+		float: left;
+		width: 100%;
+    }
+
+	.h2 {
+		position: relative;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #d5d5d5;
+		float: left;
+		width: 100%;
+	}
+	.h3 {
+		position: relative;
+		font-size: 14px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #FFFFFF;
+		float: left;
+		width: 100%;
+	}
+
+	.chosen-container .chosen-drop {
+		border-color: #333;
+		background: #212121;
+		box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+	}
+
+	.chosen-container-single .chosen-single {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+		padding: 10px;
+	}
+
+	.chosen-container-single .chosen-default {
+		color: #999;
+	}
+
+	.chosen-container-single .chosen-search input[type="text"] {
+		border-color: #333;
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results {
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results li.disabled-result {
+		color: #505050;
+	}
+
+	.chosen-container .chosen-results li.highlighted {
+		background-color: #3875d7;
+		background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+		color: #fff;
+	}
+
+	.chosen-container .chosen-results li.no-results {
+		color: #e3e3e3;
+		background: #1f1d1d;
+	}
+
+	.chosen-container-multi .chosen-choices {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+	}
+
+	.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice {
+		border-color: #000;
+		background-color: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-disabled {
+		border: 1px solid #ccc;
+		background-color: #e4e4e4;
+		background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+		color: #666;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-focus {
+		background: #d4d4d4;
+	}
+
+	.chosen-container-multi .chosen-drop .result-selected {
+		color: #505050;
+	}
+
+	.chosen-container-active .chosen-single {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+	}
+
+	.chosen-container-active.chosen-with-drop .chosen-single {
+		border-color: #333;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+	}
+
+	.chosen-container-active .chosen-choices {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+
+	.chosen-container-active .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3 !important;
+	}
+
+	.chosen-disabled {
+		opacity: 0.5 !important;
+	}
+
+	.chosen-rtl .chosen-search input[type="text"] {
+		color: #e3e3e3;
+		background: url("chosen-sprite.png") no-repeat -30px -20px;
+	}
+
+	.input_text {
+		font-family: 'Titillium Web', sans-serif;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 16px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+		padding: 15px 10px;
+		border: solid 1px #3f4143;
+		background-color: #212121;
+		color: #c7c7c7;
+		width: 100%;
+	}
+</style> 
+<style type="text/css">
+	.combo {
+		position: relative;
+		margin-left: 9px;
+		width: calc(100% - 26px);
+		float: left;
+		margin-bottom: 30px;
+    }
+
+	.bt_padrao {
+		padding: 10px 20px;
+		width: calc(100% - 80px);
+		left: 50%;
+		position: relative;
+		margin: 13px 0;
+		transform: translateX(calc(-50% - 6px));
+		text-align: center;
+	}
+	.bt_metade {
+	padding: 10px 20px;
+	width: calc(50% - 60px);
+	position: relative;
+	margin: 13px 5px;
+	text-align: center;
+	left: 7px;
+    }
+	.checkbox{
+		position: relative;
+		float: left;
+		padding: 5px 12px;
+		background-color: #38619a;
+		margin: 2px;
+		color: #FFF;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+	}
+
+.containerCheck {
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+	display: block;
+	float: left;
+	padding: 4px 12px;
+	background-color: #38619a;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	margin: 3px 6px;
+	cursor: pointer;
+	font-size: 16px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #FFF;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	height: 15px;
+	width: 16px;
+	background-color: #274268;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 4px;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmark {
+    background-color: #1e2e45;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmark {
+    background-color: #18202c;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmark:after {
+    left:4px;
+    top: -1px;
+    width: 5px;
+    height: 10px;
+    border: solid #4a98b8;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+
+
+
+</style>
+<div class="h1">
+	<i class="fa fa-wrench"></i> Adicionar uma ferramenta
+</div>
+<div class="h3">Adicone de forma fácil e rápida todas as ferramentas do seu WebSheep<br> com apenas alguns cliques!</div>
+<div class="combo"> 
+	<select class="chosen" id="ferramenta" style="width:100%;"> 
+		<option>Selecione uma ferramenta </option> 
+		<!-- BEGIN LIST_TOOLS -->
+			<option value="{id}">{name}</option> 
+		<!-- END LIST_TOOLS -->
+	</select> 
+</div>
+
+<div class="h1">Elemento a ser puxado:</div>
+<div class="h3">
+	Qual é o tipo de ítem que você quer puxar?
+</div>
+<div class="combo"> 
+	<select id="type" class="chosen" style="width:100%;"> 
+		<option value="item">Item</option> 
+		<option value="cat">Categorias</option> 
+		<option value="img">Imagens</option> 
+		<option value="gal">Galerias</option> 
+		<option value="imgGal">Imagens da galeria</option> 
+		<option value="arquivos">Arquivos</option> 
+	</select> 
+</div>
+
+<div class="h1">Variáveis de consulta:</div>
+<div class="h3">
+	Cada ferramenta inserida é uma consulta na base de dados.<br>
+	Como qualquer consulta, podemos inserir parâmetros.<br><br>
+	<b>Quais termos de pesquisa você gostaria de inserir? </b>
+</div>
+
+<div class="combo"> 
+	<label class="containerCheck">
+	  <input class="checkTermos" value="alias" type="checkbox">Alias
+	  <span class="checkmark"></span>
+	</label>
+	<label class="containerCheck">
+	  <input class="checkTermos" value="colum" type="checkbox">Colunas
+	  <span class="checkmark"></span>
+	</label>
+	<label class="containerCheck">
+	  <input class="checkTermos" value="limit" type="checkbox">Limit
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck"> 
+	  <input class="checkTermos" value="linker" type="checkbox">Linker
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck"> 
+	  <input class="checkTermos" value="linked" type="checkbox">Linked
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">	
+	  <input class="checkTermos" value="distinct" type="checkbox">Distinct
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">	
+	  <input class="checkTermos" value="utf8" type="checkbox">UTF-8  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">	
+	  <input class="checkTermos" value="url" type="checkbox">URLencode  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="order" type="checkbox">OrderBy  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">	
+	  <input class="checkTermos" value="category" type="checkbox">Inner Category  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="galery" type="checkbox">Inner Galery  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="item" type="checkbox">Item  
+	  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="where" type="checkbox">Where  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="innerItem" type="checkbox">Inner Item  <span class="checkmark"></span>
+	</label>
+
+	<label class="containerCheck">
+	  <input class="checkTermos" value="filter" type="checkbox">Filter  
+	  <span class="checkmark"></span>
+	</label>
+	<label class="containerCheck">
+	  <input class="checkTermos" value="paginate" type="checkbox">Paginate  
+	  <span class="checkmark"></span>
+	</label>
+</div>
+
+<div class="h1">Formato de inserção:</div>
+<div class="h3">
+	Selecione o formato de importação de dados
+</div>
+<div class="combo"> 
+	<select class="chosen" id="typeInsert" style="width:100%;"> 
+		<option value="HTML5">HTML5</option> 
+		<option value="PHP">PHP</option> 
+		<option value="REST">REST</option> 
+	</select> 
+</div>
+
+<div class="h1">Colunas utilizadas:</div>
+<div class="h3">
+	Cada ferramenta possúi campos cadastrados, quais deles você quer importar ao seu código? </b>
+</div>
+
+<div class="combo" id="listCampos"> 
+
+
+
+</div>
+<div id="AddColunas" class="botao bt_metade" style="float: left; ">Inserir apenas colunas</div>
+<div id="AddFull" class="botao bt_metade" style="float: left; ">Estrutura completa</div>
+
+
+
+<script type="text/javascript">
+	var SlugTool = null;
+
+	function refreshChecks(){
+		$(".checkTermos[value='colum']").unbind("change").bind("change",function(){
+			if (!$(this).is(':checked')) {
+				$(".camposTool:checked").click();
+			}
+		})
+		$(".camposTool").unbind("change").bind("change",function(){
+			if (!$(".checkTermos[value='colum']").is(':checked')) {
+				$(".checkTermos[value='colum']").click();
+			}
+		})
+	}
+	function insereTagHTML(){
+		var tagHTML = '<ws-tool slug="'+SlugTool+'" type="'+$("#type").val()+'" '
+		 	tagHTML += returnParams().html.join(" ")
+		 	tagHTML += ">\n"
+		 	tagHTML += "	"+returnColunasHTML().join("	")
+		 	tagHTML += "</ws-tool>"
+		 	return tagHTML;
+	}
+	function insereTagPHP(){
+		var tagPHP =  '<?\n	$template="<div>{{{_}coluna}}</div>";\n';
+			tagPHP += '	$Tool= new WS();\n';
+			tagPHP += '	$pesquisa = $Tool->slug("'+SlugTool+'")\n';
+			tagPHP += '					 ->type("'+$("#type").val()+'")\n';
+			tagPHP += returnParams().php.join("					 \n");
+			tagPHP += "\n					 ->go();\n\n";
+			tagPHP += '	print_r($pesquisa->result);\n';
+			tagPHP += '	print_r($pesquisa->obj);\n';
+			tagPHP += '	print_r($pesquisa->_num_rows);\n';
+			tagPHP += '	print_r($pesquisa->sql);\n\n';
+			tagPHP += '	foreach($pesquisa->obj as $data){\n';
+			$.each($(".camposTool:checked"),function(){
+				var type = $(this).data('type');
+				var typeColum = $(this).data('type-colum');
+				var name = $(this).val();
+				if( typeColum=="playerVideo" && type=="item") {
+					tagPHP += '		//Function:  url=null,type=player,w=null,h=null\n';
+					tagPHP += '		//Retorno: site,url,title,description,image ou player\n';
+					tagPHP += '		//Default: div ou mensagem que retornará caso não tenha URL especificada\n';
+					tagPHP += '		//AutoPlay: Habilita o AutoPlay no vídeo. Valores 1 - 0 \n';
+					tagPHP += '		echo "<div>".ws::videoData($data->'+name+',"Retorno","200","200","Default","AutoPlay")."</div>";\n\n\n';
+					tagPHP += '		//Caso queira a URL do MP4 diretamente\n';
+					tagPHP += '		//Secury=true retorna um link seguro, impossível de salvar \n';
+					tagPHP += '		//Secury=false retorna o link do arquivo do MP4 diretamente do youtube ou Vimeo \n';
+					tagPHP += '		echo \'<video width="200" height="200" preload="auto" type="video/mp4" src="\'.ws::getVimeoYoutubeDirectLink($data->'+name+',Secury).\'" controls="true" poster=""></video>\';\n\n';
+				}else if( typeColum=="playerMP3" && type=="item"){
+					tagPHP += '		// Function:  url=null,type=player,w=null,h=null,size,theme \n';
+					tagPHP += '		// Retorno: 	player, site, title, description, height, width, image \n';
+					tagPHP += '		// Size: 		widget,classic,minimo,list \n';
+					tagPHP += '		// Theme: 	light, dark \n';
+					tagPHP += '		// Auto_play: 	true, false \n';
+					tagPHP += '		// Default: 	div ou mensagem que retornará caso não tenha URL especificada \n';
+					tagPHP += '		echo "<div>".ws::audioData('+name+',"Retorno","w","h","Size","Theme","Auto_play","Default")."</div>";\n';
+				}else if( typeColum=="thumbmail" && type=="item"){
+					tagPHP + '		//retorno da imagem:  ( path/largura/altura/imagem ) \n';
+ 					tagPHP + '		echo \'<picture>\n';
+                    tagPHP + '		    	<source media="(max-width: 992px)" 	srcset="\'.ws::rootPath.\'ws-img/586/350/\'.$data->'+name+'.\'">\n';
+                    tagPHP + '		    	<source media="(max-width: 1382px)" 	srcset="\'.ws::rootPath.\'ws-img/586/350/\'.$data->'+name+'.\'">\n';
+                    tagPHP + '		    	<img src="\'.ws::rootPath.\'ws-img/0/0/\'.$data->'+name+'.\'">\n';
+                    tagPHP + '			</picture>\';\n';
+				}else{
+					tagPHP += '		echo \'<div>\'.$data->'+name+'.\'</div>\';\n';
+				}
+			})
+			tagPHP +=	'	}\n';
+			tagPHP +=	'?>';
+		 	return tagPHP;
+	}
+	function insertJSON(){
+		$output = 	[];	
+		$output.push('<?');
+		$output.push('	$VARS = http_build_query(');
+		$output.push('		array(');
+		$output.push('			"type"=> "'+$("#type").val()+'",');
+		$output.push('			"slug"=> "'+SlugTool+'",');
+		$.each(returnParams().json, function(a,b){
+			$output.push(b);
+		})
+		$output.push('		)');
+		$output.push('	);');
+		$output.push('	$HEADER = stream_context_create(array(');
+		$output.push('			"http" => array(');
+		$output.push('				"method" => "GET",');
+		$output.push('				"header" => "Content-Type: application/x-www-form-urlencoded\\r\\n"');
+		$output.push('							."token:" . ws::setTokenRest()."\\r\\n"');
+		$output.push('			)');
+		$output.push('		)');
+		$output.push('	);');
+		$output.push('	$obj_tool = json_decode(file_get_contents(ws::protocolURL().ws::domain.ws::rootPath."ws-rest/?".$VARS, false,$HEADER));');	
+		$output.push('	foreach ($obj_tool as $toll) {');
+			$.each($(".camposTool:checked"),function(){
+				var type = $(this).data('type');
+				var typeColum = $(this).data('type-colum');
+				var name = $(this).val();
+				$output.push('		echo $toll->'+name+';');
+			})
+		$output.push('	}');
+		$output.push('?>');
+		$output.push('');
+		$output.push('');
+		$output.push('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"><\/script>');
+		$output.push('<script>');
+		$output.push('');
+    	$output.push("$.ajax({");
+    	$output.push("    type: 'GET',");
+    	$output.push("    url: '<?=ws::protocolURL().ws::domain.ws::rootPath.'ws-rest/?'.$VARS?>',");
+    	$output.push('    headers: {"token":"<?=ws::setTokenRest()?>","Content-Type": "application/x-www-form-urlencoded"})');
+    	$output.push("}).done(function(data) { ");
+    	$output.push("    console.log(data);");
+    	$output.push("});");
+		$output.push('');
+		$output.push('<\/script>');
+		$output = $output.join("\n")
+		return $output;
+	}
+
+
+	function returnParams(){
+		var parametros 		= []
+		var paramStrutura 	= []
+		var paramPHP 		= []
+		var paramJSON 		= []
+		var paramColums		= []
+
+		$.each($(".camposTool:checked"),function(){
+			paramColums.push($(this).val());
+		})
+
+		$.each($(".checkTermos:checked"),function(){
+			var termo = $(this).val();
+			if(termo=="colum" && paramColums.length>0){
+				paramStrutura.push(termo+'="'+paramColums.join(',')+'"');
+				paramPHP.push("					 ->colum('"+paramColums.join(',')+"')");
+				paramJSON.push('			"setColum"=>"'+paramColums.join(',')+'",');
+			}else{
+				paramStrutura.push(termo+'=\"\"');
+				paramPHP.push("					 ->"+termo+'()');
+				paramJSON.push('			"'+termo+'"=>"",');
+			}
+			parametros.push(termo);
+		})
+		return {"params":parametros,"html":paramStrutura,"php":paramPHP,"json":paramJSON};
+	}
+	function returnColunasHTML(){
+		var returnColum = []
+		$.each($(".camposTool:checked"),function(){
+			var type = $(this).data('type');
+			var typeColum = $(this).data('type-colum');
+			var name = $(this).val();
+			if(typeColum=="playerVideo" && type=="item"){
+				returnColum.push("<!-- Function:  url=null,type=player,w=null,h=null -->\n");
+				returnColum.push("<!-- Retorno: site,url,title,description,image ou player -->\n");
+				returnColum.push("{{"+name+",ws::videoData,(this),Retorno,200,200}}\n");
+			}else if(typeColum=="playerMP3" && type=="item"){
+				returnColum.push("	<!-- Function:  url=null,type=player,w=null,h=null,size,theme -->\n");
+				returnColum.push("	<!-- Retorno: 	player, site, title, description, height, width, image -->\n");
+				returnColum.push("	<!-- Size: 		widget,classic,minimo,list -->\n");
+				returnColum.push("	<!-- Theme: 	light, dark -->\n");
+				returnColum.push("{{"+name+",ws::audioData,(this),Retorno,w,h,Size,Theme}}\n")
+			}else if(typeColum=="thumbmail" && type=="item"){
+				returnColum.push("<picture>\n");
+				returnColum.push("	<source media=\"(max-width: 992px)\" srcset=\"{{ROOT_WEBSHEEP}}ws-img/586/350/{{"+name+"}}\">\n");
+				returnColum.push("	<source media=\"(max-width: 1440px)\" srcset=\"{{ROOT_WEBSHEEP}}ws-img/586/350/{{"+name+"}}\">\n");
+				returnColum.push("	<source media=\"(max-width: 1920px)\" srcset=\"{{ROOT_WEBSHEEP}}ws-img/586/350/{{"+name+"}}\">\n");
+				returnColum.push("	<img src=\"{{ROOT_WEBSHEEP}}ws-img/0/0/{{"+name+"}}\">\n");
+				returnColum.push("</picture>");
+			}else{
+				returnColum.push("{{"+$(this).val()+"}}\n")
+			}
+		})
+		return returnColum;
+	}
+	$('#AddColunas').unbind("click tap press").bind("click tap press", function() {
+
+		window.ws_webmaster.engine.insert(returnColunasHTML().join(""))
+	})
+	$('#AddFull').unbind("click tap press").bind("click tap press", function() {
+		if($("#typeInsert").val()=="PHP"){
+			window.ws_webmaster.engine.insert(insereTagPHP())
+		}else if($("#typeInsert").val()=="HTML5"){
+			window.ws_webmaster.engine.insert(insereTagHTML())
+		}else if($("#typeInsert").val()=="REST"){
+			window.ws_webmaster.engine.insert(insertJSON())
+		}
+	})
+	$(".chosen").chosen({
+		disable_search_threshold: 10,
+		search_contains: true,
+		enable_split_word_search: true,
+		no_results_text: "Oops, nothing found!",
+	})
+	$("#ferramenta,#type").chosen().change(function(e) {
+
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'getColums',
+				'id': $("#ferramenta").val(),
+				'type': $("#type").val(),
+			}
+		}).done(function(data) {
+			data = $.parseJSON(data);
+			 $("#listCampos").html("");
+			 SlugTool = data.slug;
+			 $.each(data.colunas,function(i){
+			 	var campo = data.colunas[i];
+			 	if(data.type=="item"){
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" data-type-colum="'+campo.type+'" value="'+campo.name+'" type="checkbox">'+campo.name+'<span class="checkmark"></span></label>')
+			 	}else{
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" value="'+campo+'" type="checkbox">'+campo+'<span class="checkmark"></span></label>')
+			 	}
+			 })	
+			 refreshChecks();		
+		})
+	})
+
+	$('.bt_padrao').unbind("click tap press").bind("click tap press", function() {
+		var path = $("#dirList").val();
+		var filename = $("#filename").val();
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'createFile',
+				'path': path,
+				'filename': filename
+			},
+			success: function(data) {}
+		}).done(function(data) {
+			var data = $.parseJSON(data);
+			console.log(data);
+			if (data.status == 1) {
+				ws.alert.top({
+					mensagem: "Arquivo criado com sucesso!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#9ee651",
+					bottomColor: "#3a763e",
+					styleText: "color:#000"
+				});
+				window.closeRighttMenu();
+				window.ws_webmaster.set.session({
+					token: data.token,
+					pathFile: data.pathFile,
+					filename: data.filename,
+					stringFile: data.stringFile,
+					extension: data.ext,
+				})
+				window.refreshAbas(data.token);
+				window.ws_webmaster.apply.session(data.token)
+				window.refreshExplorerFilesLeft();
+			} else {
+				ws.alert.top({
+					mensagem: "Ops, houve alguma falha!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#e04e1f",
+					bottomColor: "#e04e1f",
+					styleText: "color:#FFFFFF"
+				});
+			}
+		})
+	})
+	refreshChecks();
+</script>

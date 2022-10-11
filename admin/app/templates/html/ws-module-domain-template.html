@@ -1,0 +1,325 @@
+<!-- BEGIN BLOCK_DOMAIN -->
+<script>include_css('{ROOT_WEBSHEEP}admin/app/templates/css/websheep/ws-modules/ws-domain/style.min.css','css_mod','All');</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{domainPanel_AccountDetails}</div>
+<div class='palco_01' id="palco">
+<form id="detalhes_domain">
+	<div class="tituloLabel w1" >{domainPanel_Server} SMPT: </div>
+	<label class="w1 SMTP_Host">Host:             </label>
+	<label class="w1 SMTP_Porta">{domainPanel_Port}:</label>
+	<label class="w1 SMTP_Auth">SMTPAuth:         </label>
+	<label class="w1 SMTP_Secure">SMTPSecure:         </label>
+	<label class="w1 SMTP_Email">{domainPanel_DefaultEmail}:  </label>
+	<div class="c"/>
+	<input  id="SMTP_Host"      name="SMTP_Host"      class="inputText w4"    value="{smtp_host}"   placeholder="ssl://smtp.googlemail.com">
+	<input  id="SMTP_Porta"     name="SMTP_Porta"     class="inputText w4"    value="{smtp_port}"      placeholder="">
+	<label for="SMTP_Auth"                           class="labelcheck inputText w4">
+		<input  id="SMTP_Auth"      name="SMTP_Auth"      type="checkbox"         class="inputText w4" {smtp_auth}/> {domainPanel_RequiresAuth}
+	</label>
+	<input  id="SMTP_secure"    name="SMTP_secure"     class="inputText w4"    value="{smtp_secure}"   placeholder="ex: tsl">
+	<input  id="SMTP_Email"    name="SMTP_Email"       class="inputText w4"    value="{smtp_email}"   placeholder="ssl://smtp.googlemail.com">
+
+	<div class="c"/>
+	<label class="w1 SMTP_Senha">{domainPanel_Password}:</label>
+	<label class="w1 hd">{domainPanel_HDspace}:</label>
+	<label class="w1" style="margin-left:63px;">{domainPanel_WsLang}:</label>
+	<div class="c"/>
+
+	<input  id="SMTP_Senha"    name="SMTP_Senha"      class="inputText w4"    type="password"  value="{smtp_senha}"      placeholder="">
+	<input  id="hd"   type="number" name="hd" class="inputText w4"  style="width:155px;"  value="{hd}">
+	<select id="ws_lang" name="ws_lang" class="inputText w4" style="padding: 9px; width: 590px; ">
+		<!-- BEGIN BLOCK_WS_LANG -->
+			<option value="{LANG}">{LANG}</option>
+		<!-- END BLOCK_WS_LANG -->
+	</select>
+
+
+	<div class="tituloLabel w1" >{domainPanel_DomainStatus}: </div>
+	<div class="c"/>
+	<label for="DomainStatus"     class="DomainStatus w4" style="padding:10px 59px;float:left">
+	<input  id="DomainStatus"      name="DomainStatus"    type="checkbox"         class="inputText w4" {domain_status}/> 
+	{domainPanel_ActiveDomain} 
+	</label>
+	<label for="congelaFull"     class="congelaFull w4" style="padding:10px 59px;float:left">
+	<input  id="congelaFull"      name="congelaFull"    type="checkbox"         class="inputText w4" {congelaFull}/> 
+	{domainPanel_FreezeAllPages}: 
+	</label>
+	<input class="inputText" placeholder="{domainPanel_FreezingURL}:" name="url_congelamento" style="width: 420px;" value="{url_congelamento}"/>
+	<div class="c"/>
+		<div class="c"></div>
+		<div class="tituloLabel w1" style="margin-top: 10px;width: calc( 50% - 20px);float: left;" >Cache: </div>
+		<div class="tituloLabel w1" style="margin-top: 10px;width: calc( 50% - 20px);float: left;" >{domainPanel_AutoSave}: </div>
+		<input  id="auto_save"   type="number" name="auto_save" class="inputText w4"  style="width:150px;"  value="{auto_save}">
+		<label for="DomainCache"     class="DomainCache w4" style="padding: 10px;float:left;width: calc(50% - 20px);">
+		<input  id="DomainCache"      name="DomainCache"    type="checkbox"         class="inputText w4" {ws_cache}/> 
+		{domainPanel_ForceFileCache} 
+		</label>
+		<div class="c"></div>
+		<div class="tituloLabel w1" style="margin-top: 10px;" >{domainPanel_DefaultMetaTags}: </div>
+		<div id="metaTags" class="botao" style="position: relative;padding: 10px;text-align: center;width: calc(100% - 40px);left: 50%;transform: translateX(-50%); min-width: 200px;margin: 20px 0;">{domainPanel_ConfigureMetaTags}</div>
+		<div class="c"></div>
+		<div class="tituloLabel w1" style="margin-bottom:30px;">{domainPanel_SplashScreen}:</div>
+		<div id="splash_ws_img" style="  background-repeat: no-repeat;background-image:url('{ROOT_WEBSHEEP}ws-img/395/325/100/{splash_img}')">
+			<div class="combo_upload">
+				<div class="pc" legenda="Meu computador"><img  src="{ROOT_WEBSHEEP}admin/app/templates/img/websheep/up_m.png"/></div>
+				<div class="bb" legenda="Na biblioteca"><img  src="{ROOT_WEBSHEEP}admin/app/templates/img/websheep/folder_m.png"/></div>
+			</div>
+		</div>
+		<div class="c"></div>
+		<div class="botao"  id="salvar">{domainPanel_UpdateData}</div>
+</form>
+</div>
+<form id="Upload_File_topo"     style="display:none" action="{ROOT_WEBSHEEP}admin/app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+	<input name="arquivo"     id="myfile" type="file"   />
+	<button type="submit"     id="enviar_arquivos"></button>
+	<div id="bt_search_files"   style="dispaly:none;position: absolute;cursor: pointer;"></div>
+</form>
+<form id="Upload_File_Splash"   style="display:none" action="{ROOT_WEBSHEEP}admin/app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+	<input name="type"     		type="hidden" value="splashScreen"   />
+	<input name="arquivo"     	id="myfile" type="file"   />
+	<button type="submit"     id="enviar_arquivos"></button>
+	<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+</form>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#ws_lang option[value={ATUAL_LANG}]').attr('selected','selected');
+		$('#metaTags').bind('tap click press',function(){
+			$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-model-tool/metaTags.php?id_page=0");
+		})
+		$('*[legenda]').LegendaOver();
+		$(document).off("mouseenter").off("mouseleave");
+		$(document).on("mouseenter", "#topo_ws_img", function() {
+			$(this).find('.combo_upload').stop().fadeIn();
+		}).on("mouseleave", "#topo_ws_img", function() {
+			$(this).find('.combo_upload').stop().fadeOut();
+		});
+		$("#Upload_File_topo").ajaxForm({
+				beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
+				uploadProgress: function(event, position, total, percentComplete, myForm){
+					$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
+					$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
+				},
+				complete: function(e){
+					var json = jQuery.parseJSON(e.responseText);
+					$("#topo_ws_img").attr('style','  background-repeat: no-repeat;background-image:url("{ROOT_WEBSHEEP}ws-img/1000/50/100/'+json.thumb+'")');
+					$("#header #logomarca img").attr('src','{ROOT_WEBSHEEP}ws-img/1000/50/100/'+json.thumb);
+					$('.tapa_upload').find('.bar').animate({width:0},500,function(){
+						$('.tapa_upload').hide("fade", {}, 'fast');
+					});
+				}
+			})
+		$("#Upload_File_topo #myfile").change(function(){$("#Upload_File_topo #enviar_arquivos").click();})
+		$('#topo_ws_img .combo_upload .pc').unbind('click').click(function(){$("#Upload_File_topo #myfile").click();})
+		$("#topo_ws_img .combo_upload .bb").unbind('click').click(function(){
+			abreBiblioteca({
+				multiple:0,
+				onSelect:function(a){
+					$.ajax({
+						beforeSend:function(){confirma({width:"auto",conteudo:"  {domainPanel_modal_Saving}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\""+ws.rootPath+"admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						cache: false,
+						type: "POST",
+						url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+						data: {function:"substituiTopo",img:a},
+					}).done(function(e) {
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+								 $("#topo_ws_img").attr('style','  background-repeat: no-repeat;background-image:url("{ROOT_WEBSHEEP}ws-img/50/1000/100/'+e+'")');
+								$("#header #logomarca img").attr('src','{ROOT_WEBSHEEP}ws-img/1000/50/'+e);
+					})
+				}
+			})
+		})
+		$(document).on("mouseenter", "#splash_ws_img", function() {$(this).find('.combo_upload').stop().fadeIn();}).on("mouseleave", "#splash_ws_img", function() { $(this).find('.combo_upload').stop().fadeOut();});
+		$("#Upload_File_Splash").ajaxForm({
+			beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
+			uploadProgress: function(event, position, total, percentComplete, myForm){
+					$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
+					$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
+				},
+				complete: function(e){
+					var json = jQuery.parseJSON(e.responseText);
+					out(json)
+					$("#splash_ws_img").attr('style','  background-repeat: no-repeat;background-image:url("{ROOT_WEBSHEEP}ws-img/460/395/'+json.thumb+'")');
+					$('.tapa_upload').find('.bar').animate({width:0},500,function(){$('.tapa_upload').hide("fade", {}, 'fast');});
+				}
+			})
+		$("#Upload_File_Splash #myfile").change(function(){$("#Upload_File_Splash #enviar_arquivos").click();})
+		$('#splash_ws_img .combo_upload .pc').unbind('click').click(function(){$("#Upload_File_Splash #myfile").click();})
+		$("#splash_ws_img .combo_upload .bb").unbind('click').click(function(){
+			abreBiblioteca({
+				multiple:0,
+				onSelect:function(a){
+					$.ajax({
+						beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\""+ws.rootPath+"admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						cache: false,
+						type: "POST",
+						url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+						data: {function:"substituiSplash",img:a},
+					}).done(function(e) {
+						out(e)
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+						$("#splash_ws_img").attr('style','  background-repeat: no-repeat;background-image:url("{ROOT_WEBSHEEP}ws-img/460/395/'+e+'")');
+					})
+				}
+			})
+		})
+			$('#valor, #FeeMensal').Dinheiro({suffix:"", prefix: 'R$ ', centsSeparator: ',', thousandsSeparator: '.'});
+			$("#transfereArquivos").unbind("click").click(function(e) {
+				 e.preventDefault();
+					confirma({
+						conteudo:"{domainPanel_modal_BeforeProceed}",
+						drag:false,         
+						bot1:'{domainPanel_modal_Prepare}',
+						newFun:function(){
+						// VERIFICA 
+								setTimeout(function(){
+									 confirma({width:"auto",conteudo:" {domainPanel_modal_Checking} ...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\""+ws.rootPath+"admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+									$.ajax({
+										type: "POST",
+										cache: false,
+										url: 	ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+										data: {"function":"VerificaPacote" }
+									}).done(function(e) {
+										var json = jQuery.parseJSON(e);
+										setTimeout(function(){
+										var mensagens = Array();
+							
+											mensagens[0]='{domainPanel_modal_SeparatingFiles}';
+											mensagens[1]='{domainPanel_modal_CompactingFiles}';
+											mensagens[2]='{domainPanel_modal_JustALittleBit}';
+											mensagens[3]='{domainPanel_modal_TakingAWhile}';
+											mensagens[4]='{domainPanel_modal_WereAlmostThere}';
+											mensagens[5]='{domainPanel_modal_Wait}';
+											mensagens[6]='{domainPanel_modal_OneMoment}';
+											mensagens[7]='{domainPanel_modal_FinalSettings}';
+											mensagens[8]='{domainPanel_modal_Finishing}';
+											mensagens[9]='{domainPanel_modal_ClosingFile}';
+											mensagens[10]='{domainPanel_modal_CheckingForError}';
+											mensagens[11]='{domainPanel_modal_EverythingOk}';
+											mensagens[12]='{domainPanel_modal_AllocatingRecords}';
+											mensagens[13]='{domainPanel_modal_PleaseWait}';
+											mensagens[14]='{domainPanel_modal_Processing}';
+											if(json.file_exists==false){
+										confirma({
+											width:600,
+											conteudo: "<div style='padding: 20px;margin: 10px;font-size: 18px;'>{domainPanel_modal_WeFound}"+json.pastas+"{domainPanel_modal_DirectoriesAnd}"+json.arquivos+"{domainPanel_modal_FilesYourServer}.<br><b>{domainPanel_modal_CanWeStartCompac}</b>",
+											drag:false, 
+											bot1:'{domainPanel_modal_Compact}',
+											newFun:function(){
+														setTimeout(function(){confirma({width:600,conteudo:" <div id='mensagemZIP'> {domainPanel_modal_Compacting}...</div><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\""+ws.rootPath+"admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});},500)               
+												$.ajax({
+													url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+													data: {"function":"CompactarZIPtoFTP" },
+													type: "POST",
+													cache: false,
+													beforeSend:function(){$.each(mensagens,function(vars){window.acalma = setTimeout(function(){$("#mensagemZIP").html(mensagens[vars])},vars * 8000)});},
+												}).done(function(e) {
+													var objJSON = JSON.parse(e);
+													out(objJSON)
+													clearTimeout(window.acalma);
+															setTimeout(function(){
+															confirma({
+															conteudo: "<div style='padding: 20px;margin: 10px;'><b>{domainPanel_modal_Compacting}</b><br>                           <b>{domainPanel_modal_Directories}:</b>"+objJSON.diretorios+", <b>{domainPanel_modal_Files}:</b>"+objJSON.arquivos+", <b>{domainPanel_modal_FileWeight}:</b>"+objJSON.pesoZip+"</div>",
+															drag:false,         
+															bot1:'{domainPanel_modal_Download}',
+															newFun:function(){
+																			setTimeout(function(){
+																				confirma({
+																					width:"auto",
+																					conteudo:"{domainPanel_modal_Downloading}<div style='position: relative;height: 12px;background-color: #FFF;margin: 7px;border: solid 1px #CCC;margin-bottom: -6px;'><div id='progressBar' style='position: relative;height: 5px;background-color: #4271B0;top:3px;left: 5px;'></div></div>",
+																					drag:false,
+																					bot1:0,
+																					bot2:0,
+																					Init:function(){
+	
+																						downloadFile({
+																				file: ws.rootPath+"admin/app/ws-modules/ws-domain/"+objJSON.namefile,
+																				finish:function(e){
+																					$("#ws_confirm").remove();
+																					$("#body").removeClass("scrollhidden");
+																					$("*").removeClass("blur");
+																					$.ajax({
+																						url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+																						data: {"function":"delZIPtoFTP",namefile:objJSON.namefile},
+																						type: "POST",
+																						cache: false,
+																					})
+																				},
+																				progress:function(e){
+																					out(e)
+																					$("#progressBar").css({width:'calc('+e+'% - 10px)'})
+																				}
+																			})
+																						
+																					}
+																				});
+																			},500)
+															}
+														})
+															},200)
+												})
+											}
+										})
+											}else{
+										confirma({
+											conteudo: "<div style='padding: 20px;margin: 10px;font-size: 18px;'>{domainPanel_modal_BKPAlready}.</b>",
+											bot1:'{domainPanel_modal_GenerateNew}',
+											bot2:'{domainPanel_modal_UseTheSame}',
+											botClose:1,
+											newFun:function(){
+												$.ajax({
+													type: "POST",
+													cache: false,
+													url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+													data: {"function":"getFtpConnection" }
+												}).done(function(e) {
+													out(e)
+												})
+											}
+										})
+											}
+										},500)
+								})
+							},500)
+					},
+	
+	
+						bot2:"Cancelar",
+						onCancel:function(){
+	
+	
+						},          
+					})
+			})
+			$("#salvar").unbind("click").click(function(e) {
+				 e.preventDefault();
+					var inputs = ($("#detalhes_domain").serialize());
+					$.ajax({
+						type: "POST",
+						cache: false,
+						url: ws.rootPath+"admin/app/ws-modules/ws-domain/functions.php",
+						data: {function:"salvaDominio", inputs:inputs }
+					}).done(function(e) {
+					if(e=='{domainPanel_modal_ItemSavedSucces}'){var cor=3;}else{var cor=2;}
+					TopAlert({
+						mensagem:e,
+						clickclose:true,
+						height:20,
+						timer:3000,
+						type:cor,
+					})
+				})
+			})
+	})
+	
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy');
+	//		$('#container').perfectScrollbar('update')
+	//		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+	
+</script>
+<!-- END BLOCK_DOMAIN -->

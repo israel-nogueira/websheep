@@ -1,0 +1,74 @@
+<style>
+.form-send-bugs	label.full{
+							width: 100%;
+							position: relative;
+							float: left;
+							padding: 10px 20px;
+							text-align: left;
+						}
+
+.form-send-bugs	.inputText.half{
+    width: 			calc(50% - 20px);
+    position: 		relative;
+    float: 			left;
+    padding: 		10px 0;
+    text-align: 	left;
+    padding-left: 	20px;
+    margin-left: 	15px;
+}
+
+.form-send-bugs	label.half{
+    width: calc(50% - 20px);
+    position: relative;
+    float: left;
+    padding: 10px 0;
+    text-align: left;
+    padding-left: 20px;
+}
+.form-send-bugs	.title{
+	text-align: center;
+	font-size: 20pt;
+	font-weight: 700;
+	width: 100%;
+	float: left;
+	padding-bottom: 20px;
+}
+.form-send-bugs	.inputText.full{
+		width: calc(100% - 30px);
+		position: relative;
+		float: left;
+		left: 50%;
+		padding: 10px;
+		margin: 0 5px;
+		transform: translateX(-50%);
+    }
+</style>
+<div class="form-send-bugs">
+	<form action="" method="post">
+		<label class="w1 title" 		style="">Reportar um BUG</label>
+		<label class="w1" 				style="">Caso você encontre algum erro, aviso ou warn, ou, caso tenha alguma sugestão e/ou correção por favor descreva no formulário abaixo.</label>
+		<label class="w1 half" 			style="">Título:</label>
+		<label class="w1 half" 			style="">E-mail:</label>
+		<input class="inputText half" 	name="nome" type="text">	
+		<input class="inputText half" 	name="email" type="text">	
+		<label class="w1 half" 			style="">WhatsApp:</label>
+		<label class="w1 half" 			style="">Skype:</label>
+		<input class="inputText half"  	name="whatsApp"	type="text">	
+		<input class="inputText half"  	name="skype"	type="text">	
+		<label class="w1 full" 			style="">URL de aesso:</label>
+		<input class="inputText full" 	name="url" type="text">	
+		<label class="w1 full" 			style="">Assunto:</label>
+		<input class="inputText full"	name="assunto" type="text">	
+		<label class="w1 full" 			style="">Descrição:</label>
+		<textarea name="descricao" class="inputText full" cols="30" rows="5"></textarea>
+	</form>	
+</div>
+<script>
+	$("#ws_confirm .body .ws_confirm_conteudo form").submit(function(e){
+		e.preventDefault();
+		console.log($(this).serialize());
+		return false;
+	})
+
+
+</script>

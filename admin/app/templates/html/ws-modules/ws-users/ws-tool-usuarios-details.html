@@ -1,0 +1,173 @@
+<!-- BEGIN BLOCKUSER -->
+<script>
+include_css('./app/templates/css/websheep/ws-modules/ws-users/detalhes.min.css', 'css_mod', 'All');
+</script>
+<div class="bg02 comboBT">
+    <div id="voltar" class="botao botTop">{userManager_details_back}</div><div class="botao botTop salvarUsuario">{userManager_details_save}</div>
+</div>
+<script type="text/javascript">
+$("#voltar").unbind("click").click(function() {
+    $("#conteudo").load("./app/ws-modules/ws-users/index.php");
+})
+window.PermUserTools;
+$(".salvarUsuario").unbind("click").click(function() {
+    delete window.PermUserTools;
+    window.PermUserTools = [];
+
+    $("input.checkTool[type='checkbox']:checked").each(function() {
+        window.PermUserTools.push($(this).val())
+    });
+    functions({
+        funcao: "SalvadadosUser",
+        vars: 	"PermTools=" + window.PermUserTools + "&idUser={USER_ID}&" + $("#form_dados_geral").serialize(),
+        patch: 	"{PATH}",
+        check: function(e) {
+            return true;
+        },
+        Sucess: function(e) {
+            out(e)
+            TopAlert({
+                mensagem: e,
+                clickclose: true,
+                height: 20,
+                timer: 3000,
+                type: 3,
+            })
+        }
+    });
+})
+</script>
+<div id="palco" class="palco_01">
+    <form id="formUploadAvatar" style="display:none" action="./app/ws-modules/ws-model-tool/upload_avatar.php" method="post" enctype="multipart/form-data" name="formUpload">
+        <input name="arquivo" id="myfile" type="file" style="display:none">
+        <input type="hidden" name="id_item" id="id_item" value="1">
+        <button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+        <div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+    </form>
+    <form id="form_dados_geral">
+        <div class="c"></div>
+        <div class="label_separados w1">{userManager_details_userData}</div>
+        <div class="c"></div>
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_name}</div>
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_lastName}</div>
+        <input id="nome" class="inputText input_adicional" name="nome" placeholder="{userManager_details_labels_name}" style="height:44px;width:calc(50% - 7px);" value="{USER_NAME}">
+        <input id="nome" class="inputText input_adicional" name="sobrenome" placeholder="{userManager_details_labels_lastName}" style="height:44px;width:calc(50% - 7px);" value="{USER_SOBRENOME}">
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_email}</div>
+        <input id="email" class="inputText input_adicional" name="email" placeholder="{userManager_details_labels_email}" style="height:44px;width:calc(50% - 7px);" value="{USER_EMAIL}">
+        <div class="c"></div>
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_login}</div>
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_pass}</div>
+        <input id="login" class="inputText input_adicional" name="login" placeholder="{userManager_details_labels_login}" style="height:44px;width:calc(50% - 7px);" value="{USER_LOGIN}">
+        <input id="senha" class="inputText input_adicional" name="senha" type="password" placeholder="{userManager_details_labels_pass}" style="height:44px;width:calc(50% - 7px);" value="">
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_rg}</div>
+        <div class="label_input w1" style="height:36px;width:calc(50% - 27px)">{userManager_details_labels_cpf}</div>
+        <input id="RG" class="inputText input_adicional" name="RG" placeholder="{userManager_details_labels_rg}" style="height:44px;width:calc(50% - 7px);" value="{USER_RG}">
+        <input id="CPF" class="inputText input_adicional" name="CPF" placeholder="{userManager_details_labels_cpf}" style="height:44px;width:calc(50% - 7px);" value="{USER_CPF}">
+        <div class="c"></div>
+        <div class="label_separados w1">{userManager_details_labels_basicData}</div>
+        <div class="c"></div>
+        <label class="w1 class_check bg01" style="width:calc(24% - 14px);">
+            <input id="leitura" name="leitura" type="checkbox" {CHECK_READING}/>{userManager_details_labels_readOnly}
+        </label>
+        <!-- BEGIN ADMIN_USER -->
+        <label class="w1 class_check bg01" style="width:calc(24% - 14px);">
+            <input id="adminWS"         name="adminWS" type="checkbox" {ADMIN_CHECK}/>
+            <input id="adminWSHidden"   name="adminWSHidden" type="hidden" value="" />{userManager_details_labels_administrator}
+        </label>
+        <label class="w1 class_check bg01" style="width:calc(24% - 14px);">
+            <input id="add_user" name="add_user" type="checkbox" {CHECK_ADD_USER}/>{userManager_details_labels_canAddAndEditUsers}
+        </label>
+        <label class="w1 class_check bg01" style="width:calc(24% - 14px);">
+            <input id="edit_only_own" name="edit_only_own" type="checkbox" {CHECK_EDIT_ONLY_OWN}/>{userManager_details_labels_edit_only_own}
+        </label>
+        <!-- END ADMIN_USER -->
+        <div class="c"></div>
+        <div class="label_separados w1">{userManager_details_labels_panelStatus}</div>
+        <div class="c"></div>
+        <label class="w1 class_radio bg01" style="width:calc( 20% - 20px);">
+            <input type="radio" name="estado_do_usuario" value="5">{userManager_details_labels_normal}</label>
+        <label class="w1 class_radio bg01" style="width:calc( 20% - 20px);">
+            <input type="radio" name="estado_do_usuario" value="4">{userManager_details_labels_invalidAccess}</label>
+        <label class="w1 class_radio bg01" style="width:calc( 20% - 20px);">
+            <input type="radio" name="estado_do_usuario" value="3">{userManager_details_labels_inactiveDashboard}</label>
+        <label class="w1 class_radio bg01" style="width:calc( 20% - 20px);">
+            <input type="radio" name="estado_do_usuario" value="2">{userManager_details_labels_evaluation}</label>
+        <label class="w1 class_radio bg01" style="width:calc( 20% - 20px);">
+            <input type="radio" name="estado_do_usuario" value="1">{userManager_details_labels_blocked}</label>
+        <script>
+        $("input[type='radio'][name='user_ativo'][value='{USER_ACTIVE}']").click();
+        $("input[type='radio'][name='estado_do_usuario'][value='{USER_STATUS}']").click();
+        </script>
+        <div class="c"></div>
+        <div class="label_separados w1">{userManager_details_labels_levelsOfAccess}</div>
+        <div class="c"></div>
+        <div class="containerTools">
+            <!-- BEGIN LI_TOOLS -->
+            <label class="w1 class_check {BG}" style="width:calc(100% - 20px);">
+                <input class="checkTool" value="{LI_TOOL_ID}" type="checkbox" {LI_TOOL_CHECK} {LI_TOOL_DISABLE}/>{LI_TOOL_TITLE}
+            </label>
+            <!-- END LI_TOOLS -->
+            <style type="text/css">
+            .pac-logo:after,
+            .pac-icon.pac-icon-marker {
+                background: none!important;
+                display: none!important;
+            }
+            
+            .pac-container {}
+            
+            .pac-item {
+                color: #00a99d!important;
+            }
+            
+            .pac-item:hover {
+                background-color: rgb(70, 191, 183);
+                color: #FFF!important;
+                cursor: pointer;
+            }
+            </style>
+            <script type="text/javascript">
+            $("#adminWS").unbind('change').bind('change', function() {
+                var adminWS     = $("#adminWS")     .prop('checked');
+                var leitura     = $("#leitura")     .prop('checked');
+                var add_user     = $("#add_user")     .prop('checked');
+                var edit_only_own = $("#edit_only_own") .prop('checked');
+                if (adminWS) {
+                    $("#adminWSHidden").attr("value", "On");
+                    if (leitura)        {$("#leitura")      .click(); }
+                    if (add_user)        {$("#add_user")      .click(); }
+                    if (edit_only_own)    {$("#edit_only_own")  .click(); }
+                } else {
+                    $("#adminWSHidden").attr("value", "Off")
+                }
+            });
+
+            $("#leitura,#add_user,#edit_only_own").unbind('change').bind('change', function() {
+                if ($("#adminWS").prop('checked')) {
+                    $("#adminWS").click();
+                    $("#adminWSHidden").attr("value", "Off")
+                }
+            });
+
+            $('*[legenda]').LegendaOver();
+            $("#Balao_ToolType").remove();
+
+           </script>
+        </div>
+    </form>
+    <div class="c"></div>
+    <div id="salvar" class="botao botTop salvarUsuario">Salvar</div>
+</div>
+<script type="text/javascript">
+window.sanfona('.cabecalhoSanfona');
+$(".checkTool").change(function() {
+    var check = $(this).prop('checked');
+    if (check == true) {
+        $(this).parent().removeClass("bg01").addClass("bg04")
+
+    } else {
+        $(this).parent().removeClass("bg04").addClass("bg01")
+    }
+})
+</script>
+<!-- END BLOCKUSER -->

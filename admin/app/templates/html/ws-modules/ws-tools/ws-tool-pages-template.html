@@ -1,0 +1,317 @@
+<!-- BEGIN PAGES_MODEL -->
+<script>
+window.id_item_selected		='';
+var barra_progresso 		= '';
+var canvas_barra_progresso 	= '';
+include_css ('./app/templates/css/websheep/ws-modules/ws-tools/style.min.css','css_mod','All');
+</script>
+	<div id="topoModulo" class="TitTop bg05 w1b">{topTitle}</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+			<div id="bt_Add_Grupo" class="botao">{buttomAddPage}</div>
+			<div class="c"></div>
+		</form>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN LI_PAGES -->
+					<li class='w1 folder' data-id='{LI_ID}' data-token='{LI_TOKEN}' data-file='{LI_FILE}'>
+						<div class='titulo_folder'>{LI_TITLE}</div>
+						<div>
+							<div class="combo_folder">
+								<div class="detalhes_img">
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="cache 		legenda" 	legenda="{pages_iconsPage_cache}"										src="./app/templates/img/websheep/cache_speed.png"></div>	
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class='metaTags 	legenda' 	legenda='{pages_iconsPage_ManageMetaTags}' 	data-pageID="{LI_ID_FILE}"	src='./app/templates/img/websheep/metaTags.png' style="margin:2px;"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="mover_item 	legenda" 	legenda="{pages_iconsPage_MoveItem}" 									src="./app/templates/img/websheep/arrow-move.png"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="editar 		legenda"	legenda="{pages_iconsPage_Edit}" 		 								src="./app/templates/img/websheep/layer--pencil.png"></div>
+									<!-- <div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="programar 	legenda" 	legenda="{pages_iconsPage_EditCode}" 		 							src="./app/templates/img/websheep/Terminal-Logo.png"></div> -->
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="excluir 	legenda" 	legenda="{pages_iconsPage_delete}"										src="./app/templates/img/websheep/cross-button.png"></div>	
+								</div>
+							</div>
+						</div>
+					</li>
+			<!-- END LI_PAGES -->
+		</ul>
+	</div>
+</div>
+
+<script>
+	window.ordenaSubFerramenta = function (retorno){
+		TopAlert({mensagem: "Função não desenvolvida ainda",type: 1})
+	}
+	window.ordenaFerramenta = function (retorno){
+			var retorno;
+			var posicoes = [];
+			var i = 0;
+			$('#palco ul li').each(function (i) {
+				var tok = $(this).data('token');
+				if(tok){
+					posicoes[i] = tok;
+					++i;
+				}
+			})
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: { 
+			  	function:"ordenaFerramenta",
+			  	posicoes:posicoes
+			  }
+			}).done(function(data) { 
+					if(data=="sucesso"){
+						TopAlert({mensagem: "{pages_responseMovePage_sucess}",type: 3})
+					}else{
+						TopAlert({mensagem: "{pages_responseMovePage_fail}",type: 2})
+					}
+			});
+	}
+	$(function() {
+	    $( "#palco ul" ).sortable({
+	    	handle: ".mover_item",
+	    	forceHelperSize: true,
+	    	beforeStop: function( event, ui ) {
+	    		window.ordenaFerramenta()
+	    	}
+		});
+	    $( "#palco .body" ).sortable({
+	    	handle: ".mover_sub_item",
+	    	forceHelperSize: true,
+	    	beforeStop: function( event, ui ) {
+	    		window.ordenaSubFerramenta()
+	    	}
+		});
+	    $( "#palco ul" ).disableSelection();
+	 });
+
+	 window.reloadFunctions = function(){
+		$('.legenda').LegendaOver();
+
+	$("#bt_Add_Grupo").unbind('click').click(function(){
+			var li		= $(this).parent().parent().parent().parent().parent();
+			var modalContent ="";
+			 modalContent 	+="<div id='form_new_name'>"
+			 modalContent 	+="<div class='w1' style='text-aling:left'>{pages_modalAddPage_title}</div>"
+			 modalContent 	+="<input name='titulo_page' style='padding: 10px 20px;margin: 10px;width: 470px;' class='inputText' value=''></input>"
+			 modalContent 	+="<div class='w1' style='text-aling:left'>{pages_modalAddPage_pathfile}</div>"
+			 modalContent 	+="<input name='file' style='padding: 10px 20px;margin: 10px;width: 470px;' class='inputText' value='' placeholder='ex: file.php'></input>"
+			 modalContent 	+="<div class='w1' style='text-aling:left'>{pages_modalAddPage_FriendlyURL}</div>"
+			 modalContent 	+="<input name='path' style='padding: 10px 20px;margin: 10px;width: 470px;' class='inputText' value='' placeholder='ex: folder1/folder2/folder3'></input>"
+			 modalContent 	+="	</div>"
+			confirma({
+				width:500,
+				conteudo:modalContent,
+				drag:false,
+				bot1:'{pages_modalAddPage_buttom_add}',
+				bot2:'{pages_modalAddPage_buttom_cancel}',
+				newFun:function(){
+					var newName = $("#form_new_name input").serialize();
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { function:"addPage",formulario:newName}
+					}).done(function(data) {
+						out(data)
+						if(data=="sucesso"){
+							$("#conteudo").load("./app/ws-modules/ws-tools/paginas.php");
+							TopAlert({mensagem: "{pages_modalAddPage_response_sucess}",type: 3})
+						}else{
+							TopAlert({mensagem: "{pages_modalAddPage_response_fail}",type: 2})
+						}
+					})
+				}
+			});
+	})
+
+
+		$(".programar").unbind('click').click(function(e){
+			e.preventDefault()
+			var page = $(this).parent().parent().parent().parent().parent().data('file');
+			confirma({
+				width:"auto",
+				conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				drag:false,
+				posFn:function(){
+						$("#ws_confirm").css("line-height","20px");
+						$( "#conteudo" ).load("./app/ws-modules/ws-webmaster/index.php?get_file="+page, function( response, status, xhr ) {
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						});
+				},
+				bot1:0,
+				bot2:0
+			})
+			return false;
+		})
+		$(".combo_folder .editar ").unbind('click').click(function(){
+				var li		= $(this).parent().parent().parent().parent().parent();
+				var id		= $(li).data('id');
+				var titulo	= $(li).find('.titulo_folder').text();
+				functions({
+					funcao:"returnPaths",
+					vars:"id="+id,
+					patch:"{PATH}",
+					beforeSend:function(){confirma({width:"auto",conteudo:"  Verificando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					Sucess:function(e){
+						confirma({				
+							width:"auto",
+							conteudo:e,
+							drag:false,
+							bot1:'{pages_modalDetailsPage_buttom_save}',
+							bot2:'{pages_modalDetailsPage_buttom_cancel}',
+							posFn:function(){					
+								$("input[type='radio'][value='renomear']").click();
+								$("select#tools").change(function(e){
+									var idTool = ($(this).val());
+									$("input#path").val($("input#path").val().replace(/{{(.*?)}}/g, "____"));
+									functions({
+										funcao:"returnCamposTool",
+										vars:"idTool="+idTool,
+										patch:"{PATH}",
+										Sucess:function(e){
+											var campos ='<option value="">{pages_modalDetailsPage_SelectField}</option>'; 
+												campos +='<option value="id">id</option>';
+												campos +='<option value="token">token</option>';
+												window.camposTools = campos+e;
+											$("select#campos").html(window.camposTools).unbind('change').bind("change",function(){
+												var string = '{{'+$("select#campos").val()+'}}';
+											 	var cursorPos = $('input#path').prop('selectionStart');
+											    var v = $('input#path').val();
+											    var textBefore = v.substring(0,  cursorPos);
+											    var textAfter  = v.substring(cursorPos, v.length);
+											    $('input#path').val(textBefore+string+textAfter);
+											})
+										}
+									})
+								});
+								$("select#campos").html(e).unbind('change').bind("change",function(){
+									var string = '{{'+$("select#campos").val()+'}}';
+								 	var cursorPos = $('input#path').prop('selectionStart');
+								    var v = $('input#path').val();
+								    var textBefore = v.substring(0,  cursorPos);
+								    var textAfter  = v.substring(cursorPos, v.length);
+								    $('input#path').val(textBefore+string+textAfter);
+								})
+								$("input[name=\"typeList\"]").unbind('change').bind("change",function(){
+											$("input#path").val($("input#path").val().replace(/{{(.*?)}}/g, "____"));
+											var type = $(this).val();
+											var campos ='<option value="">{pages_modalDetailsPage_SelectField}</option>'; 
+												campos +='<option value="titulo">titulo</option>';
+												campos +='<option value="texto">texto</option>';
+												campos +='<option value="url">url</option>';
+												campos +='<option value="filename">filename</option>';
+												campos +='<option value="token">token</option>';
+											if(type=="item"){
+												$("select#campos").html(window.camposTools)
+											}else if(type=="cat"){
+												campos +='<option value="avatar">avatar</option>';
+												$("select#campos").html(campos);
+											}else if(type=="gal"){
+												campos +='<option value="id_item">id_item</option>';
+												campos +='<option value="avatar">avatar</option>';
+												$("select#campos").html(campos);
+											}else if(type=="img"){
+												campos +='<option value="id_item">id_item</option>';
+												campos +='<option value="imagem">imagem</option>';
+												$("select#campos").html(campos);
+											}else if(type=="img_gal"){
+												campos +='<option value="id_item">id_item</option>';
+												campos +='<option value="id_galeria">id_galeria</option>';
+												campos +='<option value="imagem">imagem</option>';
+												$("select#campos").html(campos);
+											}else if(type=="files"){
+												campos +='<option value="id_item">id_item</option>';
+												campos +='<option value="file">file</option>';
+												campos +='<option value="uploaded">uploaded</option>';
+												$("select#campos").html(campos);
+											}
+								});						
+							},
+							newFun:function(){
+								var formulario 	= $("#form_new_name").serialize();
+								var newName 	= $("#form_new_name input[name='titulo_page']").val();
+								$.ajax({
+								  type: "POST",
+								  url: "./app/ws-modules/ws-tools/functions.php",
+								  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
+								}).done(function(data) {
+									if(data=="sucesso"){
+										$(li).find('.titulo_folder').text(newName);
+										TopAlert({mensagem: "Página salva com sucesso!",type: 3})
+									}else{
+										TopAlert({mensagem:data,type: 2})
+									}
+								})
+							}
+						});
+					}
+				})
+		})
+		$(".combo_folder .metaTags").unbind('click').click(function(e){
+			var id_page	= $(this).attr("data-pageID");
+			confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			$("#conteudo").load("./app/ws-modules/ws-model-tool/metaTags.php?id_page="+id_page,function(){$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");});
+		})
+		$(".combo_folder .excluir").unbind('click').click(function(e){
+			var id_folder	= $(this).parent().parent().parent().parent().parent().data("id");
+			var token 		= $(this).parent().parent().parent().parent().parent().data("token");
+			var page 	= $(this).parent().parent().parent().parent().parent().data('file');
+			confirma({ 
+				conteudo:'{pages_modalDeletePage_content}',
+				bot1:"{pages_modalDeletePage_button_ok}",
+				bot2:"{pages_modalDeletePage_button_cancel}",
+				drag:false,
+				botclose:true,
+				newFun:function(){
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:true}
+					}).done(function(data) {
+						console.log(data)
+						$("#conteudo").load("./app/ws-modules/ws-tools/paginas.php");
+					})
+				},
+				onCancel:function(){
+					$.ajax({
+					  type: "POST",
+					  url: "./app/ws-modules/ws-tools/functions.php",
+					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:false}
+					}).done(function(data) {
+						console.log(data)
+						$("#conteudo").load("./app/ws-modules/ws-tools/paginas.php");
+					})
+				}
+			})
+		})
+
+		$(".combo_folder .cache").unbind('click').click(function(e){
+			e.preventDefault()
+			ws.preload.open();
+			var page = $(this).parent().parent().parent().parent().parent().data('id');
+			$( "#conteudo" ).load("./app/ws-modules/ws-tools/cache-files.php?id_page="+page, function( response, status, xhr ) {
+				ws.preload.close();
+			});
+
+
+			return false;
+		})
+
+
+
+
+
+
+
+
+
+
+		$('#container').perfectScrollbar();
+		setTimeout(function(){
+			$('#container').perfectScrollbar('destroy')
+			$('#container').animate({scrollTop: 0}, 200);
+		},200);
+	}
+window.reloadFunctions();
+</script>
+<!-- END PAGES_MODEL -->

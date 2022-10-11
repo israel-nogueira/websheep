@@ -1,0 +1,211 @@
+<!-- BEGIN USER_MODEL -->
+<script>
+include_css('./app/templates/css/websheep/ws-modules/ws-users/style.min.css', 'css_mod', 'All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{userManager_index_mainTitle}</div>
+<div id="topocadastro" class="bg02 w1b">
+    <form id="cdastrodominio">
+        <!-- BEGIN BLOCK_TOP_ADMIN -->
+        <div id="botaoMeuPerfil" class="botao" data-iduser="{ID_USER}">{userManager_index_editMyProfile}</div>
+        <input id="domain" class="inputText w4" name="domain" placeholder="{userManager_index_editMyProfilePlaceHolder}" /></input>
+        <div id="botaoCadastraUsuario" class="botao">{userManager_index_register}</div>
+        <!-- END BLOCK_TOP_ADMIN -->
+        <!-- BEGIN BLOCK_TOP_USER -->
+        <div id="botaoMeuPerfil" data-iduser="{ID_USER}" class="botao legenda" legenda="Editar dados do meu perfil" style="width: calc(100% - 34px) !important;">{userManager_index_editMyProfile}</div>
+        <!-- END BLOCK_TOP_USER -->
+    </form>
+</div>
+<ul id="palco" class="palco_01 center">
+    <div class="parceirobase bg06 w2 no_user" style="display:{NO_USER}"><i class="fa fa-user-times" style="margin-right: 20px;"></i>{userManager_index_noRegisteredUsers}</div>
+    <!-- BEGIN LI_USER -->
+    <li class="parceirobase bg06 w2" id="{LI_ID}">
+        <div class="dadosuser">
+            <div class="w1 tituloUser">{LI_NOME} {LI_SOBRENOME} - <span class="w2">{LI_LOGIN}</span></div>
+            <div class="email w2">{LI_EMAIL}</div>
+            ';
+        </div>
+        <!-- BEGIN LI_ADMIN_EXCLUDE -->
+        <div class="acoes bg02">
+            <div class="excluir legenda" data-idUser="{LI_ID}" legenda="{userManager_index_deleteUser}"></div>
+            <div class="editar legenda" data-idUser="{LI_ID}" legenda="{userManager_index_editPermissions}"></div>
+        </div>
+        <!-- END LI_ADMIN_EXCLUDE -->
+    </li>
+    <!-- END LI_USER -->
+</ul>
+<script>
+$("#cdastrodominio").submit(function(e) {
+    e.preventDefault();
+    $("#botaoCadastraUsuario").click();
+    return false;
+})
+
+function FunctionsAddGestor(iD, iD_Reload) {
+    $("#gestor-select").chosen({
+        disable_search_threshold: 10
+    });
+    $("#addAlertGerGestor #listaGestor li #combo #fechar").unbind("click");
+    $("#addAlertGerGestor #listaGestor li #combo #fechar").click(function(e) {
+        desvilculaGestor($(this), iD)
+    })
+    $("#addAlertGerGestor  #fulladd").unbind("click");
+    $("#addAlertGerGestor #fulladd").click(function(e) {
+        AddFullGestors(iD_Reload)
+    })
+    $("#addAlertGerGestor #add").unbind("click");
+    $("#addAlertGerGestor #add").click(function(e) {
+        var GestoriD = $("#gestor-select").find("option:selected").val();
+        AddGestor(iD_Reload, GestoriD);
+    })
+};
+
+$("#botaoCargos").unbind("click");
+$("#botaoCargos").click(function() {})
+
+function reloadFunctions() {
+    $('.legenda').LegendaOver();
+    $(".excluir").unbind("click").click(function() {
+        var iD_User = $(this).parent().parent().attr('id');
+        var div = $(this).parent().parent();
+        confirma({
+            conteudo: '{userManager_index_modal_delete_content}',
+            newFun: function() {
+                functions({
+                    funcao: "exclui_user",
+                    vars: "iD=" + iD_User,
+                    patch: "{PATH}",
+                    check: function(e) {
+                        return true
+                    },
+                    Sucess: function(e) {
+                        $(div).remove();
+                        if ($('.parceirobase:not(.no_user)').length == 0) {
+                            $(".no_user").show();
+                        }
+                        if (e == 1) {
+                            TopAlert({
+                                mensagem: '{userManager_index_topAlert_delete_sucess}',
+                                clickclose: true,
+                                height: 20,
+                                timer: 3000,
+                                type: 3
+                            })
+                        } else {
+                            TopAlert({
+                                mensagem: '{userManager_index_topAlert_delete_fail}',
+                                clickclose: true,
+                                height: 20,
+                                timer: 3000,
+                                type: 2
+                            })
+                        }
+                    }
+                });
+            },
+            width: 600,
+            height: 'auto',
+            divScroll: "#body",
+            drag: false,
+            bot2: "{userManager_index_modal_delete_button2}",
+            bot1: "{userManager_index_modal_delete_button1}",
+            Callback: function(e) {}
+        })
+
+    })
+    $(".parceirobase  .acoes .editar,#botaoMeuPerfil").unbind("click").click(function() {
+        var idUser = $(this).data("iduser")
+        $("#conteudo").load("./{PATH}/user.php?id_user=" + idUser);
+    })
+}
+reloadFunctions();
+
+function reloadUser(iD_user) {
+    var iD_user;
+    functions({
+        funcao: "reloadUser",
+        vars: "iD_user=" + iD_user + "&",
+        patch: "{PATH}",
+        Init: function(e) {},
+        Sucess: function(e) {
+            var liuser = $($.parseHTML(e)).html()
+            $("#palco #" + iD_user).html(liuser);
+            reloadFunctions();
+        }
+    })
+}
+
+
+function add_Function_salva_e_exclui_cargos() {
+    $("#DadosUserBase #unicargo form #salvar").unbind("click").click(function() {
+        var Titulo = $(this).parent().children('#cargoInput').val();
+        var Desc = $(this).parent().children('#cargodescricao').val();
+        var iD = $(this).parent().children('#id_cargo').val();
+        var inputTitulo = $(this).parent().children('#cargoInput')
+        var inputDesc = $(this).parent().children('#cargodescricao');
+        functions({
+            funcao: "SalvaCargo",
+            vars: "cargo=" + Titulo + "&descricao=" + Desc + "&id=" + iD + "&",
+            patch: "{PATH}",
+            Sucess: function(e) {
+                inputTitulo.css({
+                    'background-color': '#C5F7B5'
+                });
+                inputDesc.css({
+                    'background-color': '#C5F7B5'
+                });
+                inputTitulo.animate({
+                    backgroundColor: "#E8EEF5"
+                }, 2000);
+                inputDesc.animate({
+                    backgroundColor: "#E8EEF5"
+                }, 2000);
+            }
+        })
+    })
+    $("#DadosUserBase #unicargo form #excluir").unbind("click").click(function() {
+        var iD = $(this).parent().children('#id_cargo').val();
+        functions({
+            funcao: "ExcluiCargo",
+            vars: "id=" + iD + "&",
+            patch: "{PATH}",
+            check: function(e) {
+                return true
+            },
+            Sucess: function(e) {
+                $("#DadosUserBase #base").html(e)
+                add_Function_salva_e_exclui_cargos();
+            }
+        })
+    })
+
+    //$("#DadosUserBase").scrooly('resize');
+    $('#DadosUserBase').perfectScrollbar();
+
+}
+
+
+$("#botaoCadastraUsuario").unbind("click").click(function(e) {
+    if ($("#OpcoesNiveis").val() == "" || $("#domain").val() == "") {} else {
+        functions({
+            funcao: "addUser",
+            vars: "nivel=" + $("#OpcoesNiveis").val() + "&nome=" + $("#domain").val(),
+            patch: "{PATH}",
+            Loading: function(e) {},
+            Sucess: function(e) {
+                if (e != false) {
+                    $("#conteudo").load("./{PATH}/index.php?");
+                }
+            }
+        })
+    }
+})
+
+setTimeout(function() {
+    $('#container').perfectScrollbar()
+    $('#container').perfectScrollbar('update')
+    $('#container').animate({
+        scrollTop: 0
+    }, 200);
+}, 200);
+</script>
+<!-- END USER_MODEL -->

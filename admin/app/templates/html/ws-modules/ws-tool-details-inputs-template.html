@@ -1,0 +1,547 @@
+<!-- BEGIN 	BLOCK_INPUT_IFRAME -->
+	<iframe class="iframe_adicional" width="{WIDTH}%" name="{NAME}" id="{NAME}"  src="{VALUE_OPT}" width="{WIDTH_ADD}" height="{HEIGHT}" style="position: relative;float: left; border: solid 1px #CCC;margin: 3px;"></iframe>
+<!-- END 	BLOCK_INPUT_IFRAME -->
+
+<!-- BEGIN BLOCK_KEYWORKS_ADD -->
+
+	<div class="c"></div>
+	<div class="label_separados w1" style="margin-bottom: -17px;">{LABEL}</div>
+	
+	<div class="c"></div>
+	<textarea class="keyworks_adicional" id="{ID}" name="{ID}" style="position: absolute;width:990px;"></textarea>
+	<div class="c" style="padding: 6px;"></div>
+	<script type="text/javascript">
+
+		
+		$("#{ID}").textext({
+			plugins: "tags focus",
+			tagsItems: [{TAGS}]
+		}).bind('tagClick', function(e, tag, value, callback) {
+			var newValue = window.prompt('Novo valor', value);
+			if(newValue) callback(newValue);
+		});
+		//setTimeout(function() {$('#{ID}').textext()[0].tags().addTags(['']);}, 100)
+		//$(window).resize(function() {$('#{ID}').textext()[0].tags().addTags(['']);})
+	</script>
+	<div class="c"></div>
+<!-- END BLOCK_KEYWORKS_ADD -->
+
+<!-- BEGIN BLOCK_THUMBMAIL -->
+	<div class="thumbmail" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}%; height:{HEIGHT}px;" data-width="{DATA_WIDTH}" data-height="{HEIGHT}">
+		<div class="combo_upload">
+			<div class="pc" legenda="Meu computador"> <img src="./app/templates/img/websheep/up_m.png" />
+			</div>
+			<div class="bb" legenda="Na biblioteca"> <img src="./app/templates/img/websheep/folder_m.png" />
+			</div>
+			<div class="excl" legenda="Excluir"> <img src="./app/templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;" />
+			</div>
+		</div>
+		<img class="thumb_img" src="{SRC}" />
+	</div>
+<!-- END BLOCK_THUMBMAIL -->
+
+<!-- BEGIN BLOCK_PLAYER_MP3 -->
+	<div class="playerMP3" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}%; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
+		<div class="hidePlayer combo_upload">
+			<div class="insertLink" legenda="Inserir/Alterar link"><img src="./app/templates/img/websheep/iconLink.png" />
+			</div>
+
+		</div>
+		<iframe width="100%" height="{HEIGHT}" src="{URL}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	</div>
+<!-- END BLOCK_PLAYER_MP3 -->
+
+<!-- BEGIN BLOCK_PLAYER_VIDEO -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<div class="playerVideoThumb" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:100%; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
+			<div class="combo_upload">
+				<div class="insertLink" legenda="Inserir/Alterar link"><img src="./app/templates/img/websheep/iconLink.png" />
+				</div>
+			</div>
+			<img class="thumb_img" src="{SRC}" style="{styleThumb}" />
+		</div>
+	</div>
+<!-- END BLOCK_PLAYER_VIDEO -->
+
+<!-- BEGIN BLOCK_UPLOAD_FILE -->
+	<div class="model_file bg02" {LEGENDA} style="width:{WIDTH}%;">
+		<div class="w1 label">{LABEL}</div>
+		<div class="botao" data-mysql="{MYSQL}" data-download="{DOWNLOAD}" data-token="{TOKEN}">Procurar</div>
+	</div>
+<!-- END BLOCK_UPLOAD_FILE -->
+
+<!-- BEGIN BLOCK_LABEL -->
+	<div class="label_input w1" style="height:36px;width:{WIDTH}%">{LABEL}</div>
+<!-- END BLOCK_LABEL -->
+
+<!-- BEGIN BLOCK_VAZIO -->
+	<div class="espaco_vazio" style="width:{WIDTH}%;height:{HEIGHT}px"></div>
+<!-- END BLOCK_VAZIO -->
+
+<!-- BEGIN BLOCK_BR -->
+	<div class="c"></div>
+<!-- END BLOCK_BR -->
+
+<!-- BEGIN BLOCK_SEPARADOR -->
+	<div class="c"></div>
+	<div class="label_separados w1">{LABEL}</div>
+	<div class="c"></div>
+<!-- END BLOCK_SEPARADOR -->
+
+<!-- BEGIN BLOCK_COLORPICKER -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
+		<div class="input_colorpicker bg01" style="width:calc(100% - 26px);height:{HEIGHT}px;" {LEGENDA}>
+			<div class="colorpicker_geral" data-color="{COR}">
+				<div class="label w1">{LABEL}</div>
+				<div class="ColorSelector2">
+					<div style="background-color:{COR}"></div>
+					<input id="{ID_CAMPO}" value="{COR}" type="hidden" data-mysql="{MYSQL}" data-token="{TOKEN}">
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- END BLOCK_COLORPICKER -->
+
+<!-- BEGIN BLOCK_INPUT_TEXT -->
+	<div class="groupForm" style="height:auto; width:calc({WIDTH}% - 3px); position: relative; float: left;">
+		<div class="label_input w1" style="margin-left: 5px;height:36px;width: calc(100% - 15px);padding: 10px 0px 14px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<div class="c"></div>
+		<input style="height:44px;width:calc(100% - 4px);" {FILTRO} {TYPE} {FINANCEIRO} {DISABLED} id="{ID}" {LEGENDA} class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" maxlength="{CARACTERES}" value="{VALUE}"></input>
+
+		<!-- BEGIN 	GOOGLE_API_PLACE -->
+			<style type="text/css">
+				.pac-logo:after,
+				.pac-icon.pac-icon-marker {
+					background: none!important;
+					display: none!important;
+				}
+				.pac-container {} .pac-item {
+					color: #00a99d!important;
+				}
+				.pac-item:hover {
+					background-color: rgb(70, 191, 183);
+					color: #FFF!important;
+					cursor: pointer;
+				}
+			</style>
+			<script type="text/javascript">
+				var autocomplete, autocomplete_textarea, componentForm;
+				componentForm = {
+					street_number: 'short_name',
+					route: 'long_name',
+					estado: 'long_name',
+					administrative_area_level_1: 'short_name',
+					country: 'long_name',
+					postal_code: 'short_name',
+					locality: 'long_name'
+				};
+
+				function fillInAddress() {
+					var place = autocomplete.getPlace();
+					for(var component in componentForm) {
+						$("input#{ID}").val("");
+					}
+					$("input#{ID}").val(place.formatted_address);
+					for(var i = 0; i < place.address_components.length; i++) {
+						var addressType = place.address_components[i].types[0];
+						if(componentForm[addressType]) {
+							var cont = place.address_components[i][componentForm[addressType]];
+							city = place.address_components[i];
+							{inputs}
+						}
+					}
+				}
+
+				function geolocate() {
+					if(navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(function(position) {
+							var geolocation = {
+								lat: position.coords.latitude,
+								lng: position.coords.longitude
+							};
+							var circle = new google.maps.Circle({
+								center: geolocation,
+								radius: position.coords.accuracy
+							});
+							autocomplete.setBounds(circle.getBounds());
+						});
+					}
+				}
+				include_js('./app/vendor/google/jquery.geocomplete.min.js', 'maps_googleapis_geocomplete');
+				include_js('//maps.googleapis.com/maps/api/js?sensor=false&libraries=places', 'maps_googleapis');
+				window.ActiveGoogle = function(inputText) {
+					if(window.google) {
+						autocomplete = new google.maps.places.Autocomplete((document.getElementById(inputText)), {
+							types: ['geocode']
+						});
+						autocomplete.addListener('place_changed', fillInAddress);
+					} else {
+						setTimeout(function() {
+							ActiveGoogle(inputText)
+						}, 1000)
+					}
+				}
+				window.ActiveGoogle("{ID}");
+			</script>
+		<!-- END 	GOOGLE_API_PLACE -->
+	</div>
+<!-- END BLOCK_INPUT_TEXT -->
+
+<!-- BEGIN BLOCK_TEXTAREA -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin: 3px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<div class="textarea_adicional txt_ad_{ID}" style="margin: 3px;position: relative;float: left;width:100%;">
+			<div class="readyOnly" style="display:none;position: absolute; width: 100%; height: 100%; background-color: #ffffff96; z-index: 1;"></div> 
+			<textarea style="background-color:{BACKGROUND};color:{COLOR};height:{INPUT_HEIGHT}px;width:100%;margin-top:0;" class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}"></textarea>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$val = `{CONTEUDO}`;
+		$("#{ID}").val($val.split("ws_eol").join("\n"));
+
+		if({EDITOR} == 1) {
+			if(CKEDITOR.stylesSet.registered.estilos_{ID}) {
+				delete CKEDITOR.stylesSet.registered.estilos_{ID}
+			}
+			
+			CKEDITOR.stylesSet.add('estilos_{ID}', window.styleCKEditor);
+			var config_{ID} = {
+				skin: 'office2013',
+				stylesSet: 'estilos_{ID}',
+				doksoft_uploader_url: './app/ws-modules/ws-model-tool/upload_ckEditor.php?type=ckEditor&group={GROUP}',
+				height: {HEIGHT},
+				width: {WIDTH},
+				autoGrow_minHeight: {HEIGHT},
+				MaxLength: 100,
+				enterMode: 2,
+				forcePasteAsPlainText: true,
+				fillEmptyBlocks: false,
+				basicEntities: false,
+				entities_greek: false,
+				entities_latin: false,
+				entities_additional: '',
+				toolbarStartupExpanded: false,
+				toolbarCanCollapse: true,
+				tabSpaces: 0,
+				entities: 0,
+				forceSimpleAmpersand: 1,
+				allowedContent: true,
+				extraAllowedContent: '*[id](*)',
+				autoGrow_bottomSpace: 50,
+				contentsCss: ['./app/ws-modules/ws-tools/functions.php?function=ckeditorcss&background={BACKGROUND}&color={COLOR}'],
+				toolbarGroups: [
+				{
+					name: 'codesnippet',
+					groups: ['codesnippet']
+				}, {
+					name: 'AddImagem'
+				}, {
+					name: 'document',
+					groups: ['mode', 'document', 'doctools']
+				}, {
+					name: 'clipboard',
+					groups: ['clipboard', 'undo']
+				}, {
+					name: 'basicstyles',
+					groups: ['basicstyles', 'cleanup']
+				},
+				{
+					name: 'loremipsum',
+					groups: ['loremipsum']
+				},
+
+				 {
+					name: 'paragraph',
+					groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph']
+				}, {
+					name: 'links',
+					groups: ['links']
+				}, {
+					name: 'insert',
+					groups: ['insert']
+				}, {
+					name: 'colors',
+					groups: ['colors']
+				}, {
+					name: 'tools',
+					groups: ['tools']
+				}, {
+					name: 'others',
+					groups: ['others']
+				}, {
+					name: 'about',
+					groups: ['about']
+				}, {
+					name: 'styles',
+					groups: ['Loremipsum','Font', 'FontSize', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']
+				}, {name: 'websheep'}],
+
+				removePlugins: 'resize,magicline',
+				extraPlugins: 'loremipsum,codesnippet,undo,notification,wordcount,basewidget,button,table,youtube,autogrow,lineutils,widget,leaflet,tableresize,floatpanel,listblock,richcombo,strinsert,dialogui,dialog,templates',
+				codeSnippet_theme: 'monokai_sublime',
+				wordcount: {
+					showParagraphs: false,
+					showWordCount: true,
+					showCharCount: true,
+					countSpacesAsChars: true,
+					countHTML: true,
+					maxWordCount: -1,
+					maxCharCount: {CARACTERES}
+				},
+				removeButtons: 'Presentation,Save,Flash,Print,NewPage,Preview,Templates,Form,Checkbox,TextField,Textarea,Select,Button,HiddenField,CreateDiv,Language,Anchor,Smiley,About,Copy,Paste,PasteText,PasteFromWord,Cut,Radio,SpecialChar,PageBreak,Iframe,About'
+			};
+			{ID}_editor = CKEDITOR.replace('{ID}', config_{ID});
+			//	{ID}_editor.addCommand("AddShortCode", 		{exec: function(edt) {window.loadShortCode("{ID}")		}});
+			{ID}_editor.addCommand("loadBiblioteca", {
+				exec: function(edt) {
+					window.loadBiblioteca("{ID}")
+				}
+			}); 
+			{ID}_editor.addCommand("AjustarCSS", {
+				exec: function(edt) {
+					window.AjustarCSS("{ID}")
+				}
+			}); 
+			{ID}_editor.addCommand("AjustarEstilos", {
+				exec: function(edt) {
+					window.AjustarEstilos("{ID}")
+				}
+			}); 
+			{ID}_editor.addCommand("uploadIMGEditor", {
+				exec: function(edt) {
+					window.uploadIMGEditor("{ID}")
+				}
+			});
+			{ID}_editor.ui.addButton('Biblioteca', {
+				label: "Biblioteca",
+				command: 'loadBiblioteca',
+				icon: './app/templates/img/websheep/photo-album--plus.png',
+				toolbar: 'websheep'
+			}); 
+			{ID}_editor.ui.addButton('Upload', {
+				label: "Upload",
+				command: 'uploadIMGEditor',
+				icon: './app/templates/img/websheep/image--plus.png',
+				toolbar: 'websheep'
+			}); 
+			{ID}_editor.ui.addButton('AjustCss', {
+				label: "Ajustar CSS",
+				command: 'AjustarCSS',
+				icon: './app/templates/img/websheep/ui-toolbar--pencil.png',
+				toolbar: 'websheep'
+			}); 
+			{ID}_editor.ui.addButton('AjustarEstilos', {
+				label: "Ajustar Estilos",
+				command: 'AjustarEstilos',
+				icon: './app/templates/img/websheep/application-wave.png',
+				toolbar: 'websheep'
+			});
+			setTimeout(function() {
+				{ID}_editor.on('instanceReady',function(){
+					$(".cke_wysiwyg_frame").contents().find("body").css('background', '{BACKGROUND}').css('color', '{COLOR}');
+					$(".cke_button[title='+ ShortCode'] .cke_button_label, .cke_button[title='Biblioteca'] .cke_button_label, .cke_button[title='Ajustar CSS'] .cke_button_label ,.cke_button[title='Ajustar Estilos'] .cke_button_label,.cke_button[title='Upload'] .cke_button_label").show().css({
+						'cursor': 'pointer'
+					}).parent().css({
+						'cursor': 'pointer'
+					});
+					window.verifyCkEditorOriginal();
+				});
+
+			}, 500)
+		}
+
+	</script>
+<!-- END BLOCK_TEXTAREA -->
+
+<!-- BEGIN BLOCK_SINTAXY -->
+	<textarea id="{ID}" name="{NAME}" style="display:none;"></textarea>
+	<div id="ace_{ID}" class="inputText" style="float: left;height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}%;margin-top:0;font-size: 15px;overflow-X:hidden"></div>
+	<script>
+		$.getScript(ws.rootPath+'admin/app/vendor/ace/src-min-noconflict/ace.js', function() {
+			$.getScript(ws.rootPath+'admin/app/vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
+
+				ace.config.set('basePath', ws.rootPath+'admin/app/vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
+				window.AceEditor_{ID} = ace.edit("ace_{ID}");
+				var conteudo = decodeURIComponent(`{CONTEUDO}`)
+				window.AceEditor_{ID}.setTheme("ace/theme/monokai");
+				window.AceEditor_{ID}.setHighlightActiveLine(true); // mostra linha ativa atual
+				window.AceEditor_{ID}.setShowInvisibles(0); // frufru de tabulações
+				window.AceEditor_{ID}.getSession().setUseWrapMode(1) // wrap sem quebra de linha
+				window.AceEditor_{ID}.getSession().setUseSoftTabs(1) // usar tabs ao invez de espaço
+				window.AceEditor_{ID}.getSession().setMode("ace/mode/{SINTAXY}");
+				window.AceEditor_{ID}.getSession().setValue(conteudo);
+				window.AceEditor_{ID}.getSession().on('change', function() {
+					$("textarea#{ID}").val(window.AceEditor_{ID}.getSession().getValue());
+				})
+			});
+		});
+	</script>
+<!-- END BLOCK_SINTAXY -->
+
+<!-- BEGIN BLOCK_BOT_FILE -->
+	<div style="width:{WIDTH}%;" class="botao botao_adicional" id="add_files" legenda="Aqui você poderá adicionar arquivos de diferentes extenções, <br>vinculadas a este ítem.">{LABEL}</div>
+	<script>
+		$("#add_files").unbind("click").click(function() {
+			confirma({
+				width: "auto",
+				conteudo: "Acessando arquivos...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				drag: false,
+				bot1: 0,
+				bot2: 0
+			});
+			$("#conteudo").load("{PATH}/files.php?ws_id_ferramenta={ID_FERRAMENTA}&token_group={GROUP}&id_item={ID_ITEM}&id_cat={ID_CAT}&id_item={ID_ITEM}&ws_nivel={ID_NIVEL}", function() {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			})
+		})
+	</script>
+<!-- END BLOCK_BOT_FILE -->
+
+<!-- BEGIN BLOCK_BOT_GALERIAS -->
+	<div style="width:{WIDTH}%;" class="botao botao_adicional" id="add_gal_imgs" legenda="Aqui você poderá adicionar várias galerias de imagens segmentadas, <br>vinculadas a este ítem.">{LABEL}</div>
+	<script>
+		$("#add_gal_imgs").unbind("click").click(function() {
+			confirma({
+				width: "auto",
+				conteudo: "Acessando galerias...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				drag: false,
+				bot1: 0,
+				bot2: 0
+			});
+			$("#conteudo").load("{PATH}/galerias.php?back=true&ws_id_ferramenta={ID_FERRAMENTA}&token_group={GROUP}&id_item={ID_ITEM}&id_cat={ID_CAT}&ws_nivel={WS_NIVEL}", function() {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			})
+		})
+	</script>
+<!-- END BLOCK_BOT_GALERIAS -->
+
+<!-- BEGIN BLOCK_BOT_TOOLS -->
+	<div style="width:calc({WIDTH}% - 3px);" class="botao botao_adicional" id="InnerToll_{VALUE}" {LEGENDA}>{LABEL}</div>
+	<script>
+		$("#InnerToll_{VALUE}").unbind("click").click(function() {
+			confirma({
+				width: "auto",
+				conteudo: "<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top:35px;background-image:url(\""+ws.rootPath +"admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				drag: false,
+				bot1: 0,
+				bot2: 0
+			});
+			$("#conteudo").load("{PATH}/index.php?back=true&ws_id_ferramenta={VALUE}", function() {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			})
+		})
+	</script>
+<!-- END BLOCK_BOT_TOOLS -->
+
+<!-- BEGIN BLOCK_BOT_FOTOS -->
+	<div style="width:{WIDTH}%;" class="botao botao_adicional" id="addimgs" legenda="Adicione imagens de exibição para este ítem.<br><i>Obs.:Imagens diretamente linkadas ao ítem. Sem galerias.">{LABEL}</div>
+	<script>
+		$("#addimgs").unbind("click").click(function() {
+			confirma({
+				width: "auto",
+				conteudo: "Acessando imagens...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				drag: false,
+				bot1: 0,
+				bot2: 0
+			});
+			$("#conteudo").load("{PATH}/imagens.php?token_group={GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&id_item={ID_ITEM}&id_cat={ID_CAT}&ws_nivel={WS_NIVEL}", function() {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+	</script>
+<!-- END BLOCK_BOT_FOTOS -->
+
+<!-- BEGIN BLOCK_CHECKBOX -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<label {LEGENDA} class="w1 class_check bg01" style="width:100%;">
+			<input {DISABLED} {CHECKED} value="{VALUE}" type="checkbox" id="{ID}" name="{NAME}"> {LABEL}
+		</label>
+	</div>
+<!-- END BLOCK_CHECKBOX -->
+
+<!-- BEGIN BLOCK_RADIOBOX -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div> 
+		<label {LEGENDA} class="w1 class_radio bg01" style="width:100%;">
+			<input {DISABLED} type="radio" name="{NAME}" value="{LABEL}" {CHECK}>{LABEL}
+		</label>
+	</div>
+<!-- END BLOCK_RADIOBOX -->
+
+<!-- BEGIN BLOCK_SELECTBOX -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
+		<div class="combo_selectbox" style="width:100%;height: 36px;background:rgba(0, 0, 0, 0.07);margin: 3px;position: relative;float: left;padding: 4px 0;">
+			<select {DISABLED} id="{ID}" name="{NAME}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional" {LEGENDA} placeholder="{PLACE}" style="margin:3px;padding: 6px 0px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;  border-radius: 5px;">
+				<option value="" disabled selected style="color:#CCC">{PLACE}</option>
+				<!-- BEGIN BLOCK_SELECTBOX_OPT -->
+				<option name="{NAMEOPT}" value="{OP}" {CHECKOPT}>{OP}</option>
+				<!-- END BLOCK_SELECTBOX_OPT -->
+			</select>
+			<div class="edita_select_box" legenda="Editar opções"></div>
+		</div>
+	</div>
+<!-- END BLOCK_SELECTBOX -->
+
+<!-- BEGIN BLOCK_SELECTBOX_LINK_TOOL -->
+	<div class="groupForm" style="height:auto; width:calc({WIDTH}% - 3px); position: relative; float: left;margin-right: 6px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 20px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<div class="combo_selectbox" style="width:100%;height: 36px;background:rgba(0, 0, 0, 0.07);margin: 3px;position: relative;float: left;padding: 4px 0;">
+			<select style="margin:3px;padding: 6px 0px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;border-radius: 5px;width: calc(100% - 10px);" {DISABLED} id="{ID}" name="{NAMEOPT}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional" {LEGENDA} placeholder="{PLACE}" >
+				<option value="" disabled selected style="color:#CCC">{PLACE}</option>
+				<!-- BEGIN BLOCK_SELECTBOX_OPT_TOOL -->
+				<option value="{VALUE}" {CHECKOPT}>{LABEL}</option>
+				<!-- END BLOCK_SELECTBOX_OPT_TOOL -->
+			</select>
+		</div>
+	</div>
+<!-- END BLOCK_SELECTBOX_LINK_TOOL -->
+
+<!-- BEGIN BLOCK_SELECTBOX_TOOL_LINK -->
+	<div style="width:calc({WIDTH}% - 3px);" class="botao botao_adicional bt_link_itens" id="{ID}" name="{ID}">{PLACE}</div>
+<!-- END BLOCK_SELECTBOX_TOOL_LINK -->
+
+<!-- BEGIN BLOCK_MULTIPLE_SELECTBOX -->
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
+		<div class="multipleselect_box" style="width:100%">
+			<select {DISABLED} id="{ID}" name="{ID}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional multipleselect" placeholder="{PLACE}" style="width:{WIDTH_SELECT};margin: 10px;padding: 10px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;  border-radius: 5px;" multiple>
+				<!-- BEGIN BLOCK_MULTIMPLE_SELECTBOX_OP -->
+				<option id="{OP_ID}" value="{OP_LABEL}" {OP_CHECK}>{OP_LABEL}</option>
+				<!-- END BLOCK_MULTIMPLE_SELECTBOX_OP -->
+			</select>
+			<div class="edita_select_box_multiple" legenda="Editar opções"></div>
+		</div>
+
+		<!-- BEGIN BLOCK_MULTIMPLE_SELECTBOX_LEGENDA -->
+		<script>
+			$(function() {
+				setTimeout(function() {
+					$("#{ID}_chosen").attr("legenda", "{LEGENDA}").LegendaOver();
+				}, 1000);
+			})
+		</script>
+		<!-- END BLOCK_MULTIMPLE_SELECTBOX_LEGENDA -->
+
+	</div>
+<!-- END BLOCK_MULTIPLE_SELECTBOX -->
+
+<!-- BEGIN BLOCK_ESCOPE_VARS -->
+	{WS_NIVEL}
+<!-- END BLOCK_ESCOPE_VARS -->

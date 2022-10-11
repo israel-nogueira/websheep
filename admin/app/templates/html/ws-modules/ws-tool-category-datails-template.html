@@ -1,0 +1,379 @@
+<!-- BEGIN CAT_DETAILS -->
+<script type="text/javascript">
+	include_css("./app/templates/css/websheep/ws-modules/ws-model-tool/detalhes.min.css","css_mod","All");
+</script>
+<style type="text/css">.iframe #topoModulo {display: none;}</style>
+<div id="topoModulo" class="TitTop bg05 w1b">Categoria</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+			<div id="bt_SalvarItem" class="bg02 w1">
+				<img src="./app/templates/img/websheep/disk-black.png"/> Salvar categoria
+			</div>
+			<div id="bt_voltar_cat" class="bg02 w1">
+				<img src="./app/templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;"/> Voltar
+			</div>
+			<script>
+				$("#bt_voltar_cat").unbind("click").click(function(){
+					confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					$("#conteudo").load("./app/ws-modules/ws-model-tool/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}",function(){
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					});
+				});
+			</script>
+		</form>
+	</div>
+	
+<div id="palco" class="palco_01">
+	<form id="UploadThumbmails" style="display:none" action="./app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+		<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="" type="file" style="display:none">
+		<input type="hidden" name="type" value="avatar_categoria">
+		<input type="hidden" name="token" value="{TOKEN}">
+		<input type="hidden" name="ws_id_ferramenta" value="{WS_ID_FERRAMENTA}">
+		<input type="hidden" name="id" value="{ID_CAT}">
+		<input type="hidden" name="token_group" value="{TOKEN_GROUP}">
+		<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+		<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+	</form>
+
+	<form id="form_dados_geral">
+		<div class="thumbmail" data-mysql="teste_thumb" style="width:281px;min-height: 280px;">
+			<div class="combo_upload" style="display: none; opacity: 1;">
+				<div class="pc" legenda="Meu computador">	<img src="./app/templates/img/websheep/up_m.png"></div>
+				<div class="bb" legenda="Na biblioteca">	<img src="./app/templates/img/websheep/folder_m.png"></div>
+				<div class="excl" legenda="Excluir">		<img src="./app/templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;"></div>
+			</div>
+			<img class="thumb_img" src="{ws_rootPath}ws-img/281/0/100/{CAT_AVATAR}">
+		</div>
+
+		<div class="groupForm" style="height:auto;width: 695px;position: relative;float: right;margin-right: 16px;overflow: hidden;">
+			<div class="label_input w1" style="height:36px;width: calc(100% - 14px);padding: 12px 10px;">Label da categoria</div>
+			<div class="c"></div>
+			<input type="text" id="categoryTitle" class="inputText input_adicional" style="height:44px;width:calc(693px - 3px);" value="{TITULO}">		
+		</div>
+
+		<div class="groupForm" style="height:auto;w;width: 695px;osition: relative;float: right;margin-right: 16px;">
+			<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px;">Vincular a categoria</div>
+			<div class="combo_selectbox" style="width: calc(100% - 5px);height: 36px;background:rgba(0, 0, 0, 0.07);margin: 3px;position: relative;float: left;padding: 4px 0;">
+			<select id="categoryTop"  class="textoarea_adicional selectbox_adicional" style="margin:3px;padding: 6px 0px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;  border-radius: 5px;">
+				<option value='0'>Não vincular a nenhuma categoria</option>
+				<!-- BEGIN OPT_CAT -->
+					<option value='{IDCAT}' {DISABLED} {SELECT} >{LABEL}</option>
+				<!-- END OPT_CAT -->
+			</select>
+			<div class="edita_select_box" legenda="Editar opções"></div>
+			</div>
+		</div>
+
+
+	<div class="groupForm" style="height:auto;width:690px;position: relative;float: right;margin-right: 26px;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">Descrição da categoria</div>
+		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;width: 100%;">
+			<textarea id="textarea">{DESCRIPTION}</textarea>
+		</div>
+	</div>
+<div class="espaco_vazio" style="width:298px;height:48px"></div>
+<div style="width:calc(100% - 30px);" class="botao2 botao_adicional" id="exclCat">Excluir categoria</div>
+
+
+
+<script type="text/javascript">
+
+			$("#categoryTop").val({CAT_PAI}).change();
+			$("#categoryTop option[value='{ID_CAT}']").attr("disabled","disabled");
+
+			$(document).off("mouseenter").off("mouseleave");
+			$(document).on("mouseenter", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+				$(this).find('.combo_upload').stop().fadeIn();
+			}).on("mouseleave", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+			 	$(this).find('.combo_upload').stop().fadeOut();
+			});
+
+			$("#UploadThumbmails").ajaxForm({
+				beforeSend: function(xhr) {
+					$('.tapa_upload').show("fade", {}, 'fast');
+					$('#cancelBtn').click(xhr.abort);
+				},
+				uploadProgress: function(event, position, total, percentComplete, myForm) {
+					if(percentComplete >= 99) {
+						$('.tapa_upload').find('.pct').html("Processando imagem...").css({"left":percentComplete + "%"});
+					} else {
+						$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+					}
+					$('.tapa_upload').find('.bar').animate({
+						width: percentComplete + "%"
+					}, 50);
+				},
+				complete: function(e) {
+					out(e.responseText);
+
+					$('.tapa_upload').find('.bar').animate({
+						width: 0
+					}, 500, function() {
+						$('.tapa_upload').hide("fade", {}, 'fast');
+						$('.thumb_img').attr('src', e.responseText);
+						$("#UploadThumbmails").trigger('reset');
+					});
+				}
+			})	
+	
+			$("#UploadThumbmails #myfile").change(function() {
+					$("#UploadThumbmails #enviar_arquivos").click();
+			})
+			$(".combo_upload .pc").unbind('click').click(function() {
+				window.progressbarfile = $(this).parent();
+				$("#UploadThumbmails #myfile").click();
+			})
+			$(".combo_upload .excl").unbind("click tap press").bind("click tap press",function(e) {
+				confirma({
+					conteudo:"<b>Você quer excluir esta imagem?</b>",
+					width:500,
+					height:'auto',
+					bot1:"Sim eu quero",
+					bot2:"Cancelar",
+					divScroll:"body",
+					divBlur:"body #container",
+					newFun:function(){
+						setTimeout(function(){
+								$.ajax({
+								  type: "POST",
+								  data: {function:"reloadThumbCategoria",idCat:"{ID_CAT}",avatar:"null"},
+								  url: "./{PATH}/functions.php",
+								  beforeSend:function(){confirma({width:"auto",conteudo:"Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+								}).done(function(e) {
+										$("#ws_confirm").css("line-height","20px");
+										$("#ws_confirm").remove();
+										$("#body").removeClass("scrollhidden");
+										$("*").removeClass("blur");
+										$('.thumb_img').attr('src', e);
+										TopAlert({
+											mensagem:'Imagem excluída com sucesso!',
+											height:20,
+											timer:5000,
+											type:3
+										})
+
+								});
+						},500)
+					}
+				})
+
+
+
+			})
+			$(".combo_upload .bb").unbind("click tap press").bind("click tap press",function(e) {
+
+				e.preventDefault();
+				abreBiblioteca({
+					admin:0,
+					multiple:0,
+					type:'all',
+					posFn:function(){},
+					onSelect:function(e){
+						$.ajax({
+						  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						  cache: false,
+						  type: "POST",
+						  url: "{PATH}/functions.php",
+						  data: {
+						  	function	:"reloadThumbCategoria",
+						  	idCat		:"{ID_CAT}",
+						  	avatar		:e[0],
+						  },
+						}).done(function(e) {
+							out(e)
+							$('.thumb_img').attr('src',e);
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						})
+
+
+
+					}
+				})
+				return false;
+			});
+			$("#exclCat").unbind('click tap press').bind("click tap press",function(){
+				confirma({
+					conteudo:"<b>Você quer excluir esta categoria?</b><br><br>Após clicar em 'Sim eu quero', não terá mais volta.<br> <b>Tem certeza?</b>",
+					width:500,
+					height:'auto',
+					bot1:"Sim eu quero",
+					bot2:"Cancelar",
+					divScroll:"body",
+					divBlur:"body #container",
+					newFun:function(){
+						$("#ws_confirm").css("line-height","20px");
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+						setTimeout(function(){
+								$.ajax({
+								  type: "POST",
+								  data: {function:"ExcluiCategoria",id_cat:"{ID_CAT}"},
+								  url: "./{PATH}/functions.php",
+								  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+								}).done(function(e) {
+										$("#ws_confirm").css("line-height","20px");
+										$("#ws_confirm").remove();
+										$("#body").removeClass("scrollhidden");
+										$("*").removeClass("blur");
+										if(e.trim()==''){
+											$("#bt_voltar_cat").click();
+											TopAlert({
+												mensagem:'Categoria excluída com sucesso!',
+												height:20,
+												timer:5000,
+												type:3
+											})
+										}else{
+											TopAlert({
+												mensagem:'Erro: '+e,
+												height:200,
+												timer:5000,
+												type:2
+											})
+										}
+								});
+						},500)
+					}
+				})
+			})
+
+
+			var $config= {
+				skin: 'office2013',
+				stylesSet: 'estilos_{ID}',
+				doksoft_uploader_url: './app/ws-modules/ws-model-tool/upload_ckEditor.php?type=ckEditor&group={GROUP}',
+				height: 100,
+				width:690,
+				autoGrow_minHeight: 100,
+				MaxLength: 100,
+				enterMode: 2,
+				forcePasteAsPlainText: true,
+				fillEmptyBlocks: false,
+				basicEntities: false,
+				entities_greek: false,
+				entities_latin: false,
+				entities_additional: '',
+				toolbarStartupExpanded: false,
+				toolbarCanCollapse: true,
+				tabSpaces: 0,
+				entities: 0,
+				forceSimpleAmpersand: 1,
+				allowedContent: true,
+				extraAllowedContent: '*[id](*)',
+				autoGrow_bottomSpace: 50,
+				toolbarGroups: [
+				{
+					name: 'codesnippet',
+					groups: ['codesnippet']
+				}, {
+					name: 'AddImagem'
+				}, {
+					name: 'document',
+					groups: ['mode', 'document', 'doctools']
+				}, {
+					name: 'clipboard',
+					groups: ['clipboard', 'undo']
+				}, {
+					name: 'basicstyles',
+					groups: ['basicstyles', 'cleanup']
+				},
+				{
+					name: 'loremipsum',
+					groups: ['loremipsum']
+				},
+
+				 {
+					name: 'paragraph',
+					groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph']
+				}, {
+					name: 'links',
+					groups: ['links']
+				}, {
+					name: 'insert',
+					groups: ['insert']
+				}, {
+					name: 'colors',
+					groups: ['colors']
+				}, {
+					name: 'tools',
+					groups: ['tools']
+				}, {
+					name: 'others',
+					groups: ['others']
+				}, {
+					name: 'about',
+					groups: ['about']
+				}, {
+					name: 'styles',
+					groups: ['Loremipsum','Font', 'FontSize', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']
+				}, {name: 'websheep'}],
+
+				removePlugins: 'resize,magicline',
+				extraPlugins: 'loremipsum,codesnippet,undo,notification,wordcount,basewidget,button,table,youtube,autogrow,lineutils,widget,leaflet,tableresize,floatpanel,listblock,richcombo,strinsert,dialogui,dialog,templates',
+				codeSnippet_theme: 'monokai_sublime',
+				wordcount: {
+					showParagraphs: false,
+					showWordCount: true,
+					showCharCount: true,
+					countSpacesAsChars: true,
+					countHTML: true,
+					maxWordCount: -1,
+					maxCharCount: 300
+				},
+				removeButtons: 'Presentation,Save,Flash,Print,NewPage,Preview,Templates,Form,Checkbox,TextField,Textarea,Select,Button,HiddenField,CreateDiv,Language,Anchor,Smiley,About,Copy,Paste,PasteText,PasteFromWord,Cut,Radio,SpecialChar,PageBreak,Iframe,About'
+			};
+
+			CKEDITOR.replace("textarea",$config);	
+
+
+
+				$("#bt_SalvarItem").unbind("click tap press").bind("click tap press",function(){
+					$.ajax({
+					  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					  cache: false,
+					  type: "POST",
+					  url: "{PATH}/functions.php",
+					  data: {
+					  	function			:"SalvarDadosCategoria",
+					  	iCat				:"{ID_CAT}",
+					  	ws_id_ferramenta	:"{WS_ID_FERRAMENTA}",
+					  	titulo				:encodeURIComponent($("#categoryTitle").val()),
+					  	categoryTop			:encodeURIComponent($("#categoryTop").val()),
+					  	texto				:encodeURIComponent(CKEDITOR.instances["textarea"].getData()),
+					  	url					:encodeURIComponent($("#categoryTitle").val()),
+					  	ws_protect			:1
+					  },
+					}).done(function(e) {
+						if(e.trim()=='sucesso!'){
+							TopAlert({
+								mensagem:'Categoria salva com sucesso!',
+								height:20,
+								timer:5000,
+								type:3
+							})
+						}else{
+							TopAlert({
+								mensagem:'Erro: '+e,
+								height:200,
+								timer:5000,
+								type:2
+							})
+						}
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					})
+				})
+
+
+
+
+</script>
+
+</form>	</div>
+<!-- END CAT_DETAILS -->

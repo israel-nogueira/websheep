@@ -1,0 +1,120 @@
+<!-- BEGIN CAMPOS_LEADS -->
+<script>
+var barra_progresso = '';
+include_css ('./app/templates/css/websheep/ws-modules/ws-register-leads/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">Lead Captures</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload" style="position: relative;width: 100%;max-width: 1000px;left: 50%;transform: translateX(-50%);height: 50px;">
+		<div id="voltar" class="botao" style="position: absolute;padding: 10px 70px;width: fit-content;z-index: 1;text-align: center; ">{Leads_Fields_Back}</div> 
+		<div id="bt_Add_Galeria" class="botao rig">{Leads_Fields_AddField}</div> </form>
+			<div class="c"></div>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN LI_CAMPO -->
+				<li class='bg06'>
+					<spam class='titulo_coluna w1'>{LI_FIELD}</spam>
+					<div class='combo campo'><div class='detalhes_img excluir botao' data-colum='{LI_FIELD}'>{Leads_Fields_Delete}</div></div>
+				</li>
+			<!-- END LI_CAMPO -->
+		</ul>
+	</div>
+</div>
+<script>
+
+$("#aviso_topo").unbind('click').click(function(){$(this).hide('fast');})
+	window.soLetras = function (obj){
+	     var tecla = (window.event) ? event.keyCode : obj.which;
+	     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+	               return true;
+		}else{
+	          if (tecla != 8) return false;
+	          else return true;
+	     }
+	}
+
+
+function reloadFunctions(){
+
+
+	$('.legenda').LegendaOver();
+	$('.excluir').unbind('click').click(function(){
+		var campo = $(this).data('colum');
+		var divExcl = $(this).parent().parent()	
+			confirma({
+				width: 600,
+				conteudo: "{Leads_Fields_Modal_AreSure}<br>{Leads_Fields_Modal_DataDelete} ",
+				drag: false,bot1:'ok',bot2: '{Leads_Fields_Modal_Cancel}',
+				posFn:function(){},
+				newFun:function(){
+					$.ajax({
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						cache: false, type: "POST", url: "{PATH}/functions.php",
+						data: {
+							function: "exclCampo",
+							tabela: "{TABELA}",
+							coluna: campo,
+						}
+					}).done(function(e) {
+						if(e==true){
+							$(divExcl).remove();
+						}
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					})
+
+				}
+			});
+	})
+
+	$("#voltar").unbind("click").click(function() {
+		confirma({width: "auto",conteudo: "{Leads_Fields_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+		$("#conteudo").load("{PATH}/detalhes.php?lead={TOKEN_TABLE}", function() {
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+	})
+	$("#bt_Add_Galeria").unbind('click').click(function(){
+		confirma({
+			width: 600,
+			conteudo: "{Leads_Fields_Modal_TypeName}<br>{Leads_Fields_Modal_SameName}<br><input class='inputText colunaNameConfirm' onkeypress='return soLetras(event)' style='position: relative; padding: 10px; margin-top: 10px; width: calc(100% - 20px); '>",
+			drag: false,bot1:'ok',bot2: '{Leads_Fields_Modal_Cancel}',
+			posFn:function(){},
+			Check: function() {if($('.colunaNameConfirm').val()!=""){return true; }else{return false; } },
+			ErrorCheck: function() {TopAlert({mensagem: "{Leads_Fields_Modal_TypeName}", clickclose: true, height: 20, timer: 3000, type: 2, }) },
+			newFun:function(){
+				var coluna = $('.colunaNameConfirm').val();
+				confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+				$.ajax({
+					beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+					cache: false, type: "POST", url: "{PATH}/functions.php",
+					data: {
+						function: "AddCampo",
+						tabela: "{TABELA}",
+						coluna: coluna,
+					}
+				}).done(function(e) {
+					out(e)
+						$("#conteudo").load("{PATH}/campos.php?token_table={TOKEN_TABLE}", function() {
+						$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); 
+					});
+				})
+
+			}
+		});
+	})
+
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+}
+reloadFunctions();
+</script>
+
+<!-- END CAMPOS_LEADS -->

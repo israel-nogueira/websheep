@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+#maquina {
+	background-color:#343434;
+	overflow:auto;
+	position: relative;
+	height: 99%;
+	max-height:99%;
+	min-height:99%;
+	border-style:solid;
+	border-color:#141414;
+	border-width:1px;
+	margin: 0 0px -55px 0px;
+	min-width:99%;
+}

@@ -1,0 +1,161 @@
+{
+	"files": {
+		"desktop.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "desktop.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"desktop.less",
+				"../../../../../../localhost/data/localweb/less/vars.less",
+				"../../../../../../localhost/data/localweb/less/easin.less"
+			]
+		},
+		"theme_blue.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "theme_blue.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"theme_blue.less"
+			]
+		},
+		"modulos/ws-tools/style.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "style.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"style.less"
+			]
+		},
+		"modulos/ws-model-tool/metaTags.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "metaTags.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"metaTags.less",
+				"../../../../../../../../localhost/data/localweb/less/vars.less"
+			]
+		},
+		"modulos/ws-tools/detalhes.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "detalhes.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"detalhes.less"
+			]
+		},
+		"modulos/ws-model-tool/detalhes.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "detalhes.min.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"../../../../../../../../localhost/data/localweb/less/vars.less",
+				"detalhes.less"
+			]
+		},
+		"modulos/ws-model-tool/style.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "style.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"style.less"
+			]
+		},
+		"modulos/ws-model-tool/templates.less": {
+			"engines": [
+				{
+					"compiler": "less",
+					"output": "templates.css",
+					"options": {
+						"compress": false,
+						"ieCompat": false,
+						"strictMath": false,
+						"strictUnits": false,
+						"javascriptEnabled": false,
+						"sourceMap": true
+					}
+				}
+			],
+			"sources": [
+				"../../../../../../../../localhost/data/localweb/less/vars.less",
+				"templates.less"
+			]
+		}
+	}
+}

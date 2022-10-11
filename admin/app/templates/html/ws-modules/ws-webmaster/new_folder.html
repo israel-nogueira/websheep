@@ -1,0 +1,213 @@
+<style type="text/css">
+	.h1 {
+		position: relative;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 10px;
+		margin: 10px 0;
+		border-bottom: solid 1px #50637d;
+		color: #FFF;
+	}
+
+	.h2 {
+		position: relative;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #d5d5d5;
+	}
+
+	.chosen-container .chosen-drop {
+		border-color: #333;
+		background: #212121;
+		box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+	}
+
+	.chosen-container-single .chosen-single {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+		padding: 10px;
+	}
+
+	.chosen-container-single .chosen-default {
+		color: #999;
+	}
+
+	.chosen-container-single .chosen-search input[type="text"] {
+		border-color: #333;
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results {
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results li.disabled-result {
+		color: #505050;
+	}
+
+	.chosen-container .chosen-results li.highlighted {
+		background-color: #3875d7;
+		background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+		color: #fff;
+	}
+
+	.chosen-container .chosen-results li.no-results {
+		color: #e3e3e3;
+		background: #1f1d1d;
+	}
+
+	.chosen-container-multi .chosen-choices {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+	}
+
+	.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice {
+		border-color: #000;
+		background-color: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-disabled {
+		border: 1px solid #ccc;
+		background-color: #e4e4e4;
+		background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+		color: #666;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-focus {
+		background: #d4d4d4;
+	}
+
+	.chosen-container-multi .chosen-drop .result-selected {
+		color: #505050;
+	}
+
+	.chosen-container-active .chosen-single {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+	}
+
+	.chosen-container-active.chosen-with-drop .chosen-single {
+		border-color: #333;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+	}
+
+	.chosen-container-active .chosen-choices {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+
+	.chosen-container-active .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3 !important;
+	}
+
+	.chosen-disabled {
+		opacity: 0.5 !important;
+	}
+
+	.chosen-rtl .chosen-search input[type="text"] {
+		color: #e3e3e3;
+		background: url("chosen-sprite.png") no-repeat -30px -20px;
+	}
+
+	.input_text {
+		font-family: 'Titillium Web', sans-serif;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 16px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+		padding: 15px 10px;
+		border: solid 1px #3f4143;
+		background-color: #212121;
+		color: #c7c7c7;
+		width: 100%;
+	}
+	.combo {
+		position: relative;
+		margin-left: 9px;
+		width: calc(100% - 26px);
+	}
+
+	.bt_padrao {
+		padding: 10px 20px;
+		width: calc(100% - 80px);
+		left: 50%;
+		position: relative;
+		margin: 13px 0;
+		transform: translateX(calc(-50% - 6px));
+		text-align: center;
+	}
+</style>
+<div class="h1">Criando um novo folder</div>
+<div class="h2">Selecione o diretório o qual será criado o novo folder:</div>
+<div class="combo"> <select id="dirList" style="width:310px;"> <option>/</option> <!-- BEGIN OPT_FOLDER -->
+		<option>{name}</option> <!-- END OPT_FOLDER --></select> </div>
+<div class="h2">Nome do arquivo a ser criado:</div>
+<div class="combo"> <input type="text" id="foldername" class="input_text" name="namefile"> </div>
+<div class="botao bt_padrao">Criar arquivo</div>
+<script type="text/javascript">
+	$("#dirList").chosen({
+		disable_search_threshold: 10,
+		search_contains: true,
+		enable_split_word_search: true,
+		no_results_text: "Oops, nothing found!",
+		width: "calc(100%)"
+	}).change(function(e) {})
+	$('.bt_padrao').unbind("click tap press").bind("click tap press", function() {
+		var path = $("#dirList").val();
+		var foldername = $("#foldername").val();
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'createFolder',
+				'path': path,
+				'foldername': foldername
+			},
+			success: function(data) {}
+		}).done(function(data) {
+			var data = $.parseJSON(data);
+			if (data.status == 1) {
+				ws.alert.top({
+					mensagem: "Diretório criado com sucesso!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#9ee651",
+					bottomColor: "#3a763e",
+					styleText: "color:#000"
+				});
+				window.closeRighttMenu();
+				window.refreshExplorerFilesLeft();
+			} else {
+				ws.alert.top({
+					mensagem: "Ops, houve alguma falha!",
+					timer: 3000,
+					color: "#FFF",
+					background: "#e04e1f",
+					bottomColor: "#e04e1f",
+					styleText: "color:#FFFFFF"
+				});
+			}
+		})
+	})
+</script>

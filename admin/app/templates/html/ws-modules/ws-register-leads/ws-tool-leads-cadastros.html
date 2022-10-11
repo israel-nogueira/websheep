@@ -1,0 +1,132 @@
+<!-- BEGIN LEAD_CAPTURE -->
+<script>
+	include_css ('./app/templates/css/websheep/ws-modules/ws-register-leads/itens.css','css_mod','All');
+	include_css ('./app/templates/css/websheep/ws-modules/ws-register-leads/newItens.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">
+			<span style='color:#FFF'>{TITULO}<span>
+</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+		<div id="bt_voltar_cat_cad" class="botao">{Leads_Register_Back}</div>
+		<script>
+			$("#bt_voltar_cat_cad").unbind("click").click(function(){
+					confirma({width:"auto",conteudo:"  {Leads_Register_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					$("#conteudo").load("./{PATH}/index.php",function(){
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					});
+			});
+		</script>
+	</form>
+	</div>
+	<div class="c"></div>
+	<div id="palco" class="palco_01"  style="padding-bottom: 30px;">
+		<table class="data-tbl-simple table table-bordered w1">
+			<thead class="cabecalhoTable">
+				<tr>
+					<!-- BEGIN TH_THEAD -->
+						<th class="bg05" style="color: #FFF;text-shadow: none;">{TH_FIELD}</th> 
+					<!-- END TH_THEAD -->
+					<th class="bg05"></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<!-- BEGIN TR_TABLE -->
+					<tr class="item">
+						<!-- BEGIN TD -->
+							<td>{TD_FIELD}</td>
+						<!-- END TD -->
+						<td>
+							<img class="btExclui" src="./app/templates/img/websheep/cross.png" data-id="{TD_ID}" style="cursor: pointer;"/>
+						</td>
+					</tr>
+				<!-- END TR_TABLE -->
+
+			</tbody>
+		</table>
+	</div>
+<div class="c"></div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	window.DesativaTabela = function(){
+			$(".tbl_length").chosen('destroy');
+			$('.data-tbl-simple').dataTable().fnDestroy();
+			$("div.table_top select").removeClass('tbl_length').removeClass('selectNumResult');
+			$(".dataTables_filter").removeClass('w1');
+			$(".dataTables_filter input").removeClass('inputText');
+	}
+	window.AtivaTabela = function(){
+		$('.data-tbl-simple').dataTable({
+			"sDom": '<"table_top clearfix"fl<"clear">>,<"table_content"t>,<"table_bottom w1"p<"clear">>',
+			"iDisplayLength": 10,
+			"bAutoWidth": false,
+			"sPaginationType": "full_numbers",
+			'autoWidth': false,
+			'aoColumnDefs': [{'aTargets': ['nosort']}],
+			"oLanguage": {"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel w1'>{Leads_Register_Modal_NumerForPage}:</span>",},
+		})
+		$("div.table_top select").addClass('tbl_length').addClass('selectNumResult').attr('id','selectNumResult');
+		$(".tbl_length").chosen({disable_search_threshold: 4});
+		$(".dataTables_filter input").addClass('inputText').addClass('w1').attr("placeHolder","Pesquisar:");
+	}
+
+
+	$('.btExclui').unbind('click').click(function(){
+			var id 		= $(this).data("id");
+			var divExcl = $(this).parent().parent();
+			confirma({
+				width: 600,
+				conteudo: "{Leads_Register_Modal_WantDelete}<br>{Leads_Register_Modal_DataDelete} ",
+				drag: false,bot1:'{Leads_Register_Modal_Delete}',bot2: '{Leads_Register_Modal_Cancel}',
+				posFn:function(){},
+				newFun:function(){
+					$.ajax({
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Register_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						cache: false, type: "POST", url: "{PATH}/functions.php",
+						data: {
+							function: "exclRegistro",
+							id: id,
+							tabela: "{LEAD}",
+						}
+					}).done(function(e) {
+						out(e)
+						if(e==true){
+								window.DesativaTabela();
+								$(divExcl).remove();
+								window.AtivaTabela();
+							}
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					})
+
+				}
+			});
+	})
+
+	<!-- BEGIN ATIVA_TABLE -->
+		window.AtivaTabela();
+	<!-- END ATIVA_TABLE -->
+
+	$("#Balao_ToolType").remove();
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+//#########################################################################################
+//#########################################################################################
+//#########################################################################################
+});
+
+
+
+
+</script>
+
+<!-- END LEAD_CAPTURE -->

@@ -1,0 +1,35 @@
+@charset "utf-8";
+/*##################################################  STAGE LIQUIDO  #####################################################################*/
+html, body, #container { 
+height: 100%;
+min-width:900px;
+}
+body > #container { 
+height: auto;
+min-height: 100%;
+margin-bottom: -129px;
+overflow: hidden;
+}
+#container{
+	padding-bottom: -129px;
+}
+
+#footer {
+background-color:#C30;
+position: relative;
+margin-top: -129px;
+height: 129px;
+clear: both;
+}
+#header{
+background-color: #069;
+width: 100%;
+min-width: 900px;
+height: 150px;
+}
+#conteudo{
+background-color: #91CEEC;
+margin-bottom: 129px;
+}
+#desktop{display:none;}
+#mobile{display:blok;}

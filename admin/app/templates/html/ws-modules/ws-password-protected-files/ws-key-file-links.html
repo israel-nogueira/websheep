@@ -1,0 +1,190 @@
+<!-- BEGIN KEYLINKS -->
+<script>
+window.id_item_selected		='';
+var barra_progresso 		= '';
+var canvas_barra_progresso 	= '';
+include_css ('{ROOT_PATH}admin/app/templates/css/websheep/ws-modules/ws-password-protected-files/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{keyFile_links_mainTitle}<span style="color:#FFF;">{FILENAME}</span></div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload" style="position: relative; width: 100%; float: left; height: 40px; ">
+			<div id="bt_Voltar_Galeria" class="botao">{keyFile_links_backButton}</div>
+			<div id="bt_Add_Galeria" class="botao">{keyFile_links_createLinkButton}</div>
+		</form>
+	</div>
+
+	<div id="palco" class="palco_01" >
+		<ul>
+		<!-- BEGIN LI_KEYLINKS -->
+					<li id='{LI_ID_LINK}' class='bg06'>
+						<spam class='desc_item w2'>
+								<i class='icon-link'></i>
+								<a href='http://{DOMINIO}{ROOT_PATH}ws-download/{LI_TOKEN_FILE}!{LI_LEY_ACCESS}' target='_blank' >{FILENAME}</a>
+						</spam>
+						<div class='combo'>
+							<div 
+								class='detalhes_img editar' 		
+								data-idLink='{LI_ID_LINK}'	
+								data-tokenFile='{LI_TOKEN_FILE}'		
+								data-active='{LI_ACTIVE}' 
+								data-disabletodown='{LI_DISABLE_TO_DOWN}' 
+								data-refreshToDown='{LI_REFRESH_TO_DOWN}'	
+								data-keyaccess='{LI_LEY_ACCESS}'	
+								data-expire='{LI_EXPIRE}'	
+							>
+								<i class='fa fa-edit' 	style='cursor:pointer;color: #3d69a5;'></i>
+							</div>
+							<div class='detalhes_img excluir' 		data-idLink='{LI_ID_LINK}' 	data-token='{LI_LEY_ACCESS}'>
+									<i class='fa fa-close' 	style='cursor:pointer;color: #da4040;'></i>
+							</div>
+						</div>
+					</li>
+			<!-- END LI_KEYLINKS -->
+		</ul>
+	</div>
+</div>
+<script>
+
+$("#aviso_topo").unbind('click').click(function(){$(this).hide('fast');})
+function reloadFunctions(){
+
+	//==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM
+	$('.editar').unbind('click').bind("click",function(){
+		var idLink 			= $(this).data('idlink');
+		var tokenFile 		= $(this).data('tokenfile');
+		var keyaccess 		= $(this).data('keyaccess');
+		var linkActive		= $(this).data('active');
+		var disabletodown 	= $(this).data('disabletodown');
+		var refreshToDown 	= $(this).data('refreshtodown');
+		var expire 			= $(this).data('expire');
+
+		$.ajax({
+			beforeSend: function() {}
+			,cache: false, type: "POST", url: "{ROOT_PATH}admin/app/ws-modules/ws-password-protected-files/functions.php",
+			data: {'function': "getInfoLink", idLink: idLink, }
+		}).done(function(e) {
+			confirma({
+				width: 600,
+				conteudo:e,
+				drag: false,bot1:'Salvar',bot2: 'Cancelar',
+				posFn:function(){
+					$( "*[legenda]" )						.LegendaOver();
+					$( "input[name='disableToDown']" )		.change(	function(){$( "input[name='refreshToAllDown']:checked, 	input[name='refreshToFirstDown']:checked" )	.click() })
+					$( "input[name='refreshToFirstDown']" )	.change(	function(){$( "input[name='refreshToAllDown']:checked, 	input[name='disableToDown']:checked" )		.click() })
+					$( "input[name='refreshToAllDown']" )	.change(	function(){$( "input[name='disableToDown']:checked, 	input[name='refreshToFirstDown']:checked" )	.click() })
+					$(".icon-refresh")						.unbind("click tap press").bind('click tap press',function(){
+							$.ajax({
+								beforeSend: function() {}
+								,cache: false, type: "POST", url: "{ROOT_PATH}admin/app/ws-modules/ws-password-protected-files/functions.php",
+								data: {'function': "AtualizaKey", idLink: idLink, }
+							}).done(function(e) {
+								if(e=="falha"){
+									TopAlert({mensagem: "{keyFile_links_failCreateLink}",type:2})
+								}else{
+									TopAlert({mensagem: "{keyFile_links_topAlert_sucessCreateLink}",type:3})
+									$(".AlinkAccessKey").attr("href","http://{DOMINIO}/ws-download/"+tokenFile+"!"+e)
+									$(".inputlinkAccessKey").attr("value","http://{DOMINIO}/ws-download/"+tokenFile+"!"+e)
+									keyaccess = e;
+								}
+							})	
+					})
+				}
+				,newFun:function(){}
+				,onCancel:function(){}
+				,Check:function(){
+					if($( "#arquivo" ).val()==""){return false; }
+					$.ajax({
+						beforeSend: function() {
+							setTimeout(function(){
+								confirma({width: "auto", conteudo: "  {keyFile_links_modal_save_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_PATH}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) 
+							},500)
+						},
+						cache: false, type: "POST", url: "{ROOT_PATH}admin/app/ws-modules/ws-password-protected-files/functions.php",
+						data: {
+							function: "salvaLink",
+							form: $("#formLink").serialize(),
+						}
+					}).done(function(e) {
+
+						$("#conteudo").load("{PATH}/links.php?tokenfile={TOKEN_FILE}",function(){$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); });
+
+
+					})
+					return true;
+				}
+				,ErrorCheck:function(){TopAlert({mensagem: "{keyFile_links_topAlert_settingsIncorrectly}",clickclose:true,type:2})}
+			})
+
+
+		})	
+
+
+
+
+
+
+
+		})
+
+
+	$('.excluir').unbind('click').click(function(){
+			var divExcl = $(this).parent().parent();
+			var idLink = $(this).data("idlink");
+			confirma({
+				width: 600,
+				conteudo: "{keyFile_links_modal_delete_content} ",
+				drag: false,bot1:'{keyFile_links_modal_delete_bot1}',bot2: '{keyFile_links_modal_delete_bot2}',
+				posFn:function(){},
+				newFun:function(){
+					$.ajax({
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_delete_before}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_PATH}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						cache: false, type: "POST", url: "{ROOT_PATH}admin/app/ws-modules/ws-password-protected-files/functions.php",
+						data: {
+							function: "exclLink",
+							idLink: idLink,
+						}
+					}).done(function(e) {
+						if(e==true){$(divExcl).remove();}
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					})
+
+				}
+			});
+	})
+
+	$("#bt_Add_Galeria").unbind('click').click(function(){
+		$.ajax({
+			beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_addLink_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_PATH}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+			cache: false, type: "POST", url: "{ROOT_PATH}admin/app/ws-modules/ws-password-protected-files/functions.php",
+			data: {
+				function: "AddLink",
+				tokenFile: '{TOKEN_FILE}',
+			}
+		}).done(function(e) {
+			out(e)
+			$("#conteudo").load("{PATH}/links.php?tokenfile={TOKEN_FILE}",function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+	})
+
+
+	$("#bt_Voltar_Galeria").unbind('click').click(function(){
+		confirma({width: "auto", conteudo: "  {keyFile_links_backButtonBefore}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_PATH}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0})
+		$("#conteudo").load("{PATH}/index.php",function(){$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); });
+	});
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+}
+reloadFunctions();
+
+</script>
+
+<!-- END KEYLINKS -->

@@ -1,0 +1,217 @@
+<!-- BEGIN ITEM_LIST -->
+<script>
+	window.id_item_selected		='';
+	include_css ("./app/templates/css/websheep/ws-modules/ws-model-tool/itens.css","css_mod","All");
+	include_css ("./app/templates/css/websheep/ws-modules/ws-logs/newItens.min.css","css_mod","All");
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{TITULO_TOOL}{KEYWORK}</div>
+<div id="topo_upload" class="bg01" >
+	<div id="formUpload">
+		<!-- BEGIN BT_BACK -->
+		<div id="bt_voltar_filters" class="botao">{modulo_itens_buttons_back}</div>
+		<script>
+			$("#bt_voltar_filters").unbind("click").click(function(){
+					confirma({width:"auto",conteudo:"  {modulo_itens_modal_back_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					$("#conteudo").load("{LINK_BACK}",function(){
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					});
+			});
+		</script>
+		<!-- END BT_BACK -->
+		<!-- BEGIN FORM_SEARCH -->
+		<form name="form" id="formsearch">
+			<input type="text" name="" legenda="Para filtro simples, apenas digite.<br>Para pesquisa interna, aperte 'ENTER'" class="inputText search">
+		</form>
+		<select id="setLimit">
+			<option value="2">Mostrar 2</option>
+			<option value="5">Mostrar 5</option>
+			<option value="10">Mostrar 10</option>
+			<option value="25">Mostrar 25</option>
+			<option value="50">Mostrar 50</option>
+			<option value="All">Todos os registros</option>
+		</select>
+		<!-- END FORM_SEARCH -->
+		<!-- BEGIN BT_CAT -->
+		<div id="bt_categorias" class="botao">{modulo_itens_buttons_category}</div>
+		<!-- END BT_CAT -->
+		<!-- BEGIN BT_ADD -->
+		<div id="bt_Add_Galeria" class="botao">{modulo_itens_buttons_addItem}</div>
+		<!-- END BT_ADD -->
+	</div>
+</div>
+<div id="palco" class="palco_01"  style="padding-bottom: 30px;">
+
+
+	<div class="table-thead">
+		<div class="table-thead-colunm">Tipo</div>
+		<div class="table-thead-colunm">Arquivo</div>
+		<div class="table-thead-colunm">Linha</div>
+		<div class="table-thead-colunm">Mensagem</div>
+	</div>
+
+
+	<div class="table-tbody">
+		<!-- BEGIN TR_ITEM -->
+		<div class="table-tr" id="{ID_ITEM}" data-pos="{POSITION}">
+			<div class="table-tr-colunm {td_class}">
+				<i class="{ICON}"></i>  {td_type}
+			</div>
+			<div class="table-tr-colunm">{td_file}</div>
+			<div class="table-tr-colunm">{td_line}</div>
+			<div class="table-tr-colunm">{td_msn}</div>
+		</div>
+		<!-- END TR_ITEM -->
+	</div>
+	<div class="c"></div>
+	<div class="container-paginate">
+		<!-- BEGIN COUNTPAGE -->
+		<div data-page="{COUNT}" class="count-paginate {ACTIVE}">{COUNT}</div>
+		<!-- END COUNTPAGE -->
+	</div>
+	<script type="text/javascript">
+		$(".count-paginate:not(.active)").click(function(){
+			var page 		= $(this).data("page");
+			var keywork 	= $('.search').val();
+			var paginate 	= $('#setLimit').chosen().val();
+			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			$("#conteudo").load("./{PATH}/index.php?PAGE="+page+"&LIMIT={LIMIT}",function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});				
+		});	
+	</script>
+	<div class="c"></div>
+</div>
+<div class="c"></div>
+</div>
+<script type="text/javascript">
+	$( function() {
+		$( ".table-tbody" ).sortable({
+			placeholder: "placeholderDrop", 
+			handle: ".mover",
+			update: function( event, ui ) {
+				OrdenaItem()
+			}
+		});
+
+
+		$('#setLimit').val("{LIMIT}").chosen({width: 200,disable_search_threshold:10}).change(function(event){
+			if(event.target == this){
+				var keywork = ($(this).val());
+				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+				$("#conteudo").load("./{PATH}/itens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&LIMIT="+encodeURI(keywork),function(){
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});	
+			}
+		});
+
+		<!-- BEGIN FILTER_KEYUP -->
+				var inputlideres = document.querySelector('.search');
+				inputlideres.onkeyup = function () {
+					var filter = inputlideres.value.toUpperCase();
+					$('.table-tr').each(function(){
+						var name=$(this).text().split("	").join("").split("\n").join(" ").trim();
+						if (name.toUpperCase().indexOf(filter) >= 0) {
+							$(this).show();
+						}else{
+							$(this).hide();
+						}
+					})
+				}
+		<!-- END FILTER_KEYUP -->
+
+		$('#formsearch').submit(function(e){
+			e.preventDefault();
+			var keywork = $('.search').val();
+			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			$("#conteudo").load("./{PATH}/itens.php?PAGE={PAGE}&LIMIT={LIMIT}&token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&keywork="+encodeURI(keywork),function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});	
+		});
+	});
+	function reloadFunctions(){
+		$('*[legenda]').LegendaOver();
+		$('#palco td .excluir').LegendaOver();
+		$("#Balao_ToolType").remove();
+
+		$('.editar').unbind('click').bind("click",function(){
+			var id_item = $(this).data('id');
+				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+				$("#conteudo").load("./{PATH}/detalhes.php?PAGE={PAGE}&LIMIT={LIMIT}&token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&id_cat={ID_CAT}&ws_nivel={WS_NIVEL}&id_item="+id_item,function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+
+
+		$(".excluir").unbind('click').click(function(){
+			var iDgaleria 	= $(this).data('id');
+			confirma({
+				conteudo:"{modulo_itens_modal_delete_content}",
+				width:500,
+				height:'auto',
+				bot1:"{modulo_itens_modal_delete_bot1}",
+				bot2:"{modulo_itens_modal_delete_bot2}",
+				divScroll:"body",
+				divBlur:"body #container",
+				newFun:function(){
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+					setTimeout(function(){
+						$.ajax({
+						  type: "POST",
+						  data: {function:"excl_produto",id_item_direct:true,id_item:iDgaleria},
+						  url: "./{PATH}/functions.php",
+						  beforeSend:function(){confirma({width:"auto",conteudo:"  {modulo_itens_modal_delete_beforeContent}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+						}).done(function(e) {
+							$("#ws_confirm").css("line-height","20px");
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+							if(e.indexOf('sucesso')>=0){
+								$('.data-tbl-simple tr#'+iDgaleria).fadeOut(400, function(){
+									$(this).remove();
+									window.DesativaTabela();
+									window.AtivaTabela();
+								}); 
+								TopAlert({
+									mensagem:'{modulo_itens_topAlert_sucessDelete}',
+									height:20,
+									timer:5000,
+									type:3
+								})
+							}else{
+								TopAlert({
+									mensagem:'Error:'+e,
+									height:200,
+									timer:5000,
+									type:2
+								})
+							}
+						})
+					},500);
+				}
+			})
+		})
+		//	OrdenaItem();
+		//====================================================================================================
+	}
+	reloadFunctions();
+		setTimeout(function(){
+			$('#container').perfectScrollbar()
+			$('#container').perfectScrollbar('update')
+			$('#container').animate({scrollTop: 0}, 200);
+		},200);
+		
+</script>
+<!-- END ITEM_LIST -->

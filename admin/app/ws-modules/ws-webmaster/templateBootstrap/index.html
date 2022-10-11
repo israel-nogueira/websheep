@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="//code.jquery.com/jquery-latest.min.js"></script>
+		<link rel="stylesheet" href="./../../../templates/css/fontes/fonts.css">
+		<link rel="stylesheet" href="./../../../templates/css/perfect-scrollbar/perfect-scrollbar.min.css">
+		<link rel="stylesheet" href="./css/bigsky.aui.css">
+		<link rel="stylesheet" href="./css/styles.css">
+	</head>
+	<body>
+		<div class="application-frame easing">
+			<div class="panels-wrapper">
+				<div class="navigator easing">
+					<div class="preview xs easing">
+						<div class="title-bar">
+							<div class="size-icon"><i class="icon-mobile-phone"> </i></div>
+							<div class="title">Celular</div>
+						</div>
+						<div class="preview-container">
+							<div class="preview-rows"></div>
+						</div>
+					</div>
+					<div class="preview sm easing">
+						<div class="title-bar">
+							<div class="size-icon"><i class="icon-tablet"> </i></div>
+							<div class="title">Tablet</div>
+						</div>
+						<div class="preview-container">
+							<div class="preview-rows"></div>
+						</div>
+					</div>
+					<div class="preview md easing">
+						<div class="title-bar">
+							<div class="size-icon"><i class="icon-laptop"> </i></div>
+							<div class="title">Desktop</div>
+						</div>
+						<div class="preview-container">
+							<div class="preview-rows"></div>
+						</div>
+					</div>
+					<div class="preview lg easing">
+						<div class="title-bar">
+							<div class="size-icon"><i class="icon-desktop">  </i></div>
+							<div class="title">Large Desktop</div>
+						</div>
+						<div class="preview-container">
+							<div class="preview-rows"></div>
+						</div>
+					</div>
+				</div>
+				<div class="workspace easing"></div>
+				<div class="html easing">
+					<div class="collapse-panel right"> <span class="open"><i class="icon-caret-right"> </i></span><span class="closed"><i class="icon-caret-left"> </i></span></div>
+					<div class="html-wrapper">
+						<div class="options easing">
+							<div class="container-check">
+								<label>
+									<input type="checkbox" class="use-less-mixin" style="margin-right: 9px;">LESS
+								</label>
+								<label>
+									<input type="checkbox" class="include-container" style="margin-right: 9px;">Container
+								</label>
+								<label class="insertCode">
+									Inserir código
+								</label>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="output_container">
+							<pre class="output prettyprint lang-html markup"></pre>
+							<div class="clear"></div>
+							<pre class="output prettyprint lang-text mixins"></pre>
+						</div>
+						<textarea class="copy-output"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="./../../../vendor/prettify/r298/prettify.min.js"></script>
+		<script type="text/javascript" src="./../../../vendor/beautify-html/beautify-html.js"></script>
+		<script type="text/javascript" src="./../../../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script type="text/javascript" src="./js/cljs.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("body").perfectScrollbar()
+				$(".preview .preview-container").perfectScrollbar()
+				$(".workspace.easing").perfectScrollbar()
+				$(".insertCode").bind("click tap press",function(){
+					var html = 	$(".output.prettyprint.lang-html.markup.prettyprinted").text();
+					var less = 	$(".output.prettyprint.lang-text.mixins.prettyprinted").text();
+					window.top.ws_webmaster.engine.insert("<!-- GRID BOOTSTRAP -->\n\n"+html+"\n\n<!-- LESS --> \n\n"+less)
+					window.top.closeRighttMenu();
+				})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			})
+		</script>
+	</body>
+</html>

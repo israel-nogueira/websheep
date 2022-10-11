@@ -1,0 +1,8 @@
+########################## BEGIN WEBSHEEP ###########################
+	<IfModule mod_rewrite.c>
+			RewriteEngine On
+			RewriteCond %{SCRIPT_FILENAME} !-f
+			RewriteRule ^(.*)$ index.php
+	</IfModule>
+
+########################### END WEBSHEEP ############################

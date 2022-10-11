@@ -1,0 +1,219 @@
+@charset "utf-8";
+#topo_upload{
+}
+
+
+#palco{
+		position: relative;
+		width: 1000px;
+		float: left;
+		left: 50%;
+		margin-left: -500px;
+		top: 0px;
+		padding: 10px;
+		margin-bottom: 20px;
+		margin-top: 10px;
+		height: ~'calc(100% - 105px)';
+		#salvarBase{
+			position: absolute;
+			padding: 8px 40px;
+			float: right;
+			right: 50px;
+			font-size: 20px;
+			top: 10px;
+			text-align: center;
+			z-index: 1;
+    	}
+		#helpme{
+			position: absolute; 
+			float: right; 
+			right: 10px; 
+			padding: 10px; 
+			top: 10px;
+			z-index: 1;
+    	}
+		.dados_basicos{
+            margin-bottom: 20px;
+            width: 50%;
+            float: left;
+            position: relative;
+
+            &.fullw{
+            	width: 100%;
+            	.includes{
+            		width: 100%;
+            		li{
+            			width: 100%;
+            			.file{
+            				width: ~'calc(100% - 10px)';
+            				.urlPath.file{
+            					    width: ~'calc(100% - 50px)';
+            				}
+            				.editar{
+            					float: right;
+            				}
+            			}
+            		}
+            	}
+            }
+
+			input{
+                padding: 3px 10px;
+                top: -2px;
+                position: relative;
+                background-color: rgba(6, 91, 152, 0.11);
+                color: #55739a;
+			}
+		}
+		.titlew1{
+		    width: 100%;
+            font-size: 40px;
+            top: 0px;
+            position: relative;
+            border-bottom: solid 1px;
+            margin-bottom: 20px;
+            float: left;
+            padding-bottom: 10px;
+        }
+
+		#addFile{
+			z-index: 1;
+			position: relative;
+			padding: 8px 40px;
+			float: right;
+			font-size: 20px;
+			top: 0px;
+			text-align: center;
+		}
+
+		.includes,.includesFTP{
+            position: relative;
+            float: left;
+            width: 100%;
+            overflow: auto;
+            overflow-x: hidden;
+            height: ~'calc(100% - 90px)';
+			li{
+				position: relative;
+				height: auto;
+			    float: left;
+				width: ~'calc(100% - 20px)';
+				padding: 2px;
+				.processo{
+					cursor: move;
+					padding: 10px;
+					margin: 10px 0;
+					position: relative;
+					float: left;
+					width: ~'calc(100% - 10px)';
+					text-align: center;
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+					user-select: none;
+					font-weight: bold;
+					font-size: 20px;
+				}
+				.file{
+                    padding: 3px;
+                    position: relative;
+                    float: left;
+                    margin: 0;
+                    width: calc(100% - 3px);
+                    top: 0;
+                    left: 0;
+					.ClassOnly{
+						background: none;
+						color: #56a9ad;
+						border-color: #9db7b9;
+
+					}
+	    			.nameFile{
+							padding: 10px;
+						    width: ~'calc(50% - 90px)';
+							float: left;
+					}		    			
+				    .urlPath{
+                        overflow: hidden;
+                        word-wrap: inherit;
+                        margin-right: 0px;
+                        padding: 5px 0px 7px 5px;
+                        width: ~'calc(100% - 67px)';
+                        float: left;
+                        background: rgba(51, 129, 197, 0.21);
+                        border: none;
+                        margin-top: 1px;
+                        margin-left: 6px;
+                        position: relative;
+                        &.ftp{width: ~'calc(100% - 7px)';}
+                        &.file{width: ~'calc(100% - 90px)';}
+    				}	
+					.salvar{
+						cursor: pointer;
+						position: relative;
+						float: right;
+						width: 16px;
+						height: 16px;
+	    				margin: 10px;
+	    				background-image:url('./../../../../img/websheep/disk-black.png'); 
+					}	
+					.incluir{
+					    display:none;
+						cursor: pointer;
+						position: relative;
+						float: right;
+						width: 16px;
+						height: 16px;
+	    				margin: 5px;
+	    				background-image:url('./../../../../img/websheep/document-export.png'); 
+					}	
+					
+					.excluir{
+						cursor: pointer;
+						position: relative;
+						float: right;
+						width: 16px;
+						height: 16px;
+					    margin: 5px;
+						background-image:url('./../../../../img/websheep/cross.png'); 
+					}			
+					.editar{
+						cursor: pointer;
+						position: relative;
+						float: left;
+						width: 16px;
+						height: 16px;
+					    margin: 10px;
+						background-image:url('./../../../../img/websheep/magnifier.png'); 
+					}			
+					.move{
+						cursor: move;
+						position: relative;
+						float: left;
+						width: 16px;
+						height: 16px;
+					    margin: 5px;
+						background-image:url('./../../../../img/websheep/arrow-move.png'); 
+					}	
+					
+
+					
+					
+					
+				}
+				
+					&.insertFile{
+					
+				    	.move, .editar,.excluir{display:none;}
+				    	.incluir{display:block;}
+				    	.urlPath{
+				    	    width: ~'calc(100% - 50px)';
+				    	}
+					
+					}
+				
+				
+				
+			}
+		}
+}

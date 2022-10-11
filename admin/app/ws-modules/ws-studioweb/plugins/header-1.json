@@ -1,0 +1,32 @@
+[{
+	"hash": "ej5078gh0w8uerhg07856gujwp45ghpr4hgy80vb0rufvh04tg9wgh7w8",
+	"name": "header-1",
+	"description": "Start your development with a beautiful Bootstrap 4 UI kit.",
+	"avatar": "//demos.creative-tim.com/bs3/material-kit-pro/assets/assets-for-demo/h_3.jpg",
+	"author": "Israel Nogueira",
+	"type": "header",
+	"version": "1.2.1",
+	"html": "<div class=\"header-1\"> <nav class=\"navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute\"> <div class=\"container\"> <div class=\"navbar-translate\"> <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#example-navbar-primary\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\"> <span class=\"navbar-toggler-bar bar1\"></span> <span class=\"navbar-toggler-bar bar2\"></span> <span class=\"navbar-toggler-bar bar3\"></span> </button> <a class=\"navbar-brand\" href=\"#pablo\">Creative Tim</a> </div> <div class=\"collapse navbar-collapse\" id=\"example-navbar-primary\"> <ul class=\"navbar-nav mx-auto\"> <li class=\"nav-item active\"> <a class=\"nav-link\" href=\"#pablo\"> Home </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"#pablo\"> About Us </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"#pablo\"> Contact Us </a> </li> </ul> <ul class=\"nav navbar-nav\"> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://twitter.com/CreativeTim\"> <i class=\"fa fa-twitter\"></i> </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://www.facebook.com/CreativeTim\"> <i class=\"fa fa-facebook-square\"></i> </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://www.instagram.com/CreativeTimOfficial\"> <i class=\"fa fa-instagram\"></i> </a> </li> </ul> </div> </div> </nav> <div class=\"page-header header-filter\"> <div class=\"page-header-image\" style=\"background-image: url('//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/img/bg16.jpg');\"></div> <div class=\"content-center\"> <div class=\"container\"> <div class=\"row\"> <div class=\"col-md-7 ml-auto text-right\"> <h1 class=\"title\">History of surfing</h1> <h4 class=\"description\">The riding of waves has likely existed since humans began swimming in the ocean. In this sense, bodysurfing is the oldest type of wave-catching. Standing up on what is now called a surfboard is a relatively recent innovation developed by the Polynesians.</h4> <br /> <div class=\"buttons\"> <a href=\"#pablo\" class=\"btn btn-icon btn-link btn-neutral btn-lg\"> <i class=\"fa fa-twitter\"></i> </a> <a href=\"#pablo\" class=\"btn btn-icon btn-link btn-neutral btn-lg\"> <i class=\"fa fa-facebook-square\"></i> </a> <a href=\"#pablo\" class=\"btn btn-icon btn-link btn-neutral btn-lg\"> <i class=\"fa fa-get-pocket\"></i> </a> <a href=\"#pablo\" class=\"btn btn-info btn-lg mr-3\"> Read More </a> </div> </div> </div> </div> </div> </div>",
+	"assets": {
+		"css": [
+			"//fonts.googleapis.com/css?family=Montserrat:400,700,200",
+			"//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/bootstrap.min.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/now-ui-kit.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/demo.css"
+		],
+		"js": [
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/jquery.3.2.1.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/popper.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/bootstrap.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/moment.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-switch.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-tagsinput.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-selectpicker.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/jasny-bootstrap.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/nouislider.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-datetimepicker.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/now-ui-kit.js?v=1.2.0"
+		]
+	}
+}]

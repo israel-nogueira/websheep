@@ -1,0 +1,309 @@
+<!-- BEGIN TOOL_MODEL -->
+<form id="formUploadTool" style="display:none" method="post" enctype="multipart/form-data" name="formUpload">
+	<input name="arquivo"	 id="myfile" 		type="file"  style="display:none" accept=".ws" />
+	<input name="pageid" 	id="pageid" 		type="hidden"  style="display:none"/>
+	<input name="prefix" 	id="InputPrefix" 	type="hidden"  style="display:none"/>
+	<input name="slugTool" 	id="InputSlug" 		type="hidden"  style="display:none"/>
+	<input name="nameTool" 	id="InputName" 		type="hidden"  style="display:none"/>
+	<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+	<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+</form>
+<script>
+	window.id_item_selected='';
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-tools/style.min.css','css_mod','All');
+</script>
+<style type="text/css">
+	.comboToolls{
+		position: relative;
+		overflow: auto;
+		max-height: 400px;
+		margin-bottom: -57px;
+
+	}
+	.comboToolls .toolUnique{
+		position: relative;
+		width: 500px;
+		border: solid 0.5px rgba(146, 146, 146, 0.3);
+		height: initial;
+		margin: 8px;
+		padding: 10px
+	}
+	.comboToolls .toolUnique .title{
+		font-size: 20px;
+		font-weight: bold;
+		float: left;
+		width: 100%;
+		text-align: left;
+	}
+	.comboToolls .toolUnique .content {
+		float: left;
+		position: relative;
+		min-height: 30px;
+		width: 100%;
+		text-align: left;
+		border-bottom: solid 1px #cecece;
+		margin: 10px 0;
+		word-wrap: break-word;
+		color: #000;
+		padding-bottom: 16px;
+	}
+	#excluir{
+		display: block;
+		position: relative;
+		float: right;
+		padding: 10px 30px;
+		right: 40px;
+	}
+	#exportarTodos,#excluir{
+		display: none;
+	}
+
+</style>
+
+	<div id="topoModulo" class="TitTop bg05 w1b">{ToolsManager_Title}</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+			<div id="voltar" 			data-goback="{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/tools.php" class="botao">{ToolsManager_Back}</div>
+			<div id="importApp" 		class="botao">{ToolsManager_Add}</div>
+			<div class="c"></div>
+		</form>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN PATHS -->
+				<li class='ws-toolsferramenta' data-id='{LI_ID}'>
+					<div class='w1 titulo'>
+						<input class="inputText" value="{LI_PATH_NAME}" style="padding: 2px 5px; position: relative; margin: -5px; width: calc(100% - 130px); ">
+					</div>
+					<div id='combo'>
+						<div id='detalhes_img' style="width: 130px;">
+							<div style='padding:0;position:relative;float:left;width: 100%;height:25px;top:2px;'>
+								<div style='padding:0 9px;	position:relative; float:left; width:25px; height:25px; top:2px;'>
+									<img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='mover_item legenda' legenda='{ToolsManager_Move}' src='./app/templates/img/websheep/arrow-move.png'>
+								</div>
+								<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'>
+									<img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='salvar legenda' legenda='{ToolsManager_Save}' src='./app/templates/img/websheep/disk-black.png'>
+								</div> 
+	                            <div style='padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'>
+	                            	<img style='cursor:pointer; position:relative; float:left; top:4px; left:5px' 	class='excluir legenda' legenda='{ToolsManager_Delete}' src='./app/templates/img/websheep/cross-button.png'>
+								</div>
+							</div>
+					</div>
+				</li>
+			<!-- END PATHS -->
+		</ul>
+	</div>
+</div>
+
+<script>
+	window.ordenaFerramenta = function (retorno){
+			var retorno;
+			var posicoes = [];
+			var i = 0;
+			$('#palco ul li').each(function (i) {
+				var id = $(this).data('id');
+				if(id){
+					posicoes[i] = id;
+					++i;
+				}
+			})
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: { 
+				function:"ordenaPathsFerramenta",
+				posicoes:posicoes
+			  }
+			}).done(function(data) { 
+					out(data)
+					// if(data=="sucesso"){
+					// 	TopAlert({mensagem: "{ToolsManager_RepoPath}",type: 3})
+					// }else{
+					// 	TopAlert({mensagem: "{ToolsManager_RepoFail}",type: 2})
+					// }
+			});
+	}
+
+
+	$(function() {
+		$( "#palco ul" ).sortable({
+			handle: ".mover_item",
+			forceHelperSize: true,
+			axis: "y",
+			beforeStop: function( event, ui ) {
+				window.ordenaFerramenta();
+			}
+		});
+		$( "#palco ul" ).disableSelection();
+	 });
+
+ 	window.reloadFunctions = function(){
+
+		$("#voltar").unbind("click tap press").bind("click tap press",function(){
+			confirma({width:"auto",conteudo:"  {ToolsManager_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/tools.php",function(){
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+			});
+		})
+		$('.legenda').LegendaOver();
+
+		$(".salvar").unbind('click').click(function(e){
+			var path_name = $($(this).parent().parent().parent().parent().parent().find('input')).val();
+			var id 		= $(this).parent().parent().parent().parent().parent().data('id');
+			ws.preload.open();
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: { 
+				function:"saveLabelPathTool",
+				path_name:path_name,
+				id:id
+			  }
+			}).done(function(data) {
+					if(data=="sucesso"){
+						ws.alert.top({
+							mensagem	: "{ToolsManager_SaveSucess}",
+							styleText: 'font-weight: 700;',
+							color: "#FFF",
+							background: "#b0dc5e",
+							bottomColor: "#F5C814"
+						});
+					}else{
+						ws.alert.top({
+							mensagem	: "{ToolsManager_SaveFail}",
+							styleText: 'font-weight: 700;',
+							color: "#FFF",
+							background: "#dc4a4a",
+							bottomColor: "#F5C814"
+						});
+					}
+					ws.preload.close();
+			})
+
+		})
+		$("#importApp").unbind('click').click(function(e){
+			ws.preload.open()
+			$.ajax({
+			  type: "POST",
+			  url: "./app/ws-modules/ws-tools/functions.php",
+			  data: {function:"addPathTool"}
+			}).done(function(data) {
+				$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/paths.php",function(){ws.preload.close();});
+				if(data=="sucesso"){
+					ws.alert.top({
+						mensagem	: "{ToolsManager_addGroup_Sucess}",
+						styleText: 'font-weight: 700;',
+						color: "#FFF",
+						background: "#b0dc5e",
+						bottomColor: "#F5C814"
+					});
+					ws.preload.open();
+					$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/paths.php",function(){
+						ws.preload.close();
+					});
+				}else{
+					ws.alert.top({
+						mensagem	: "{ToolsManager_addGroup_Fail}",
+						styleText: 'font-weight: 700;',
+						color: "#FFF",
+						background: "#dc4a4a",
+						bottomColor: "#F5C814"
+					});
+				}
+			})
+
+		})
+
+		$(".excluir").unbind('click').click(function(e){
+			var id 		= $(this).parent().parent().parent().parent().parent().data('id');
+
+			ws.confirm({
+				conteudo:'{ToolsManager_Label_Confirm_Delete}',
+				width: 'calc(100% - 20px)',
+				maxWidth: '1000px',
+				minWidth: '300px',
+				height: 'auto',
+				mleft: 0,
+				mtop: 0,
+				posFn: function() {},
+				Init: function() {},
+				posClose: function() {},
+				bots: [
+					{
+							id			: "ok",
+							label		: "{ToolsManager_Confirm_Confirm_Delete}",
+							class		: "",
+							style 		: "",
+							css 		: {"color":"#FFF"},
+							ErrorCheck	: function() {},
+							Check 		: function() {return true},
+							action		: function(){
+											$.ajax({
+											  type: "POST",
+											  url: "./app/ws-modules/ws-tools/functions.php",
+											  data: { 
+												function:"excluiPathTool",
+												id:id
+											  }
+											}).done(function(data) { 
+												if(data=="sucesso"){
+													ws.alert.top({
+														mensagem	: "{ToolsManager_Confirm_Sucess}",
+														styleText: 'font-weight: 700;',
+														color: "#FFF",
+														background: "#b0dc5e",
+														bottomColor: "#F5C814"
+													});
+													ws.preload.open();
+													$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/paths.php",function(){
+														ws.preload.close();
+													});
+												}else{
+													ws.alert.top({
+														mensagem	: "{ToolsManager_Confirm_Fail}",
+														styleText: 'font-weight: 700;',
+														color: "#FFF",
+														background: "#dc4a4a",
+														bottomColor: "#F5C814"
+													});
+
+												}
+											})
+							},
+					},
+					{
+							id			: "cancel",
+							label		: "{ToolsManager_Cancel_Confirm_Delete}",
+							class		: "",
+							style 		: "background-color: #c5c5c5;",
+							css 		: {"color":"#000"},
+							ErrorCheck	: function() {},
+							Check 		: function() {return true},
+							action		: function(){},
+					}
+				],
+				bot1: false,
+				cancel: false,
+				idModal: "ws_confirm",
+				divScroll: "body",
+				divBlur: "#menu_tools,#container,#header",
+				drag: true,
+				botclose: false,
+				newFun: function() {},
+				onCancel: function() {},
+				onClose: function() {},
+				Callback: function() {},
+				ErrorCheck: function() {},
+				Check: function() {
+					return true
+				}
+			})
+
+		})
+}
+window.reloadFunctions();
+</script>
+
+<!-- END TOOL_MODEL -->

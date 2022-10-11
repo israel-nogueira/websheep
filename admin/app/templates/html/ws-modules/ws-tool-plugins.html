@@ -1,0 +1,272 @@
+<!-- BEGIN BLOCK_MODULE_PLUGINS -->
+	<script type="text/javascript">
+		include_css(ws.rootPath+'admin/app/templates/css/websheep/ws-modules/ws-model-tool/plugins.min.css','css_mod','All');
+	</script>
+	<div id="topoModulo" class="TitTop bg05 w1b">{Plugins_PluginsWebsheep}</div>
+	<div id="topo_upload" class="bg01" style="height: 30px;">
+		<div class="btToolCenter">
+			<div id="newPlugin" class="botTool bg06 w1">{Plugins_CreateNewPlugin}</div>
+			<div id="InnerTool" class="botTool bg06 w1">{Plugins_CofigureTool}</div>
+		</div>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul class="listagem">
+			<!-- BEGIN BLOCK_PLUGIN -->
+			<div class="pluginItem bg01 {classActive}" data-path="{dataPath}">
+				<div class="keyActive w2">
+					<div class="botActive bg02"></div>
+					<div class="green">{Plugins_On}</div>
+					<div class="red">{Plugins_Off}</div>
+				</div>
+				<div class="overPlug"></div>
+				<div class="closePlugin"><i class="fa fa-times-circle-o"></i></div>
+				<div class="column-primary " data-minWsVersion="{minWsVersion}">
+					<div class="plugin-avatar"><img src="{avatar}" width="100px" height="100px"/></div>
+					<div class="plugin-title w1 {ClasseThumb}">{pluginName}</div>
+					<div class="plugin-links w2 {ClasseThumb}">{innerload}</div>
+					<div class="description w2  {ClasseThumb}">{description}</div>
+					<div class="plugin-links w2 {ClasseThumb}">{Plugins_Version}: {version} | {Plugins_Author}: {author} | {links}</div>
+					<div class="plugin-links w2 {ClasseThumb}">
+						{Plugins_Path}: 
+						<spam class="path">{PluginPath}</spam>|  {Plugins_Keycode}: 
+						<spam class="path">{keycode}</spam>
+					</div>
+				</div>
+			</div>
+			<!-- END BLOCK_PLUGIN -->
+		</ul>
+	</div>
+	<div class="c"></div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('.closePlugin').unbind('click tap press').bind('click tap press', function(e){
+				e.preventDefault();
+				var path = $(this).parent().data('path');
+				confirma({
+					conteudo:'<b>{Plugins_Modal_DoYouWantDelete}</b><br>{Plugins_Modal_ActionNotBack}.',
+					bot1:'{Plugins_Modal_Yes}',
+					bot2:'{Plugins_Modal_Cancel}',
+					drag:0,
+					botclose:0,
+					posFn:function(){},
+					newFun:function(){
+						setTimeout(function(){confirma({width:"auto",conteudo:"  {Plugins_Modal_Excluding}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0}) },500)
+						$.ajax({
+						  cache: false,
+						  type: "POST",
+						  url: ws.rootPath+"admin/app/ws-modules/ws-model-tool/functions.php",
+						  data: {
+						  	function:"excluiPlugin",
+						  	path:path
+						  },
+						}).done(function(e) {
+							if(e==''){
+								$( "#conteudo" ).load( './{PATH}/plugins.php' , function( response, status, xhr ) {
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+								});
+							}
+						})
+					}
+				})
+			})
+				
+			$('.keyActive').unbind('click tap press').bind('click tap press', function(e){
+				var pathPlugin = $(this).parent().data("path");
+				var DivItem = $(this).parent();
+				$.ajax({
+					type: "POST",
+					sync: true,
+					url:ws.rootPath+"admin/app/ws-modules/ws-model-tool/functions.php",
+					data: { function: "disEnabledPlugin",pathPlugin:pathPlugin}
+				}).done(function(e) {
+					console.log(e)
+					if(e.trim()=='on'){
+						$(DivItem).addClass('enabled')
+						$(DivItem).removeClass('disabled')
+					}
+					if(e.trim()=='off'){
+						$(DivItem).removeClass('enabled')
+						$(DivItem).addClass('disabled')
+					}
+					$("#ws_confirm").remove();
+					$("*").removeClass("scrollhidden").removeClass("blur");
+					$('#container').perfectScrollbar('destroy');
+					window.CloseMenu();
+				})
+			})
+		
+			$('.botInnerPluginURL').unbind('click tap press').bind('click tap press', function(e){
+				e.preventDefault();
+				var dataFile 	= $(this).attr('href');
+				var target 		= $(this).attr("target").toLowerCase();
+				var w 			= $(this).data("w");
+				var h 			= $(this).data("h");
+				if(target=="_self"){
+					window.location = dataFile;
+				}else if(target=="_blank"){
+					window.open(dataFile,'_blank');
+				}
+		
+				return false;
+			})
+		
+		
+		
+			$('.botInnerPlugin').unbind('click tap press').bind('click tap press', function(e){
+				e.preventDefault();
+				var dataFile 	= $(this).attr('href');
+				var target 		= $(this).attr("target").toLowerCase();
+				var w 			= $(this).data("w");
+				var h 			= $(this).data("h");
+		
+		
+			//	confirma({width:"auto",conteudo:"  {Plugins_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+				functions({
+					funcao:"loadInfosPlugin",
+					vars:"dataFile="+dataFile,
+					patch:"{PATH}",
+					Sucess:function(e){
+						if(e!="false"){
+
+							if(target=="_self"){
+								window.location = dataFile;
+							}else if(target=="_blank"){
+								window.open(dataFile,'_blank');
+								$("#ws_confirm").remove();$("#body").removeClass("scrollhidden"); $("*").removeClass("blur");
+							}else if(target=="" || target=="inner" || target=="iframe"){
+									setTimeout(function(){
+										confirma({
+											width:"auto",
+											conteudo:"  {Plugins_Loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+											drag:false,
+											posFn:function(){
+												$("#ws_confirm").css("line-height","20px");
+												setTimeout(function(){
+														if(target=="iframe"){
+															$( "#conteudo" ).html('<iframe src="'+dataFile+'" width="100%" height="100%"></iframe>');
+															$("#ws_confirm").remove();
+															$("*").removeClass("scrollhidden").removeClass("blur");
+															$('#container').perfectScrollbar('destroy');
+															window.CloseMenu();
+														}else{
+															$.ajax({
+																type: "POST",
+																sync: true,
+																beforeSend:function(){confirma({width:"auto",conteudo:"{Plugins_Loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0}); },
+																url: ws.rootPath+"admin/app/ws-modules/ws-tools/functions.php",
+																data: { function: "returnFileInnerPlugin",page:dataFile}
+															}).done(function(e) {
+																out(e)
+																$( "#conteudo" ).html('<div class="ws-plugin"><div>');
+																$( "#conteudo .ws-plugin" ).html(e)
+																$("#ws_confirm").remove();
+																$("*").removeClass("scrollhidden").removeClass("blur");
+																$('#container').perfectScrollbar('destroy');
+																window.CloseMenu();
+															})
+														}
+												},1000)
+											},
+											bot1:0,
+											bot2:0
+										})
+		
+									},1000)
+							}else if(target=="modal"){
+									confirma({
+										conteudo:"{Plugins_Modal_Loading}...",
+										width:w,
+										height:h,
+										bot1:0,
+										bot2:0,
+										drag:0,
+										botclose:1,
+										posFn:function(){
+											$.ajax({
+												type: "POST",
+												sync: true,
+												url: ws.rootPath+"admin/app/ws-modules/ws-tools/functions.php",
+												data: { function: "returnFileInnerPlugin",page:dataFile}
+											}).done(function(e) {
+												$(".ws_popup_confirm .ws_confirm_conteudo").html('<div class="ws-plugin">'+e+'<div>'); 
+											})
+										},
+										newFun:function(){}
+									})
+							}else if(target=="popup"){
+								popup(dataFile, w, h);
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden"); 
+								$("*").removeClass("blur");
+							}
+						}else{
+							console.error("{Plugins_Modal_NotExist}")
+							confirma({
+								conteudo:"{Plugins_Modal_NotExist}",
+								bot1:'ok',
+								bot2:0,
+								botclose:0,
+								posFn:function(){},
+								newFun:function(){}
+							})
+						}
+		
+					}
+				})
+				return false;
+			})
+		
+		
+			$('#newPlugin').unbind('click tap press').bind('click tap press', function(e){
+					e.preventDefault();
+					confirma({width:"auto", conteudo:"  {Plugins_Modal_CreatingPlugin}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag:false, posFn:function(){
+					functions({
+						funcao:"AddPlugin",
+						vars:"namePlugin=null",
+						patch:"{PATH}",
+						Sucess:function(e){
+							if(e==''){
+								$( "#conteudo" ).load( './{PATH}/plugins.php' , function( response, status, xhr ) {
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+								});
+							}
+						}
+					})
+		
+		
+					}, bot1:0, bot2:0 })
+					return false;
+			})
+		$('#InnerTool').unbind('click tap press').bind('click tap press', function(e){
+					e.preventDefault();
+					var dataFile = $(this).data('href');
+					confirma({
+						width:"auto",
+						conteudo:"  {Plugins_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+						drag:false,
+						posFn:function(){
+							$("#ws_confirm").css("line-height","20px");
+							$( "#conteudo" ).load( ws.rootPath+'admin/app/ws-modules/ws-tools/tools.php?plugin=true&goback={PATH}/plugins.php' , function( response, status, xhr ) {
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+							});
+						},
+						bot1:0,
+						bot2:0
+					})
+					return false;
+			})
+		});
+			setTimeout(function(){
+				$('#container').perfectScrollbar('destroy')
+				// $('#container').perfectScrollbar('update')
+				$('#container').animate({scrollTop: 0}, 200);
+			},200);
+	</script>
+<!-- END BLOCK_MODULE_PLUGINS -->

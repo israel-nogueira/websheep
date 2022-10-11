@@ -1,0 +1,190 @@
+<!-- BEGIN METATAGS -->
+<div id="topoModulo" class="TitTop bg05 w1b" style="text-align:center;">
+	Meta tags 
+	<spam style="color:#FFF">{PAGE_NAME}</spam>
+</div>
+<div id="palco" class="palco_01 metaPalco" >
+	<form id="listaMetas">
+		<div class="comboMetasForm">
+			<input name="id_page" type="hidden" value="{ID_PAGE}">
+			<input class=" inputMeta title title_page"	name="title_page" 	placeholder="Título do site:" value="{TITLE_PAGE}"> 
+			<div id="salvaTitle" class="salvaTitle" legenda="Salvar título"></div>
+	</form>
+	<select id="typeMeta" name="typeMeta" style="position:relative;float:left;padding:10px;width:31%;">
+	<option value="blank">Em branco</option>
+	<option value="basic">Básico</option>
+	<option value="og">Open Graph</option>
+	<option value="twitter">Twitter</option>
+	</select>
+	<div id="addMetaBotao" class="botao addMetaBotao">Adicionar</div>
+	<div id="exclMetaBotao" class="botao exclMetaBotao">Excluir</div>
+	</div>
+	<div class="c"></div>
+	<ul class="comboMetas" >
+		<!-- BEGIN LIMETA -->
+		<li class="w1 bg02 liMeta" data-meta="{LI_ID}" style="height:40px!important;">
+			<div class="metaInput">
+				Meta: 
+				<select class="selectMeta" data-meta="{LI_TYPE}" style="padding: 7px;margin-top: -11px;">
+					<option value="">--</option>
+					<option value="name">name</option>
+					<option value="property">property</option>
+					<option value="http-equiv">http-equiv</option>
+					<option value="rel">rel</option>
+				</select>
+				Type: <input type="text" class="type_content" value="{LI_TYPE_CONTENT}" style="padding: 7px;margin-top: -8px;"/>
+				Content: <input type="text" class="content"  value="{LI_CONTENT}" style="padding: 7px;margin-top: -8px;width: calc(100% - 540px);">
+			</div>
+			<div class="select"><input type="checkbox"></div>
+			<div class="save"/>
+		</li>
+		<!-- END LIMETA -->
+	</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	$("select.selectMeta[data-meta!='']").each(function(){$(this).val($(this).attr('data-meta'))})
+	$("#exclMetaBotao").unbind('click tap press').bind("click tap press",function(){
+			confirma({
+				conteudo: "Tem certeza de que gostaria de excluir as metaTags selecionadas?",
+				width: 500,
+				bot1: "Sim",
+				bot2: "Cancelar",
+				newFun: function() {
+					var lista =[]; 
+					$('.select input[type="checkbox"]:checked').each(function(e){lista.push($(this).parent().parent().data("meta")); })
+					$.ajax({
+						type: "POST",
+						url: "./{PATH}/functions.php",
+						beforeSend:function(){setTimeout(function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},500);},
+						data: {function:"exclMultiMetaTag",metas:lista}
+					}).done(function(e) {
+						setTimeout(function(){
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						},500);
+						if(e=="sucesso"){
+							TopAlert({mensagem: "<b>Sucesso!</b>",type: 3})
+							$('.select input[type="checkbox"]:checked').each(function(e){$(this).parent().parent().remove() })
+						}else{
+							TopAlert({mensagem:e,type: 2})
+						}
+					})					
+				}
+			})
+	})
+	
+	$("#Reload").unbind('click tap press').bind("click tap press",function(){
+		$("#conteudo").load("./app/ws-modules/ws-model-tool/metaTags.php?id_page={ID_PAGE}");
+	})
+	$(".comboMetas li .close").click(function(){
+		var idMeta = $(this).parent().data('meta');
+		var divExcl = $(this).parent();
+			confirma({
+				conteudo: "Tem certeza de que gostaria de excluir esta metaTag?",
+				width: 500,
+				posFn: function() {},
+				Init: function() {},
+				posClose: function() {},
+				bot1: "Sim",
+				bot2: "Cancelar",
+				newFun: function() {
+					setTimeout(function(){
+						$.ajax({
+							type: "POST",
+							url: "./{PATH}/functions.php",
+							beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+							data: {function:"exclMetaTag",idMeta}
+						}).done(function(e) {
+							out(e)
+							$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+							if(e=="sucesso"){
+								TopAlert({mensagem: "<b>Sucesso!</b>",type: 3})
+								$(divExcl).remove()
+							}else{
+								TopAlert({mensagem:e,type: 2})
+							}
+						})						
+					},500);
+				},
+				onCancel: function() {},
+				onClose: function() {},
+				Callback: function() {},
+			})
+	});
+	$(".comboMetas li .save").click(function(){
+			var idMeta 			= $(this).parent().data('meta')
+			var type 			= $(this).parent().find('.selectMeta').val();
+			var type_content 	= $(this).parent().find('.type_content').val();
+			var content 		= $(this).parent().find('.content').val();
+			$.ajax({
+				type: "POST",
+				url: "./{PATH}/functions.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"salvaMetaTag",idMeta:idMeta,type:type,type_content:type_content,content:content }
+			}).done(function(e) {
+				out(e)
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				if(e=="sucesso"){
+					TopAlert({mensagem: "<b>MetaTag salva com sucesso!</b>",type: 3})
+				}else{
+					TopAlert({mensagem:e,type: 2})
+				}
+			})
+	})
+
+	$("#salvaTitle").click(function(){
+		var titulo= $('input.title_page').val();
+		$.ajax({
+			type: "POST",
+			url: "./{PATH}/functions.php",
+			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			data: {function:"salvaTitlePage",titulo:titulo, id_page:"{ID_PAGE}"}
+			}).done(function(e) {
+			out(e)
+			$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+			if(e=="sucesso"){
+				TopAlert({mensagem: "<b>Sucesso!</b>",type: 3})
+			}else{
+				TopAlert({mensagem:e,type: 2})
+			}
+		})
+	})	
+	$("#addMetaBotao").click(function(){
+		var TypeMedia = $("select[name='typeMeta']").val();
+		$.ajax({
+			type: "POST",
+			url: "./{PATH}/functions.php",
+			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			data: {function:"addMetaTag",TypeMedia:TypeMedia,id_page:"{ID_PAGE}"}
+			}).done(function(e) {
+			out(e)
+			$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+			if(e=="sucesso"){
+				TopAlert({mensagem: "<b>Sucesso!</b>",type: 3})
+				$("#conteudo").load("./app/ws-modules/ws-model-tool/metaTags.php?id_page={ID_PAGE}");
+			}else{
+				TopAlert({mensagem:e,type: 2})
+			}
+		})
+	})
+	include_css('./app/templates/css/websheep/ws-modules/ws-model-tool/metaTags.min.css','metaTagsCSS','All');
+	function AceEditorInit() {
+		setTimeout(function(){
+			$('.comboMetas li').each(function( index ) {
+				var idDiv = $(this).find('div').attr('id')
+				var str =  $("#"+idDiv).html()
+			});
+		},100)
+	}
+	AceEditorInit();
+	$('*[legenda]').LegendaOver();
+		setTimeout(function(){
+			$('#container').perfectScrollbar()
+			$('#container').perfectScrollbar('update')
+			$('#container').animate({scrollTop: 0}, 200);
+		},200);
+	
+</script>
+<!-- END METATAGS -->

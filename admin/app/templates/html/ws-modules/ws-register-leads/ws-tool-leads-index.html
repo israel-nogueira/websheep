@@ -1,0 +1,107 @@
+<!-- BEGIN LEAD_CAPTURE -->
+<script>
+	window.id_item_selected='';
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	include_css('./app/templates/css/websheep/ws-modules/ws-register-leads/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{Leads_Index_FormRegister}</div>
+	<div id="topo_upload" class="bg01" >
+		<form name="formUpload" id="formUpload">
+			<div id="bt_Add_Galeria" class="botao">{Leads_Index_CreateLink}</div>
+		</form>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN LI_LEAD -->
+				<li id='{LI_ID}' class='bg06'>
+					<spam class='titulo_item w1'>{LI_TITLE}</spam>
+					<spam class='desc_item w2'>{DOMINIO}{ws_includePath}ws-leads/{LI_TOKEN}</spam>
+					<div class='combo'>
+						<div class='detalhes_img cadastros botao' 	data-token='{LI_TOKEN}'>{Leads_Index_ViewRegister}</div>
+						<div class='detalhes_img editar botao' 		data-token='{LI_TOKEN}'>{Leads_Index_Edit}</div>
+						<div class='detalhes_img excluir botao' 	data-token='{LI_TOKEN}'>{Leads_Index_Delete}</div>
+					</div>
+				</li>
+			<!-- END LI_LEAD -->
+		</ul>
+	</div>
+</div>
+<script>
+
+$("#aviso_topo").unbind('click').click(function(){$(this).hide('fast');})
+function reloadFunctions(){
+
+	//==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM
+
+	$('.cadastros').unbind('click').bind("click",function(){
+		var token = $(this).data('token');
+		confirma({width:"auto",conteudo:"Carregando cadastro...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		$("#conteudo").load("{PATH}/cadastros.php?lead="+token,function(){
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+	})
+	$('.editar').unbind('click').bind("click",function(){
+		var token = $(this).data('token');
+		confirma({width:"auto",conteudo:"{Leads_Index_Modal_LoadRegister}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		$("#conteudo").load("{PATH}/detalhes.php?lead="+token,function(){
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+	})
+
+
+	$('.excluir').unbind('click').click(function(){
+			var divExcl = $(this).parent().parent();
+			var tabela = $(this).data("token");
+			confirma({
+				width: 600,
+				conteudo: "{Leads_Index_Modal_AreSure}<br>{Leads_Index_Modal_NotBack} ",
+				drag: false,bot1:'{Leads_Index_Modal_Delete}',bot2: '{Leads_Index_Modal_Cancel}',
+				posFn:function(){},
+				newFun:function(){
+					$.ajax({
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						cache: false, type: "POST", url: "./app/ws-modules/ws-register-leads/functions.php",
+						data: {
+							function: "exclTabela",
+							tabela: tabela,
+						}
+					}).done(function(e) {
+						out(e)
+						if(e==true){$(divExcl).remove();}
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+					})
+
+				}
+			});
+	})
+
+	$("#bt_Add_Galeria").unbind('click').click(function(){
+		$.ajax({
+			beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_CreateLead}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+			cache: false, type: "POST", url: "./app/ws-modules/ws-register-leads/functions.php",
+			data: {function: "AddLead"}
+		}).done(function(e) {
+			out(e)
+			$("#conteudo").load("{PATH}/index.php",function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+	})
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+}
+reloadFunctions();
+</script>
+<!--  END LEAD_CAPTURE -->

@@ -1,0 +1,512 @@
+<!-- BEGIN CAMPOS -->
+<script>
+	window.id_item_selected='';
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	include_css ('{ROOT_WEBSHEEP}admin/app/templates/css/websheep/ws-modules/ws-tools/style.css','css_mod','All');
+	include_css ('{ROOT_WEBSHEEP}admin/app/templates/css/websheep/ws-modules/ws-tools/detalhes.min.css','css_mod','All');
+</script>
+<style type="text/css">
+	.ui-icon, .ui-widget-content .ui-icon{
+		background-image: url({ROOT_WEBSHEEP}admin/app/templates/img/jquery-ui/1.12.1/ui-icons_444444_256x240.png)!important;
+	}
+</style><div id="_prefix_" data-prefix="{PREFIX}"></div>
+<iframe id="getThumb" style="display:none;width:1300px;"></iframe>
+<div id="topoModulo" class="TitTop bg05 w1b">{_tit_topo_}</div>
+	<div id="topo_detalhado" class="bg01 editor_campos"><div id="voltar_basico" class="botao">Voltar</div></form>
+		<div class="topo_tools">
+			<div class="icon input" 			legenda="InputText"						data-ferramenta="input"></div>
+			<div class="icon textarea"			legenda="TextArea"						data-ferramenta="textarea"></div>
+			<div class="icon check disabled"	legenda="CheckBox"						data-ferramenta="check"></div>
+			<div class="icon radio"				legenda="RadioBox"						data-ferramenta="radiobox"></div>
+			<div class="icon select"			legenda="SelectBox"						data-ferramenta="selectbox"></div>
+			<div class="icon multiple"			legenda="Multiple SelectBox"			data-ferramenta="multiple_select"></div>
+			<div class="icon label"				legenda="LabelText"						data-ferramenta="label"></div>
+			<div class="icon separador"			legenda="Separador"						data-ferramenta="separador"></div>
+			<div class="icon quebra"			legenda="Quebra de linha"				data-ferramenta="quebra"></div>
+			<div class="icon vazio"				legenda="Espaço vazio"					data-ferramenta="vazio"></div>
+			<div class="icon file"				legenda="Upload de um arquivo"			data-ferramenta="file"></div>
+			<div class="icon thumb"				legenda="Upload de uma thumbmail"		data-ferramenta="thumbmail"></div>
+			<div class="icon color"				legenda="Color picker"					data-ferramenta="colorpicker"></div>
+			<div class="icon keyworks"			legenda="Key Works"						data-ferramenta="key_works"></div>
+			<div class="icon link_tool"			legenda="Ferramenta"					data-ferramenta="_ferramenta_interna_"></div>
+
+			<div class="icon imagens {class_1}"		data-ferramenta="imagens_internas" {legenda_1}></div>
+			<div class="icon galerias {class_2}"	data-ferramenta="galerias_internas" {legenda_2}></div>
+			<div class="icon arquivos {class_3}"	data-ferramenta="arquivos_internos" {legenda_3}></div>
+
+			<div class="icon iframe"			legenda="iFrame"						data-ferramenta="iframe"></div>
+			<div class="icon editor_model"		legenda="Editor de Código"				data-ferramenta="editor"></div>
+			<div class="icon categoria_link"	legenda="Linkar a outra ferramenta"		data-ferramenta="linkTool"></div>
+			<div class="icon playerVideo"		legenda="Player de vídeo"				data-ferramenta="playerVideo"></div>
+			<div class="icon playerMP3"			legenda="Player de MP3"					data-ferramenta="playerMP3"></div>
+		</div>
+	</div>
+	<div id="palco" class="palco_01" >
+		<div id="print_div" class="coluna_dir editor_campos">
+			<ul id="ul_resize">
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+   $(window).scroll(function () {
+         scrollY = $(window).scrollTop();
+         if(scrollY>93){
+         	if(!$("#topo_detalhado").hasClass("fixeTop")){
+         		$("#topo_detalhado").addClass("fixeTop");
+         	}
+         }else{
+        	if($("#topo_detalhado").hasClass("fixeTop")){
+         		$("#topo_detalhado").removeClass("fixeTop");
+         	}
+         } 
+	})
+}); 
+$(function(){
+		//#################################################################  RELOAD FUNCTIONS
+		window.resize_and_move = function(){
+			var grid = 75;
+			$( "#ul_resize" ).sortable({
+				handle: ".hand",
+				grid: [ grid,5 ],
+				forceHelperSize: true,
+				maxWidth: 995,
+				beforeStop: function( event, ui ) {window.OrdenaCampos(true);}
+			});
+			$( ".mp3Player" ).resizable({
+				grid: grid,
+				maxWidth: 995,
+				maxHeight: 137,
+				minHeight: 137,
+				start: function( event, ui ) {
+					var elemento = ui.element.context.attributes[1].nodeValue;
+				    var campo = $( "li[data-token='"+elemento+"']" );
+				    var desc = $("li[data-token='"+elemento+"'] .descricao");
+				    $(desc).attr('texto',$(desc).html());
+					$(campo).bind( "resize", function(event,ui) {
+						var h=$(this).height();
+						var w=$(this).width();
+						$(desc).html(h+"x"+w);
+					});
+				},
+				stop: function( event, ui ) {
+					var elemento = ui.element.context.attributes[1].nodeValue;
+				    var campo = $( "li[data-token="+elemento+"]" );
+				    var desc = $(campo).find('.descricao').attr('texto');
+				    var dataid = $( "li[data-token="+elemento+"]").data('id');
+					$(campo).find('.descricao').text(dataid+":"+desc);
+					$(campo).unbind( "resize");
+					var target 		= ui.element;
+					var _token_ 	= $(target).data('token');
+					var _largura_ 	= $(target).width();
+					var _altura_ 	= $(target).height();
+					var dataid 	= $(target).data('id');
+					_root.resize(_token_,_largura_,_altura_,dataid);
+				}
+			});
+			$( ".aspectRatio" ).resizable({
+				aspectRatio: 16 / 8,
+				grid: [ grid,5 ],
+				maxWidth: 995,
+				start: function( event, ui ) {
+					var elemento = ui.element.context.attributes[1].nodeValue;
+				    var campo = $( "li[data-token='"+elemento+"']" );
+				    var desc = $("li[data-token='"+elemento+"'] .descricao");
+				    var dataid = $( "li[data-token="+elemento+"]").data('id');
+
+					$(campo).bind( "resize", function(event,ui) {
+						var h=$(this).height();
+						var w=$(this).width();
+						$(desc).html(h+"x"+w);
+					});
+				},
+				stop: function( event, ui ) {
+					var elemento = ui.element.context.attributes[1].nodeValue;
+				    var campo = $( "li[data-token="+elemento+"]" );
+				    var desc = $(campo).find('.descricao').attr('texto');
+				    var dataid = $( "li[data-token="+elemento+"]").data('id');
+					$(campo).find('.descricao').text(dataid+":"+desc);
+
+					$(campo).unbind( "resize");
+					var target 		= ui.element;
+					var _token_ 	= $(target).data('token');
+					var _largura_ 	= $(target).width();
+					var _altura_ 	= $(target).height();
+					var dataid 	= $(target).data('id');
+					_root.resize(_token_,_largura_,_altura_,dataid);
+				}
+			});
+			$( ".resize_x_y" ).resizable({
+				grid: [ grid,5 ],
+				maxWidth: 995,
+				start: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+					var elemento = ui.element[0];
+				    var desc = $("li[data-token='"+token+"'] .descricao");
+					$(ui.element[0]).bind( "resize", function(event,ui) {
+						var h=$(this).height();
+						var w=$(this).width();
+						$(desc).html(h+"x"+w);
+					});
+				},
+				stop: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+					var elemento = ui.element[0];
+				    var campo = $( "li[data-token="+token+"]" );
+				    var desc = $("li[data-token='"+token+"'] .descricao").attr('data-content');
+				    var dataid = $( "li[data-token="+token+"]").data('id');
+					$(ui.element[0]).find('.descricao').text(desc+":"+dataid);
+					$(ui.element[0]).unbind( "resize");
+					var _token_ 	= $(ui.element[0]).data('token');
+					var _largura_ 	= $(ui.element[0]).width();
+					var _altura_ 	= $(ui.element[0]).height();
+					var dataid 		= $(ui.element[0]).data('id');
+					_root.resize(_token_,_largura_,_altura_,dataid);
+				}
+			});
+			$( ".resize_x" ).resizable({
+				grid: grid,
+				maxWidth: 995,
+				start: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+				 	var campo = $( "li[data-token='"+token+"']" );
+				 	var desc = $("li[data-token='"+token+"'] .descricao");
+					$(ui.element[0]).bind( "resize", function(event,ui) {
+						var h=$(this).height();
+						var w=$(this).width();
+						$(desc).html(h+"x"+w);
+					});
+				},
+				stop: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+				    var campo = $( "li[data-token="+token+"]" );
+				    var dataid = $( "li[data-token="+token+"]").data('id');
+				    var desc = $("li[data-token='"+token+"'] .descricao").attr('data-content');
+					$(ui.element[0]).find('.descricao').text(desc+":"+dataid);
+					$(ui.element[0]).unbind( "resize");
+				  	var _token_ 	= $(ui.element[0]).data('token');
+				  	var _largura_ 	= $(ui.element[0]).width();
+				  	var _altura_ 	= $(ui.element[0]).height();
+				  	var dataid 		= $(ui.element[0]).data('id');
+			    	_root.resize(_token_,_largura_,_altura_,dataid);
+				}
+			});
+			$( ".resize_y" ).resizable({
+				grid: 5,
+				maxWidth: 995,
+				minWidth: 995,
+				minHeight: 200,
+				start: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+				    var campo = $( "li[data-token='"+token+"']" );
+				    var desc = $("li[data-token='"+token+"'] .descricao");
+				    $(desc).attr('texto',$(desc).html());
+					$(ui.element[0]).bind( "resize", function(event,ui) {
+						var h=$(this).height();
+						var w=$(this).width();
+						$(desc).html(h+"x"+w);
+					});
+				},
+				stop: function( event, ui ) {
+					var token = $(ui.element[0]).data('token');
+				    var campo = $( "li[data-token="+token+"]" );
+				    var dataid = $( "li[data-token="+token+"]").data('id');
+				    var desc = $("li[data-token='"+token+"'] .descricao").attr('data-content');
+					$(campo).find('.descricao').text(desc+":"+dataid);
+					$(campo).unbind( "resize");
+				  	var _token_ 	= $(ui.element[0]).data('token');
+				  	var _largura_ 	= $(ui.element[0]).width();
+				  	var _altura_ 	= $(ui.element[0]).height();
+				  	var dataid 		= $(ui.element[0]).data('id');
+				  	_root.resize(_token_,_largura_,_altura_,dataid);
+				}
+			});
+		}
+//_root.reloadFunctions()
+_root.reloadFunctions = function(){
+	window.resize_and_move();
+	$('*[legenda]').LegendaOver();
+	$("#voltar").unbind('click').click(function(){
+		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/index.php",function(){
+			$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+		});
+	})
+
+	$("#voltar_basico").unbind('click').click(function(){
+		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		// aqui verificamos se ele vem dos plugins ou não...
+			$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/tools.php?{ENCODE_GOBACK}ws_id_ferramenta={WS_ID_FERRAMENTA}",function(){
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+	})
+	$("input[type=checkbox]").click(function(){if ( $(this).is(':checked') ) {$(this).val('1');}else{$(this).val('0');}})
+	$("#salvar_basico").unbind('click').click(function(){
+		var inputs = $("#form_basico").serialize();
+	$.ajax({
+		type: "POST",
+		cache: false,
+		beforeSend:function(){
+			confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+		},
+		url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+		data: {function:"salvaFerramenta", ws_id_ferramenta:"{WS_ID_FERRAMENTA}",inputs:inputs }
+		}).done(function(e) {
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				out(e)
+		});
+	})
+	$("#palco #ul_resize .close").unbind('click').click(function(){
+			var token 		= $(this).parent().data('token');
+			var div 		= $(this).parent();
+
+			$.ajax({
+			  type: "POST",
+			  cache: false,
+			  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluíndo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			  url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+			  data: {function:"excluicampo", ws_id_ferramenta: "{WS_ID_FERRAMENTA}",token:token }
+			}).done(function(e) {
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				if(e=="sucesso"){
+					// $("#getThumb").attr("src","{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+					$(div).remove();
+				}else{
+					out(e)
+				}
+			});
+	});
+	$("#palco #ul_resize .edit").unbind('click').click(function(){
+		var token 		= $(this).parent().data("token");
+		var _prefix_ 	= $("#_prefix_").data("prefix");
+		$.ajax({
+			  type: "POST",
+			  url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/detalhes_campo.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:" Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+			},
+			  data: { ws_id_ferramenta: "{WS_ID_FERRAMENTA}",token:token,prefix:_prefix_ }
+			}).done(function(e) {
+				confirma({
+					conteudo:e,
+					bot1: "Salvar",
+					bot2: "Cancelar",
+					drag:false,
+					width: 450,
+					Check:function(){
+						if($("#form_campo input[name='identificador']").val()==""){return false; }else{return true; }
+					},
+					ErrorCheck: function() {
+						TopAlert({mensagem:'Por favor, insira um ID ao campo!',type: 2})
+						$("#form_campo input[name='identificador']").addClass('erro')
+					},
+					newFun:function(){
+						var Conteudo = $("#form_campo").serialize()
+						// AQUI AGORA SALVAMOS O CAMPO =================================================
+						$.ajax({
+							type: "POST",
+							url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+							beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+							data: {function:"salvaCampo",inputs:Conteudo,ws_id_ferramenta:"{WS_ID_FERRAMENTA}" }
+						}).done(function(e) {
+							console.log(e)
+							// $("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+							// var json = jQuery.parseJSON(e);
+							// if(json.status==true){
+							// 	TopAlert({mensagem:json.response,type: 3})
+							// 	 $("li[data-token='"+json.token+"'] ").attr('data-id',json.id_campo);
+							// 	$desc 	= $("li[data-token='"+json.token+"'] .descricao").attr('data-content');
+							// 	$idcamp = $("li[data-token='"+json.token+"'] ").attr('data-id');
+							// 	$("li[data-token='"+json.token+"'] .descricao").html($desc+": "+$idcamp);
+							// }else{
+							// 	TopAlert({mensagem:json.response,type: 2})
+							// }
+						})}
+				})
+		});
+	});
+	/*
+				INSERE OS CAMPOS NOVOS
+	*/
+	$( "#topo_detalhado .topo_tools .icon" ).unbind('click').click(function() {
+		var dataType 	= $(this).data('ferramenta');
+		var botao 		= $(this);
+		if(dataType=="imagens_internas"){
+			$.ajax({
+				type: "POST",
+				url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"habilita_img_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
+			}).done(function(data) {
+				out(data)
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				var json = jQuery.parseJSON(data);
+				if(json.resposta=="sucesso"){
+					TopAlert({mensagem: "Imagens habilitadas com sucesso!",type: 3})
+					eval(json.item);
+					eval(json.habdesab);
+					window.OrdenaCampos(false);
+					_root.reloadFunctions();
+				}else{
+					TopAlert({mensagem: "Ops, houve uma falha ao habilitar imagens!",type: 2})
+				}
+			})
+		/////////////////////////////////////////////////////////  se for icone das galerias
+		}else if(dataType=="galerias_internas"){
+			$.ajax({
+				type: "POST",
+				url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"habilita_gal_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
+			}).done(function(data) {
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				var json = jQuery.parseJSON(data);
+				if(json.resposta=="sucesso"){
+					TopAlert({mensagem: "Imagens habilitadas com sucesso!",type: 3})
+					eval(json.item);
+					eval(json.habdesab);
+					window.OrdenaCampos(false);
+					_root.reloadFunctions();
+				}else{
+					TopAlert({mensagem: "Ops, houve uma falha ao habilitar imagens!",type: 2})
+				}
+			})
+		/////////////////////////////////////////////////////////  arquivos
+		}else if(dataType=="arquivos_internos"){
+				out("arquivos_internos");
+				$.ajax({
+					type: "POST",
+					url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+					beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					data: {function:"habilita_files_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
+				}).done(function(data) {
+					$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+					var json = jQuery.parseJSON(data);
+					if(json.resposta=="sucesso"){
+						TopAlert({mensagem: "Arquivos habilitadas com sucesso!",type: 3})
+						eval(json.item);
+						eval(json.habdesab);
+						window.OrdenaCampos(false);
+						_root.reloadFunctions();
+					}else{
+						TopAlert({mensagem: "Ops, houve uma falha ao habilitar arquivos!",type: 2})
+					}
+				})
+		/////////////////////////////////////////////////////////  todos os outros
+		}else{
+			$.ajax({
+				type: "POST",
+				url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Adicionando elemento...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"addCampo",type:dataType,ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
+			}).done(function(data) {
+				// $("#getThumb").attr("src","{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+				var json = jQuery.parseJSON(data);
+				if(json.resposta=="sucesso"){
+					TopAlert({mensagem: "Campo adicionado com sucesso!",type: 3})
+					$('#ul_resize').prepend(json.item);
+					window.OrdenaCampos(false);
+					_root.reloadFunctions();
+					$('li[data-token="'+json.token+'"] .edit').click();
+				}else{
+					TopAlert({mensagem: "Ops, houve uma falha ao adicionar um campo!",type: 2})
+				}
+			});
+		}
+	})
+}
+
+
+
+_root.resize = function(_token_,_largura_,_altura_,dataid){
+			out(_largura_+"x"+_altura_)
+			$.ajax({
+			  type: "POST",
+			  url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+			  data: {
+			  	function:"resizeCampos",
+			  	token:_token_,
+			  	largura:_largura_,
+			  	altura:_altura_,
+			  	dataid:dataid,
+			  	ws_id_ferramenta:"{WS_ID_FERRAMENTA}"
+			  }
+			}).done(function(data) {
+				console.log(data)
+				// $("#getThumb").attr("src","{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+				if(data=="sucesso"){
+					TopAlert({mensagem: "Campo redimencionado com sucesso!",type: 3})
+				}else{
+					TopAlert({mensagem: "Ops, houve uma falha ao redimencionar um campo!",type: 2})
+				}
+			});
+}
+//##########################################################################################################
+	$("#coluna_esq").hover(
+		function(){$("#coluna_esq").stop().animate({ width: 240},1000 , 'easeOutElastic');},
+		function(){$("#coluna_esq").stop().animate({ width: 10}, 500 );
+	})
+	$("#coluna_esq *").hover(function(){$("#coluna_esq").stop().animate({ width: 240},1000 , 'easeOutElastic');},function(){})
+	window.OrdenaCampos = function (retorno){
+		var retorno;
+		var posicoes = [];
+		var i = 0;
+		$('#ul_resize li').each(function (i) {
+			var tok = $(this).data('token');
+			if(tok){
+				posicoes[i] = tok;
+				++i;
+			}
+		})
+		
+		$.ajax({
+			type: "POST",
+			url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+			data: {
+				function:"ordenaCampos",
+				posicoes:posicoes,
+				ws_id_ferramenta:"{WS_ID_FERRAMENTA}"
+			}
+		}).done(function(data) {
+			if(retorno==true){
+				if(data=="sucesso"){
+					TopAlert({mensagem: "Campo reposicionado com sucesso!",type: 3})
+					// $("#getThumb").attr("src","{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+				}else{
+					TopAlert({mensagem: "Ops, houve uma falha ao reposicionar um campo!",type: 2})
+				}
+			}
+		});
+	}
+	$( "#ul_resize" ).disableSelection();
+//##################################################################################################
+	$('#Balao_ToolType').remove();
+	_root.reloadFunctions();
+	$.ajax({
+		type: "POST",
+		url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+		data: {
+				function:"listaCampos",
+				ws_id_ferramenta:"{WS_ID_FERRAMENTA}"
+			}
+		}).done(function(data) {
+			console.log(data)
+			$('#ul_resize').prepend(data);
+			_root.reloadFunctions();
+	});
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy').css({"overflow":"auto"});
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+		
+});
+</script>
+
+<!-- END CAMPOS -->

@@ -1,0 +1,548 @@
+<style type="text/css">
+	.h1 {
+		position: relative;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 10px;
+		margin: 10px 0;
+		border-bottom: solid 1px #50637d;
+		color: #FFF;
+		float: left;
+		width: 100%;
+    }
+
+	.h2 {
+		position: relative;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #d5d5d5;
+		float: left;
+		width: 100%;
+	}
+	.h3 {
+		position: relative;
+		font-size: 14px;
+		font-weight: 100;
+		padding: 4px;
+		margin: 10px 10px;
+		color: #FFFFFF;
+		float: left;
+		width: 100%;
+	}
+
+	.chosen-container .chosen-drop {
+		border-color: #333;
+		background: #212121;
+		box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+	}
+
+	.chosen-container-single .chosen-single {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+		padding: 10px;
+	}
+
+	.chosen-container-single .chosen-default {
+		color: #999;
+	}
+
+	.chosen-container-single .chosen-search input[type="text"] {
+		border-color: #333;
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results {
+		color: #e3e3e3;
+	}
+
+	.chosen-container .chosen-results li.disabled-result {
+		color: #505050;
+	}
+
+	.chosen-container .chosen-results li.highlighted {
+		background-color: #3875d7;
+		background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+		color: #fff;
+	}
+
+	.chosen-container .chosen-results li.no-results {
+		color: #e3e3e3;
+		background: #1f1d1d;
+	}
+
+	.chosen-container-multi .chosen-choices {
+		border-color: #333;
+		background: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+	}
+
+	.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice {
+		border-color: #000;
+		background-color: #212121;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 0 2px #5d5d5d inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+		color: #e3e3e3;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-disabled {
+		border: 1px solid #ccc;
+		background-color: #e4e4e4;
+		background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+		color: #666;
+	}
+
+	.chosen-container-multi .chosen-choices li.search-choice-focus {
+		background: #d4d4d4;
+	}
+
+	.chosen-container-multi .chosen-drop .result-selected {
+		color: #505050;
+	}
+
+	.chosen-container-active .chosen-single {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+	}
+
+	.chosen-container-active.chosen-with-drop .chosen-single {
+		border-color: #333;
+		background-image: linear-gradient(#353535 1%, #212121 15%);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3) inset;
+	}
+
+	.chosen-container-active .chosen-choices {
+		border: 1px solid #5897fb;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+
+	.chosen-container-active .chosen-choices li.search-field input[type="text"] {
+		color: #e3e3e3 !important;
+	}
+
+	.chosen-disabled {
+		opacity: 0.5 !important;
+	}
+
+	.chosen-rtl .chosen-search input[type="text"] {
+		color: #e3e3e3;
+		background: url("chosen-sprite.png") no-repeat -30px -20px;
+	}
+
+	.input_text {
+		font-family: 'Titillium Web', sans-serif;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 16px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+		padding: 15px 10px;
+		border: solid 1px #3f4143;
+		background-color: #212121;
+		color: #c7c7c7;
+		width: 100%;
+	}
+</style> 
+<style type="text/css">
+	.combo {
+		position: relative;
+		margin-left: 9px;
+		width: calc(100% - 26px);
+		float: left;
+		/*margin-bottom: 30px;*/
+    }
+
+	.bt_padrao {
+		padding: 10px 20px;
+		width: calc(100% - 80px);
+		left: 50%;
+		position: relative;
+		margin: 13px 0;
+		transform: translateX(calc(-50% - 6px));
+		text-align: center;
+	}
+	.bt_metade {
+		padding: 10px 20px;
+		width: calc(50% - 60px);
+		position: relative;
+		margin: 13px 5px;
+		text-align: center;
+		left: 7px;
+    }
+	.checkbox{
+		position: relative;
+		float: left;
+		padding: 5px 12px;
+		background-color: #38619a;
+		margin: 2px;
+		color: #FFF;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-ms-border-radius: 7px;
+		-o-border-radius: 7px;
+		border-radius: 7px;
+	}
+
+.containerCheck {
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+	display: block;
+	float: left;
+	padding: 4px 12px;
+	background-color: #38619a;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	margin: 3px 6px;
+	cursor: pointer;
+	font-size: 16px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #FFF;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	height: 15px;
+	width: 16px;
+	background-color: #274268;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 4px;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmark {
+    background-color: #1e2e45;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmark {
+    background-color: #18202c;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmark:after {
+    left:4px;
+    top: -1px;
+    width: 5px;
+    height: 10px;
+    border: solid #4a98b8;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.editorRight{
+	z-index: 0;
+	position: relative;
+	float: left;
+	width: calc(100% - 50px);
+	overflow: auto;
+	margin: 0px 25px;
+}
+
+.botao {
+    cursor: pointer;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    font-family: 'Titillium Web',sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-weight: 100;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #497bbe;
+    color: #fff;
+}
+
+
+
+</style>
+<div class="h1">
+	<i class="fa fa-wrench"></i> Adicionar uma paginação
+</div>
+<div class="h3">Adicone uma paginação para listagem das ferramentas do seu WebSheep <br> com apenas alguns cliques!</div>
+<div class="combo"> 
+	<select class="chosen" id="ferramenta" style="width:100%;"> 
+		<option value="0">Selecione uma ferramenta </option> 
+		<!-- BEGIN LIST_TOOLS -->
+			<option value="{id}">{name}</option> 
+		<!-- END LIST_TOOLS -->
+	</select> 
+</div>
+
+<div class="h1">Elemento a ser listado:</div>
+<div class="h3">
+	Qual é o tipo de ítem que você quer paginar?
+</div>
+<div class="combo"> 
+	<select id="type" class="chosen" style="width:100%;"> 
+		<option value="item">Item</option> 
+		<option value="cat">Categorias</option> 
+		<option value="img">Imagens</option> 
+		<option value="gal">Galerias</option> 
+		<option value="imgGal">Imagens da galeria</option> 
+		<option value="arquivos">Arquivos</option> 
+	</select> 
+</div>
+<div class="h1">Formato de inserção:</div>
+<div class="h3">
+	Corpo HTML de toda paginação:
+</div>
+
+<div class="editorRight">
+	<div id="editor1" style="min-height:200px;height:144px;">
+	</div>
+</div>
+
+<div class="h3">
+	Contador das páginas:
+</div>
+
+<div class="editorRight">
+	<div id="editor2" style="min-height:144px;height:144px;"></div>
+</div>
+
+<div class="h3">
+	Contador das páginas (ativo):
+</div>
+
+<div class="editorRight">
+	<div id="editor3" style="min-height:144px;height:144px;"></div>
+</div>
+<!-- <div class="combo" style="margin-top: 20px;">
+	<select class="chosen" id="typeInsert" style="width:100%;">
+		<option value="HTML5">HTML5</option> 
+		<option value="PHP">PHP</option> 
+		<option value="JS">Javascript</option> 
+		<option value="REST">REST</option> 
+	</select>
+</div>
+ -->
+<div id="AddColunas" class="botao bt_padrao" style="float: left; ">Inserir paginação</div>
+
+
+<script type="text/javascript">
+	var SlugTool = null;
+
+
+
+
+	$(".chosen").chosen({
+		disable_search_threshold: 10,
+		search_contains: true,
+		enable_split_word_search: true,
+		no_results_text: "Oops, nothing found!",
+	})
+	$("#ferramenta,#type").chosen().change(function(e) {
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "./app/ws-modules/ws-webmaster/functions.php",
+			data: {
+				'function': 'getColums',
+				'id': $("#ferramenta").val(),
+				'type': $("#type").val(),
+			}
+		}).done(function(data) {
+			data = $.parseJSON(data);
+			 $("#listCampos").html("");
+			 SlugTool = data.slug;
+			 $.each(data.colunas,function(i){
+			 	var campo = data.colunas[i];
+			 	if(data.type=="item"){
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" data-type-colum="'+campo.type+'" value="'+campo.name+'" type="checkbox">'+campo.name+'<span class="checkmark"></span></label>')
+			 	}else{
+			 		$("#listCampos").prepend('<label class="containerCheck"><input class="camposTool" data-type="'+data.type+'" value="'+campo+'" type="checkbox">'+campo+'<span class="checkmark"></span></label>')
+			 	}
+			 })	
+			 refreshChecks();		
+		})
+	})
+
+
+
+	$('#editor1').text(`
+		<div class='combo'>
+			<div class='primeira'>
+				<a href='/?page={{{_}first}}'>Primeira</a>
+			</div>
+			<div class='anterior'>
+				<a href='/?page={{{_}prev}}'>Anterior</a>
+			</div>
+			{{{_}pages}}
+			<div class='primeira'>
+				<a href='/?page={{{_}next}}'>Próxima</a>
+			</div>
+			<div class='anterior'>
+				<a href='/?page={{{_}last}}'>Último</a>
+			</div>
+		</div>`);
+
+	$('#editor2').text(`
+	<li>
+		<a href='/blog/{{{_}i}}'>
+			{{{_}i}}
+		</a>
+	</li>`);
+
+	$('#editor3').text(`
+	<li>
+		<div class='active'>
+			{{{_}i}}
+		</div>
+	</li>`);
+
+
+
+	$.getScript('./app/vendor/ace/src-min-noconflict/ace.js', function() {
+		$.getScript('./app/vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
+
+			ace.config.set('basePath', './app/vendor/ace/src-min-noconflict');
+			
+			window.editor1 = ace.edit("editor1");
+			window.editor1.setTheme("ace/theme/monokai");
+			window.editor1.getSession().setMode("ace/mode/html");
+			window.editor1.setShowPrintMargin(true);
+			window.editor1.setHighlightActiveLine(true);
+			window.editor1.setShowInvisibles(0);
+			window.editor1.getSession().setUseSoftTabs(false);
+			window.editor1.setDisplayIndentGuides(true);
+			window.editor1.getSession().setUseWrapMode(true);
+			window.editor1.setOptions({maxLines:'Infinity',minLines: 1});
+
+
+			window.editor2 = ace.edit("editor2");
+			window.editor2.setTheme("ace/theme/monokai");
+			window.editor2.getSession().setMode("ace/mode/html");
+			window.editor2.setShowPrintMargin(true);
+			window.editor2.setHighlightActiveLine(true);
+			window.editor2.setShowInvisibles(0);
+			window.editor2.getSession().setUseSoftTabs(false);
+			window.editor2.setDisplayIndentGuides(true);
+			window.editor2.getSession().setUseWrapMode(true);
+			window.editor2.setOptions({maxLines:'Infinity',minLines: 1});
+
+			window.editor3 = ace.edit("editor3");
+			window.editor3.setTheme("ace/theme/monokai");
+			window.editor3.getSession().setMode("ace/mode/html");
+			window.editor3.setShowPrintMargin(true);
+			window.editor3.setHighlightActiveLine(true);
+			window.editor3.setShowInvisibles(0);
+			window.editor3.getSession().setUseSoftTabs(false);
+			window.editor3.setDisplayIndentGuides(true);
+			window.editor3.getSession().setUseWrapMode(true);
+			window.editor3.setOptions({maxLines:'Infinity',minLines: 1});
+
+
+
+
+
+		})
+	})
+
+
+	$('.bt_padrao').unbind("click tap press").bind("click tap press", function() {
+
+
+		var id_toll = $("#ferramenta").val();
+		var type 	= $("#type").val();
+		var body 	= window.editor1.getValue();
+		var count 	= window.editor2.getValue();
+		var active 	= window.editor3.getValue();
+
+		if(id_toll=="0"){
+			ws.alert.top({
+				mensagem	: "Selecione uma ferramenta",
+				clickclose	: true,
+				height		: 20,
+				position: "fixed",
+				botClose: null,
+				onClose: function() {},
+				posFn: function() {},
+				timeoutFn: function() {},
+				timer: 3000,
+				type: null,
+				styleText: null,
+				classText: null,
+				color: "#FFFFFF",
+				background: "#ff3000",
+				bottomColor: "#851900",
+			});
+
+
+		}else{
+			$.ajax({
+				type: "POST",
+				async: true,
+				url: "./app/ws-modules/ws-webmaster/functions.php",
+				data: {
+					'function'			: 'getPagination',
+					'id_toll'			: id_toll,
+					'type'				: type,
+					'editorHTML'		: body,
+					'editorCOUNT'		: count,
+					'editorCOUNTactive'	: active
+				}
+			}).done(function(data) {
+				window.ws_webmaster.engine.insert(data);
+				window.closeRighttMenu();
+			})			
+		}
+
+
+
+
+	})
+
+
+
+
+
+//	refreshChecks();
+</script>

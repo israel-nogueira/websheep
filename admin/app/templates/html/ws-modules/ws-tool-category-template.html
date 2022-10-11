@@ -1,0 +1,198 @@
+<!-- BEGIN BLOCK_CATEGORY -->
+	<script type="text/javascript">
+	window.id_item_selected;
+	include_css ("./app/templates/css/websheep/ws-modules/ws-model-tool/style.min.css","css_mod","All");
+	</script>
+	<div id="topoModulo" class="TitTop bg05 w1b">{TITLE}</div>
+		<div id="topo_upload" class="bg01" >
+			<form name="formUpload" id="formUpload">
+				<!-- BEGIN BOT_ADD_GALERY -->
+					<div id="bt_Add_Galeria"	class="botao">Adicionar uma Categoria</div>
+				<!-- END BOT_ADD_GALERY -->
+				<!-- BEGIN BOT_BACK -->
+					<div id="bt_voltar_cat"	class="botao">Voltar</div>
+							<script>
+							$("#bt_voltar_cat").unbind("click tap press").bind("click tap press",function(){
+								confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+								$("#conteudo").load("{LINK}",function(){
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+								});
+							})
+							</script>
+				<!-- END BOT_BACK -->
+			</form>
+		</div>
+		<div id="palco" class="palco_01" >
+			<ul>
+			<!-- BEGIN ITEMCAT -->
+				<li id="{LI_CAT}" data-cat="{LI_CAT}" data-cat-pai="{LI_CAT_PAI}" class="bg06" style="height:50px;">
+					<img id="thumb_{LI_CAT}" class="avatar" src="{LI_IMG}" style="position: relative;float: left;margin: 5px;">
+					<span class="titulo_item w1">{LI_TITULO}</span>
+					<span class="desc_item w2">{LI_DESCRIPTION}</span>
+					<div id="combo">
+						<div id="detalhes_img" class="bg02" style="padding:8px;position:relative;right: 4px;top: 3px;float: right;">
+							<span><img class="mover_item" legenda="Mover a posição do ítem" src="./app/templates/img/websheep/arrow-move.png"></span>
+							<span><img class="editar" data-group="{LI_GROUP}" legenda="Editar Informações" src="./app/templates/img/websheep/layer--pencil.png"></span>
+						</div>
+					</div>
+				</li>
+				<!-- END ITEMCAT -->
+			</ul>
+		</div>
+		<div class="c"></div>
+	</div>
+
+	<script type="text/javascript">
+		function OrdenaCategoria(){
+			var posicoes = [];
+			var i = 0;
+			$('#palco ul').children().each(function (i) {posicoes[i]= $(this).attr('id');++i;})
+			functions({funcao:"OrdenaCategoria",vars:"ids="+posicoes,patch:"{PATH}"})
+		}
+		$(function() {
+		    $( "#palco ul" ).sortable({
+		    	handle: ".mover_item",
+		    	forceHelperSize: true,
+		    	beforeStop: function( event, ui ) {OrdenaCategoria();}
+			});
+		    $( "#palco ul" ).disableSelection();
+		 });
+	function reloadFunctions(){
+		$('*[legenda]').LegendaOver();
+		$("#Balao_ToolType").remove();
+		$('#palco ul li .galeria').unbind('click tap press').bind("click tap press",function(){
+			var id_item = $(this).parent().parent().parent().parent().data('cat');
+			var link = './{PATH}/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&id_cat='+id_item+"&{GETVARS}";
+			confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			$("#conteudo").load(link,function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+		$('#palco ul li .editar').unbind('click tap press').bind("click tap press",function(){
+	 		var group 				= $(this).data('group');
+			var id_cat 				= $(this).parent().parent().parent().parent().data('cat');
+			var cat_pai 			= $(this).parent().parent().parent().parent().data('cat-pai');
+			var ReloadDiv 			= $(this).parent().parent().parent().parent();
+			window.id_item_selected = id_cat;
+			$("#conteudo").load("./app/ws-modules/ws-model-tool/detalhes_cat.php?LIMIT={LIMIT}&PAGE={PAGE}&token_group={WS_TOKENGROUP}&id_cat_pai="+cat_pai+"&id_cat="+id_cat+"&ws_id_ferramenta={ID_FERRAMENTA}",function(){
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		})
+		$("#bt_Add_Galeria").unbind('click tap press').bind("click tap press",function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./{PATH}/functions.php",
+				  beforeSend:function(){confirma({width:"auto",conteudo:"  Adicionando categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				  data: {function:"addCategoria",id_cat:"{ID_CAT}",ws_id_ferramenta:"{ID_FERRAMENTA}",group:"{WS_TOKENGROUP}"}
+				}).done(function(data) {
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+					var json = jQuery.parseJSON(data);
+					if(json.resposta=="sucesso"){
+
+
+
+						$("#conteudo").load("./app/ws-modules/ws-model-tool/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&ws_id_ferramenta={ID_FERRAMENTA}",function(){
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						});
+
+					}else{
+						TopAlert({mensagem: "Ops, houve uma falha ao adicionar categoria!",type: 2})
+					}
+				});
+		})
+		$("#ws_confirm #ws_confirm_conteudo #form-img").ajaxForm({
+			beforeSend: function(xhr) {},
+			uploadProgress: function(event, position, total, percentComplete, myForm){$('#preloader #bar').css({width:percentComplete+"%"})},
+			success: function(e) {
+				var img = '{ws_rootPath}ws-img/40/40/60/'+e;
+				var img_G = '{ws_rootPath}ws-img/322/322/100/'+e;
+				$('#exibicao_G').attr("src",img_G);
+				$("#thumb_"+window.id_item_selected).attr("src",img);
+				$('#recusar').show();
+			},
+			complete: function(e){
+				$('#preloader #bar').css({width:"0"});
+				$('#recusar').show();
+			}
+		});
+		$("#refreshimg").unbind('click tap press').bind("click tap press",function(event){
+			event.preventDefault();
+			$(this).parent().parent().parent().find('#form-img #myfile').click();
+
+		})
+		$("#form_dados #EnterGalery").unbind('click tap press').bind("click tap press",function(event){
+			event.preventDefault();
+			var iDimg 	= $(this).parent().attr('id-img');
+			$('#recusar').click();
+		})
+		$('#form-img').change(function(success){
+			$("#form-img #bot_upload_form").click();
+			$('#recusar').hide();
+		})
+		$(".excluir").unbind('click tap press').bind("click tap press",function(){
+			var iDgaleria 		= $(this).parent().parent().parent().parent().attr('id');
+			var divAseExcluir  = $(this).parent().parent().parent().parent();
+			confirma({
+				conteudo:"<b>Você quer excluir esta categoria?</b><br><br>Após clicar em 'Sim eu quero', não terá mais volta.<br> <b>Tem certeza?</b>",
+				width:500,
+				height:'auto',
+				bot1:"Sim eu quero",
+				bot2:"Cancelar",
+				divScroll:"body",
+				divBlur:"body #container",
+				newFun:function(){
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+					setTimeout(function(){
+							$.ajax({
+							  type: "POST",
+							  data: {function:"ExcluiCategoria",id_cat:iDgaleria},
+							  url: "./{PATH}/functions.php",
+							  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+							}).done(function(e) {
+									$("#ws_confirm").css("line-height","20px");
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+									if(e==''){
+										$(divAseExcluir).remove();
+										TopAlert({
+											mensagem:'Categoria excluída com sucesso!',
+											height:20,
+											timer:5000,
+											type:3
+										})
+									}else{
+										TopAlert({
+											mensagem:'Erro: '+e,
+											height:200,
+											timer:5000,
+											type:2
+										})
+									}
+							});
+					},500)
+				}
+			})
+		})
+		OrdenaCategoria();
+	}
+	reloadFunctions();
+		setTimeout(function(){
+			$('#container').perfectScrollbar('destroy')
+		},200);
+	</script>
+<!-- END BLOCK_CATEGORY -->

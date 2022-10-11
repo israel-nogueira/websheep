@@ -1,0 +1,92 @@
+<!-- BEGIN  INCLUDE_JS_CSS -->
+<script>
+	window.id_item_selected='';
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-includes-js-css/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{includeJsCss_index_title}</div>
+	<div id="palco" class="palco_01" >
+		<div class="w1 titlew1" style="font-size: 30px;width: 100%;">{includeJsCss_index_title_Module}</div>
+		<form class="dados_basicos fullw"  id="dados_basicos">
+		<ul class="includes">
+			<!-- BEGIN LI_INCLUDE -->
+				<li data-id="{LI_ID}">
+					<div class="bg01 file" >
+						<div class="w1 urlPath inputText file">{LI_PATH}</div>
+						<div class="editar"></div>
+					</div>
+				</li>
+			<!-- END LI_INCLUDE -->
+		</ul>
+	</div>
+</div>
+<script>
+function reloadFunctions(){
+	$('*[legenda]').LegendaOver();
+
+	$(".editar").unbind('click tap press').bind("click tap press",function(e){
+		var Path 		= $(this).parent().find('.urlPath').text();
+		var idPath 		= $(this).parent().parent().data('id');
+		confirma({width:"auto",conteudo:"  {includeJsCss_index_modal_edit_access}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+		$( "#conteudo" ).load("./app/ws-modules/ws-includes-js-css/urlsCadastradas.php?type={TYPE}&Path="+Path+"&idPath="+idPath, function( response, status, xhr ) {
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+
+	})
+
+
+	$(".excluir").unbind('click tap press').bind("click tap press",function(e){
+		var idPath 		= $(this).parent().find('.idPath').val();
+		var div_include= $(this).parent().parent();
+		confirma({ 
+			conteudo:'{includeJsCss_index_modal_delete_content}',
+			bot1:"{includeJsCss_index_modal_delete_delete}",
+			bot2:"{includeJsCss_index_modal_delete_cancel}",
+			drag:false,
+			botclose:true,
+			newFun:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./app/ws-modules/ws-url-friendly/functions.php",
+				  data: { function:"excluiRegistro",idPath:idPath}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			},
+			onCancel:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./app/ws-modules/ws-url-friendly/functions.php",
+				  data: { function:"excluiRegistroFile",id_include:id_include}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			}
+		})
+	})
+
+
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy')
+		//$('#container').perfectScrollbar('update')
+		//$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+}
+reloadFunctions();
+</script>
+
+<!-- END INCLUDE_JS_CSS -->

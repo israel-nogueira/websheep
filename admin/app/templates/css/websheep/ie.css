@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+.celula-micro img,
+.box-celula img,
+.box-celula,
+.box,
+.pconteudo p img, 
+.botao{
+	behavior:url("PIE.htc");
+	display:block;
+	position:relative;
+}

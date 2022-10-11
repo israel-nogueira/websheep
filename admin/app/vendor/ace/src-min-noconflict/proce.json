@@ -1,0 +1,5 @@
+ [ {"word":"//Class WS \n $Tool= new WS();\n$pesquisa = $Tool->setSlug()->setType('item')"}, 
+   {"word":"good morning"},
+   {"word":"suggestions"},
+   {"word":"auto suggest"},
+   {"word":"try this"}]

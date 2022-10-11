@@ -1,0 +1,32 @@
+[{
+	"hash": "5y054thy03475g0t8w45jhgyh6ye4",
+	"name": "header-2",
+	"description": "Start your development with a beautiful Bootstrap 4 UI kit.",
+	"avatar": "//demos.creative-tim.com/bs3/material-kit-pro/assets/assets-for-demo/h_1.jpg",
+	"author": "Israel Nogueira",
+	"type": "header",
+	"version": "0.1",
+	"html": "<div class=\"header-2\"><nav class=\"navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute\"> <div class=\"container\"> <div class=\"navbar-translate\"> <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#example-navbar-primary\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\"> <span class=\"navbar-toggler-bar bar1\"></span> <span class=\"navbar-toggler-bar bar2\"></span> <span class=\"navbar-toggler-bar bar3\"></span> </button> <a class=\"navbar-brand\" href=\"#pablo\">Creative Tim</a> </div> <div class=\"collapse navbar-collapse\" id=\"example-navbar-primary\"> <ul class=\"navbar-nav mx-auto\"> <li class=\"nav-item active\"> <a class=\"nav-link\" href=\"#pablo\"> Home </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"#pablo\"> About Us </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"#pablo\"> Products </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"#pablo\"> Contact Us </a> </li> </ul> <ul class=\"nav navbar-nav navbar-right\"> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://twitter.com/CreativeTim\"> <i class=\"fa fa-twitter\"></i> </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://www.facebook.com/CreativeTim\"> <i class=\"fa fa-facebook-square\"></i> </a> </li> <li class=\"nav-item\"> <a class=\"nav-link\" href=\"https://www.instagram.com/CreativeTimOfficial\"> <i class=\"fa fa-instagram\"></i> </a> </li> </ul> </div> </div> </nav> <div class=\"page-header header-filter\"> <div class=\"page-header-image\" style=\"background-image: url('//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/img/bg14.jpg');\"></div> <div class=\"content-center\"> <div class=\"container\"> <div class=\"row\"> <div class=\"col-md-8 ml-auto mr-auto text-center\"> <h1 class=\"title\"> You should be here!</h1> <h5 class=\"description\">5,000 capacity venue, holding some of the latest technology lighting with a 24 colour laser system Amnesia is one of the islands most legendary clubs.</h4> </div> <div class=\"col-md-10 ml-auto mr-auto\"> <div class=\"card card-raised card-form-horizontal card-plain\" data-background-color> <div class=\"card-body\"> <form method=\"\" action=\"\"> <div class=\"row\"> <div class=\"col-md-3\"> <div class=\"form-group\"> <input type=\"text\" value=\"\" placeholder=\"Full Name\" class=\"form-control\" /> </div> </div> <div class=\"col-md-3\"> <div class=\"form-group\"> <input type=\"email\" value=\"\" placeholder=\"Your Email\" class=\"form-control\" /> </div> </div> <div class=\"col-md-3\"> <div class=\"form-group\"> <input type=\"password\" value=\"\" placeholder=\"Password\" class=\"form-control\" /> </div> </div> <div class=\"col-md-3\"> <button type=\"button\" class=\"btn btn-primary btn-round btn-block\">Join Us</button> </div> </div> </form> </div> </div> </div> </div> </div> </div> </div> </div>",
+	"assets": {
+		"css": [
+			"//fonts.googleapis.com/css?family=Montserrat:400,700,200",
+			"//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/bootstrap.min.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/now-ui-kit.css",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/css/demo.css"
+		],
+		"js": [
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/jquery.3.2.1.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/popper.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/core/bootstrap.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/moment.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-switch.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-tagsinput.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-selectpicker.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/jasny-bootstrap.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/nouislider.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/plugins/bootstrap-datetimepicker.min.js",
+			"//demos.creative-tim.com/marketplace/now-ui-kit-pro/assets/js/now-ui-kit.js?v=1.2.0"
+		]
+	}
+}]

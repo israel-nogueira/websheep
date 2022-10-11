@@ -1,0 +1,146 @@
+<!-- BEGIN URLAMIGAVEL -->
+<script>
+	window.id_item_selected		=	'';
+	var barra_progresso 		=	'';
+	var canvas_barra_progresso 	=	'';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-url-friendly/style.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{urlFriendly_title}</div>
+	<div id="topo_upload" class="bg01" >
+		
+	</div>
+	<div id="palco" class="palco_01" >
+		<h1 class="w1 titlew1">{urlFriendly_configurationData}
+		<div id="addFile" class="botao" >{urlFriendly_addaURL}</div>
+		</h1>		
+		<form class="dados_basicos"  id="dados_basicos">
+		<ul id="includes">
+			<!-- BEGIN URLHTACCESS -->
+			<li>
+				<div class="bg01 file" >
+					<input value="{LI_TYPE}" 	class="type" 	type="hidden" name="type"/>
+					<input value="{LI_ID}" 		class="idPath"  type="hidden" />
+					<input placeholder="^minha-url/(.*)$" value="{LI_PATH}" 	class="urlPath inputText" 	name="urlPath"/>
+					<input placeholder="/arquivo.php?var=$1" value="{LI_VALUE}" 			class="nameFile inputText {LI_CLASS_ONLY}" 	name="nameFile" {LI_READ_ONLY}/>
+					<div legenda="Salvar registro" class="salvar"></div>
+					{LI_CLOSE}
+				</div>
+			</li>
+			<!-- END URLHTACCESS -->
+		</ul>
+	</div>
+</div>
+<script>
+function reloadFunctions(){
+	$('*[legenda]').LegendaOver();
+	$("#addFile").unbind('click tap press').bind("click tap press",function(){
+		$.ajax({
+			type: "POST",
+			url: "./{PATH}/functions.php",
+ 			beforeSend:function(){ws.preload.open({string: "{urlFriendly_modal_Adding}"})},
+			data: { function:"addRules"}
+		}).done(function(data) {
+			console.log(data)
+			$( "#conteudo" ).load("./{PATH}/index.php", function( response, status, xhr ) {
+					ws.preload.close()
+			});
+		})
+	})
+	$(".salvar").unbind('click tap press').bind("click tap press",function(e){
+		var idPath 		= $(this).parent().find('.idPath').val();
+		var urlPath		= $(this).parent().find('.urlPath').val();
+		var nameFile	= $(this).parent().find('.nameFile').val();
+		var type		= $(this).parent().find('.type').val();
+
+		confirma({ 
+			conteudo:'	<form id="formSalva">\
+							<div style="margin: 20px;text-align:center;line-height: 26px;margin-bottom: -9px;line-height: 24px;">\
+								<div style="text-align:center;margin: -20px;font-weight: bold;font-size: 20px;">\
+									{urlFriendly_modal_save_contentLine1}\
+								</div>\
+								<br>\
+								{urlFriendly_modal_save_contentLine2}\
+							</div>\
+						</form>',
+			bot1:"{urlFriendly_modal_save_button1}",
+			bot2:"{urlFriendly_modal_save_button2}",
+			drag:false,
+			botclose:false,
+			posFn:function(){},
+			newFun:function(){
+				$.ajax({
+					type: "POST",
+					url: "./{PATH}/functions.php",
+		 			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlFriendly_modal_rearrangingItems}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					data: { function:"salvaRules",idPath:idPath,urlPath:urlPath,nameFile:nameFile,type:type}
+				}).done(function(data) {
+					console.log(data)
+					if(data=="sucesso"){
+						TopAlert({
+							mensagem: "{urlFriendly_topAlert_save_sucess}",
+							clickclose: true,
+							height: 20,
+							timer: 3000,
+							type: 3,
+						})
+					}
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				})
+			}
+		})
+	})
+
+	$(".excluir").unbind('click tap press').bind("click tap press",function(e){
+		var idPath 		= $(this).parent().find('.idPath').val();
+		var div_include= $(this).parent().parent();
+		confirma({ 
+			conteudo:'{urlFriendly_modal_delete_content}',
+			bot1:"{urlFriendly_modal_delete_button1}",
+			bot2:"{urlFriendly_modal_delete_button2}",
+			drag:false,
+			botclose:true,
+			newFun:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./{PATH}/functions.php",
+				  data: { function:"excluiRegistro",idPath:idPath}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			},
+			onCancel:function(){
+				$.ajax({
+				  type: "POST",
+				  url: "./{PATH}/functions.php",
+				  data: { function:"excluiRegistroFile",id_include:id_include}
+				}).done(function(data) {
+					out(data);
+					$(div_include).remove();
+					$("#ws_confirm").css("line-height","20px");
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			}
+		})
+	})
+
+
+	// setTimeout(function(){
+	// 	$('#container').perfectScrollbar();
+	// 	$('#container').perfectScrollbar('update');
+	// 	$('#container').animate({scrollTop: 0}, 200);
+	// },200);
+
+}
+reloadFunctions();
+</script>
+<!-- END URLAMIGAVEL -->

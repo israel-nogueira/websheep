@@ -1,0 +1,348 @@
+<!-- BEGIN DETALHES -->
+<script>
+	var barra_progresso = '';
+	var canvas_barra_progresso = '';
+	window.id_item_selected='';
+	include_css ('{ROOT_WEBSHEEP}admin/app/templates/css/websheep/ws-modules/ws-tools/detalhes.min.css','css_mod','All');
+</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{ToolsManager_ToolDetails_mainTitle}</div>
+	<div id="topo_basico" class="bg01 editor_basico" style="display:block">
+		<!-- BEGIN GOBACK -->
+				<div id="voltar" data-goback="{goback}" class="botao">{ToolsManager_ToolDetails_BackToPluginsButton}</div>
+		<!-- END GOBACK -->
+		<!-- BEGIN VOLTAR -->
+			<div id="voltar" data-goback="{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/tools.php" class="botao">{ToolsManager_ToolDetails_BackToToolsButton}</div>
+		<!-- END VOLTAR -->
+		<div id="salvar_basico" class="botao">{ToolsManager_ToolDetails_saveTool}</div>
+	</div>
+
+	<div id="palco" class="palco_01" >
+		<div id="coluna_esq" class="coluna_esq editor_basico">
+			<form id="form_basico">
+				<input id="selectbox_type" name="_patch_" type="hidden" value="{PATCH}">
+
+
+ 				<div class="label w1 slug">{ToolsManager_ToolDetails_label_slugTool}</div> 
+ 				<input name="_slug_" class="inputText" placeholder="Slug:" value="{SLUG}">
+
+
+				<div class="label w1 qualeonome">{ToolsManager_ToolDetails_label_nameTool}</div>
+				<input name="_tit_menu_" class="inputText" placeholder="Titulo no menu:"	value="{_tit_menu_}">
+
+
+				<div class="label w1 qualeonome">{ToolsManager_ToolDetails_label_prefixColunm}</div>
+				<input name="_prefix_" class="inputText" placeholder="Prefixo:"	readonly="1" value="{_prefix_}">
+
+
+				<div class="label w1 qualeonome">{ToolsManager_ToolDetails_label_description}</div>
+				<input name="_desc_" class="inputText" placeholder="Descrição:"	value="{_desc_}">
+
+
+
+				<div class="label w1 _menu_popup_">{ToolsManager_ToolDetails_toolType}</div>
+				<div class="w1" style="padding: 10px 10px;">
+					<label style="text-align: left;"><input class="inputText _menu_popup_"	name="_niveis_"	type="radio" value="-1"  {checked1} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_label_anItem}</label>
+					<label style="text-align: left;"><input class="inputText _menu_popup_"	name="_niveis_"	type="radio" value="0" 	 {checked2} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_label_list}</label>
+					<label style="text-align: left;"><input class="inputText _menu_popup_"	name="_niveis_"	type="radio" value="1" 	 {checked3} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_label_category}</label>
+				</div>
+
+				<div class="c"></div>
+
+				<div class=" max label w1" style="padding:17px 10px;">{ToolsManager_ToolDetails_MaxItem}</div>
+				<input name="max_item" min="0" type="number" class=" max inputText" placeholder=""	value="{max_item}">
+
+				<div class="c"></div>
+
+				<div class="w1">
+					<label style="text-align: left;width: 50%;position: relative;float: left;padding: 20px 10px;;"><input class="inputText _menu_popup_"	name="_plugin_"	type="checkbox" {_plugin_} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_toolIsPartOfAPlugin}</label>
+				</div>
+
+				<div class="c"></div>
+				<div class="label w1 _menu_popup_" style="width: 570px;font-size:26px">{ToolsManager_ToolDetails_columnsWillBeDisplayed}</div>
+				<div class="c"></div>
+				<div id="camposTable">
+					<select id="InfoItemSelect" style="width: 580px;margin-left: 10px;" multiple>
+						<!-- BEGIN OPT_LIST_TABLE -->
+							<option value="{coluna_mysql}" {selectmulti}>{listaTabela}</option>
+						<!-- END OPT_LIST_TABLE -->
+					</select>
+				</div>
+			<div class="c"></div>
+				<label class="label w1 _menu_popup_" style="width: 579px;font-size:27px;">{ToolsManager_ToolDetails_groupOwned}</label>		
+				<div class="c"></div>
+				<div class="groups">
+					<div class="w1">
+						<label style="text-align: left;width: calc(100% - 10px);position: relative;float: left;padding: 5px 0px 5px 10px;border-bottom: dotted 1px #CCC;">
+							<input class="inputText _menu_popup_ groups"	name="groups[]" data-value="0"	type="checkbox" {checked_0} style="position: relative; width: 15px; height: 15px; top: 2px; ">
+							{ToolsManager_ToolDetails_rootGroup}
+						</label>
+					</div>
+					<!-- BEGIN LIST_GROUP -->
+					<div class="w1">
+						<label style="text-align: left;width: calc(100% - 10px);position: relative;float: left;padding: 5px 0px 5px 10px;border-bottom: dotted 1px #CCC;">
+							<input class="inputText _menu_popup_ groups" data-value="{id}" type="checkbox" {checked} style="position: relative; width: 15px; height: 15px; top: 2px; ">{GRUPO_NAME}
+						</label>
+					</div>
+
+
+
+					<!-- END LIST_GROUP -->
+					
+					
+				</div>
+
+
+
+				<div class="c"></div>
+				<label class="label w1 _menu_popup_" style="width: 579px;font-size:27px;">{ToolsManager_ToolDetails_AddJs_title}</label>
+				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="osdois" {_exec_js_1} >{ToolsManager_ToolDetails_AddJs_opt1}</label>
+				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="abrir" 	{_exec_js_2} >{ToolsManager_ToolDetails_AddJs_opt2}</label>
+				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="salvar" {_exec_js_3} >{ToolsManager_ToolDetails_AddJs_opt3}</label>
+				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="nada" 	{_exec_js_4} >{ToolsManager_ToolDetails_AddJs_opt4}</label>
+				<div class="c"></div>
+				<div class="c" id="ace_editor" style="position: relative;width: 574px;height:270px;margin:10px;font-size: 16px;">{_js_}</div>
+				<div class="c"></div>
+				<div class="label w1 _menu_popup_" style="font-size:27px;">{ToolsManager_ToolDetails_AddHTML}</div>
+
+				<select id="selectType" style="float:left;position:relative;" class="textArea">
+					<option value="session1">Ítem</option>
+					<option value="session5">Categorias</option>
+					<option value="session2">Imagens</option>
+					<option value="session3">Galerias</option>
+					<option value="session4">Imagens das galerias</option>
+					<option value="session6">Arquivos</option>
+				</select>
+				<div class="c" id="ace_editor_html" style="position: relative;width: 574px;height:270px;margin:10px;font-size: 16px;"></div>
+				<textarea  id="codigo_textarea" style="display:none"	name="_js_">{_js_}</textarea>
+				<textarea  id="html_item" 		style="display:none" 	name="html_item" >{html_item}</textarea>
+				<textarea  id="html_cat" 		style="display:none" 	name="html_cat" >{html_cat}</textarea>
+				<textarea  id="html_img" 		style="display:none" 	name="html_img" >{html_img}</textarea>
+				<textarea  id="html_gal" 		style="display:none" 	name="html_gal" >{html_gal}</textarea>
+				<textarea  id="html_img_gal" 	style="display:none" 	name="html_img_gal" >{html_img_gal}</textarea>
+				<textarea  id="html_file" 		style="display:none" 	name="html_file" >{html_file}</textarea>
+				<div class="c"></div>
+		</div>
+		</form>
+	</div>
+</div>
+<script>
+$(document).ready(function () {
+_root.reloadFunctions = function(){
+		window.gotoCampos=false;
+		$( "#InfoItemSelect" ).chosen({max_selected_options:8}).bind("chosen:maxselected", function () {
+			TopAlert({mensagem: "{ToolsManager_ToolDetails_chosen_maxSelect}", clickclose: true,height: 20,timer: 9000,type: 1})
+		});
+		$('*[legenda]').LegendaOver();
+		_root.form_preenchido = $("#form_basico").serialize();
+		out("reload functions");
+		$("#voltar").unbind('click').click(function(){
+			var url = $(this).data("goback");
+			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_back}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+
+			$("#conteudo").load(url,function(){
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+			});
+		})
+
+		$("#editar_campos_item").unbind('click').click(function(){
+			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			if(_root.form_preenchido!= $("#form_basico").serialize()){
+				confirma({
+					conteudo: "{ToolsManager_ToolDetails_modal_save_content}",
+					drag:false,					
+					bot1:'{ToolsManager_ToolDetails_modal_save_bot1}',
+					bot2:"{ToolsManager_ToolDetails_modal_save_bot2}",
+					newFun:function(){ 
+						window.gotoCampos=true; 
+						setTimeout(function(){$("#salvar_basico").click();},500);
+					},
+					onCancel:function(){
+						window.gotoCampos=false;
+					}
+				})
+			}else{
+				$("#conteudo").load("{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/campos.php?goback={GOBACK_ENCODE}&ws_id_ferramenta={WS_ID_FERRAMENTA}",function(){
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			}
+		})
+		$("#voltar_basico").unbind('click').click(function(){ $('#conteudo').load("./index.php"); })
+
+		$("input[type=checkbox]").click(function(){if ( $(this).is(':checked') ) {$(this).val('1');}else{$(this).val('0');}})
+
+		$("input[name='_niveis_']").click(function(){
+			if( $(this).val()== -1){
+				$('.max').hide();
+			}else{
+				$('.max').show();
+			};
+		})
+		if( $("input[type='radio'][name='_niveis_']:checked").val()==-1){
+			$('.max').hide();
+		}else{
+			$('.max').show();
+		};
+
+
+
+	$("#salvar_basico").unbind('click').click(function(){
+		if($('input[name="_slug_"]').val()==""){
+			TopAlert({
+				mensagem: "{ToolsManager_ToolDetails_TopAlert_setSlug}",
+				clickclose: true,
+				height: 20,
+				timer: 9000,
+				type: 1,
+			})
+		}else if($('input[name="_tit_menu_"]').val()==""){
+			TopAlert({
+				mensagem: "{ToolsManager_ToolDetails_TopAlert_setTitle}",
+				clickclose: true,
+				height: 20,
+				timer: 9000,
+				type: 1,
+			})
+		}else if($('input[name="_tb_"]').val()=="" && $( "input[type='checkbox'][name='_menu_popup_']" ).val()=='0'){
+			TopAlert({
+				mensagem: "{ToolsManager_ToolDetails_TopAlert_setMySQL}",
+				clickclose: true,
+				height: 20,
+				timer: 9000,
+				type: 1,
+			})
+		}else{
+			var inputs = $("#form_basico").serialize();
+			if($("#InfoItemSelect_chosen .chosen-choices .search-choice").length>=1){		
+				var chos ="&det_listagem_item="+$( "#InfoItemSelect" ).val();
+			}else{
+				var chos ="&det_listagem_item=&";
+			}
+			
+			var grupoTools =[];
+			$(".groups:checkbox:checked").each(function(){
+				grupoTools.push($(this).data('value'));
+			});
+
+			$.ajax({
+			  type: "POST",
+			  cache: false,
+			  url: "{ROOT_WEBSHEEP}admin/app/ws-modules/ws-tools/functions.php",
+			  beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"{ROOT_WEBSHEEP}admin/app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			  data: {
+			  	_js_:window.javascriptAuxiliar.getSession().getValue(),
+			  	html_item:$("#html_item").val(), 
+			  	html_cat:$("#html_cat").val(), 
+			  	html_img:$("#html_img").val(), 
+			  	html_gal:$("#html_gal").val(), 
+			  	html_img_gal:$("#html_img_gal").val(), 
+			  	html_file:$("#html_file").val(), 
+			  	groups:grupoTools, 
+			  	function:"salvaFerramenta",
+			  	ws_id_ferramenta: "{WS_ID_FERRAMENTA}",
+			  	inputs:inputs+chos
+			  }
+			}).done(function(e) {
+				out(e)
+				if(e=="sucesso"){
+					window.refreshMenuDesktop();
+					_root.form_preenchido = inputs;
+					if(window.gotoCampos==true){
+						$("#editar_campos_item").click();
+					}
+
+					TopAlert({
+						mensagem: "{ToolsManager_ToolDetails_modal_save_sucess}",
+						clickclose: true,
+						height: 20,
+						timer: 9000,
+						type: 3
+					});
+				}else{
+					TopAlert({
+						mensagem: e,
+						clickclose: true,
+						height: 50,
+						timer: 9000,
+						type: 2
+					})
+				}
+				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
+			});
+		}
+	})
+	$('#container').perfectScrollbar({suppressScrollX: true});
+}	
+	if($('#Balao_ToolType').length){$('#Balao_ToolType').remove();}
+	_root.reloadFunctions();
+
+	$.getScript("{ROOT_WEBSHEEP}admin/app/vendor/ace/src-min-noconflict/ace.js", function(wordList) {
+		$.getScript("{ROOT_WEBSHEEP}admin/app/vendor/ace/src-min-noconflict/ext-language_tools.js", function(wordList) {
+			ace.config.set('basePath', '{ROOT_WEBSHEEP}admin/app/vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
+			window.javascriptAuxiliar = ace.edit("ace_editor");
+			window.javascriptAuxiliar.setTheme("ace/theme/monokai");
+			window.javascriptAuxiliar.getSession().setMode("ace/mode/javascript");
+			window.javascriptAuxiliar.setShowPrintMargin(true); 			
+			window.javascriptAuxiliar.setHighlightActiveLine(true); 		
+			window.javascriptAuxiliar.setShowInvisibles(0); 				
+			window.javascriptAuxiliar.getSession().setUseSoftTabs(0) 		
+		    window.javascriptAuxiliar.setDisplayIndentGuides(true);
+		    window.javascriptAuxiliar.getSession().setUseWrapMode(true);  
+			window.javascriptAuxiliar.on('change', function () {
+				$("#codigo_textarea").val(window.javascriptAuxiliar.getValue())
+			}) 
+			window.javascriptAuxiliar.setValue($("#codigo_textarea").val());
+
+				window.TemplateHTML = ace.edit("ace_editor_html");
+				window.TemplateHTML.setTheme("ace/theme/monokai");    
+				window.TemplateHTML.setShowPrintMargin(true); 			
+				window.TemplateHTML.setHighlightActiveLine(true); 		
+				window.TemplateHTML.setShowInvisibles(0); 				
+				window.TemplateHTML.getSession().setUseSoftTabs(0) 		
+			    window.TemplateHTML.setDisplayIndentGuides(true);
+			    window.TemplateHTML.getSession().setUseWrapMode(true);  
+			
+				window.sessoesEditor = [];					 
+				window.sessoesEditor['session1'] = ["#html_item"	,ace.createEditSession($("#html_item").val(),'ace/mode/html')];
+				window.sessoesEditor['session2'] = ["#html_img"		,ace.createEditSession($("#html_img").val(),'ace/mode/html')];
+				window.sessoesEditor['session3'] = ["#html_gal"		,ace.createEditSession($("#html_gal").val(),'ace/mode/html')];
+				window.sessoesEditor['session4'] = ["#html_img_gal"	,ace.createEditSession($("#html_img_gal").val(),'ace/mode/html')];
+				window.sessoesEditor['session5'] = ["#html_cat"		,ace.createEditSession($("#html_cat").val(),'ace/mode/html')];
+				window.sessoesEditor['session6'] = ["#html_file"	,ace.createEditSession($("#html_file").val(),'ace/mode/html')];
+
+			 	window.TemplateHTML.setSession(window.sessoesEditor['session1'][1]);
+
+				$("#selectType").unbind('change').change(function(value){
+					window.TemplateHTML.setSession(window.sessoesEditor[$(this).val()][1]);
+				})
+
+				window.TemplateHTML.on('change', function () { 
+				 	$(window.sessoesEditor[$("#selectType").val()][0]).val(window.TemplateHTML.getValue())
+				}) 
+
+
+			window.wordList = [<!-- BEGIN CAMPOSTOOL -->{coluna_mysql_auto_complete}<!-- END CAMPOSTOOL -->];
+			out(window.wordList);
+			window.wsCompleterHTML = {
+				getCompletions: function(editor, session, pos, prefix, callback) {
+					if (prefix.length === 0){ callback(null, []); return }
+					callback(null,window.wordList.map(function(ea)  {return ea;}));
+				}
+			}
+			window.TemplateHTML.setOptions({
+			    enableBasicAutocompletion: true,
+			    enableSnippets: false,
+			    enableLiveAutocompletion: true
+			});
+			window.langTools = ace.require("ace/ext/language_tools");
+			window.langTools.setCompleters([window.wsCompleterHTML])
+		})		
+	})		
+
+
+
+ });
+</script>
+
+<!-- END DETALHES -->

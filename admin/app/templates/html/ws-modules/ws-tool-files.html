@@ -1,0 +1,272 @@
+<!-- BEGIN FILES -->
+<script>
+	include_css ("./app/templates/css/websheep/ws-modules/ws-model-tool/style_files.min.css","css_mod","All");
+</script>
+<!-- BEGIN TOP_ALERT_RASCUNHO -->
+	<script>
+		TopAlert({
+			mensagem:"<i class='fa fa-info-circle'></i> Para que você possa editar este conteúdo de forma segura, foi gerado um rascunho do ítem.<br>Para aplicar as alterações, será necessário salvar e aplicar o rascunho nos ítens.",
+			clickclose:true,
+			height:40,
+			timer:10000,
+			type:1,
+		})
+	</script>
+<!-- END TOP_ALERT_RASCUNHO -->
+
+
+<div id="topoModulo" class="TitTop bg05 w1b">Listagem de arquivos</div>
+		<div class="barra_botoes bg02" style="height: 40px;padding: 10px;">
+			
+			<!-- BEGIN BOT_BACK -->
+				<div id="voltar_item" class="botao">Voltar</div>
+			<!-- END BOT_BACK -->
+
+
+			<div id="bt_search_files" class="botao">Procurar arquivos</div>
+		</div>
+		<div class="c"></div>
+		<form name="formUpload" id="formUpload" action='./app/core/ws-upload-files.php' method="post" enctype="multipart/form-data" name="formUpload">
+		<!-- <form name="formUpload" id="formUpload" action='./app/ws-modules/ws-model-tool/upload_files.php' method="post" enctype="multipart/form-data" name="formUpload"> -->
+
+			<input name="arquivo[]" id="myfile" type="file" multiple  style="display:none" />
+			<input name="type" 	type="hidden" value="lista_arquivos_item"/>
+			<input name="token_group" 	id="token_group" type="hidden" value="{TOKEN_GROUP}"/>
+			<input name="ws_id_ferramenta" 	id="ws_id_ferramenta" type="hidden" value="{WS_ID_FERRAMENTA}"/>
+			<input name="id_item" 	id="id_item" type="hidden" value="{ID_ITEM}"/>
+			<button type="submit" id="enviar_arquivos" style="display:none" ></button>
+		</form>
+	</div>
+	<div id="palco" class="palco_01" >
+		<ul>
+			<!-- BEGIN BLOCK_FILES_ITEM -->
+				<li id='{LI_ID}' data-token="{LI_TOKEN}">
+					<div id='combo'>
+						<div class='w1'>
+							<b>Nome Original:</b>{NOME}<br><b>Peso:</b>{PESO}<br><b>Filename:</b>{ARQUIVO}
+						</div>
+						<div id='detalhes_img'>
+						<span class='editar legenda mover' 	legenda ='Mover Posição'>		<img src='./app/templates/img/websheep/arrow-move.png'></span>
+						<span class='editar legenda' 		legenda ='Editar Informações'>	<img src='./app/templates/img/websheep/pencil.png'></span>
+						<span class='excluir legenda' 		legenda ='Excluir Arquivo'>		<img src='./app/templates/img/websheep/cross-button.png'></span>
+					</div>
+				</li>
+			<!-- END BLOCK_FILES_ITEM -->
+		</ul>
+	</div>
+</div>
+
+<script>
+	function _ordena_files(){
+		var posicoes = [];
+		var i = 0;
+		$('#palco ul').children().each(function (i) {posicoes[i]= $(this).attr('id');++i;})
+		functions({funcao:"ordena_files",vars:"ids="+posicoes,patch:'app/ws-modules/ws-model-tool'})
+	}
+	$(function() {
+	    $( "#palco ul" ).sortable({
+	    	handle: ".mover",
+	    	forceHelperSize: true,
+	    	beforeStop: function( event, ui ) {_ordena_files()}
+		});
+	    $( "#palco ul" ).disableSelection();
+	 });
+
+ $("#voltar_item").unbind("click").click(function(){
+	confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+ 	$("#conteudo").load("./app/ws-modules/ws-model-tool/detalhes.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}",function(){
+		$("#ws_confirm").remove();
+		$("#body").removeClass("scrollhidden");
+		$("*").removeClass("blur");
+	});
+ });
+
+function reloadFunctions(){
+	$('.legenda').LegendaOver();
+	/*==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM */
+	$('#palco ul li .excluir').unbind('click').click(function(){
+		var iDimg = $(this).parent().parent().parent().attr('id');
+		var Div = $(this).parent().parent().parent();
+				confirma({
+					conteudo:'Tem certeza que quer excluir esse arquivo?',
+					bot1:"Sim tenho certeza!",
+					bot2:"Ops, cliquei errado!",
+					drag:false,
+					botclose:false,
+					newFun:function(){
+						functions({
+							patch:'app/ws-modules/ws-model-tool',
+							funcao:"ExcluiFile",
+							vars:"iDimg="+iDimg,
+							Sucess:function(e){
+								if(e=='Sucesso em excluir o arquivo'){var cor=3;}else{var cor=2;}
+								TopAlert({
+									mensagem:e,
+									clickclose:true,
+									height:20,
+									timer:3000,
+									type:cor,
+								})
+								$(Div).remove();
+							}
+						});
+					}
+				})
+		})
+
+/*==================================================================================================== EDITAR INFORMAÇÕES DA IMAGEM */
+	$('#palco ul li .editar').unbind('click').click(function(){
+		var iDimg = $(this).parent().parent().parent().attr('id');
+		var token = $(this).parent().parent().parent().data('token');
+
+			$.ajax({
+			  type: "POST",
+			  url: "./{PATH}/functions.php",
+			  data: {"function":"dados_file","idFile":iDimg,"token":token},
+			  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+			}).done(function(e) {
+				var formImg = e;
+				confirma({
+					conteudo:formImg,
+					bot1:"Salvar",
+					bot2:"Cancelar",
+					drag:false,
+					botclose:false,
+					posFn:function(){
+						var element = $('#ws_confirm #body #ws_confirm_conteudo #form-img #textAreaInput');
+ 						$(element).ckeditor({
+ 								enterMode :2,
+								forcePasteAsPlainText	:true,
+								fillEmptyBlocks:false,
+								basicEntities:false,
+								entities_greek:false, 
+								entities_latin:false, 
+								entities_additional:"",
+								toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]
+ 						})
+					},
+					newFun:function(){
+						var element 	= 	$('#textAreaInput');
+						var token 		= 	$('#token').val();
+						var idImg 		= 	$('#form-img').attr('id-img');
+						var download 	= 	$('#download:checked').length;
+						var titulo 		= 	encodeURIComponent($('#form-img #titulo').val());
+						var texto 		= 	encodeURIComponent(element.val());
+						var url 		= 	encodeURIComponent($('#form-img #url').val());
+						$.ajax({
+						  type: "POST",
+						  url: "./{PATH}/functions.php",
+						  data: {"function":"SalvarDadosFiles","idFile":idImg,"titulo":titulo,"texto":texto,"url":url,"download":download,"token":token},
+						  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+						}).done(function(e) {
+								out(e)
+								if(e=='Ítem salvo com sucesso!'){var cor=3;}else{var cor=2;}
+								TopAlert({
+									mensagem:e,
+									clickclose:true,
+									height:20,
+									timer:3000,
+									type:cor,
+								})
+						})
+					}
+				})
+			})
+
+			/*		functions({
+						funcao:"dados_file",
+						vars:"idFile="+iDimg+"&token="+token,
+						patch:'app/ws-modules/ws-model-tool',
+						Sucess:function(e){
+							var formImg = e;
+							confirma({
+								conteudo:formImg,
+								bot1:"Salvar",
+								bot2:"Cancelar",
+								drag:false,
+								botclose:false,
+								posFn:function(){
+									var element = $('#ws_confirm #body #ws_confirm_conteudo #form-img #textAreaInput');
+			 						$(element).ckeditor({
+			 								enterMode :2,
+											forcePasteAsPlainText	:true,
+											fillEmptyBlocks:false,
+											basicEntities:false,
+											entities_greek:false, 
+											entities_latin:false, 
+											entities_additional:"",
+											toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]
+			 						})
+								},
+								newFun:function(){
+									var element 	= 	$('#textAreaInput');
+									var token 		= 	$('#token').val();
+									var idImg 		= 	$('#form-img').attr('id-img');
+									var download 	= 	$('#download:checked').length;
+									var titulo 		= 	encodeURIComponent($('#form-img #titulo').val());
+									var texto 		= 	encodeURIComponent(element.val());
+									var url 		= 	encodeURIComponent($('#form-img #url').val());
+									functions({
+										patch:"app/ws-modules/ws-model-tool",
+										funcao:"SalvarDadosFiles",
+										vars:"idFile="+idImg+"&titulo="+titulo+"&texto="+texto+"&url="+url+"&download="+download+"&token="+token,
+										metodo:"post",
+										Sucess:function(e){
+											out(e)
+											if(e=='Ítem salvo com sucesso!'){var cor=3;}else{var cor=2;}
+											TopAlert({
+												mensagem:e,
+												clickclose:true,
+												height:20,
+												timer:3000,
+												type:cor,
+											})
+										}
+									})
+								}
+							})
+						}
+					})
+			*/	
+	})
+/*====================================================================================================*/
+}
+reloadFunctions();
+
+
+$("#formUpload").ajaxForm({
+		beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
+		uploadProgress: function(event, position, total, percentComplete, myForm){
+			$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
+			$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
+		},
+		complete: function(e){
+			$("#conteudo").load("./app/ws-modules/ws-model-tool/files.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}")
+		}
+	})
+
+
+$("#bt_search_files").click(function(){$("#myfile").click();})
+document.getElementById('formUpload').addEventListener('change', handleFileSelect, false);
+function handleFileSelect(evt) {
+    var files = evt.target.files;
+    var output = [];
+    var ext_permitias = [{EXTENCOES}];
+
+  /*  for (var i = 0, f; f = files[i]; i++) {
+    	var extencao= (escape(f.name).substr(f.name.lastIndexOf('.')+1));
+    	if($.inArray( extencao, ext_permitias )== -1){
+    		alert("Existe um ou mais arquivos com extenção não permitida. \n Você pode selecionar os seguintes tipos de arquivo: \n "+ext_permitias);
+    		return false;
+    	}
+    }*/
+	$("#enviar_arquivos").click();
+  }
+	setTimeout(function(){
+		$('#container').perfectScrollbar()
+		$('#container').perfectScrollbar('update')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+</script>
+<!-- END FILES -->

@@ -1,0 +1,119 @@
+<!-- BEGIN FOLDER -->
+		<div class="item {type} easing" data-path="{path}" data-token="{token}" data-basename="{NAME_FOLDER}">
+			<!-- BEGIN BOTS_FOLDER -->
+			<div class="bot_fn">
+				<div legenda="Excluir diretório" class="deleteFolder"> 	<img src="./app/templates/img/websheep/folder--minus.png"> 	</div>
+			</div>
+			<!-- END BOTS_FOLDER -->
+			<!-- BEGIN BOTS_FILE -->
+			<div class="bot_fn">
+				<div legenda="Excluir arquivo" class="deleteFile"> 	<img src="./app/templates/img/websheep/cross.png"> 	</div>
+			</div>
+			<!-- END BOTS_FILE -->
+			<div class="icon {type} {ext}">
+				<div class="label easing">{NAME_FOLDER}</div>
+			</div>
+		</div>
+		<div class="container" data-path="{path}"></div>
+<!-- END FOLDER -->
+
+<!-- BEGIN ESTRUTURA -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+	<link href="./app/templates/css/websheep/ws-modules/ws-webmaster/template_base.css" rel="stylesheet">
+
+	<div id="webmaster_desktop">
+		<div id="webmaster_menu_left">
+			<div class="drag"></div>
+			<div class="container-scroll scrollbar"></div>
+		</div>
+		<div id="webmaster_container">
+			<div id="webmaster_abas"></div>
+			<div id="webmaster_editor"></div>
+		</div>
+		<div id="webmaster_menu_right" class="closed">
+			<div class="close">
+					<i class="icon-close" title="Fechar"></i>
+			</div>
+			<div id="webmaster_menu_right_icon">
+				<div class="containerScroll easing" >
+					<div title="Config: Ctrl+Y" id="config" class="icon easing" data-w="500">
+						<i class="fa fa-gear"></i>
+						<div class="label">Config.</div>
+					</div>
+					<div title="Novo Arquivo: Ctrl+N" id="newFile" class="icon easing" data-w="500">
+						<i class="fa fa-plus"></i>
+						<div class="label">+ Arquivo</div>
+					</div>
+					<div title="Novo Folder: Ctrl+E" id="newFolder" class="icon easing" data-w="500">
+						<i class="fa fa-folder-open"></i>
+						<div class="label">+ Pasta</div>
+					</div>
+					<div title="Salvar: Ctrl+S" id="saveFile" class="icon easing" data-w="500">
+						<i class="fa fa-save"></i>
+						<div class="label">Salvar</div>
+					</div>
+					<div title="Deletar Arquivo: Ctrl+D" id="deleteFile" class="icon easing" data-w="500">
+						<i class="fa fa fa-remove"></i>
+						<div class="label">Excluir</div>
+					</div>
+					<div title="Ferramentas: Ctrl+'" id="tools" class="icon easing" data-w="500">
+						<i class="fa fa-wrench"></i>
+						<div class="label">Ferramentas</div>
+					</div>
+					<div title="Plugins: Ctrl+1" id="plugins" class="icon easing" data-w="500">
+						<i class="fa-plug"></i>
+						<div class="label">Plugins</div>
+					</div>
+					<div title="Config: Ctrl+Y" id="shortcodes" class="icon easing" data-w="500">
+						<i class="fa fa-code"></i>
+						<div class="label">Shortcodes</div>
+					</div>
+					<div title="CDNJS: Ctrl+G" id="CDNJS" class="icon easing" data-w="500">
+						<i class="fa fa-cloud-download"></i>
+						<div class="label">CDNJS</div>
+					</div>
+					<div title="GoogleFonts: Ctrl+J" id="GoogleFonts" class="icon easing" data-w="500">
+						<i class="fa fa-font"></i>
+						<div class="label">GoogleFonts</div>
+					</div>
+					<div title="Paginação: Ctrl+P" id="paginate" class="icon easing" data-w="500">
+						<i class="fa fa-list"></i>
+						<div class="label">Paginação</div>
+					</div>
+					<div title="Formulário: Ctrl+Q" id="forms" class="icon easing" data-w="500">
+						<i class="fa fa-file-text"></i>
+						<div class="label">Formulário</div>
+					</div>
+					<!-- 
+					<div id="versions" class="icon easing" data-w="500">
+						<i class="fa fa-code-fork"></i>
+						<div class="label">Versões</div>
+					</div>
+ 					<div id="versions" class="icon easing" data-w="500">
+						<i class="fa fa-image"></i>
+						<div class="label">Imagens</div>
+					</div>
+					<div id="versions" class="icon easing" data-w="500">
+						<i class="fa fa-align-left"></i>
+						<div class="label">Lipsum</div>
+					</div>
+					<div id="versions" class="icon easing" data-w="500">
+						<i class="fa fa-certificate"></i>
+						<div class="label">Ícones</div>
+					</div>
+					 -->					
+					<div title="Formulário: Ctrl+2" id="GridBootstrap" class="icon easing" data-w="500">
+						<i class="fa fa-columns"></i>
+						<div class="label">GRID<br>Bootstrap</div>
+					</div>
+				</div>
+			</div>
+			<div id="webmaster_menu_right_body" class="scrollbar easing"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+			window.ROOT_WEBSHEEP	= "{ROOT_WEBSHEEP}";
+			window.INCLUDE_PATH 	= "{INCLUDE_PATH}"; 
+	</script>
+	<script src="./app/templates/js/websheep/ws-modules/ws-webmaster/ws-functions.js?v={cache}"></script>
+<!-- END ESTRUTURA -->

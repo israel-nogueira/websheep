@@ -1,0 +1,1036 @@
+<!-- BEGIN BLOCK_WS_DETAILS -->
+	<script type="text/javascript">
+		window.comboPlugins = [{COMBO_PLUGINS}];
+		window.id_item_selected = '';
+		window.typeColumns = [{TYPE_COLUMNS}];
+		include_js('./app/vendor/jquery-ui/1.12.1/jquery-ui.min.js', 'jqueryUI');
+		$.getScript('./app/vendor/ace/src-min-noconflict/ace.js', function() {
+			include_js('./app/vendor/ace/src-min-noconflict/ext-language_tools.js', 'ace-language-tools');
+		});
+		include_css("./app/templates/css/websheep/ws-modules/ws-model-tool/detalhes.min.css?v={RAND}", "css_mod", "All");
+		window.styleCKEditor = {STYLE_CKEDITOR};
+
+
+		window.verifyCkEditorOriginal = function(){
+			if({IF_ORIGINAL}==true){
+				$(".cke_top.cke_reset_all").hide();
+				$(".cke_wysiwyg_frame").contents().find("body").attr("contenteditable","false");
+			}
+		}
+		window.uploadIMGEditor = function(ID) {
+			functions({
+				funcao: "ReturnUploadCKEditor",
+				vars: "id_item={ID_ITEM}&token_group={GROUP}&token={TOKEN}",
+				patch: "{PATH}",
+				Sucess: function(e) {
+					confirma({
+						conteudo: e,
+						bot1: 0,
+						bot2: 0,
+						drag: 0,
+						botclose: 1,
+						posFn: function() {
+							$("#formUploadCKeditor").ajaxForm({
+								beforeSend: function(xhr) {
+									$('#ws_confirm #body #close').click(xhr.abort);
+								},
+								uploadProgress: function(event, position, total, percentComplete, myForm) {
+									if(percentComplete >= 99) {
+										$('#uploadBarContent #uploadBar').html("Processando imagem...");
+									} else {
+										$('#uploadBarContent #uploadBar').html(percentComplete + "%");
+									}
+									$('#uploadBarContent #uploadBar').animate({
+										width: percentComplete + "%"
+									}, 50);
+								},
+								complete: function(e) {
+									$('#ws_confirm #body #close').click();
+									$("#formUploadCKeditor").trigger('reset');
+									eval("CKEDITOR.instances." + ID + ".insertHtml('<img src=\"" + decodeURIComponent(e.responseText) + "\">')");
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+
+								}
+							})
+							$("#btSelectFile").bind('tap click press', function() {
+								$("#inputFile").click();
+							})
+							$("#formUploadCKeditor #inputFile").change(function() {
+								$("#formUploadCKeditor #enviar_arquivos").click();
+							})
+
+						},
+						newFun: function() {}
+					})
+				}
+			})
+		}
+		window.AjustarCSS = function(ID) {
+			functions({
+				funcao: "ReturnCSSPadrao",
+				vars: "id_item={ID_ITEM}",
+				patch: "{PATH}",
+				Sucess: function(e) {
+					confirma({
+						conteudo: e,
+						width: 'calc(100% - 20px)',
+						height: 'calc(100% - 90px)',
+						bot1: 'salvar',
+						bot2: 'Cancelar',
+						drag: 0,
+						botclose: 0,
+						posFn: function() {
+							var str = $("textarea#stylesCSS").val();
+							var uri_encoded = str.replace(/%([^\d].)/, "%25$1");
+							var decoded = decodeURIComponent(escape(uri_encoded));
+							window.AceEditor_cssFile = ace.edit("ace_stylesCSS");
+							window.AceEditor_cssFile.setTheme("ace/theme/monokai");
+							window.AceEditor_cssFile.setHighlightActiveLine(0); // mostra linha ativa atual
+							window.AceEditor_cssFile.setShowInvisibles(0); // frufru de tabulações
+							window.AceEditor_cssFile.getSession().setUseWrapMode(1) // wrap sem quebra de linha
+							window.AceEditor_cssFile.getSession().setUseSoftTabs(1) // usar tabs ao invez de espaço
+							window.AceEditor_cssFile.getSession().setMode("ace/mode/css");
+							window.AceEditor_cssFile.getSession().setValue(decoded);
+							window.AceEditor_cssFile.getSession().on('change', function() {$("textarea#stylesCSS").val(window.AceEditor_cssFile.getSession().getValue());})
+							$('.ace_scrollbar ').perfectScrollbar();
+							setTimeout(function() {$('.ace_scrollbar ').perfectScrollbar('update')}, 200);
+						},
+						newFun: function() {
+							var Conteudo = $("#stylesCSS").val()
+							$.ajax({
+								type: "POST",
+								url: "./{PATH}/functions.php",
+								beforeSend: function() {
+									confirma({
+										width: "auto",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										drag: false,
+										bot1: 0,
+										bot2: 0
+									})
+								},
+								data: {
+									function: "salvaCss",
+									css: Conteudo
+								}
+							}).done(function(e) {
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+								if(e == "sucesso") {
+									TopAlert({
+										mensagem: "<b>Recarregue a página</b>",
+										type: 3
+									})
+								} else {
+									TopAlert({
+										mensagem: e,
+										type: 2
+									})
+								}
+							})
+						}
+					})
+				}
+			})
+		}
+		window.AjustarEstilos = function(ID) {
+			functions({
+				funcao: "ReturnEstiloPadrao",
+				vars: "id_item={ID_ITEM}",
+				patch: "{PATH}",
+				Sucess: function(e) {
+					confirma({
+						conteudo: e,
+						width: 'calc(100% - 20px)',
+						height: 'calc(100% - 90px)',
+						bot1: 'salvar',
+						bot2: 'Cancelar',
+						drag: 0,
+						botclose: 0,
+						posFn: function() {
+							window.AceEditor_JSON_Style = ace.edit("ace_stylesCSS");
+							window.AceEditor_JSON_Style.setTheme("ace/theme/monokai");
+							window.AceEditor_JSON_Style.session.setOption("useWorker", false); //desabilita o corretor de sintaxe								
+							window.AceEditor_JSON_Style.setHighlightActiveLine(0); // mostra linha ativa atual
+							window.AceEditor_JSON_Style.setShowInvisibles(0); // frufru de tabulações
+							window.AceEditor_JSON_Style.getSession().setUseWrapMode(1) // wrap sem quebra de linha
+							window.AceEditor_JSON_Style.getSession().setUseSoftTabs(1) // usar tabs ao invez de espaço
+							window.AceEditor_JSON_Style.getSession().setMode("ace/mode/javascript");
+							window.AceEditor_JSON_Style.getSession().setValue(decodeURIComponent(unescape($("textarea#stylesCSS").val())));
+							window.AceEditor_JSON_Style.getSession().on('change', function() {
+								$("textarea#stylesCSS").val(window.AceEditor_JSON_Style.getSession().getValue());
+							})
+							$('.ace_scrollbar ').perfectScrollbar();
+							setTimeout(function() {
+								$('.ace_scrollbar ').perfectScrollbar('update')
+							}, 200);
+						},
+						newFun: function() {
+							var Conteudo = $("#stylesCSS").val()
+							$.ajax({
+								type: "POST",
+								url: "./{PATH}/functions.php",
+								beforeSend: function() {
+									confirma({
+										width: "auto",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										drag: false,
+										bot1: 0,
+										bot2: 0
+									})
+								},
+								data: {
+									function: "salvaEstilo",
+									json: Conteudo
+								}
+							}).done(function(e) {
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+								if(e == "sucesso") {
+									TopAlert({
+										mensagem: "Recarregue a página</b>",
+										type: 3
+									})
+								} else {
+									TopAlert({
+										mensagem: e,
+										type: 2
+									})
+								}
+							})
+						}
+					})
+				}
+			})
+		}
+		window.loadBiblioteca = function(id) {
+			abreBiblioteca({
+				multiple: 1,
+				onSelect: function(_out_) {
+					var crop = '<img src="'+ws.rootPath+'ws-img/0/0/';
+					imagens = crop + _out_.join('"/>' + crop) + '"/>';
+					eval("CKEDITOR.instances." + id + ".insertHtml('" + decodeURIComponent(imagens) + "')");
+				}
+			})
+		}
+		window.loadShortCode = function(id) {
+			functions({
+				funcao: "loadShortCodes",
+				vars: "",
+				patch: "{PATH}",
+				Sucess: function(e) {
+					confirma({
+						conteudo: e,
+						width: 600,
+						bot1: 'Inserir shortcode',
+						bot2: 'Cancelar',
+						drag: 0,
+						botclose: 0,
+						posFn: function() {
+							$("#shortcodes").chosen().change(function() {
+								$("#shortcodes").trigger('chosen:updated');
+							})
+						},
+						newFun: function() {
+							eval("CKEDITOR.instances." + id + ".insertHtml('" + $("#shortcodes").val() + "')");
+						}
+					})
+				}
+			})
+		}
+		window.isDraftOrNot = function(draft){		
+			if(draft==true){
+				$(document).off("mouseenter").off("mouseleave");
+				$("#DraftKey").removeClass("draft")
+				$("#DraftKey").addClass("original")
+				$("#DraftKey").animate({"backgroundColor":"#59aec7"});
+				$("#DraftKey").attr("legenda","mostrando PUBLICADAS");
+				$("#bt_search_files,#bt_search_biblioteca,#bt_publicar,#bt_lixeira,#bt_AddCat").fadeOut("fast")
+				$("#DraftKey").find('.bolinha').animate({"marginLeft":47,"backgroundColor":"#FFF"},function(){})
+				$("input[type='text'],textarea").attr("readOnly","true");
+				$("input[type='checkbox'],input[type='radio'],select").attr("disabled","true");
+				$(".colorpicker_geral,.botao").unbind("click tap press").bind("click tap press",function(){
+						TopAlert({mensagem: "Este ítem não pode ser salvo, edite o rascunho.", clickclose: true, height: 20, timer: 3000, type: 1, })
+				});
+				$(".textoarea_adicional.selectbox_adicional.multipleselect").attr("disabled", true).trigger("chosen:updated");
+			}else{
+				$("#DraftKey").addClass("draft");
+				$("#DraftKey").removeClass("original");
+				$("#DraftKey").animate({"backgroundColor":"#697685"})
+				$("#DraftKey").attr("legenda","mostrando RASCUNHO");
+				$("#bt_search_files,#bt_search_biblioteca,#bt_publicar,#bt_lixeira").fadeIn("fast")
+				$("#DraftKey").find('.bolinha').animate({"marginLeft":2,"backgroundColor":"#f3f4f7"},function(){})
+			}
+		}
+
+	</script>
+	<style type="text/css">
+		.iframe #topoModulo {
+			display: none;
+		}
+	</style>
+	<div id="topoModulo" class="TitTop bg05 w1b">{TITULO_TOOL}</div>
+	<div id="topo_upload" class="bg01">
+
+		<form name="formUpload" id="formUpload">
+				<div id="bt_SalvarItem" class="bg02 w1"><img src="./app/templates/img/websheep/disk-black.png" /> Salvar rascunho </div>
+
+
+				<div>
+					<!-- BEGIN BLOCK_ADD_CAT -->
+						<div id="bt_AddCat" class="bg02 w1"><img src="./app/templates/img/websheep/category-group.png" />Categorias</div>
+					<!-- END BLOCK_ADD_CAT -->
+					<div id="DraftKey" class="{CLASS_ORIGINAL}" legenda="Mostrando RASCUNHO">
+						<div class="bolinha"></div>
+					</div>
+
+
+					<!-- BEGIN BLOCK_LINK_BACK -->
+						<div id="bt_voltar_cat" class="bg02 w1"><img src="./app/templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;" />Voltar</div>
+						<script>
+							$("#bt_voltar_cat").unbind("click").click(function() {
+								confirma({
+									width: "auto",
+									conteudo: "  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+									drag: false,
+									bot1: 0,
+									bot2: 0
+								});
+								$("#conteudo").load("{LINK_BACK}", function() {
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+								});
+							});
+						</script>
+					<!-- END BLOCK_LINK_BACK -->
+		</form>
+		</div>
+		<div id="palco" class="palco_01">
+			<div id="hideActions" style="display:none;position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1000; background-color:rgba(255, 255, 255, 0.35);"></div>
+			<form id="UploadFile" style="display:none" action="./app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+				<input name="arquivo" id="myfile" type="file" style="display:none" />
+				<input type="hidden" name="type" 				value="item_detail_file" />
+				<input type="hidden" name="token_group" 		value="{TOKEN_GROUP}" />
+				<input type="hidden" name="ws_id_ferramenta" 	value="{ID_FERRAMENTA}" />
+				<input type="hidden" name="id_item" 			value="{ID_ITEM}" />
+				<input type="hidden" name="id_cat" 				value="{ID_CAT}" />
+				<input type="hidden" name="extension" 			value="" />
+				<input type="hidden" name="token" 				value="" />
+				<input type="hidden" name="mysql" 				value="" />
+				<input type="hidden" name="download" 			value="" />
+				<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+				<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+			</form>
+			<form id="UploadThumbmails" style="display:none" action="./app/core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+				<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="myfile" type="file" style="display:none" />
+				<input type="hidden" name="type" 				value="item_detail_thumbnail" />
+				<input type="hidden" name="id_item" 			value="{ID_ITEM}" />
+				<input type="hidden" name="id_cat" 				value="{ID_CAT}" />
+				<input type="hidden" name="ws_id_ferramenta" 	value="{ID_FERRAMENTA}" />
+				<input type="hidden" name="token_group" 		value="{TOKEN_GROUP}" />
+				<input type="hidden" name="extension" 			value="" />
+				<input type="hidden" name="token" 				value="" />
+				<input type="hidden" name="mysql" 				value="" />
+				<input type="hidden" name="newheight" 			value="" />
+				<input type="hidden" name="newwidth" 			value="" />
+				<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+				<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
+			</form>
+			<form id="form_dados_geral">
+				<!-- BEGIN BLOCK_BOT_TOOLS -->
+				<div style="width:{WIDTH}px;" class="botao botao_adicional" id="{ID}" {LEGENDA}>{LABEL}</div>
+				<script>
+					$("#{ID}").unbind("click").click(function() {
+						confirma({
+							width: "auto",
+							conteudo: "  Carregando {LABEL}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+							drag: false,
+							bot1: 0,
+							bot2: 0
+						})
+						$("#ws_confirm").css("line-height", "20px");
+						$("#conteudo").load("./ws-modules/ws-model-tool/index.php?ws_id_ferramenta={VALUE}", function(response, status, xhr) {
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						});
+					})
+				</script>
+				<!-- END BLOCK_BOT_TOOLS -->
+
+
+				<!-- BEGIN 	BLOCK_INPUTS_DETAILS -->
+					{INPUTS_DETAILS}
+				<!-- END 	BLOCK_INPUTS_DETAILS -->
+			</form>
+		</div>
+		<div class="c"></div>
+		<script>
+			$(document).ready(function() {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+				$('#keywork_select, .multipleselect,#_link_opt_cat_,.chosen-container-multi').chosen({
+					update: function(element) {
+						$(element).trigger('chosen:updated');
+					}
+				});
+				$('#keywork_select_chosen').attr("legenda", "Essas palavras, podem interligar os ítens posteriormente.<br>Gerando assim, uma afinidade entre eles.<br>obs: <i>Para editar as palavras, clique em voltar e depois em 'Gerenciar Afinidades'.");
+				
+				$(".bt_link_itens").unbind('click tap press').bind('click tap press', function() {
+					var idCampo = $(this).attr('id');
+					functions({
+						funcao: "returnItensVinculados",
+						vars: "ws_id_ferramenta={ID_FERRAMENTA}&id_item={ID_ITEM}&idCampo=" + idCampo,
+						patch: "{PATH}",
+						Sucess: function(e) {
+							confirma({
+								conteudo: '<div class="w1"> Selecione os ítens para vincular.</div>\
+											<div class="listaCategoriasPopup">\
+											<form id="combo" class="ace_scrollbar">' + e + '</form>\
+										</div>',
+								width: "50%",
+								height: "calc(100% - 190px)",
+								bot1: "Vincular itens",
+								bot2: 'Cancelar',
+								drag: 0,
+								botclose: 1,
+								posFn: function() {
+									$('.ace_scrollbar ').perfectScrollbar();
+									setTimeout(function() {
+										$('.ace_scrollbar ').perfectScrollbar('update')
+									}, 200);
+								},
+								newFun: function() {
+									$.ajax({
+										type: "POST",
+										url: "{PATH}/functions.php",
+										cache: false,
+										data: {
+											"function": "vinculaItemOuCategorias",
+											"idCampo": idCampo,
+											"ws_id_ferramenta_link": $("#id_link_obj").val(),
+											"categorias": $("#combo").serialize(),
+											"ws_id_ferramenta": "{ID_FERRAMENTA}",
+											"id_item": "{ID_ITEM}"
+										},
+									}).done(function(e) {
+										if(e.trim() == "sucesso") {
+											e = 'Item vinculado com sucesso!';
+											var cor = 3;
+										} else {
+											var cor = 2;
+											e = 'Ops houve algum erro!';
+										}
+										TopAlert({
+											mensagem: e,
+											clickclose: true,
+											height: 20,
+											timer: 3000,
+											type: cor,
+										})
+									})
+								}
+							})
+						}
+					})
+				});
+				$('#bt_AddCat').unbind('click tap press').bind('click tap press', function() {
+					functions({
+						funcao: "returnCategorias",
+						vars: "id_item={ID_ITEM}&ws_id_ferramenta={ID_FERRAMENTA}",
+						patch: "{PATH}",
+						Sucess: function(e) {
+							confirma({
+								conteudo: '<div class="w1"> Selecione as categorias que estarão este ítem.</div>\
+										<div class="listaCategoriasPopup">\
+											<form id="combo" class="ace_scrollbar">' + e + '</form>\
+										</div>',
+								width: "50%",
+								height: "calc(100% - 190px)",
+								bot1: "Vincular",
+								bot2: "Cancelar",
+								drag: 0,
+								botclose: 1,
+								posFn: function() {
+									$('.ace_scrollbar ').perfectScrollbar();
+									setTimeout(function() {
+										$('.ace_scrollbar ').perfectScrollbar('update')
+									}, 200);
+								},
+								newFun: function() {
+									$.ajax({
+										type: "POST",
+										url: "{PATH}/functions.php",
+										cache: false,
+										data: {
+											"function": "vinculaCategorias",
+											"categorias": $("#combo").serialize(),
+											"ws_id_ferramenta": "{ID_FERRAMENTA}",
+											"id_item": "{ID_ITEM}"
+										},
+									}).done(function(e) {
+										if(e == "sucesso") {
+											e = 'Item vinculado com sucesso!';
+											var cor = 3;
+										} else {
+											var cor = 2;
+										}
+										TopAlert({
+											mensagem: e,
+											clickclose: true,
+											height: 20,
+											timer: 3000,
+											type: cor,
+										})
+									})
+								}
+							})
+						}
+					})
+				})
+
+	/*######################################################################################################################*/
+
+				$('#DraftKey').unbind('click').click(function(){
+					if($(this).hasClass("draft")){
+						confirma({width: "auto", conteudo: "<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 33px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+						window.isDraftOrNot(true);
+						$("#conteudo").load('{URL_LOAD}&original=true', function() {
+							TopAlert({mensagem:'Visualizando Original', height:20, timer:2000, type:3})
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass("blur");
+						});
+					}else{
+						confirma({width: "auto", conteudo: "<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 33px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+						window.isDraftOrNot(false);
+						$("#conteudo").load('{URL_LOAD}&original=false', function() {
+							TopAlert({mensagem:'Visualizando Rascunho', height:20, timer:2000, type:1})
+							$("#ws_confirm").remove();
+							$("#body").removeClass("scrollhidden");
+							$("*").removeClass
+						});
+					}
+				})
+				$('#bt_SalvarItem').unbind('click tap press').bind('click tap press', function() {
+					if({IF_ORIGINAL}==false){
+						var campos = {};
+						if(campos._link_opt_cat_) {
+							campos._link_opt_cat_ = null;
+						}
+						if($('#_link_opt_cat_').chosen().val() != null) {
+							campos._link_opt_cat_ = $('#_link_opt_cat_').chosen().val();
+						}
+						$(window.typeColumns).each(function(index, input) {
+							if(input.type == "key_works") {
+								if($("textarea#" + input.id).next().children().length > 0) {
+									var keyworksCampo = [];
+									$("textarea#" + input.id).next().children().each(function(index) {
+										keyworksCampo.push($(this).text());
+									});
+									eval("campos." + input.id + "='" + keyworksCampo + "'");
+								} else {
+									eval("campos." + input.id + "='';");
+								}
+							} else if(input.type == "editor") {
+								eval("campos." + input.coluna_mysql + "=encodeURIComponent($(\"#" + input.id + "\").val());")
+							} else if(input.type == "textarea") {
+								if(input.editor == '1') eval("campos." + input.coluna_mysql + "=addslashes(encodeURIComponent(CKEDITOR.instances[\"" + input.id + "\"].getData()));");
+								if(input.editor == '0') eval("campos." + input.coluna_mysql + "=addslashes(encodeURIComponent($(\"#" + input.id + "\").val()));");
+							} else if(input.type == "input") {
+								if(input.financeiro == '1') {
+									eval("campos." + input.coluna_mysql + "= $(\"#" + input.id + "\").val();");
+								} else {
+									eval("campos." + input.coluna_mysql + "= encodeURIComponent($(\"#" + input.id + "\").val());");
+								}
+							} else if(input.type == 'check') {
+								eval("campos." + input.coluna_mysql + "=$(\"#" + input.id + "\").val();");
+							} else if(input.type == 'selectbox' || input.type == 'linkTool') {
+								eval("campos." + input.coluna_mysql + "=$(\"#" + input.id + "  option:selected\").val();");
+							} else if(input.type == 'multiple_select') {
+								var multipleopt = new Array();
+								$("#" + input.id + "_chosen .chosen-choices li").each(function(i) {
+									var txt = ($(this).find("span").text());
+									if(txt != "") {
+										multipleopt.push(txt);
+									};
+								});
+								if(multipleopt.length == 0) {
+									multipleopt = null;
+								}
+								eval('campos.' + input.coluna_mysql + '="' + multipleopt + '"');
+							} else if(input.type == 'colorpicker') {
+								eval("campos." + input.coluna_mysql + "= $(\"#" + input.id + "\").val();");
+							}else if(input.type == 'radiobox') {
+								eval("campos." + input.coluna_mysql + "= $(\"input[name='"+input.id+"']:checked\").val();");
+							}
+						})
+						campos.function = "SalvaDetalhes";
+						campos.id_item = "{ID_ITEM}";
+						campos.ws_id_ferramenta = "{ID_FERRAMENTA}";
+						{EXEC_JS_1}
+						confirma({
+							conteudo: "Deseja fazer o que?",
+							width: 500,
+							height: 'auto',
+							mleft: 0,
+							mtop: 0,
+							posFn: function() {},
+							Init: function() {},
+							posClose: function() {},
+							bot1: "Salvar rascunho",
+							bot2: "Salvar e publicar",
+							drag: false,
+							botclose: true,
+							newFun: function() {
+								$.ajax({
+									type: "POST",
+									url: "{PATH}/functions.php",
+									beforeSend: function() {
+										confirma({
+											width: "auto",
+											conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+											drag: false,
+											bot1: 0,
+											bot2: 0
+										})
+									},
+									cache: false,
+									data: campos,
+								}).done(function(e) {
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+									if(e.trim() == 'Ítem salvo com sucesso!') {
+										var cor = 3;
+									} else {
+										var cor = 2;
+									}
+									TopAlert({
+										mensagem: e,
+										clickclose: true,
+										height: 20,
+										timer: 3000,
+										type: cor,
+									})
+								})
+							},
+							onCancel: function() {
+								campos.function = "PublicaRascunho";
+								$.ajax({
+									type: "POST",
+									url: "{PATH}/functions.php",
+									beforeSend: function() {
+										confirma({
+											width: "auto",
+											conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+											drag: false,
+											bot1: 0,
+											bot2: 0
+										})
+									},
+									cache: false,
+									data: campos,
+								}).done(function(e) {
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+									if(e.trim() == 'Ítem salvo com sucesso!') {
+										var cor = 3;
+									} else {
+										var cor = 2;
+									}
+									TopAlert({
+										mensagem: e,
+										clickclose: true,
+										height: 20,
+										timer: 3000,
+										type: cor,
+									})
+								})
+							},
+							onClose: function() {},
+							Callback: function() {},
+							ErrorCheck: function() {},
+							Check: function() {
+								return true
+							}
+						})
+					}else{
+							TopAlert({
+								mensagem: "Este ítem não pode ser salvo, edite o rascunho.",
+								clickclose: true,
+								height: 20,
+								timer: 3000,
+								type: 1,
+							})
+					}
+				})
+
+				function OrdenaCategoria() {
+					var posicoes = [];
+					var i = 0;
+					$('#palco ul').children().each(function(i) {
+						posicoes[i] = $(this).attr('id');
+						++i;
+					})
+					functions({
+						funcao: "OrdenaCategoria",
+						vars: "ids=" + posicoes,
+						patch: "{PATH}"
+					})
+				}
+				$(function() {
+					$("#palco ul").sortable({
+						handle: ".mover_item",
+						forceHelperSize: true,
+						beforeStop: function(event, ui) {
+							OrdenaCategoria()
+						}
+					});
+					$("#palco ul").disableSelection();
+				});
+				$(".colorpicker_geral").each(function(index) {
+					var input = $(this);
+					$(input).ColorPicker({
+						color: $(input).data('color'),
+						onShow: function(colpkr) {
+							$(colpkr).fadeIn(500);
+							return false;
+						},
+						OnHide: function(colpkr) {
+							$(colpkr).fadeOut(500);
+							return false;
+						},
+						onChange: function(HSB, hex, rgb) {
+							$(input).find('.ColorSelector2 div').attr('style', 'background-color:#' + hex);
+							$(input).find('.ColorSelector2 input').val('#' + hex);
+						}
+					});
+				});
+
+				function reloadFunctions() {
+					$("#Balao_ToolType").remove();
+					$("input[type=checkbox]").click(function() {
+						if($(this).is(':checked')) {
+							$(this).val('1');
+						} else {
+							$(this).val('0');
+						}
+					})
+					$('.edita_select_box').unbind('click').click(function() {
+						var id_campo = $(this).parent().find('.selectbox_adicional').data('id_campo');
+						functions({
+							patch: "{PATH}",
+							funcao: "editaCamposSelect",
+							vars: "id_campo=" + id_campo + "&id_item={ID_ITEM}&path={PATH}&ws_id_ferramenta={ID_FERRAMENTA}",
+							Sucess: function(e) {
+								confirma({
+									conteudo: e,
+									bot1: "Concluír",
+									bot2: false,
+									drag: false,
+									botclose: false,
+									width: 500,
+									newFun: function() {}
+								})
+							}
+						});
+					})
+					$('.edita_select_box_multiple').unbind('click').click(function() {
+						var id_campo = $(this).parent().find('.selectbox_adicional').data('id_campo')
+						functions({
+							patch: "{PATH}",
+							funcao: "edita_select_box_multiple",
+							vars: "path={PATH}&ws_id_ferramenta={ID_FERRAMENTA}&id_campo=" + id_campo + "&id_item={ID_ITEM}",
+							Sucess: function(e) {
+								confirma({
+									conteudo: e,
+									bot1: "Concluír",
+									bot2: false,
+									drag: false,
+									botclose: false,
+									width: 500,
+									newFun: function() {}
+								})
+							}
+						});
+					})
+					$('*[financeiro]').Dinheiro({
+						prefix: '',
+						centsSeparator: ',',
+						thousandsSeparator: '.'
+					});
+					$("*[filtro]").each(function(index) {
+						$(this).mask($(this).attr('filtro'))
+					});
+					$('*[legenda]').LegendaOver();
+					$("#UploadFile").ajaxForm({
+						beforeSend: function(xhr) {
+							$('.tapa_upload').show("fade", {}, 'fast');
+						},
+						uploadProgress: function(event, position, total, percentComplete, myForm) {
+							$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+							$('.tapa_upload').find('.bar').animate({
+								width: percentComplete + "%"
+							}, 50);
+						},
+						complete: function(e) {
+							var json = jQuery.parseJSON(e.responseText);
+
+							if(json.status == 'sucesso') {
+								TopAlert({
+									mensagem: json.response,
+									type: 3
+								})
+								$(window.progressbarfile).attr('legenda', json.original);
+							} else {
+								TopAlert({
+									mensagem: json.original + " : " + json.error,
+									type: 2
+								})
+							}
+							$('.tapa_upload').find('.bar').animate({
+								width: 0
+							}, 500, function() {
+								$('.tapa_upload').hide("fade", {}, 'fast');
+								$("#UploadFile").trigger('reset');
+							});
+						}
+					})
+					$(".model_file .botao").unbind('click').click(function() {
+						var token = $(this).data('token');
+						var extension = $(this).data('extension');
+						var mysql = $(this).data('mysql');
+						var download = $(this).data('download');
+						window.progressbarfile = $(this).parent();
+						$("#UploadFile input[name='token']").val(token);
+						$("#UploadFile input[name='extension']").val(extension);
+						$("#UploadFile input[name='mysql']").val(mysql);
+						$("#UploadFile input[name='download']").val(download);
+						$("#UploadFile #myfile").click();
+					})
+
+					$("#UploadFile #myfile").change(function() {
+							$("#UploadFile #enviar_arquivos").click();
+					})
+					$("#UploadThumbmails").ajaxForm({
+						beforeSend: function(xhr) {
+							$('.tapa_upload').show("fade", {}, 'fast');
+							$('#cancelBtn').click(xhr.abort);
+						},
+						uploadProgress: function(event, position, total, percentComplete, myForm) {
+							if(percentComplete >= 99) {
+								$('.tapa_upload').find('.pct').html("Processando imagem...").css({"left":percentComplete + "%"});
+							} else {
+								$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+							}
+							$('.tapa_upload').find('.bar').animate({
+								width: percentComplete + "%"
+							}, 50);
+						},
+						complete: function(e) {
+							var response = $.parseJSON(e.responseText);
+							console.log(response)
+							$('.tapa_upload').find('.bar').animate({
+								width: 0
+							}, 500, function() {
+								 $('.tapa_upload').hide("fade", {}, 'fast');
+								$(window.new_thumb).parent().attr("legenda", response.nome);
+								$(window.new_thumb).attr('src', response.thumb);
+								$("#UploadThumbmails").trigger('reset');
+							});
+						}
+					})
+
+					$(document).off("mouseenter").off("mouseleave");
+					$(document).on("mouseenter", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+						$(this).find('.combo_upload').stop().fadeIn();
+					}).on("mouseleave", ".thumbmail,.playerVideoThumb,.playerMP3", function() {
+						$(this).find('.combo_upload').stop().fadeOut();
+					});
+					$(".playerMP3 .combo_upload").unbind('click tap press').bind("click tap press", function() {
+						var token = $(this).parent().data('token');
+						functions({
+							funcao: "getURLmp3",
+							vars: "ws_id_ferramenta={ID_FERRAMENTA}&token=" + token + "&id_item={ID_ITEM}",
+							patch: "{PATH}",
+							Sucess: function(e) {
+								confirma({
+									conteudo: e,
+									bot1: 'Salvar',
+									bot2: 'Cancelar',
+									drag: 0,
+									botclose: 0,
+									posFn: function() {},
+									newFun: function() {
+										functions({
+											funcao: "saveURLmp3",
+											vars: $("#formLinkVideo").serialize(),
+											patch: "{PATH}",
+											Sucess: function(e) {
+												$(".playerMP3[data-token='" + token + "'] iframe").attr("src", e)
+											}
+										})
+									}
+								})
+							}
+						})
+					})
+					$(".playerVideoThumb .combo_upload .insertLink").unbind('click tap press').bind("click tap press", function() {
+						var token = $(this).parent().parent().data('token');
+						functions({
+							funcao: "getURLvideo",
+							vars: "ws_id_ferramenta={ID_FERRAMENTA}&token=" + token + "&id_item={ID_ITEM}",
+							patch: "{PATH}",
+							Sucess: function(e) {
+								confirma({
+									conteudo: e,
+									bot1: 'Salvar',
+									bot2: 'Cancelar',
+									drag: 0,
+									botclose: 0,
+									posFn: function() {},
+									newFun: function() {
+										functions({
+											funcao: "saveURLvideo",
+											vars: $("#formLinkVideo").serialize(),
+											patch: "{PATH}",
+											Sucess: function(e) {
+												$(".playerVideoThumb[data-token='" + token + "'] .thumb_img").attr("src", e)
+											}
+										})
+									}
+								})
+							}
+						})
+					})
+
+					$(".thumbmail .combo_upload .excl").unbind('click').click(function() {
+						var mysql = $(this).parent().parent().data('mysql');
+						var width = $(this).parent().parent().data("width");
+						var height = $(this).parent().parent().data("height");
+						var imagem = $(this).parent().parent().find(".thumb_img");
+						confirma({
+							conteudo: '<b>Deseja excluir esta imagem?</b><br>(Ela permanecerá na biblioteca)',
+							bot1: 'Sim',
+							bot2: 'Cancelar',
+							drag: 0,
+							botclose: 0,
+							posFn: function() {},
+							newFun: function() {
+								confirma({
+									width: "auto",
+									conteudo: "  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+									drag: false,
+									bot1: 0,
+									bot2: 0
+								})
+								$.ajax({
+									cache: false,
+									type: "POST",
+									url: "{PATH}/functions.php",
+									data: {
+										function: "excluiThumb",
+										ws_id_ferramenta: "{ID_FERRAMENTA}",
+										idItem: "{ID_ITEM}",
+										coluna: mysql
+									},
+								}).done(function(e) {
+									$(imagem).attr("src", ws.rootPath+"ws-img/" + width + "/" + height + "/100")
+								})
+							}
+						})
+					})
+
+					$(".thumbmail .combo_upload .bb").unbind('click').click(function() {
+						var mysql 	= $(this).parent().parent().data('mysql');
+						var width 	= $(this).parent().parent().data("width");
+						var height 	= $(this).parent().parent().data("height");
+						var imagem 	= $(this).parent().parent().find(".thumb_img");
+						abreBiblioteca({
+							multiple: 2,
+							onSelect: function(a) {
+								$.ajax({
+									beforeSend: function() {
+										confirma({
+											width: "auto",
+											conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+											drag: false,
+											bot1: 0,
+											bot2: 0
+										})
+									},
+									cache: false,
+									type: "POST", 
+									url: "{PATH}/functions.php",
+									data: {
+										function: "substituiThumb",
+										img: a,
+										ws_id_ferramenta: "{ID_FERRAMENTA}",
+										idItem: "{ID_ITEM}",
+										coluna: mysql
+									},
+								}).done(function(e) {
+									var image = ws.rootPath+"ws-img/"+width+"/"+height+"/100/"+e;
+									$("#ws_confirm").remove();
+									$("#body").removeClass("scrollhidden");
+									$("*").removeClass("blur");
+									$(imagem).attr("src",image.replace(" ",""))
+								})
+							}
+						})
+					})
+					$(".thumbmail .combo_upload .pc").unbind('click').click(function() {
+						var token = $(this).parent().parent().data('token');
+						var extension = $(this).parent().parent().data('extension');
+						var mysql = $(this).parent().parent().data('mysql');
+						var newwidth = $(this).parent().parent().data('width');
+						var newheight = $(this).parent().parent().data('height');
+						window.new_thumb = $(this).parent().parent().find('.thumb_img');
+						window.progressbarfile = $(this).parent().parent().parent();
+						$("#UploadThumbmails input[name='token']").val(token);
+						$("#UploadThumbmails input[name='extension']").val(extension);
+						$("#UploadThumbmails input[name='mysql']").val(mysql);
+						$("#UploadThumbmails input[name='newwidth']").val(newwidth);
+						$("#UploadThumbmails input[name='newheight']").val(newheight);
+						$("#UploadThumbmails #myfile").click();
+					})
+					$("#UploadThumbmails #myfile").change(function() {
+						$("#UploadThumbmails #enviar_arquivos").click();
+					})
+					OrdenaCategoria();
+					if({IF_ORIGINAL}==true){
+						//$("#hideActions").show();
+						$("#bt_SalvarItem,#bt_voltar_cat").hide();
+					}else{
+						$("#bt_SalvarItem,#bt_voltar_cat").show();
+					//	$("#hideActions").hide();
+					}
+				}
+				reloadFunctions(); 
+				{EXEC_JS_2}
+				setTimeout(function() {
+
+				/*######################################################################################################################*/
+
+					window.isDraftOrNot({IF_ORIGINAL});
+
+				/*######################################################################################################################*/
+
+
+				}, 1000);
+
+
+
+			})
+		</script>
+<!-- END BLOCK_WS_DETAILS -->
+
+

@@ -1,0 +1,471 @@
+{
+	"lang":["pt","en"],
+    "ws000001": {
+		"pt": "[avatar]Olá <strong>[username]</strong>, seja bem vindo(a)!",
+		"en": "[avatar]hello <strong>[username]</strong>, welcome!"
+	},
+    "ws000002": {
+		"pt": "(*) Seu plano Free irá expirar em [Dias] dias e [Horas]",
+		"en": "(*) Free your plan will expire in [Dias] days [Horas] "
+	}
+	,"ws000003": {
+		"pt": "Usuários",
+		"en": "Users"
+	}
+	,"ws000004": {
+		"pt": "Biblioteca de imagens",
+		"en": "Picture Library"
+	}
+	,"ws000005": {
+		"pt": "Editor de códigos",
+		"en": "Code editor"
+	}
+	,"ws000006": {
+		"pt": "FTP",
+		"en": "FTP"
+	}
+	,"ws000007": {
+		"pt": "Editor de códigos",
+		"en": "Codes editor"
+	}
+	,"ws000008": {
+		"pt": "URL base & Navegação",
+		"en": "Base URL & Navigation"
+	}
+	,"ws000009": {
+		"pt": "Gerenciar",
+		"en": "To manage"
+	}
+	,"ws000010": {
+		"pt": "Central de BKP",
+		"en": "Backup central"
+	}
+	,"ws000011": {
+		"pt": "Configuração do painel",
+		"en": "Panel configuration"
+	}
+	,"ws000012": {
+		"pt": "BKP de conteúdo",
+		"en": "backup content"
+	}
+	,"ws000013": {
+		"pt": "Gerenciamento de HD",
+		"en": "HD management"
+	}
+	,"ws000014": {
+		"pt": "Suporte WebSheep",
+		"en": "WebSheep suport"
+	}
+	,"ws000015": {
+		"pt": "Fazer Logout",
+		"en": "Logout"
+	}
+	,"ws000016": {
+		"pt": "<div class=\"titulo w1\">ATENÇÃO! Você pode estar sendo enganado!</div><div class=\"descricao w2\">Painel não autorizado pela WebSheep°.<br>Conheça todas as vantagens de ter uma <br> licença original do nosso sistema.<br> <a href=\"http://websheep.com.br/vantagens\">Clique aqui e saiba mais.</a></div>",
+		"en": "<div class=\"titulo w1\">HEADS UP! You might be being scammed!</div><div class=\"descricao w2\">Panel not authorized by WebSheep°.<br>Discover all the advantages of having a <br> original license from our system.<br> <a href=\"http://websheep.com.br/vantagens\">Click here to learn more.</a></div>"
+	}
+	,"ws000017": {
+		"pt": "<div class=\"titulo w1\">Bem vindo ao painel WebSheep!</div><div class=\"descricao w2\">Esta versão é gratuita, porém limitada.<br>Conheça todas as vantagens de ter uma <br> licença completa do nosso sistema.<br> <a href=\"http://websheep.com.br/vantagens\">Clique aqui e saiba mais.</a></div>",
+		"en": "<div class=\"titulo w1\">Welcome to panel WebSheep!</div><div class=\"descricao w2\">This version is free, but limited.<br>Discover all the advantages of having a <br> full license from our system.<br> <a href=\"http://websheep.com.br/vantagens\">Click here to learn more.</a></div>"
+	}
+	,"ws000018": {
+		"pt": "Este produto está licenciado a <strong>[name]</strong>s® WebSheep Tec. Int. Ltda    ||   Versão [system_version] ||  Plano [plan_name]",
+		"en": "This product is licensed to <strong>[name]</strong>s® WebSheep Tec. Int. Ltda    ||   Version [system_version] ||  Plan [plan_name]"
+	}
+	,"ws000019": {
+		"pt": "<div class=\"balaoexpirado\"><div class=\"icon\"></div><div class=\"titulo w1\">ATENÇÃO! Seu plano expirou!</div><div class=\"descricao w2\">Painel não autorizado pela WebSheep°.<br>Conheça todas as vantagens de ter uma <br> licença original do nosso sistema.<br> <a href=\"http://websheep.com.br/vantagens\">Clique aqui e saiba mais.</a></div></div>",
+		"en":"<div class=\"balaoexpirado\"><div class=\"icon\"></div><div class=\"titulo w1\">HEADS UP! His plan has expired!</div><div class=\"descricao w2\">Panel unauthorized Web Sheep °. <br> Discover all the advantages of having a <br> original license from our system.<br> <a href=\"http://websheep.com.br/vantagens\">Click here to learn more.</a></div></div>"
+	}
+	,"ws000020": {
+		"pt": "Gerenciar",
+		"en":"Manage"
+	}
+	,"ws000021": {
+		"pt": "Gerenciar Páginas",
+		"en": "Manage Pages"
+	}
+	,"ws000022": {
+		"pt": "Minhas Ferramentas",
+		"en": "My Tools"
+	}
+	,"ws000023": {
+		"pt": "Plugins",
+		"en": "Plugins"
+	}
+	,"ws000024": {
+		"pt": "Plugins instalados",
+		"en": "Installed plugins"
+	}
+	,"ws000025": {
+		"pt": "MySQL",
+		"en": "MySQL"
+	}
+	,"ws000026": {
+		"pt": "Inspetor de código",
+		"en": "Inspector code"
+	}
+	,"ws000027": {
+		"pt": "Formatar Website",
+		"en": "Format Website"
+	}
+	,"ws000028": {
+		"pt": "Criar backup",
+		"en": "Create backup"
+	}
+	,"ws000029": {
+		"pt": "Aplicar backup",
+		"en": "Apply backup"
+	}
+	,"ws000030": {
+		"pt": "Todo o website será excluído,<br>juntamente com seu conteudo e essa operação não poderá ser desfeita.<br>Gostaria de continuar?",
+		"en": "The entire website is deleted,<br>along with its contents and this operation can not be undone.<br>Would you like to continue?"
+	}
+	,"ws000031": {
+		"pt": "Lembre-se, o template que está sendo gerado,<br> será uma CÓPIA idêntica do site atual, incluindo o seu conteudo cadastrado.<br>:<br><br><input style='padding: 10px 20px;width: 100%;'  class='inputText' id='tituloTemplate' placeholder='Nome do template:'/>",
+		"en": "Remember, the template that is being generated, Europe will be an identical copy of the current site, including your registered content Filmography:<br><br><input style='padding: 10px 20px;width: 100%;'  class='inputText' id='tituloTemplate' placeholder='Nome do template:'/>"
+	}
+	,"ws000032": {
+		"pt": "<strong>Sobre os arquivos:</strong> <br><br> <label><input type='radio' name='typebkp' value='full'/> Restaurar 100% o site, excluindo todos os arquivos atuais</label><br> <label><input type='radio' name='typebkp' value='replace'/> Aplica os arquivos substituindo os arquivos existentes atuais</label><br> <label><input type='radio' name='typebkp' value='jump'/> Aplica BKP sobre o site atual pulando os arquivos existentes</label><br> <label><input type='radio' name='typebkp' value='tools'/> Apenas utilizar as ferramentas como base</label><br><br> <strong>E em relação a base de dados?</strong> <br><br> <label><input type='radio' name='dataBase' value='none'/> Não mexer na base</label><br><label><input type='radio' name='dataBase' value='basic'/> Estrutura básica instalada</label><br> <label><input type='radio' name='dataBase' value='tools'/> Estrutura + Ferramentas instaladas</label> <br> <label><input type='radio' name='dataBase' value='content'/> Estrutura + Ferramentas + Conteúdo preenchido</label><br><br><span style='color: #d60000; font-weight: 700;'>* Lembre-se os plugins estarão incluídos nas exclusões ou substituições.</span>", "en": "ws000032"
+	}
+	,"ws000033": {
+		"pt": "Criando backup...",
+		"en": "Creating backup..."
+	}
+	,"ws000034": {
+		"pt": "Lembre-se, o template que está sendo gerado,<br> será uma CÓPIA idêntica do site atual, incluindo o seu conteudo cadastrado.<br> Por favor, dê um nome para este template:<br><br><input style='padding: 10px 20px;width: 100%;'  class='inputText' id='tituloTemplate' placeholder='Nome do template:'/>",
+		"en": "ws000034"
+	}
+	,"ws000035": {
+		"pt": "Modo designer",
+		"en": "Live editor"
+	}
+	,"ws000036": {
+		"pt": "Preparando ambiente...",
+		"en": "Loading..."
+	}
+	,"ws000037": {
+		"pt": "Cadastros adicionais",
+		"en": "Additional entries"
+	}
+	,"ws000038": {
+		"pt": "Nova versão disponível!",
+		"en": "New version!"
+	}
+	,"ws000039": {
+		"pt": "Acessar website",
+		"en": "Website access"
+	}
+	,"ws000040": {
+		"pt": "Download com senha",
+		"en": "Key Download"
+	}
+	,"ws000041": {
+		"pt": ".HTACCES",
+		"en": ".HTACCES"
+	}
+	,"ws000042": {
+		"pt": "Gerenciador de páginas",
+		"en": "Page Manager"
+	}
+	,"ws000043": {
+		"pt": "Gerenciador de ferramentas",
+		"en": "Tools Manager"
+	}
+	,"ws000044": {
+		"pt": "URL's & Includes",
+		"en": "URL's & Includes"
+	}
+	,"ws000045": {
+		"pt": "CSS's",
+		"en": "CSS's"
+	}
+	,"ws000046": {
+		"pt": "Javascript",
+		"en": "Javascript"
+	}
+
+	,"ws000047": {
+		"pt": "Templates",
+		"en": "Templates"
+	}
+	,"ws000048": {
+		"pt": "Instalar tema",
+		"en": "Install theme"
+	}
+	,"ws000049": {
+		"pt": "Temas Websheep",
+		"en": "Websheep themes"
+	}
+	,"ws000050": {
+		"pt": "Exportar tema",
+		"en": "Theme export"
+	}
+	,"ws000051": {
+		"pt": "Detalhes da conta",
+		"en": "Account details"
+	}
+	,"ws000052": {
+		"pt": "Dados Gerais",
+		"en": "General data"
+	}
+	,"ws000053": {
+		"pt": "Domínio",
+		"en": "Domain"
+	}
+	,"ws000054": {
+		"pt": "Plano",
+		"en": "Plan"
+	}
+	,"ws000055": {
+		"pt": "Data de criação",
+		"en": "Creation date"
+	}
+	,"ws000056": {
+		"pt": "URL Exclusiva",
+		"en": "Exclusive URL"
+	}
+	,"ws000057": {
+		"pt": "Espaço no HD",
+		"en": "HD space"
+	}
+	,"ws000058": {
+		"pt": "Sobre o servidor",
+		"en": "About server"
+	}
+	,"ws000059": {
+		"pt": "Protocolo",
+		"en": "Protocol"
+	}
+	,"ws000060": {
+		"pt": "Senha",
+		"en": "Password"
+	}
+	,"ws000061": {
+		"pt": "Porta",
+		"en": "Port"
+	}
+	,"ws000062": {
+		"pt": "ftp.dominio.com.br",
+		"en": "ftp.domain.com"
+	}
+	,"ws000063": {
+		"pt": "BD",
+		"en": "DB"
+	}
+	,"ws000064": {
+		"pt": "Banco de Dados",
+		"en": "Database"
+	}
+	,"ws000065": {
+		"pt": "URL absoluta do servidor",
+		"en": "Absolute server URL"
+	}
+	,"ws000066": {
+		"pt": "mysql.dominio.com.br",
+		"en": "mysql.domain.com"
+	}
+	,"ws000067": {
+		"pt": "Servidor",
+		"en": "Server"
+	}
+	,"ws000068": {
+		"pt": "Email Principal",
+		"en": "Default Email"
+	}
+	,"ws000069": {
+		"pt": "Requer autenticação",
+		"en": "Requires authentication"
+	}
+	,"ws000070": {
+		"pt": "Status do domínio",
+		"en": "Domain status"
+	}
+	,"ws000071": {
+		"pt": "Domínio Ativo",
+		"en": "Active domain"
+	}
+	,"ws000072": {
+		"pt": "Congelar todas as páginas",
+		"en": "Freeze all pages"
+	}
+	,"ws000073": {
+		"pt": "URL de congelamento",
+		"en": "Freezing URL"
+	}
+	,"ws000074": {
+		"pt": "Forçar cache de arquivos",
+		"en": "Force file cache"
+	}
+	,"ws000075": {
+		"pt": "Backup do site",
+		"en": "Site backup"
+	}
+	,"ws000076": {
+		"pt": "Fazer BKP do site",
+		"en": "Excute site backup"
+	}
+	,"ws000077": {
+		"pt": "Configurar meta tags padrões",
+		"en": "Set up default meta tags"
+	}
+	,"ws000078": {
+		"pt": "Configurar Meta Tags",
+		"en": "Configure meta tags"
+	}
+	,"ws000079": {
+		"pt": "Splash de abertura",
+		"en": "Splash screen"
+	}
+	,"ws000080": {
+		"pt": "Atualizar dados",
+		"en": "Update data"
+	}
+	,"ws000081": {
+		"pt": 	"<div class='bg08' style='padding: 20px;margin: 10px;color: #D40000;font-size: 18px;'><b>Antes de prosseguir:</b> <br><br>O sistema NÃO MANTÉM cópias destes backups no servidor.<br><br>Portanto, guarde bem este arquivo, <br> pois ele é a cópia <b>FIEL ATUAL</b> do seu site/sistema.<br><br>Quando descompactar arquivo novamente no servidor, ele pedirá um setup, isso é normal, prossiga normalmente.<br><br>Se for uma nova hospedagem, ele pedirá novamente os dados de acesso, caso contrario apenas um setup.<br>Os dados do site, e templates ficarão guardados dentro do menu 'Templates' ao lado esquerdo, com a data de registro.<br><br>Lembre-se, o sistema apagará tudo que existe de dados e arquivos antes de aplicar o bkp.",
+		"en": "<div class='bg08' style='padding: 20px;margin: 10px;color: #D40000;font-size: 18px;'><b>Before proceeding:</b><br><br> The system DOES NOT KEEP copies of these backups on the server.<br><br>So save this file, <br>Because it is the current <b> FAITHFUL COPY </b> of your site / system.<br><br>When you unzip the file again on the server, it will ask for a setup, this is normal, proceed normally.<br><br>If it is a new hosting, it will ask for the access data again, otherwise just a setup. <br>The site data and templates will be stored in the 'Templates' menu on the left side with the registration date. <br><br>Remember, the system will erase all existing data and files before applying bkp."
+	}
+	,"ws000082": {
+		"pt": "Preparar",
+		"en": "Prepare"
+	}
+	,"ws000083": {
+		"pt": "Verificando",
+		"en": "Checking"
+	}
+	,"ws000084": {
+		"pt": "Separando arquivos...",
+		"en": "Separating files ..."
+	}
+	,"ws000085": {
+		"pt": "Compactando arquivos, aguarde...",
+		"en": "Compacting files, please wait ..."
+	}	
+	,"ws000086": {
+		"pt": "Só mais um pouquinho...",
+		"en": "Just a little bit ..."
+	}
+	,"ws000087": {
+		"pt": "Sei que está demorando, é assim mesmo...",
+		"en": "I know it's taking a while, it's just ..."
+	}
+	,"ws000088": {
+		"pt": "Estamos quase lá...",
+		"en": "We're almost there ..."
+	}
+	,"ws000089": {
+		"pt": "Peraí...",
+		"en": "Wait ..."
+	}
+	,"ws000090": {
+		"pt": "Um momento...",
+		"en": "One moment ..."
+	}
+	,"ws000091": {
+		"pt": "Ajustes finais...",
+		"en": "Final settings ..."
+	}
+	,"ws000092": {
+		"pt": "Finalizando...",
+		"en": "Finishing ..."
+	}
+	,"ws000093": {
+		"pt": "Fechando arquivo...",
+		"en": "Closing file ..."
+	}
+	,"ws000094": {
+		"pt": "Verificando erros...",
+		"en": "Checking for errors ..."
+	}
+	,"ws000095": {
+		"pt": "Tudo ok...",
+		"en": "Everything ok ..."
+	}
+	,"ws000096": {
+		"pt": "Alocando registros no diretório padrão...",
+		"en": "Allocating records in the default directory ..."
+	}
+	,"ws000097": {
+		"pt": "Aguarde...",
+		"en": "Please wait ..."
+	}
+	,"ws000098": {
+		"pt": "Processando...",
+		"en": "Processing ..."
+	}
+	,"ws000099": {
+		"pt": "Encontramos",
+		"en": "We found"
+	}
+	,"ws000100": {
+		"pt": "diretórios e",
+		"en": "directories and"
+	}
+	,"ws000101": {
+		"pt": "arquivos em seu servidor",
+		"en": "files on your server"
+	}
+	,"ws000102": {
+		"pt": "Podemos começar a compactar?",
+		"en": "Can we start compacting?"
+	}
+	,"ws000103": {
+		"pt": "Compactar",
+		"en": "Compact"
+	}
+	,"ws000104": {
+		"pt": "Compactando",
+		"en": "Compacting"
+	}
+	,"ws000104": {
+		"pt": "Tudo compactado, gostaria de fazer download?",
+		"en": "All compressed, would you like to download?"
+	}
+	,"ws000105": {
+		"pt": "Diretórios",
+		"en": "Directories"
+	}
+	,"ws000106": {
+		"pt": "Arquivos",
+		"en": "Files"
+	}
+	,"ws000107": {
+		"pt": "Peso do arquivo",
+		"en": "File weight"
+	}
+	,"ws000108": {
+		"pt": "Fazer download",
+		"en": "Download"
+	}
+	,"ws000109": {
+		"pt": "Fazendo download",
+		"en": "Downloading"
+	}
+	,"ws000110": {
+		"pt": "Já existe um arquivo de BKP gerado no servidor",
+		"en": "A BKP file already exists on the server"
+	}
+	,"ws000111": {
+		"pt": "Gerar novo",
+		"en": "Generate new"
+	}
+	,"ws000112": {
+		"pt": "Usar o mesmo",
+		"en": "Use the same"
+	}
+	,"ws000113": {
+		"pt": "Ítem salvo com sucesso!",
+		"en": "Item saved successfully!"
+	}	
+	,"ws000114": {
+		"pt": "Salvando",
+		"en": "Saving"
+	}	
+	
+	
+	
+	
+	
+	
+
+}
+

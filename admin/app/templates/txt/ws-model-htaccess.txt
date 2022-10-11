@@ -1,0 +1,37 @@
+<IfModule mod_rewrite.c>
+	#########################################################################################
+		Options -Indexes -MultiViews +FollowSymLinks 
+
+	#########################################################################################
+	# 	ATIVAMOS  O RewriteEngine 
+	#########################################################################################
+		RewriteEngine On
+
+	#########################################################################################
+	# 	PRIMEIRO VERIFICAMOS SE O ARQUIVO EXISTE DENTRO DA PASTA WEBSITE
+	#########################################################################################
+		RewriteBase {{ROOT_WEBSHEEP}}website/
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}website/$1 -f
+		RewriteRule ^(.*)$ $1 [L]
+
+	#########################################################################################
+	# 	AGORA VERIFICA SE É UMA URL GLOBAL 
+	#########################################################################################
+		RewriteCond 	%{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-f
+		RewriteCond	%{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-d
+		{{INCLUDES}}
+
+	#########################################################################################
+	# 	AGORA DIRECIONA OS ACESSOS AO PAINEL ADMIN
+	#########################################################################################
+		 RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}admin/$1 -f			
+		 RewriteRule ^((.*/)*[^./]+)/*$	./../admin/$1		[L]
+		
+	#########################################################################################
+	# 	QUALQUER OUTRA URL DIGITADA DIRECIONA PARA O PROCESSADOR CENTRAL
+	#########################################################################################
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-f
+		RewriteCond %{DOCUMENT_ROOT}{{ROOT_WEBSHEEP}}$1 !-d
+		RewriteRule ^((.*/)*[^./]+)/*$	./../admin/app/core/ws-website.php		[L]
+		RewriteRule ^$					./../admin/app/core/ws-website.php		[L]
+</IfModule>

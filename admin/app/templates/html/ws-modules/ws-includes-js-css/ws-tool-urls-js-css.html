@@ -1,0 +1,253 @@
+<!-- BEGIN URLS_CADASTRADAS -->
+<script>
+	window.id_item_selected		= '';
+	var barra_progresso 		= '';
+	var canvas_barra_progresso 	= '';
+	include_css ('./app/templates/css/websheep/ws-modules/ws-includes-js-css/style.min.css','css_mod','All');
+</script>
+<style type="text/css">
+	  .ui-state-highlight { 
+			float: left; width: 100%; min-height: 53px; height: auto;
+	  }
+</style>
+
+
+<div id="topoModulo" class="TitTop bg05 w1b">{includeJsCss_includeFiles_moduleTitle}</div>
+	<div id="palco" class="palco_01" >
+		<div class="w1 titlew1">
+			<div class="titsearch left" 	style="font-size: 20px;width: 50%;">{includeJsCss_includeFiles_inFTP}</div>
+			<div class="titsearch right"	style="font-size: 20px;width: 50%;">{includeJsCss_includeFiles_LinkedURL}</div>
+			<input type="text" 				class="inputText" id="searchFTP" 	placeholder="{includeJsCss_includeFiles_search}" style="padding: 10px;width: calc(50% - 10px);">
+			<input type="text" 				class="inputText" id="search" 		placeholder="{includeJsCss_includeFiles_search}" style="padding: 10px;width: calc(50% - 10px);">
+		</div>
+		<div class="c"></div>
+
+		<form class="dados_basicos"  id="dados_basicos">
+			<ul class="includesFTP">
+				<!-- BEGIN GETFILE_FTP -->
+					<li data-id="{ID}"  class="{CLASS}" data-filename="{FILE}" legenda="{FILE}" data-url="{URL}" style="{DISPLAY}"> 
+						<div class="bg01 file" >
+							<label>
+								<div  class="w1 urlPath inputText">
+									<span>
+									{FILE}
+									</span>
+								</div>
+							<label>
+							<div legenda="Vincular" class="incluir" style="{CLASS_INCLUDE}"></div>
+							<div legenda="Mover" class="move"></div>
+							<div legenda="Excluir" class="excluir"></div>
+						</div>
+					</li>
+				<!-- END GETFILE_FTP -->
+			</ul>
+		</form>
+
+
+		<form class="dados_basicos"  id="dados_basicos">
+			<ul class="includes">
+				<!-- BEGIN GETFILE_BASIC -->
+					<li data-id="{ID}"  class="{CLASS}" data-filename="{FILE}" legenda="{FILE}" data-url="{URL}" style="{DISPLAY}"> 
+						<div class="bg01 file" >
+							<label>
+								<div  class="w1 urlPath inputText">
+									<span>
+									{FILE}
+									</span>
+								</div>
+							<label>
+							<div legenda="Vincular" class="incluir" style="{CLASS_INCLUDE}"></div>
+							<div legenda="Mover" class="move"></div>
+							<div legenda="Excluir" class="excluir"></div>
+						</div>
+					</li>
+				<!-- END GETFILE_BASIC -->
+			</ul>
+		</form>
+	</div>
+</div>
+
+<script>
+
+function OrdenaItem(){
+		var positions 	= [];
+		var i 			= 0;
+		var p 			= 0;
+		if($('.includes li').length >0){
+			$('.includes li').each(function () {
+				var dataid 			= $(this).data("id");
+				if(dataid!="undefined" && dataid!=""){
+					positions[i]	= {"position":p,"dataid":dataid};
+					i++;p++;
+				}
+			})
+			out(positions)
+			$.ajax({
+			  type: "POST",
+			  url: "./{PATH}/functions.php",
+			  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_sortItem}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			  data: {function:"OrdenaItem",positions:positions}
+			}).done(function(data) {
+				$("#ws_confirm").remove();
+				$("#body").removeClass("scrollhidden");
+				$("*").removeClass("blur");
+			});
+		}
+}
+
+
+function reloadFunctions(){
+	$(".includesFTP li .incluir").unbind('click tap press').bind('click tap press',function(){
+			var element 	= $(this).parent().parent().parent().parent();
+			var incluirBot 	= $(this)
+			var fileString	= $(element).find('.urlPath').text();
+			$.ajax({
+				type: "POST",
+				url: "./{PATH}/functions.php",
+				beforeSend:function(){confirma({width:"auto",conteudo:"  {includeJsCss_includeFiles_modal_addingFile}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"incluir",idPage:"{ID_PATH}",file:fileString}
+			}).done(function(data) {
+				if(data!="falha"){
+
+					$( ".includes" ).html(data);
+					$(element).fadeTo( "slow" , 0.3, function() {$(incluirBot).hide();})
+					reloadFunctions();
+					OrdenaItem();
+				 		$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+				 		$("*").removeClass("blur");
+
+				}else{
+					alert("falha")
+				}
+			});
+	})
+
+	$('*[legenda]').LegendaOver();
+
+
+	$( "form .includes" ).sortable({
+		handle: ".move",
+		placeholder: "ui-state-highlight",
+		axis: "y",
+		beforeStop: function( event, ui ) {
+			$(".includes li").show();
+			$("#Balao_ToolType").remove();
+		},
+		stop: function( event, ui ) {
+			$(".includes li").show();
+			$("#Balao_ToolType").remove();
+			OrdenaItem();
+		},
+		change: function( event, ui ) {
+			$(".includes li").show();
+			$("#Balao_ToolType").remove();
+		}
+	});
+
+	$(".salvar").unbind('click tap press').bind("click tap press",function(e){
+		var id_file 		= $(this).parent().parent().data('id');
+		var inputMedia 		= $(this).parent().find('input[name="media"]').val();
+		var inputID 		= $(this).parent().find('input[name="id"]').val();
+		$.ajax({
+		  type: "POST",
+		  url: "./{PATH}/functions.php",
+		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_savingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		  data: {function 	:"salvar",id_file :id_file ,inputMedia:inputMedia ,inputID 	:inputID }
+		}).done(function(data) {
+			TopAlert({mensagem: "Input Salvo com sucesso!",type: 3})
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+		});
+	})
+	$(".excluir").unbind('click tap press').bind("click tap press",function(e){
+		var id_file 	= $(this).parent().parent().parent().parent().data('id');
+		var id_url 		= $(this).parent().parent().parent().parent().data('url');
+		var value_file 	= $(this).parent().parent().parent().parent().data('filename');
+		var incluirBot 	= $(this).parent().parent().parent().parent()
+		$.ajax({
+		  type: "POST",
+		  url: "./{PATH}/functions.php",
+		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_deletingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./app/templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		  data: {function :"excluir",id_file:id_file,id_url:id_url}
+		}).done(function(data) {
+			$("#ws_confirm").remove();
+			$("#body").removeClass("scrollhidden");
+			$("*").removeClass("blur");
+			$(".includesFTP li[data-filename='"+value_file+"']").fadeTo( "slow" , 1, function() {
+				$(".includesFTP li[data-filename='"+value_file+"']").find('.incluir').fadeTo( "slow" , 1);
+			})
+			if(data!="falha"){
+				$( ".includes" ).html(data);
+				reloadFunctions();
+			}else{
+				alert("erro")
+			}
+		});
+	})
+
+	setTimeout(function(){
+		 $('#container').perfectScrollbar('destroy');
+             $("#searchFTP").keyup(function(){
+                var searchFTP = ".includesFTP";
+                var texto = $(this).val().toUpperCase();
+                var textSearch  = $(searchFTP).text().split("	").join("").split("\n").join("").split(" ").join("\n").toUpperCase()
+				var resultGeral = textSearch.indexOf(texto);
+				if(resultGeral > 0 && texto!="") {
+                    $(searchFTP+" li").each(function(){
+						var thistext 	= $(this).text().split("	").join("").split("\n").join("").split(" ").join("\n").toUpperCase();
+						var resultado 	= thistext.indexOf(texto);
+						if(resultado <= 0) {
+						$(this).hide();
+						}else {
+						$(this).show();
+						}
+                    }); 
+                }else{
+                    $(searchFTP+" li").show();
+                }              
+              });
+             $("#search").keyup(function(){
+                var searchFTP = ".includes";
+                var texto = $(this).val().toUpperCase();
+                var textSearch  = $(searchFTP).text().split("	").join("").split("\n").join("").split(" ").join("\n").toUpperCase()
+				var resultGeral = textSearch.indexOf(texto);
+				if(resultGeral > 0 && texto!="") {
+                    $(searchFTP+" li").each(function(){
+						var thistext 	= $(this).text().split("	").join("").split("\n").join("").split(" ").join("\n").toUpperCase();
+						var resultado 	= thistext.indexOf(texto);
+						if(resultado <= 0) {
+						$(this).hide();
+						}else {
+						$(this).show();
+						}
+                    }); 
+                }else{
+                    $(searchFTP+" li").show();
+                }              
+              });
+	},200);
+}
+reloadFunctions();
+OrdenaItem();
+</script>
+<!-- END URLS_CADASTRADAS -->
+
+
+<!-- BEGIN GETFILE -->
+	<li data-id="{ID}"  class="{CLASS}" data-filename="{FILE}" legenda="{FILE}" data-url="{URL}" style="{DISPLAY}"> 
+		<div class="bg01 file" >
+			<label>
+				<div  class="w1 urlPath inputText">
+					<span>
+					{FILE}
+					</span>
+				</div>
+			<label>
+			<div legenda="Vincular" class="incluir" style="{CLASS_INCLUDE}"></div>
+			<div legenda="Mover" class="move"></div>
+			<div legenda="Excluir" class="excluir"></div>
+		</div>
+	</li>
+<!-- END GETFILE -->

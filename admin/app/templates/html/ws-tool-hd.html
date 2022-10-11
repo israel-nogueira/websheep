@@ -1,0 +1,386 @@
+<!-- BEGIN HD -->
+<style>
+	.galeria_file_textarea tr:nth-child(even){
+		background-color:#e7ecef;
+	}
+	.galeria_file_textarea tr.active{
+		border: solid 1px #76c338;
+		background-color: rgba(117, 152, 26, 0.17);
+		color: #44861c;
+	}
+	.galeria_file_textarea tr{
+		height: 35px;
+	}
+	.galeria_file_textarea td {
+	    padding: 13px;
+	}
+	.dataTables_length{
+	    color: #FFF;
+	    position: absolute;
+	    height: 40px;
+	    float: right;
+	    width: 200px;
+	    right: 0;
+    }
+	.lengthLabel{
+		color: #FFF;
+		
+	}
+	.dataTables_length label select{
+		position: absolute;
+		left: 0;
+		padding: 7px;
+		width: calc(100% - 14px);
+		margin: 3px;
+		margin-left: 9px;
+	}
+	.dataTables_info{
+		display:none;
+	}
+	.dataTables_filter{
+		color:#FFF;
+		position: relative;
+		height: 40px;
+		float: left;
+		width: calc(100% - 200px);
+	}
+	.dataTables_filter label input{
+		position: absolute;
+		left: 0;
+		padding: 7px;
+		width: 100%;
+		margin: 4px;
+		top: 0;
+		border: solid 1px #3e6ca9;
+	}
+	tr.item.odd {
+	    background-color: #FFF;
+	}
+	td {
+	    padding: 10px;
+	    text-shadow: none;
+	    width: calc(100% / 6)!important;
+	}
+	.dataTables_paginate.paging_full_numbers a{
+		cursor: pointer;
+		margin: 2px;
+		padding: 10px;
+		color: #FFF;
+		background-color: #ffffff;
+		font-family: 'Titillium Web', sans-serif;
+		border: 1px solid #497cbf;
+		-moz-box-shadow: inset 0px 1px #99bbff;
+		-webkit-box-shadow: inset 0px 1px #99bbff;
+		box-shadow: inset 0px 1px #99bbff;
+		filter: progid:DXImageTransform.Microsoft.Shadow(strength = 1, direction = 180, color = '#99bbff');
+		-ms-filter: progid:DXImageTransform.Microsoft.Shadow(strength = 1, Direction = 180, Color = '#99bbff');
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#497cbf', endColorstr = '#365f97');
+		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#497cbf', endColorstr = '#365f97');
+		background-image: -moz-linear-gradient(top, #497cbf, #365f97);
+		background-image: -ms-linear-gradient(top, #497cbf, #365f97);
+		background-image: -o-linear-gradient(top, #497cbf, #365f97);
+		background-image: -webkit-gradient(linear, center top, center bottom, from(#497cbf), to(#365f97));
+		background-image: -webkit-linear-gradient(top, #497cbf, #365f97);
+		background-image: linear-gradient(top, #497cbf, #365f97);
+		-moz-background-clip: padding;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+	}
+	.dataTables_paginate.paging_full_numbers{
+		padding: 15px;
+		text-align: center;
+		   margin-top: 10px;
+	}
+
+.filetd{
+	overflow: hidden;
+	width: 100%;
+	word-break: break-all;
+}
+.filetdFile{
+	min-width: 250px;
+	max-width: 300px;
+}
+</style>
+
+<script>include_css ('./app/templates/css/websheep/ws-modules/ws-hd-management/style.css','css_mod','All');</script>
+<div id="topoModulo" class="TitTop bg05 w1b">{hdPanel_title}</div>
+<div class='palco_01' id="palco">
+  <div class="c"/>
+  <div class="w1 " style="position: relative;font-size: 30px;margin: 0px;text-align: center;width: 440px;margin-left: 70px;float:left">{hdPanel_consumptionPerTool}</div>
+  <div class="w1 "style="position: relative;font-size: 30px;margin: 0px;text-align: center;margin-left: 180px;">{hdPanel_SituationOfTheHD}</div>
+	<div class="c" style="margin-bottom: 50px;"></div>
+	<div id="ferramentas_pie"       class="pie_grafico"     style="height:400px;width:600px"></div>
+	<div id="ferramentas_speed"     class="speed_grafico"   style="height:300px;width:300px"></div>
+	<div class="c"></div>
+	<div class="w1 " style="position: relative;font-size: 30px;margin: 0px;text-align: center;padding: 0 30px;">{hdPanel_overviewOfAllFiles}<hr></div>
+
+			<div id="todos_arquivos" style="width:998px">
+				<div class="">
+					<table class="data-tbl-simple table table-bordered w1" style="width: 100%;">
+								<thead class="cabecalhoTable">
+									<tr style="color:#FFF;height:30px;">
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_originalName}</td>
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_fileName}</td>
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_size}</td>
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_changed}</td>
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_extension}</td>
+										<td  style="padding: 10px;padding-left: 20px;padding-right: 0;color:#FFF;" class="bg05">{hdPanel_table_path}</td>
+									</tr>
+								</thead>
+						<tbody>
+							<!-- BEGIN TABLE -->
+								<tr class="item"> 	
+									<td><div class="filetd filetdFile">{li_filename}</div></td> 	
+									<td><div class="filetd filetdFile">{li_file}</div></td> 	
+									<td><div class="filetd">{li_upload_size}</div></td>	
+									<td><div class="filetd">{li_uploaded}</div></td> 
+									<td><div class="filetd">{li_ext}</div></td> 
+									<td>{hdPanel_Library}</td> 
+								</tr>
+							<!-- END TABLE -->
+
+						</tbody> 
+					</table>
+				</div>
+			</div>
+
+
+
+
+
+	<div class="c"></div>
+</div>
+<script type="text/javascript">
+
+$(function () {
+
+//################################################################################################## PIE
+
+$.getJSON('./app/ws-modules/ws-hd-management/functions.php?function=returnFerramentas', function (data) {
+	Highcharts.getOptions().plotOptions.pie.colors = (function () {var colors = [],base = Highcharts.getOptions().colors[0],i; for (i = 0; i < 10; i += 1) {colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());} return colors; }());
+	
+	$('#ferramentas_pie').highcharts({
+		chart: {
+			backgroundColor: 'transparent',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		},
+		title: {text:null},
+		tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b> do HD'
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					format: '<b>{point.name}</b>: {point.percentage:.1f} %<br>',
+					style: {
+						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+					}
+				}
+			}
+		},
+		series: [{
+			type: 'pie',
+			name: '{hdPanel_consuming}',
+			data: data
+		}]
+	});
+});
+
+//##################################################################################### VELOCIMETRO
+	$('#ferramentas_speed').highcharts({
+		chart: {
+			type: 'gauge',
+			backgroundColor: 'transparent',
+			plotBackgroundColor: null,
+			plotBackgroundImage: null,
+			plotBorderWidth: 0,
+			plotShadow: false
+		},
+		title: {text: ''},
+		pane: {
+			startAngle: -150,
+			endAngle: 150,
+			background: [{
+				backgroundColor: {
+					linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+					stops: [
+						[0, '#FFF'],
+						[1, '#333']
+					]
+				},
+				borderWidth: 0,
+				outerRadius: '109%'
+			}, {
+				backgroundColor: {
+					linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+					stops: [
+						[0, '#333'],
+						[1, '#FFF']
+					]
+				},
+				borderWidth: 1,
+				outerRadius: '107%'
+			}, {
+				// default background
+			}, {
+				backgroundColor: '#DDD',
+				borderWidth: 0,
+				outerRadius: '105%',
+				innerRadius: '103%'
+			}]
+		},
+
+		// the value axis
+		yAxis: {
+			min: 0,
+			max: {TOTAL},
+
+			minorTickInterval: 'auto',
+			minorTickWidth: 1,
+			minorTickLength: 0,
+			minorTickPosition: 'inside',
+			minorTickColor: '#666',
+
+			tickPixelInterval: 100,
+			tickWidth: 2,
+			tickPosition: 'inside',
+			tickLength: 5,
+			tickColor: '#666',
+			labels: {
+				step: 2,
+				rotation: 'auto'
+			},
+			title: {
+				text: 'Total no HD'
+			},
+			plotBands: [{
+				from: 0,
+				to: {PARCIAL},
+				color: '#ffffff' // green
+			}, {
+				from:{PARCIAL},
+				to: {PARCIALx2},
+				color: '#9abde5' // yellow
+			}, {
+				from: {PARCIALx2},
+				to: {PARCIALx3},
+				color: '#b9cc76' // yellow
+			}, {
+				from: {PARCIALx3},
+				to: {PARCIALx3_2},
+				color: '#e2ca00' // red
+			},
+			{
+				from: {PARCIALx3_2},
+				to: {PARCIALx4},
+				color: '#DF5353' // red
+			}
+		  ]
+		},
+
+		series: [{
+			name: '{hdPanel_SpaceOccupied}',
+			data: [{FILE_SIZE}],
+			tooltip: {
+				valueSuffix: ' M/{TOTAL}M'
+			}
+		}]
+	});
+
+jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+						    "datetime-us-pre": function (a) {
+						        var b = a.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4}) (\d{1,2}):(\d{1,2}) (am|pm|AM|PM|Am|Pm)/),
+						            month = b[1],
+						            day = b[2],
+						            year = b[3],
+						            hour = b[4],
+						            min = b[5],
+						            ap = b[6].toLowerCase();
+
+						        if (hour == '12') {
+						            hour = '0';
+						            if (ap == 'pm') {
+						                hour = parseInt(hour, 10) + 12;
+						            }
+
+						            if (year.length == 2) {
+						                if (parseInt(year, 10) < 70) {
+						                    year = '20' + year;
+						                }
+						                else {
+						                    year = '19' + year;
+						                }
+						            }
+						            if (month.length == 1) {
+						                month = '0' + month;
+						            }
+						            if (day.length == 1) {
+						                day = '0' + day;
+						            }
+						            if (hour.length == 1) {
+						                hour = '0' + hour;
+						            }
+						            if (min.length == 1) {
+						                min = '0' + min;
+						            }
+
+						            var tt = year + month + day + hour + min;
+						            return tt;
+						        }
+						    },
+
+						    "datetime-us-asc": function (a, b) {
+						            return a - b;
+						    },
+
+						    "datetime-us-desc": function (a, b) {
+						        return b - a;
+						    }
+});
+jQuery.fn.dataTableExt.aTypes.unshift(
+    function (sData) {
+        if (sData !== null && sData.match(/\d{1,2}\/\d{1,2}\/\d{2,4} \d{1,2}:\d{1,2} (am|pm|AM|PM|Am|Pm)/)) {
+            return 'datetime-us';
+        }
+        return null;
+    }
+);
+window.AtivaTabela 		= function (){
+	$(".data-tbl-simple").dataTable({
+		"bAutoWidth": 0,
+		"sPaginationType": "full_numbers",
+		"autoWidth": false,
+		"bPaginate": true,
+		"columnDefs": [{ 
+				type: 'datetime-us', 
+				target:[4] ,
+	     		width: "20%", 
+	     		targets: 0 
+			}
+		]})
+}
+window.DesativaTabela 	= function (){$(".data-tbl-simple").dataTable().fnDestroy();}
+window.AtivaTabela();
+
+
+
+//########################################### end jquery
+
+});
+
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy');
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+
+
+	</script>
+
+<!-- END HD -->

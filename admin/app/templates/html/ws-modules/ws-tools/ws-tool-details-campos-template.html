@@ -1,0 +1,1356 @@
+<!-- BEGIN KEY_WORKS -->
+	<div class="bg01 corpo_detalhes_campo" style="heigth:223px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_EnteringKeywords}.</div><hr>		
+			<div class="c"></div>
+			<div class="label" style="width: 419px;  float: left;">{FieldDetails_ID}:</div>
+			<input style="width: 420px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_FieldTitle}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soNum = function(obj){
+		    	 var tecla = (window.event) ? event.keyCode : obj.which;
+		    	 if((tecla > 47 && tecla < 58)){
+		    	      return true;
+		    	 }else{
+		    	      if (tecla != 8){
+		    	           return false;
+		    	      }else{
+		   	            return true;
+		    	      }
+		     	}
+			}
+			window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+			}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+		}
+		})
+	</script>
+<!-- END KEY_WORKS -->
+
+<!-- BEGIN INPUT -->
+	<div class="bg01 corpo_detalhes_campo" style="overflow-x: hidden;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_SimpleInput}.</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="width: 100%;  float: left;">{FieldDetails_ID}:</div>
+				<input style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="label " style="position: relative;width:100%;float: left;">{FieldDetails_PlaceHolder}:</div>
+			<input name="place" class="inputText campo_clone" style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;" value="{PLACE}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabel}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+			<div class="label">{FieldDetails_FieldLabel}</div>
+			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+			<div class="label" style="width: 133px;  float: left;margin: 0;padding: 10px 0px 10px 10px;">{FieldDetails_MaxCharacter}:</div>
+			<div class="label">{FieldDetails_Mask}: ( 99-999-99 )</div>
+			<div class="c"></div>
+			<input name="caracteres" class="inputText" onkeypress='return soNum(event)' type="number" style="width: 125px;  padding: 10px 10px;" value="{CARACTERES}">
+			<input name="filtro" class="inputText" style="width:270px;padding: 10px 10px;" value="{FILTRO}" >
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_OPT_CHECKBOX} name="values_opt" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldAddress}.
+			</label>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {DISABLED} name="desabilitado" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldDisabled}.
+			</label>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {PASSWORD} name="password" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldPassword}.
+			</label>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {NUMERICO} name="numerico" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldNumber}
+			</label>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {CALENDARIO} name="calendario" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldDate}
+			</label>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {FINANCEIRO} name="financeiro" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FieldMoney}
+			</label>
+			<div class="c"></div>
+
+			<div class="label" style="font-weight: 900;position: relative;text-align: left;float: left;width: 401px;border-bottom: dotted 1px #4E5157 !important;">
+			{FieldDetails_CaseAddress}.</div>
+			<div class="c"></div>
+			<div class="label">{FieldDetails_Street}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="rua">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}
+			</select>
+			<div class="label">{FieldDetails_City}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="cidade">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}			
+			</select>
+			<div class="label">{FieldDetails_State}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="uf">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}
+			</select>
+			<div class="label">{FieldDetails_Neighborhood}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="bairro">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}
+			</select>
+			<div class="label">{FieldDetails_Country}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="pais">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}
+			</select>
+			<div class="label">{FieldDetails_PostalCode}:</div>
+			<select class="selectCampo inputText" style="margin: 5px 0px;" name="cep">
+				<option value="">{FieldDetails_SelectField}</option>
+				{GMAPS_INPUT}			
+			</select>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+				$("select.selectCampo").unbind("change").bind("change",function(){});
+				$("select[name='rua']").val("{RUA}");
+				$("select[name='cidade']").val("{CIDADE}");
+				$("select[name='uf']").val("{UF}");
+				$("select[name='pais']").val("{PAIS}");
+				$("select[name='cep']").val("{CEP}");
+				$("select[name='bairro']").val("{BAIRRO}");
+
+
+				$('*[legenda]').LegendaOver();
+				window.soNum = function(obj){
+			    	var tecla = (window.event) ? event.keyCode : obj.which;
+			    	if((tecla > 47 && tecla < 58)){
+			    	      return true;
+			    	}else{
+			    	      if (tecla != 8){
+			    	           return false;
+			    	      }else{
+			   	            return true;
+			    	      }
+			     	}
+				}
+				window.soLetras = function (obj){
+					var tecla = (window.event) ? event.keyCode : obj.which;
+					if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+					       return true;
+					}else{
+					  if (tecla != 8) return false;
+					  else return true;
+					}
+				}
+
+		})
+	</script>
+<!-- END INPUT -->
+
+<!-- BEGIN TEXTAREA -->
+	<style type="text/css">
+		.colorpicker{
+			z-index: 1001!important;
+		}
+	</style>
+	<div class="bg01 corpo_detalhes_campo" style="overflow-x: hidden;height: 370px;width:calc(100% - 10px);height:100%;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<div style="position: relative;left: 50%;transform: translateX(-50%);max-width: 500px;background-color: #FFF;padding: 10px;margin-bottom: -30px;margin-top: 5px;">
+				<input type="hidden" name="tabelaMySQL" 		value="{CAMPOS}">
+				<input type="hidden" name="token" 				value="{TOKEN}">
+				<input type="hidden" name="type" 				value="{TYPE}">
+				<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+
+				<div class="c"></div>
+
+				<div class="label" style="width: 106px;  float: left;">{FieldDetails_ID}:</div>
+				<div class="label" style="position: relative;width: 176px;float: left;">{FieldDetails_PlaceHolder}:</div>
+			
+				<div class="c"></div>
+
+				<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="	{FieldDetails_UniqueIdentifier}">
+				<input name="place" class="inputText campo_clone" style="width: 265px;padding: 10px;margin-left: 10px;" value="{PLACE}">
+
+
+				<div class="c"></div>
+				<div class="label">{FieldDetails_SuperiorLabelTextArea}</div>
+				<div class="c"></div>
+				<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+				<div class="c"></div>
+				<div class="label" style="float: left;">{FieldDetails_NameTableItems}:</div>
+				<div class="label" style="float: right;">{FieldDetails_MaxLenght}:</div>
+		
+
+				<div class="c"></div>
+				<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;width: 300px;float: left;" value="{LISTA_TABELA}">
+				<input name="caracteres" type="number"  	class="inputText" style="padding: 10px 8px;width: 80px;float: left;margin-left: 15px;" value="{CARACTERES_COUNT}">
+				<div class="c"></div>
+
+
+				<div class="label" style="width: 184px; float: left;">{FieldDetails_LegendBalloon}</div>
+				<div class="c"></div>
+				<input name="legenda" class="inputText" style="padding: 10px 8px;width: 360px;float: left;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+				<div class="c"></div>
+
+				<div class="label" style="width: 184px; float: left;">{FieldDetails_DefaultColor}:</div>
+				<div style="position: relative; float: left; height: 40px; width: 100%; "> 
+
+					<div id="background" data-color="{BG}" style="position:relative;float:left;left: 0px;"> <div class="ColorSelector2">
+							<div 	legenda="{FieldDetails_FieldBackgroud}:" style="cursor: pointer;border:solid 1px #416fae;background-color:{BG}"></div>
+							<input 	name="background" value="{BG}" type="hidden">
+						</div>
+					</div>
+					<div id="color" data-color="{COLOR}" style="position:relative;float:left;left:37px">
+						<div  legenda="{FieldDetails_TextColor}o" class="ColorSelector2">
+							<div style="cursor: pointer;border: solid 1px #416fae;background-color:{COLOR}"></div>
+							<input name="color" value="{COLOR}" type="hidden">
+						</div>
+					</div>
+				</div>
+
+				<div class="c"></div>
+				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+					<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+					{FieldDetails_EnableTopCaption}.
+				</label>
+
+				<div class="c"></div>
+				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {EDITOR}	name="editor" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnabledEditor}
+				</label>
+				<div class="c"></div>
+				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {AUTOSIZE}	name="autosize" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_AutoSize}
+				</label>
+				<div class="c"></div>
+				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {UPLOAD}	name="upload" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnabledUpload}
+				</label>
+				<div class="c"></div>
+			</div>
+		</form>
+	</div>
+	<style>.ps-container > .ps-scrollbar-x-rail,.ps-container > .ps-scrollbar-y-rail {opacity: 0.8!important;}</style>
+
+	<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			$("#ws_confirm #body").css({width:"500px",height:"calc(100% - 200px)"});
+		},100);
+			$('*[legenda]').LegendaOver();
+			window.soNum = function(obj){
+				 var tecla = (window.event) ? event.keyCode : obj.which;
+				 if((tecla > 47 && tecla < 58)){
+				      return true;
+				 }else{
+				      if (tecla != 8){
+				           return false;
+				      }else{
+				            return true;
+				      }}}
+			window.soLetras = function (obj){
+			 var tecla = (window.event) ? event.keyCode : obj.which;
+			 if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+				    return true;
+				}else{
+				      if (tecla != 8) return false;
+				      else return true;
+				}
+			}
+			$("#background").ColorPicker({
+				color: $("#background").data('color'),
+				onShow: function (colpkr) {$(colpkr).fadeIn(500);return false;},
+				OnHide: function (colpkr) {$(colpkr).fadeOut(500);return false;},
+				onChange:function (HSB,hex,rgb) {
+					$("#background").find('.ColorSelector2 div').css({'backgroundColor':'#'+hex});
+					$("#background").find('.ColorSelector2 input').val('#'+hex);
+				}
+			});
+			$("#color").ColorPicker({
+				color: $("#color").data('color'),
+				onShow: function (colpkr) {$(colpkr).fadeIn(500);return false;},
+				OnHide: function (colpkr) {$(colpkr).fadeOut(500);return false;},
+				onChange:function (HSB,hex,rgb) {
+					$("#color").find('.ColorSelector2 div').css({'backgroundColor':'#'+hex});
+					$("#color").find('.ColorSelector2 input').val('#'+hex);
+				}
+			});
+	})
+	</script>
+<!-- END TEXTAREA -->
+
+<!-- BEGIN RADIOBOX -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 417px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_RadioboxDesc}
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 403px;float: left;">{FieldDetails_WhatGroup}?</div>
+			<div class="c"></div>
+			<div style="position: relative;width: 423px;">
+				<textarea id="textarea" onkeypress='return soLetras(event)' class="inputText" rows="1" style="width:423px;left:0;">{COLUNA_MYSQL}</textarea></div>
+				<input style="width: 420px;padding: 10px 10px;float: left;" type="hidden"  id="identificador" name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LabelRadio}</div>
+			<div class="c"></div>
+			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+				$('*[legenda]').LegendaOver();
+
+		 $('#textarea').textext({ plugins : 'autocomplete' }).bind('setFormData', function(e, data, isEmpty){ 
+		 	$("#identificador").val(data);
+		}).bind('getSuggestions', function(e, data){
+		   	$('#identificador').val(data.query)
+		    var list = [{RADIOBOX_INPUTS}],
+		            textext = $(e.target).textext()[0],query = (data ? data.query : '') || '';
+		            $(this).trigger('setSuggestions',{ result : textext.itemManager().filter(list, query) });
+
+		        });
+
+
+
+			window.soNum = function(obj){
+		    	 var tecla = (window.event) ? event.keyCode : obj.which;
+		    	 if((tecla > 47 && tecla < 58)){
+		    	      return true;
+		    	 }else{
+		    	      if (tecla != 8){
+		    	           return false;
+		    	      }else{
+		   	            return true;
+		    	      }
+		     	}
+			}
+			window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+			}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+		}
+		})
+	</script>
+<!-- END RADIOBOX -->
+
+<!-- BEGIN INPUT_EDITOR -->
+	<style type="text/css">
+		.text-core .text-wrap .text-dropdown.text-position-below {
+		    overflow: hidden!important;
+		}
+		 #ws_confirm #body #ws_confirm_conteudo .corpo_detalhes_campo .chosen-search input {
+		    width: 340px!important;
+		}
+	</style>
+	<div class="bg01 corpo_detalhes_campo">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_PowerEditor}.
+			</div>
+			<hr>
+			<div class="label" style="width: 106px;  float: left;">{FieldDetails_ID}:</div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+				<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="legenda" class="inputText campo_clone" style="padding: 10px 8px;width: 280px;float: left;margin-left: 10px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 403px;float: left;">{FieldDetails_WhatSyntax}?</div>
+			<div class="c"></div>
+			<div style="position: relative;width: 423px;">
+				<select id="sintaxy" name="sintaxy">
+					<option value="css">css</option>
+					<option value="javascript">javascript</option>
+					<option value="json">json</option>
+					<option value="less">less</option>
+					<option value="mysql">mysql</option>
+					<option value="php">php</option>
+					<option value="plain_text">plain_text</option>
+					<option value="sass">sass</option>
+					<option value="scss">scss</option>
+					<option value="text">text</option>
+					<option value="xml">xml</option>
+				</select>
+			<div class="c"></div>
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+				$('*[legenda]').LegendaOver();
+				{SINT_SELECT}
+				$('#sintaxy').chosen().trigger("chosen:updated").change(function (element) {});
+				window.soNum = function(obj){
+					var tecla = (window.event) ? event.keyCode : obj.which;
+					if((tecla > 47 && tecla < 58)){
+						return true;
+					}else{
+						if (tecla != 8){
+							return false;
+						}else{
+							return true;
+						}
+					}
+				}
+				window.soLetras = function (obj){
+					var tecla = (window.event) ? event.keyCode : obj.which;
+					if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+						return true;
+					}else{
+						if (tecla != 8) return false;
+						else return true;
+					}
+				}
+		})
+	</script>
+<!-- END INPUT_EDITOR -->
+
+<!-- BEGIN CHECKBOX -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 400px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_CheckboxDesc}
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 403px;float: left;">{FieldDetails_ID}:</div>
+			<div class="c"></div>
+				<input style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="label">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LabelCheckBox}</div>
+			<div class="c"></div>
+			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
+
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+				$('*[legenda]').LegendaOver();
+
+		 		$('#textarea')
+		        .textext({ plugins : 'autocomplete' })
+		        .bind('setFormData', function(e, data, isEmpty){
+		        	$("#identificador").val(data);
+				})
+		        .bind('getSuggestions', function(e, data)
+		        {
+
+		        	$('#identificador').val(data.query)
+		            var list = [{CHECK_GROUP}],
+		            textext = $(e.target).textext()[0],query = (data ? data.query : '') || '';
+		            $(this).trigger('setSuggestions',{ result : textext.itemManager().filter(list, query) });
+
+		        });
+
+				window.soNum = function(obj){
+			    	 var tecla = (window.event) ? event.keyCode : obj.which;
+			    	 if((tecla > 47 && tecla < 58)){
+			    	      return true;
+			    	 }else{
+			    	      if (tecla != 8){
+			    	           return false;
+			    	      }else{
+			   	            return true;
+			    	      }
+			     	}
+				}
+				window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+				}
+		})
+	</script>
+<!-- END CHECKBOX -->
+
+<!--  BEGIN SELECTBOX -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 390px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_SelectBoxDesc}.</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="width: 106px;  float: left;">{FieldDetails_ID}:</div>
+			<div class="label" style="position: relative;width: 276px;float: left;">{FieldDetails_PlaceHolder}:</div>
+			<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="place" class="inputText campo_clone" style="width: 295px;padding: 10px;" value="{PLACE}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelSelec}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+				$('*[legenda]').LegendaOver();
+					window.soNum = function(obj){
+			    	 var tecla = (window.event) ? event.keyCode : obj.which;
+			    	 if((tecla > 47 && tecla < 58)){
+			    	      return true;
+			    	 }else{
+			    	      if (tecla != 8){
+			    	           return false;
+			    	      }else{
+			   	            return true;
+			    	      }
+			     	}
+				}
+				window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+				}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+				}
+		})
+	</script>
+<!-- END  SELECTBOX -->
+
+<!--  BEGIN MULTIPLE_SELECT -->
+	<div class="bg01 corpo_detalhes_campo">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_SelectMultiple}.<br>
+								<b style="color:#AE270E">{FieldDetails_NotSaveSelect}.</b><br>
+								{FieldDetails_SelMultDesc1}, <br>
+								{FieldDetails_SelMultDesc2}.</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="width: 106px;  float: left;">{FieldDetails_ID}:</div>
+			<div class="label" style="position: relative;width: 276px;float: left;">{FieldDetails_PlaceHolder}:</div>
+				<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="place" class="inputText campo_clone" style="width: 295px;padding: 10px;" value="{PLACE}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+
+			<div class="label">{FieldDetails_SuperiorLabelSelec}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soNum = function(obj){
+		    	 var tecla = (window.event) ? event.keyCode : obj.which;
+		    	 if((tecla > 47 && tecla < 58)){
+		    	      return true;
+		    	 }else{
+		    	      if (tecla != 8){
+		    	           return false;
+		    	      }else{
+		   	            return true;
+		    	      }
+		     		}
+			}
+			window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+			}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+			}
+		})
+	</script>
+<!--  END MULTIPLE_SELECT -->
+
+<!-- BEGIN SEPARADOR -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 150px;overflow:hidden;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_SeparatorDesc}.<br>
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+			}
+		})
+	</script>
+<!-- END SEPARADOR -->
+
+<!-- BEGIN BT_GALERIAS -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 180px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_GalButtonDesc1}.<br>
+				{FieldDetails_GalButtonDesc2}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+		</form>
+	</div>
+<!-- END BT_GALERIAS -->
+
+<!-- BEGIN LINK_TOOL -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 550px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_MakeReference}.</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width:402px;float: left;">{FieldDetails_Identifier}:</div>
+				<input style="width: 420px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelSelec}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_ChooseTool}:</div>
+			<div class="c"></div>
+			<select name="values_opt" id="select_linkTool">
+				{SELECT_LINK_TOOL}
+			</select>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_WhatListLink}:</div>
+			<div class="c"></div>
+			<select name="referencia" id="referencia"></select>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_SpecificCategory}?</div>
+			<div class="c"></div>
+			<select name="cat_referencia" id="cat_referencia"></select>
+			<div class="c"></div>
+
+
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_WhatLink}?</div>
+			<div class="c"></div>
+				<label for="cat" 	style="position: relative;width: 200px;float:left;cursor:pointer;"><input {RADIO_CAT1}	type="radio" 	name="filtro" 	style="width: 21px;"	value="cat" 	id="cat">{FieldDetails_Categories}</label>
+				<label for="item" 	style="position: relative;width: 200px;float:left;cursor:pointer;"><input {RADIO_ITEM1}	type="radio" 	name="filtro" 	style="width: 21px;"	value="item" 	id="item">Ítens</label>
+			<div class="c"></div>
+				<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_LinkMultiple}?:</div>
+				<label for="multiple" 	style="position: relative;width: 200px;float:left;cursor:pointer;"><input 		{RADIO_MULTIPLE1} 	type="radio" 	name="multiple" 	style="width: 21px;"	value="1" 	id="multiple">{FieldDetails_Multiple}</label>
+				<label for="single" style="position: relative;width: 200px;float:left;cursor:pointer;"><input 		{RADIO_MULTIPLE2} 		type="radio" 	name="multiple" 	style="width: 21px;"	value="0" 	id="single">{FieldDetails_Unitary}</label>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText campo_clone" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+
+			refreshCombo = function(){
+				var tool 			= $('#select_linkTool').chosen().val();
+				var type 			= $('input[type="radio"][name="filtro"]:checked').val();
+				var selected		= "{REFERENCIA}";
+				var cat_referencia	= "{CAT_REFERENCIA}";
+				$.ajax({
+					type: "POST",
+					cache: false,
+					url: "./app/ws-modules/ws-tools/functions.php",
+					data: {
+						function:"returnCampos", 
+						tool:tool,
+						selected:selected,
+						type:type 
+					}
+				}).done(function(e) {	
+					$("#referencia").html(e).trigger("chosen:updated");			
+				});
+				$.ajax({
+					type: "POST",
+					cache: false,
+					url: "./app/ws-modules/ws-tools/functions.php",
+					data: {
+						function:"return_campos_cat_referencia", 
+						tool:tool,
+						cat_referencia:cat_referencia
+					}
+				}).done(function(e) {
+						$("#cat_referencia").html(e).trigger("chosen:updated");
+				})
+			}
+
+			$('input[type="radio"][name="filtro"]').click(function(event){refreshCombo()});
+			$('#select_linkTool').chosen().trigger("chosen:updated").change(function (element) {refreshCombo();});
+			$('#referencia').chosen().trigger("chosen:updated").change(function (element) {});
+			$('#cat_referencia').chosen().trigger("chosen:updated").change(function (element) {});
+			$('*[legenda]').LegendaOver();
+			refreshCombo();
+
+			window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+			}
+		})
+	</script>
+<!-- END LINK_TOOL -->
+
+<!-- BEGIN FERRAMENTA_INTERNA -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 400px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_AccessButton}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_ChooseTool}:</div>
+			<div class="c"></div>
+			<select name="values_opt">
+			{SELECT_INNER_TOOL}
+			</select>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width:402px;float: left;">{FieldDetails_Identifier}:</div>
+				<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText campo_clone" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+			}
+		})
+	</script>
+<!-- END FERRAMENTA_INTERNA -->
+
+
+<!-- BEGIN BT_FILES -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 180px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" value="{WS_ID_FERRAMENTA}">
+
+
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_FileButton1}.<br>{FieldDetails_FileButton2}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+		</form>
+	</div>
+<!-- END BT_FILES -->
+
+
+<!-- BEGIN BT_FOTOS -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 180px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 		value="{WS_ID_FERRAMENTA}">	
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_PhotoButton1}.<br>{FieldDetails_PhotoButton2}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+		</form>
+	</div>
+<!-- END BT_FOTOS -->
+
+<!-- BEGIN FILE -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 380px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_FileUpload1}.<br>{FieldDetails_FileUpload2}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width:122px;float: left;">{FieldDetails_Identifier}:</div>
+			<div class="label" style="position: relative;width: 270px;float: left;">{FieldDetails_Label}:</div>
+
+			<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="label" class="inputText campo_clone" style="width: 300px;  padding: 10px 10px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {DOWNLOAD} name="download" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_FileAuthorized}.
+			</label>
+
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+			
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+			}
+		})
+	</script>
+<!-- END FILE -->
+
+<!-- BEGIN IFRAME -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 400px;  overflow-x: hidden;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_IFrame}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 94px;float: left;">{FieldDetails_Name}:</div>
+			<div class="label" style="position: relative;width: 214px;float: left;">{FieldDetails_URL}:</div>
+			<div class="c"></div>
+			<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="values_opt" 	class="inputText" style="width: 294px ;  padding: 10px 10px;" value="{VALUES_OPT}">
+
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Variable}:</div>
+			<div class="label" style="position: relative;width: 100%;float: left;  top: -13px;">
+				<label for="get"		 ><input type="radio" name="filtro" style="width: 21px;"	value="get" id="get">{FieldDetails_GET}</label>
+				<label for="data" 	><input type="radio" name="filtro" style="width: 21px;"	value="data" id="data">{FieldDetails_Date}</label>
+			</div>
+			<div class="c"></div>
+			<div class="label" style="margin-top: -10px;">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText" style="padding: 10px 8px;margin-bottom: 20px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;  margin-top: -20px;font-weight: bold;">{FieldDetails_HowIframe}:</div>
+			<div class="label comoficaiframe" style="position: relative;width: 408px;float: left;margin-top: -20px;"></div>
+
+
+
+			<div class="c"></div>
+
+		</form>
+		<script type="text/javascript">
+		$(function(){
+			$( 'input[name="filtro"]:radio' ).change(function(){
+				if($(this).val()=="data"){
+					$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'" data-ferramenta="{value}" data-nivel="" data-cat="{value}"  data-item="{value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+				}else{
+					if($('input[name="values_opt"]').val().indexOf("?")==-1){
+						$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'?ferramenta={value}&nivel={value}&cat={value}&item={value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+					}else{
+						$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'&ferramenta={value}&nivel={value}&cat={value}&item={value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+					}
+				}
+			})
+			$('input[value="{FILTRO}"]:radio').click();
+		})
+
+
+		</script>
+	</div>
+<!-- END IFRAME -->
+
+
+<!-- BEGIN PLAYER_MP3 -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 310px;  overflow-x: hidden;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">{FieldDetails_AudioPlayer}.</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" 				style="position: relative;width:100%;float: left;">{FieldDetails_AudioField}</div>
+			<div class="c"></div>			
+			<input style="width:420px;padding: 10px 10px;float: left;margin-left: 10px;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_AudioLabelSup}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText  campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){$('input[value="{FILTRO}"]:radio').click();})
+		$(function(){$('input[value="{VALUES_OPT}"]:radio').click();})
+		$(function(){$('input[value="{BG}"]:radio').click();})
+		window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+			}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+		}
+	</script>
+<!-- END PLAYER_MP3 -->
+
+
+<!-- BEGIN PLAYER_VIDEO -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 300px;  overflow-x: hidden;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_VideoPlayer}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" 				style="position: relative;width:100%;float: left;">{FieldDetails_VideoField}</div>
+			<div class="c"></div>
+				<input style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+
+		</form>
+		<script type="text/javascript">
+		$(function(){
+			$( 'input[name="filtro"]:radio' ).change(function(){
+				if($(this).val()=="data"){
+					$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'" data-ferramenta="{value}" data-nivel="" data-cat="{value}"  data-item="{value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+				}else{
+					if($('input[name="values_opt"]').val().indexOf("?")==-1){
+						$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'?ferramenta={value}&nivel={value}&cat={value}&item={value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+					}else{
+						$(".comoficaiframe").text('<iframe src="'+$('input[name="values_opt"]').val()+'&ferramenta={value}&nivel={value}&cat={value}&item={value}" width="{LARGURA}" height="{ALTURA}"></iframe> ');
+					}
+				}
+			})
+			$('input[value="{FILTRO}"]:radio').click();
+		})
+
+
+		</script>
+	</div>
+<!-- END PLAYER_VIDEO -->
+
+<!-- BEGIN INPUT_LABEL -->
+	<div class="bg01 corpo_detalhes_campo" style="height: 180px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_SimpleLabel}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
+		</form>
+	</div>
+<!-- END INPUT_LABEL -->
+
+<!-- BEGIN COLOR_PICKER -->
+	<div class="bg01 corpo_detalhes_campo">
+		<form id="form_campo" style="padding-bottom: 10px;height:368px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_ColorPicker}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 403px;float: left;">{FieldDetails_ID}:</div>
+			<div class="c"></div>
+				<input style="width: 400px;margin-left: 10px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 266px;float: left;">{FieldDetails_ColorPickerName}:</div>
+			<input name="listaTabela" class="inputText campo_clone" style="width: 400px;padding: 10px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_SuperiorLabelCheck}</div>
+			<div class="c"></div>
+			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
+			<div class="label">{FieldDetails_ColorPickerLabel}</div>
+			<div class="c"></div>
+			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soNum = function(obj){
+		    	 var tecla = (window.event) ? event.keyCode : obj.which;
+		    	 if((tecla > 47 && tecla < 58)){
+		    	      return true;
+		    	 }else{
+		    	      if (tecla != 8){
+		    	           return false;
+		    	      }else{
+		   	            return true;
+		    	      }
+		     	}
+			}
+			window.soLetras = function (obj){
+		     var tecla = (window.event) ? event.keyCode : obj.which;
+		     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+		               return true;
+			}else{
+		          if (tecla != 8) return false;
+		          else return true;
+		     }
+			}
+		})
+	</script>
+<!-- END COLOR_PICKER -->
+
+<!-- BEGIN THUMBNAIL -->
+	<div class="bg01 corpo_detalhes_campo" style="height:400px;">
+		<form id="form_campo" style="padding-bottom: 10px;">
+			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
+			<input type="hidden" name="token" 		value="{TOKEN}">
+			<input type="hidden" name="type" 		value="{TYPE}">
+			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
+			<div class="label_titulo">{FieldDetails_Description}:</div>
+			<div class="label">
+				{FieldDetails_FreeImage}.<br>
+				{FieldDetails_NonGalery}.
+			</div>
+			<hr>
+			<div class="c"></div>
+			<div class="label" style="position: relative;width:402px;float: left;">{FieldDetails_Identifier}:</div>
+				<input style="width: 414px;margin-left: 10px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_NameTableItems}:</div>
+			<div class="c"></div>
+			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
+			<input name="label" class="inputText campo_clone" style="width: 410px;  padding: 10px 10px;" value="{LABEL}">
+			<div class="c"></div>
+			<div class="label">{FieldDetails_LegendBalloon}</div>
+			<div class="c"></div>
+			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('*[legenda]').LegendaOver();
+			window.soLetras = function (obj){
+			     var tecla = (window.event) ? event.keyCode : obj.which;
+			     if((tecla >= 97 && tecla <= 122) || (tecla==95)){
+			               return true;
+				}else{
+			          if (tecla != 8) return false;
+			          else return true;
+			     }
+			}
+		})
+	</script>
+<!-- END THUMBNAIL -->
+
+
+
+
+<script type="text/javascript">
+	$('.campo_matriz').on("input", function() {
+		$(".campo_clone").each(function(){
+			var matriz 	= $(".campo_matriz").val().substr(0,($(".campo_matriz").val().length-1));
+			var clone 	= $(this).val();
+			if(clone=="" || clone == matriz ){
+				$(this).val($(".campo_matriz").val());
+			}
+		})
+	});
+</script>
+
